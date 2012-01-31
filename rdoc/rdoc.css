@@ -39,7 +39,7 @@ h2,h3,h4 { margin-top: 1.5em; }
 
 pre {
   background: #ddd;
-  padding: 0.5em;
+  padding: 0.5em 0;
 }
 
 /* @group Generic Classes */
