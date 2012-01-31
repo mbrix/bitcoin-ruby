@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Bitcoin::Key - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/bitcoin/key.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-from_base58">::from_base58</a>
+    
+    <li><a href="#method-c-generate">::generate</a>
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-addr">#addr</a>
+    
+    <li><a href="#method-i-generate">#generate</a>
+    
+    <li><a href="#method-i-hash160">#hash160</a>
+    
+    <li><a href="#method-i-priv">#priv</a>
+    
+    <li><a href="#method-i-priv-3D">#priv=</a>
+    
+    <li><a href="#method-i-pub">#pub</a>
+    
+    <li><a href="#method-i-pub-3D">#pub=</a>
+    
+    <li><a href="#method-i-regenerate_pubkey">#regenerate_pubkey</a>
+    
+    <li><a href="#method-i-set_priv">#set_priv</a>
+    
+    <li><a href="#method-i-set_pub">#set_pub</a>
+    
+    <li><a href="#method-i-sign">#sign</a>
+    
+    <li><a href="#method-i-to_base58">#to_base58</a>
+    
+    <li><a href="#method-i-verify">#verify</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Bitcoin.html">Bitcoin</a>
+  
+    <li><a href="../Bitcoin/Connection.html">Bitcoin::Connection</a>
+  
+    <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
+  
+    <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
+  
+    <li><a href="../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
+  
+    <li><a href="../Bitcoin/Logger.html">Bitcoin::Logger</a>
+  
+    <li><a href="../Bitcoin/Logger/LogWrapper.html">Bitcoin::Logger::LogWrapper</a>
+  
+    <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
+  
+    <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
+  
+    <li><a href="../Bitcoin/Network/CommandHandler.html">Bitcoin::Network::CommandHandler</a>
+  
+    <li><a href="../Bitcoin/Network/ConnectionHandler.html">Bitcoin::Network::ConnectionHandler</a>
+  
+    <li><a href="../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
+  
+    <li><a href="../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
+  
+    <li><a href="../Bitcoin/Protocol.html">Bitcoin::P</a>
+  
+    <li><a href="../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
+  
+    <li><a href="../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
+  
+    <li><a href="../Bitcoin/Protocol/Handler.html">Bitcoin::Protocol::Handler</a>
+  
+    <li><a href="../Bitcoin/Protocol/Parser.html">Bitcoin::Protocol::Parser</a>
+  
+    <li><a href="../Bitcoin/Protocol/Tx.html">Bitcoin::Protocol::Tx</a>
+  
+    <li><a href="../Bitcoin/Protocol/TxIn.html">Bitcoin::Protocol::TxIn</a>
+  
+    <li><a href="../Bitcoin/Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>
+  
+    <li><a href="../Bitcoin/Protocol/VersionPkt.html">Bitcoin::Protocol::VersionPkt</a>
+  
+    <li><a href="../Bitcoin/Script.html">Bitcoin::Script</a>
+  
+    <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore.html">Bitcoin::Storage::Backends::ActiverecordStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Base.html">Bitcoin::Storage::Backends::ActiverecordStore::Base</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Block.html">Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Input.html">Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Output.html">Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html">Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/TransactionsParent.html">Bitcoin::Storage::Backends::ActiverecordStore::TransactionsParent</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/StorageModel.html">Bitcoin::Storage::Backends::StorageModel</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
+  
+    <li><a href="../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
+  
+    <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../OpenSSL.html">OpenSSL</a>
+  
+    <li><a href="../OpenSSL/BN.html">OpenSSL::BN</a>
+  
+    <li><a href="../OpenSSL/PKey.html">OpenSSL::PKey</a>
+  
+    <li><a href="../OpenSSL/PKey/EC.html">OpenSSL::PKey::EC</a>
+  
+    <li><a href="../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
+  
+    <li><a href="../Log4r.html">Log4r</a>
+  
+    <li><a href="../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../Array.html">Array</a>
+  
+    <li><a href="../Chain.html">Chain</a>
+  
+    <li><a href="../Hash.html">Hash</a>
+  
+    <li><a href="../InventoryRequest.html">InventoryRequest</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Bitcoin::Key</h1>
+
+  <div id="description" class="description">
+    
+<p>Elliptic Curve key as used in bitcoin.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-from_base58" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">from_base58</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Import private key from base58 fromat as described in <a
+href="https://en.bitcoin.it/wiki/Private_key#Base_58_Wallet_Import_format">en.bitcoin.it/wiki/Private_key#Base_58_Wallet_Import_format</a>
+and <a
+href="https://en.bitcoin.it/wiki/Base58Check_encoding#Encoding_a_private_key">en.bitcoin.it/wiki/Base58Check_encoding#Encoding_a_private_key</a>.
+See also <a href="Key.html#method-i-to_base58">#to_base58</a></p>
+          
+
+          
+          <div class="method-source-code" id="from_base58-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_base58</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">hex</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">base58_to_hex</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">version</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">checksum</span> = <span class="ruby-identifier">hex</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;a2a64a8&quot;</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Invalid version&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">version</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:privkey_version</span>]
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Invalid checksum&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">checksum</span>(<span class="ruby-identifier">version</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">key</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">checksum</span>
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- from_base58-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- from_base58-method -->
+
+    
+      <div id="method-c-generate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generate a new keypair.</p>
+
+<pre>Bitcoin::Key.generate</pre>
+          
+
+          
+          <div class="method-source-code" id="generate-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate</span>
+  <span class="ruby-identifier">k</span> = <span class="ruby-identifier">new</span>; <span class="ruby-identifier">k</span>.<span class="ruby-identifier">generate</span>; <span class="ruby-identifier">k</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate-method -->
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(privkey = nil, pubkey = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new key with given <code>privkey</code> and <code>pubkey</code>.</p>
+
+<pre>Bitcoin::Key.new
+Bitcoin::Key.new(privkey)
+Bitcoin::Key.new(nil, pubkey)</pre>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">privkey</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">pubkey</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@key</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">bitcoin_elliptic_curve</span>
+  <span class="ruby-identifier">set_priv</span>(<span class="ruby-identifier">privkey</span>)  <span class="ruby-keyword">if</span> <span class="ruby-identifier">privkey</span>
+  <span class="ruby-identifier">set_pub</span>(<span class="ruby-identifier">pubkey</span>)  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pubkey</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-addr" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">addr</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the address corresponding to the public key.</p>
+          
+
+          
+          <div class="method-source-code" id="addr-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addr</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_to_address</span>(<span class="ruby-identifier">hash160</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- addr-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- addr-method -->
+
+    
+      <div id="method-i-generate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generate new priv/pub key.</p>
+          
+
+          
+          <div class="method-source-code" id="generate-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate</span>
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">generate_key</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate-method -->
+
+    
+      <div id="method-i-hash160" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hash160</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the hash160 of the public key.</p>
+          
+
+          
+          <div class="method-source-code" id="hash160-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash160</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">pub</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hash160-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hash160-method -->
+
+    
+      <div id="method-i-priv" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">priv</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the private key (in hex).</p>
+          
+
+          
+          <div class="method-source-code" id="priv-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">priv</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span>
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">to_hex</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">64</span>, <span class="ruby-string">'0'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- priv-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- priv-method -->
+
+    
+      <div id="method-i-priv-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">priv=</span><span
+            class="method-args">(priv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set the private key to <code>priv</code> (in hex).</p>
+          
+
+          
+          <div class="method-source-code" id="priv-3D-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">priv=</span> <span class="ruby-identifier">priv</span>
+  <span class="ruby-identifier">set_priv</span>(<span class="ruby-identifier">priv</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- priv-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- priv-3D-method -->
+
+    
+      <div id="method-i-pub" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pub</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the public key (in hex). In case the key was initialized with only a
+private key, the public key is regenerated.</p>
+          
+
+          
+          <div class="method-source-code" id="pub-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pub</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">public_key</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span>
+      <span class="ruby-identifier">set_pub</span>(<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL_EC</span>.<span class="ruby-identifier">regenerate_key</span>(<span class="ruby-identifier">priv</span>)[<span class="ruby-value">1</span>])
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">public_key</span>.<span class="ruby-identifier">to_hex</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">130</span>, <span class="ruby-string">'0'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- pub-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pub-method -->
+
+    
+      <div id="method-i-pub-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pub=</span><span
+            class="method-args">(pub)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set the public key (in hex).</p>
+          
+
+          
+          <div class="method-source-code" id="pub-3D-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pub=</span> <span class="ruby-identifier">pub</span>
+  <span class="ruby-identifier">set_pub</span>(<span class="ruby-identifier">pub</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- pub-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pub-3D-method -->
+
+    
+      <div id="method-i-sign" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sign</span><span
+            class="method-args">(data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sign <code>data</code> with the key.</p>
+
+<pre>key1 = Bitcoin::Key.generate
+sig = key.sign(&quot;some data&quot;)</pre>
+          
+
+          
+          <div class="method-source-code" id="sign-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sign</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">dsa_sign_asn1</span>(<span class="ruby-identifier">data</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sign-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sign-method -->
+
+    
+      <div id="method-i-to_base58" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_base58</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Export private key to base58 format. See also <a
+href="Key.html#method-c-from_base58">::from_base58</a></p>
+          
+
+          
+          <div class="method-source-code" id="to_base58-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_base58</span>
+  <span class="ruby-identifier">data</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:privkey_version</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">priv</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">encode_base58</span>(<span class="ruby-identifier">data</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">checksum</span>(<span class="ruby-identifier">data</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_base58-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_base58-method -->
+
+    
+      <div id="method-i-verify" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">verify</span><span
+            class="method-args">(data, sig)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Verify signature <code>sig</code> for <code>data</code>.</p>
+
+<pre>key2 = Bitcoin::Key.new(nil, key1.pub)
+key2.verify(&quot;some data&quot;, sig)</pre>
+          
+
+          
+          <div class="method-source-code" id="verify-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">verify</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">sig</span>)
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">dsa_verify_asn1</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">sig</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- verify-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- verify-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-regenerate_pubkey" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">regenerate_pubkey</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Regenerate public key from the private key.</p>
+          
+
+          
+          <div class="method-source-code" id="regenerate_pubkey-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerate_pubkey</span>
+  <span class="ruby-identifier">set_pub</span>(<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL_EC</span>.<span class="ruby-identifier">regenerate_key</span>(<span class="ruby-identifier">priv</span>)[<span class="ruby-value">1</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- regenerate_pubkey-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- regenerate_pubkey-method -->
+
+    
+      <div id="method-i-set_priv" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_priv</span><span
+            class="method-args">(priv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set <code>priv</code> as the new private key (converting from hex).</p>
+          
+
+          
+          <div class="method-source-code" id="set_priv-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_priv</span>(<span class="ruby-identifier">priv</span>)
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">BN</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-identifier">priv</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- set_priv-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- set_priv-method -->
+
+    
+      <div id="method-i-set_pub" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_pub</span><span
+            class="method-args">(pub)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set <code>pub</code> as the new public key (converting from hex).</p>
+          
+
+          
+          <div class="method-source-code" id="set_pub-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_pub</span>(<span class="ruby-identifier">pub</span>)
+  <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">public_key</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">EC</span><span class="ruby-operator">::</span><span class="ruby-constant">Point</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-ivar">@key</span>.<span class="ruby-identifier">group</span>, <span class="ruby-identifier">pub</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- set_pub-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- set_pub-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

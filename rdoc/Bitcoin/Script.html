@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Bitcoin::Script - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/bitcoin/script.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-binary_from_string">::binary_from_string</a>
+    
+    <li><a href="#method-c-from_string">::from_string</a>
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-c-to_address_script">::to_address_script</a>
+    
+    <li><a href="#method-c-to_signature_pubkey_script">::to_signature_pubkey_script</a>
+    
+    <li><a href="#method-i-get_address">#get_address</a>
+    
+    <li><a href="#method-i-get_hash160">#get_hash160</a>
+    
+    <li><a href="#method-i-get_hash160_address">#get_hash160_address</a>
+    
+    <li><a href="#method-i-get_pubkey">#get_pubkey</a>
+    
+    <li><a href="#method-i-get_pubkey_address">#get_pubkey_address</a>
+    
+    <li><a href="#method-i-invalid-3F">#invalid?</a>
+    
+    <li><a href="#method-i-is_hash160-3F">#is_hash160?</a>
+    
+    <li><a href="#method-i-is_pubkey-3F">#is_pubkey?</a>
+    
+    <li><a href="#method-i-is_send_to_ip-3F">#is_send_to_ip?</a>
+    
+    <li><a href="#method-i-is_standard-3F">#is_standard?</a>
+    
+    <li><a href="#method-i-op_0">#op_0</a>
+    
+    <li><a href="#method-i-op_1">#op_1</a>
+    
+    <li><a href="#method-i-op_add">#op_add</a>
+    
+    <li><a href="#method-i-op_booland">#op_booland</a>
+    
+    <li><a href="#method-i-op_checkmultisig">#op_checkmultisig</a>
+    
+    <li><a href="#method-i-op_checksig">#op_checksig</a>
+    
+    <li><a href="#method-i-op_drop">#op_drop</a>
+    
+    <li><a href="#method-i-op_dup">#op_dup</a>
+    
+    <li><a href="#method-i-op_equal">#op_equal</a>
+    
+    <li><a href="#method-i-op_equalverify">#op_equalverify</a>
+    
+    <li><a href="#method-i-op_fromaltstack">#op_fromaltstack</a>
+    
+    <li><a href="#method-i-op_greaterthanorequal">#op_greaterthanorequal</a>
+    
+    <li><a href="#method-i-op_hash160">#op_hash160</a>
+    
+    <li><a href="#method-i-op_hash256">#op_hash256</a>
+    
+    <li><a href="#method-i-op_nop">#op_nop</a>
+    
+    <li><a href="#method-i-op_ripemd160">#op_ripemd160</a>
+    
+    <li><a href="#method-i-op_sha1">#op_sha1</a>
+    
+    <li><a href="#method-i-op_sha256">#op_sha256</a>
+    
+    <li><a href="#method-i-op_sub">#op_sub</a>
+    
+    <li><a href="#method-i-op_swap">#op_swap</a>
+    
+    <li><a href="#method-i-op_toaltstack">#op_toaltstack</a>
+    
+    <li><a href="#method-i-op_tuck">#op_tuck</a>
+    
+    <li><a href="#method-i-op_verify">#op_verify</a>
+    
+    <li><a href="#method-i-parse">#parse</a>
+    
+    <li><a href="#method-i-run">#run</a>
+    
+    <li><a href="#method-i-to_string">#to_string</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Bitcoin.html">Bitcoin</a>
+  
+    <li><a href="../Bitcoin/Connection.html">Bitcoin::Connection</a>
+  
+    <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
+  
+    <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
+  
+    <li><a href="../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
+  
+    <li><a href="../Bitcoin/Logger.html">Bitcoin::Logger</a>
+  
+    <li><a href="../Bitcoin/Logger/LogWrapper.html">Bitcoin::Logger::LogWrapper</a>
+  
+    <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
+  
+    <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
+  
+    <li><a href="../Bitcoin/Network/CommandHandler.html">Bitcoin::Network::CommandHandler</a>
+  
+    <li><a href="../Bitcoin/Network/ConnectionHandler.html">Bitcoin::Network::ConnectionHandler</a>
+  
+    <li><a href="../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
+  
+    <li><a href="../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
+  
+    <li><a href="../Bitcoin/Protocol.html">Bitcoin::P</a>
+  
+    <li><a href="../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
+  
+    <li><a href="../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
+  
+    <li><a href="../Bitcoin/Protocol/Handler.html">Bitcoin::Protocol::Handler</a>
+  
+    <li><a href="../Bitcoin/Protocol/Parser.html">Bitcoin::Protocol::Parser</a>
+  
+    <li><a href="../Bitcoin/Protocol/Tx.html">Bitcoin::Protocol::Tx</a>
+  
+    <li><a href="../Bitcoin/Protocol/TxIn.html">Bitcoin::Protocol::TxIn</a>
+  
+    <li><a href="../Bitcoin/Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>
+  
+    <li><a href="../Bitcoin/Protocol/VersionPkt.html">Bitcoin::Protocol::VersionPkt</a>
+  
+    <li><a href="../Bitcoin/Script.html">Bitcoin::Script</a>
+  
+    <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore.html">Bitcoin::Storage::Backends::ActiverecordStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Base.html">Bitcoin::Storage::Backends::ActiverecordStore::Base</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Block.html">Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Input.html">Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Output.html">Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html">Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/TransactionsParent.html">Bitcoin::Storage::Backends::ActiverecordStore::TransactionsParent</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/StorageModel.html">Bitcoin::Storage::Backends::StorageModel</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
+  
+    <li><a href="../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
+  
+    <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../OpenSSL.html">OpenSSL</a>
+  
+    <li><a href="../OpenSSL/BN.html">OpenSSL::BN</a>
+  
+    <li><a href="../OpenSSL/PKey.html">OpenSSL::PKey</a>
+  
+    <li><a href="../OpenSSL/PKey/EC.html">OpenSSL::PKey::EC</a>
+  
+    <li><a href="../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
+  
+    <li><a href="../Log4r.html">Log4r</a>
+  
+    <li><a href="../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../Array.html">Array</a>
+  
+    <li><a href="../Chain.html">Chain</a>
+  
+    <li><a href="../Hash.html">Hash</a>
+  
+    <li><a href="../InventoryRequest.html">InventoryRequest</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Bitcoin::Script</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="OPCODES">OPCODES
+        
+        <dd class="description">
+        
+      
+        <dt id="OPCODES_ALIAS">OPCODES_ALIAS
+        
+        <dd class="description">
+        
+      
+        <dt id="OPCODES_METHOD">OPCODES_METHOD
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_0">OP_0
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_1">OP_1
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_2_16">OP_2_16
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_ADD">OP_ADD
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_BOOLAND">OP_BOOLAND
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_CHECKMULTISIG">OP_CHECKMULTISIG
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_CHECKMULTISIGVERIFY">OP_CHECKMULTISIGVERIFY
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_CHECKSIG">OP_CHECKSIG
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_CHECKSIGVERIFY">OP_CHECKSIGVERIFY
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_DROP">OP_DROP
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_DUP">OP_DUP
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_EQUAL">OP_EQUAL
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_EQUALVERIFY">OP_EQUALVERIFY
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_EVAL">OP_EVAL
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_FALSE">OP_FALSE
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_FROMALTSTACK">OP_FROMALTSTACK
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_GREATERTHANOREQUAL">OP_GREATERTHANOREQUAL
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_HASH160">OP_HASH160
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_HASH256">OP_HASH256
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_NOP">OP_NOP
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_NOP2">OP_NOP2
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_PUSHDATA1">OP_PUSHDATA1
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_PUSHDATA2">OP_PUSHDATA2
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_PUSHDATA4">OP_PUSHDATA4
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_RIPEMD160">OP_RIPEMD160
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_SHA1">OP_SHA1
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_SHA256">OP_SHA256
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_SUB">OP_SUB
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_SWAP">OP_SWAP
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_TOALTSTACK">OP_TOALTSTACK
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_TRUE">OP_TRUE
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_TUCK">OP_TUCK
+        
+        <dd class="description">
+        
+      
+        <dt id="OP_VERIFY">OP_VERIFY
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-chunks" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">chunks</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-debug" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">debug</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-raw" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">raw</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-binary_from_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">binary_from_string</span><span
+            class="method-args">(script_string)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>raw script binary of a string representation</p>
+          
+
+          
+          <div class="method-source-code" id="binary_from_string-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">script_string</span>)
+  <span class="ruby-identifier">script_string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot; &quot;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">i</span>
+      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">values</span>;          <span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">first</span>
+      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES_ALIAS</span>.<span class="ruby-identifier">keys</span>;      <span class="ruby-constant">OPCODES_ALIAS</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">last</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^([2-9]$|1[0-7])$/</span>;      <span class="ruby-constant">OP_2_16</span>[<span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\(opcode (\d+)\)/</span>;       <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">else</span> 
+        <span class="ruby-identifier">data</span> = [<span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+        <span class="ruby-identifier">size</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">bytesize</span>
+
+        <span class="ruby-identifier">head</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">OP_PUSHDATA1</span>
+          [<span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>)
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">OP_PUSHDATA1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xff</span>
+          [<span class="ruby-constant">OP_PUSHDATA1</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;CC&quot;</span>)
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0xff</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffff</span>
+          [<span class="ruby-constant">OP_PUSHDATA2</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Cn&quot;</span>)
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0xffff</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffffffff</span>
+          [<span class="ruby-constant">OP_PUSHDATA4</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;CN&quot;</span>)
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">head</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>
+    <span class="ruby-keyword">end</span>
+  }.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">i</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Fixnum</span>) <span class="ruby-operator">?</span> [<span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">i</span> <span class="ruby-comment"># TODO yikes, implement/pack 2 byte opcodes.</span>
+  }.<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- binary_from_string-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- binary_from_string-method -->
+
+    
+      <div id="method-c-from_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">from_string</span><span
+            class="method-args">(script_string)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>script object of a string representation</p>
+          
+
+          
+          <div class="method-source-code" id="from_string-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_string</span>(<span class="ruby-identifier">script_string</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">script_string</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- from_string-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- from_string-method -->
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(bytes, offset=0)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>create a new script. <code>bytes</code> is typically input_script +
+output_script</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">bytes</span>, <span class="ruby-identifier">offset</span>=<span class="ruby-value">0</span>)
+  <span class="ruby-ivar">@raw</span> = <span class="ruby-identifier">bytes</span>
+  <span class="ruby-ivar">@stack</span>, <span class="ruby-ivar">@stack_alt</span> = [], []
+  <span class="ruby-ivar">@chunks</span> = <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">bytes</span>, <span class="ruby-identifier">offset</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+      <div id="method-c-to_address_script" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_address_script</span><span
+            class="method-args">(address)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>generate standard transaction script for given <code>address</code></p>
+          
+
+          
+          <div class="method-source-code" id="to_address_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 411</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_address_script</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-identifier">hash160</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_from_address</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash160</span>
+  <span class="ruby-comment">#  DUP   HASH160  length  hash160    EQUALVERIFY  CHECKSIG</span>
+  [ [<span class="ruby-string">&quot;76&quot;</span>, <span class="ruby-string">&quot;a9&quot;</span>,    <span class="ruby-string">&quot;14&quot;</span>,   <span class="ruby-identifier">hash160</span>,   <span class="ruby-string">&quot;88&quot;</span>,        <span class="ruby-string">&quot;ac&quot;</span>].<span class="ruby-identifier">join</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_address_script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_address_script-method -->
+
+    
+      <div id="method-c-to_signature_pubkey_script" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_signature_pubkey_script</span><span
+            class="method-args">(signature, pubkey)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_signature_pubkey_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 418</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_signature_pubkey_script</span>(<span class="ruby-identifier">signature</span>, <span class="ruby-identifier">pubkey</span>)
+  <span class="ruby-identifier">hash_type</span> = <span class="ruby-string">&quot;\x01&quot;</span>
+  <span class="ruby-comment">#pubkey = [pubkey].pack(&quot;H*&quot;) if pubkey.bytesize != 65</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;pubkey is not in binary form&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pubkey</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">==</span> <span class="ruby-value">65</span>  <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pubkey</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\x04&quot;</span>
+  [ [<span class="ruby-identifier">signature</span>.<span class="ruby-identifier">bytesize</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), <span class="ruby-identifier">signature</span>, <span class="ruby-identifier">hash_type</span>, [<span class="ruby-identifier">pubkey</span>.<span class="ruby-identifier">bytesize</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), <span class="ruby-identifier">pubkey</span> ].<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_signature_pubkey_script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_signature_pubkey_script-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-get_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_address</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get address this script corresponds to (if possible)</p>
+          
+
+          
+          <div class="method-source-code" id="get_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 405</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_address</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_pubkey_address</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pubkey?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_hash160_address</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_address-method -->
+
+    
+      <div id="method-i-get_hash160" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_hash160</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the hash160 for this script (in standard address scripts)</p>
+          
+
+          
+          <div class="method-source-code" id="get_hash160-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 394</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_hash160</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-3</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">get_pubkey</span>)        <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pubkey?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_hash160-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_hash160-method -->
+
+    
+      <div id="method-i-get_hash160_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_hash160_address</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the address for the script hash160 (in standard address scripts)</p>
+          
+
+          
+          <div class="method-source-code" id="get_hash160_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_hash160_address</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_to_address</span>(<span class="ruby-identifier">get_hash160</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_hash160_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_hash160_address-method -->
+
+    
+      <div id="method-i-get_pubkey" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_pubkey</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the public key for this script (in generation scripts)</p>
+          
+
+          
+          <div class="method-source-code" id="get_pubkey-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 383</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_pubkey</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">is_pubkey?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_pubkey-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_pubkey-method -->
+
+    
+      <div id="method-i-get_pubkey_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_pubkey_address</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the address for the public key (in generation scripts)</p>
+          
+
+          
+          <div class="method-source-code" id="get_pubkey_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 389</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_pubkey_address</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">pubkey_to_address</span>(<span class="ruby-identifier">get_pubkey</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_pubkey_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_pubkey_address-method -->
+
+    
+      <div id="method-i-invalid-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">invalid?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="invalid-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">invalid?</span>
+  <span class="ruby-ivar">@script_invalid</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- invalid-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- invalid-3F-method -->
+
+    
+      <div id="method-i-is_hash160-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_hash160?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>is this a hash160 (address) tx</p>
+          
+
+          
+          <div class="method-source-code" id="is_hash160-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 375</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_hash160?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">5</span>
+  (<span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span>
+    [<span class="ruby-constant">OP_DUP</span>, <span class="ruby-constant">OP_HASH160</span>, <span class="ruby-constant">OP_EQUALVERIFY</span>, <span class="ruby-constant">OP_CHECKSIG</span>] <span class="ruby-operator">&amp;&amp;</span>
+    <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">==</span> <span class="ruby-value">20</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_hash160-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_hash160-3F-method -->
+
+    
+      <div id="method-i-is_pubkey-3F" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">is_pubkey?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Script.html#method-i-is_send_to_ip-3F">is_send_to_ip?</a>
+        </div>
+        
+      </div><!-- is_pubkey-3F-method -->
+
+    
+      <div id="method-i-is_send_to_ip-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_send_to_ip?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>is this a send-to-ip (pubkey) tx</p>
+          
+
+          
+          <div class="method-source-code" id="is_send_to_ip-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 368</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_send_to_ip?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
+  (<span class="ruby-ivar">@chunks</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">OP_CHECKSIG</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_send_to_ip-3F-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Script.html#method-i-is_pubkey-3F">is_pubkey?</a>
+        </div>
+        
+
+        
+      </div><!-- is_send_to_ip-3F-method -->
+
+    
+      <div id="method-i-is_standard-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_standard?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>check if script is in one of the recognized standard formats</p>
+          
+
+          
+          <div class="method-source-code" id="is_standard-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 363</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_standard?</span>
+  <span class="ruby-identifier">is_pubkey?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_hash160?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_standard-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_standard-3F-method -->
+
+    
+      <div id="method-i-op_0" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_0</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>An empty array of bytes is pushed onto the stack.</p>
+          
+
+          
+          <div class="method-source-code" id="op_0-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_0</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-comment"># []</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_0-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_0-method -->
+
+    
+      <div id="method-i-op_1" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_1</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The number 1 is pushed onto the stack.</p>
+          
+
+          
+          <div class="method-source-code" id="op_1-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_1</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_1-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_1-method -->
+
+    
+      <div id="method-i-op_add" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_add</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>a is added to b.</p>
+          
+
+          
+          <div class="method-source-code" id="op_add-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_add</span>
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_add-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_add-method -->
+
+    
+      <div id="method-i-op_booland" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_booland</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If both a and b are not 0, the output is 1. Otherwise 0.</p>
+          
+
+          
+          <div class="method-source-code" id="op_booland-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_booland</span>
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>)
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-operator">!</span>[<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>].<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> } <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_booland-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_booland-method -->
+
+    
+      <div id="method-i-op_checkmultisig" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_checkmultisig</span><span
+            class="method-args">(check_callback)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>do a CHECKMULTISIG operation on the current stack, asking
+<code>check_callback</code> to do the actual signature verification.</p>
+
+<p>CHECKMULTISIG does a m-of-n signatures verification on scripts of the form:</p>
+
+<pre>0 &lt;sig1&gt; &lt;sig2&gt; | 2 &lt;pub1&gt; &lt;pub2&gt; 2 OP_CHECKMULTISIG
+0 &lt;sig1&gt; &lt;sig2&gt; | 2 &lt;pub1&gt; &lt;pub2&gt; &lt;pub3&gt; 3 OP_CHECKMULTISIG
+0 &lt;sig1&gt; &lt;sig2&gt; &lt;sig3&gt; | 3 &lt;pub1&gt; &lt;pub2&gt; &lt;pub3&gt; 3 OP_CHECKMULTISIG</pre>
+
+<p>see <a
+href="https://en.bitcoin.it/wiki/BIP_0011">en.bitcoin.it/wiki/BIP_0011</a>
+for details.</p>
+
+<p>TODO: validate signature order</p>
+          
+
+          
+          <div class="method-source-code" id="op_checkmultisig-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 337</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_checkmultisig</span>(<span class="ruby-identifier">check_callback</span>)
+  <span class="ruby-identifier">n_pubkeys</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n_pubkeys</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Fixnum</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">last</span>(<span class="ruby-identifier">n_pubkeys</span>).<span class="ruby-identifier">all?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">!=</span> <span class="ruby-string">''</span> }
+  <span class="ruby-identifier">pubkeys</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">n_pubkeys</span>) { <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span> }
+
+  <span class="ruby-identifier">n_sigs</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n_sigs</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Fixnum</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">n_sigs</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">last</span>(<span class="ruby-identifier">n_sigs</span>).<span class="ruby-identifier">all?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">!=</span> <span class="ruby-string">''</span> }
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">n_sigs</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">n_pubkeys</span>
+  <span class="ruby-identifier">sigs</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">n_sigs</span>) { <span class="ruby-identifier">parse_sig</span>(<span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>) }
+
+  <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">''</span> <span class="ruby-comment"># remove OP_NOP from stack</span>
+
+  <span class="ruby-identifier">valid_sigs</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">sigs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">pubkeys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pubkey</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">valid_sigs</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">pubkey</span>, <span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">1</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">valid_sigs</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">n_sigs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_checkmultisig-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_checkmultisig-method -->
+
+    
+      <div id="method-i-op_checksig" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_checksig</span><span
+            class="method-args">(check_callback)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>do a CHECKSIG operation on the current stack, asking
+<code>check_callback</code> to do the actual signature verification. This
+is used by <a
+href="Protocol/Tx.html#method-i-verify_input_signature">Bitcoin::Protocol::Tx#verify_input_signature</a></p>
+          
+
+          
+          <div class="method-source-code" id="op_checksig-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 313</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_checksig</span>(<span class="ruby-identifier">check_callback</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
+  <span class="ruby-identifier">pubkey</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span> = <span class="ruby-identifier">parse_sig</span>(<span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_callback</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-comment"># for tests</span>
+    <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">else</span> <span class="ruby-comment"># real signature check callback</span>
+    <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span>
+      ((<span class="ruby-identifier">check_callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">pubkey</span>, <span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>) <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_checksig-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_checksig-method -->
+
+    
+      <div id="method-i-op_drop" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_drop</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Removes the top stack item.</p>
+          
+
+          
+          <div class="method-source-code" id="op_drop-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_drop</span>
+  <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_drop-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_drop-method -->
+
+    
+      <div id="method-i-op_dup" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_dup</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Duplicates the top stack item.</p>
+          
+
+          
+          <div class="method-source-code" id="op_dup-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_dup</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">dup</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_dup-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_dup-method -->
+
+    
+      <div id="method-i-op_equal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_equal</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns 1 if the inputs are exactly equal, 0 otherwise.</p>
+          
+
+          
+          <div class="method-source-code" id="op_equal-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_equal</span>
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_equal-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_equal-method -->
+
+    
+      <div id="method-i-op_equalverify" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_equalverify</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Same as <a href="Script.html#OP_EQUAL">OP_EQUAL</a>, but runs <a
+href="Script.html#OP_VERIFY">OP_VERIFY</a> afterward.</p>
+          
+
+          
+          <div class="method-source-code" id="op_equalverify-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 243</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_equalverify</span>
+  <span class="ruby-identifier">op_equal</span>; <span class="ruby-identifier">op_verify</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_equalverify-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_equalverify-method -->
+
+    
+      <div id="method-i-op_fromaltstack" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_fromaltstack</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Puts the input onto the top of the main stack. Removes it from the alt
+stack.</p>
+          
+
+          
+          <div class="method-source-code" id="op_fromaltstack-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_fromaltstack</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack_alt</span>.<span class="ruby-identifier">pop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_fromaltstack-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_fromaltstack-method -->
+
+    
+      <div id="method-i-op_greaterthanorequal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_greaterthanorequal</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns 1 if a is greater than or equal to b, 0 otherwise.</p>
+          
+
+          
+          <div class="method-source-code" id="op_greaterthanorequal-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_greaterthanorequal</span>
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_greaterthanorequal-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_greaterthanorequal-method -->
+
+    
+      <div id="method-i-op_hash160" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_hash160</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The input is hashed twice: first with SHA-256 and then with RIPEMD-160.</p>
+          
+
+          
+          <div class="method-source-code" id="op_hash160-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_hash160</span>
+  <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">RMD160</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_hash160-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_hash160-method -->
+
+    
+      <div id="method-i-op_hash256" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_hash256</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The input is hashed two times with SHA-256.</p>
+          
+
+          
+          <div class="method-source-code" id="op_hash256-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_hash256</span>
+  <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_hash256-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_hash256-method -->
+
+    
+      <div id="method-i-op_nop" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_nop</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Does nothing</p>
+          
+
+          
+          <div class="method-source-code" id="op_nop-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_nop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_nop-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_nop-method -->
+
+    
+      <div id="method-i-op_ripemd160" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_ripemd160</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The input is hashed using RIPEMD-160.</p>
+          
+
+          
+          <div class="method-source-code" id="op_ripemd160-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_ripemd160</span>
+  <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">RMD160</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_ripemd160-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_ripemd160-method -->
+
+    
+      <div id="method-i-op_sha1" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_sha1</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The input is hashed using SHA-1.</p>
+          
+
+          
+          <div class="method-source-code" id="op_sha1-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_sha1</span>
+  <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_sha1-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_sha1-method -->
+
+    
+      <div id="method-i-op_sha256" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_sha256</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The input is hashed using SHA-256.</p>
+          
+
+          
+          <div class="method-source-code" id="op_sha256-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_sha256</span>
+  <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_sha256-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_sha256-method -->
+
+    
+      <div id="method-i-op_sub" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_sub</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>b is subtracted from a.</p>
+          
+
+          
+          <div class="method-source-code" id="op_sub-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 209</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_sub</span>
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
+  <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">b</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_sub-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_sub-method -->
+
+    
+      <div id="method-i-op_swap" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_swap</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The top two items on the stack are swapped.</p>
+          
+
+          
+          <div class="method-source-code" id="op_swap-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_swap</span>
+  <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] = <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">reverse</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_swap-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_swap-method -->
+
+    
+      <div id="method-i-op_toaltstack" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_toaltstack</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Puts the input onto the top of the alt stack. Removes it from the main
+stack.</p>
+          
+
+          
+          <div class="method-source-code" id="op_toaltstack-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_toaltstack</span>
+  <span class="ruby-ivar">@stack_alt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_toaltstack-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_toaltstack-method -->
+
+    
+      <div id="method-i-op_tuck" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_tuck</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The item at the top of the stack is copied and inserted before the
+second-to-top item.</p>
+          
+
+          
+          <div class="method-source-code" id="op_tuck-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_tuck</span>
+  <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] = [ <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>], *<span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_tuck-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_tuck-method -->
+
+    
+      <div id="method-i-op_verify" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">op_verify</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Marks transaction as invalid if top stack value is not true. True is
+removed, but false is not.</p>
+          
+
+          
+          <div class="method-source-code" id="op_verify-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 232</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">op_verify</span>
+  <span class="ruby-identifier">res</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
+    <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">res</span>
+    <span class="ruby-ivar">@script_invalid</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment"># raise 'transaction invalid' ?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@script_invalid</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- op_verify-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- op_verify-method -->
+
+    
+      <div id="method-i-parse" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse</span><span
+            class="method-args">(bytes, offset=0)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>parse raw script</p>
+          
+
+          
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">bytes</span>, <span class="ruby-identifier">offset</span>=<span class="ruby-value">0</span>)
+  <span class="ruby-identifier">program</span> = <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
+  <span class="ruby-identifier">chunks</span> = []
+  <span class="ruby-keyword">until</span> <span class="ruby-identifier">program</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">opcode</span> = <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-value">1</span>)[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">opcode</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0xf0</span>
+      <span class="ruby-identifier">opcode</span> = (<span class="ruby-identifier">opcode</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">8</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-value">1</span>)[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">opcode</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">opcode</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">OP_PUSHDATA1</span>)
+      <span class="ruby-identifier">len</span> = <span class="ruby-identifier">opcode</span>
+      <span class="ruby-identifier">chunks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-identifier">len</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">opcode</span> <span class="ruby-operator">==</span> <span class="ruby-constant">OP_PUSHDATA1</span>)
+      <span class="ruby-identifier">len</span> = <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-value">1</span>)[<span class="ruby-value">0</span>]
+      <span class="ruby-identifier">chunks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-identifier">len</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">opcode</span> <span class="ruby-operator">==</span> <span class="ruby-constant">OP_PUSHDATA2</span>)
+      <span class="ruby-identifier">len</span> = <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;n&quot;</span>)[<span class="ruby-value">0</span>]
+      <span class="ruby-identifier">chunks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-identifier">len</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">opcode</span> <span class="ruby-operator">==</span> <span class="ruby-constant">OP_PUSHDATA4</span>)
+      <span class="ruby-identifier">len</span> = <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-value">4</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;N&quot;</span>)[<span class="ruby-value">0</span>]
+      <span class="ruby-identifier">chunks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">program</span>.<span class="ruby-identifier">shift</span>(<span class="ruby-identifier">len</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">chunks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">opcode</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">chunks</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- parse-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parse-method -->
+
+    
+      <div id="method-i-run" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">run</span><span
+            class="method-args">(&check_callback)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>run the script. <code>check_callback</code> is called for <a
+href="Script.html#OP_CHECKSIG">OP_CHECKSIG</a> operations</p>
+          
+
+          
+          <div class="method-source-code" id="run-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(&amp;<span class="ruby-identifier">check_callback</span>)
+  <span class="ruby-ivar">@debug</span> = []
+  <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">chunk</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">invalid?</span>
+    <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">i</span>}
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">chunk</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Fixnum</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">chunk</span>
+
+      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES_METHOD</span>.<span class="ruby-identifier">keys</span>
+        <span class="ruby-identifier">m</span> = <span class="ruby-constant">OPCODES_METHOD</span>[<span class="ruby-identifier">chunk</span>]
+        <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>
+        <span class="ruby-identifier">send</span>(<span class="ruby-identifier">m</span>) <span class="ruby-comment"># invoke opcode method</span>
+
+      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OP_2_16</span>
+        <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">OP_2_16</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">chunk</span>) <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
+
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">OP_CHECKSIG</span>
+        <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;OP_CHECKSIG&quot;</span>
+        <span class="ruby-identifier">op_checksig</span>(<span class="ruby-identifier">check_callback</span>)
+
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">OP_CHECKMULTISIG</span>
+        <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;OP_CHECKMULTISIG&quot;</span>
+        <span class="ruby-identifier">op_checkmultisig</span>(<span class="ruby-identifier">check_callback</span>)
+
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-constant">OPCODES</span>[<span class="ruby-identifier">chunk</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">chunk</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;opcode #{name} unkown or not implemented&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+      <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;PUSH DATA #{chunk.unpack(&quot;H*&quot;)[0]}&quot;</span>
+      <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">chunk</span>
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">i</span>}
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@script_invalid</span>
+    <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;INVALID TRANSACTION&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;RESULT&quot;</span>
+  <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- run-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- run-method -->
+
+    
+      <div id="method-i-to_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_string</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>string representation of the script</p>
+          
+
+          
+          <div class="method-source-code" id="to_string-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_string</span>
+  <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">i</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Fixnum</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">i</span>
+      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">keys</span>;          <span class="ruby-constant">OPCODES</span>[<span class="ruby-identifier">i</span>]
+      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OP_2_16</span>;               (<span class="ruby-constant">OP_2_16</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">i</span>)<span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">to_s</span>
+      <span class="ruby-keyword">else</span> <span class="ruby-node">&quot;(opcode #{i})&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">i</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">end</span>
+  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_string-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_string-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

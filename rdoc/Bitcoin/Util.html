@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module Bitcoin::Util - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/bitcoin.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-address_checksum-3F">#address_checksum?</a>
+    
+    <li><a href="#method-i-address_version">#address_version</a>
+    
+    <li><a href="#method-i-base58_to_hex">#base58_to_hex</a>
+    
+    <li><a href="#method-i-base58_to_int">#base58_to_int</a>
+    
+    <li><a href="#method-i-bitcoin_elliptic_curve">#bitcoin_elliptic_curve</a>
+    
+    <li><a href="#method-i-bitcoin_hash">#bitcoin_hash</a>
+    
+    <li><a href="#method-i-bitcoin_mrkl">#bitcoin_mrkl</a>
+    
+    <li><a href="#method-i-block_hash">#block_hash</a>
+    
+    <li><a href="#method-i-checksum">#checksum</a>
+    
+    <li><a href="#method-i-decode_compact_bits">#decode_compact_bits</a>
+    
+    <li><a href="#method-i-decode_target">#decode_target</a>
+    
+    <li><a href="#method-i-encode_base58">#encode_base58</a>
+    
+    <li><a href="#method-i-encode_compact_bits">#encode_compact_bits</a>
+    
+    <li><a href="#method-i-generate_address">#generate_address</a>
+    
+    <li><a href="#method-i-generate_key">#generate_key</a>
+    
+    <li><a href="#method-i-hash160">#hash160</a>
+    
+    <li><a href="#method-i-hash160_from_address">#hash160_from_address</a>
+    
+    <li><a href="#method-i-hash160_to_address">#hash160_to_address</a>
+    
+    <li><a href="#method-i-hash_mrkl_tree">#hash_mrkl_tree</a>
+    
+    <li><a href="#method-i-htb">#htb</a>
+    
+    <li><a href="#method-i-hth">#hth</a>
+    
+    <li><a href="#method-i-inspect_key">#inspect_key</a>
+    
+    <li><a href="#method-i-int_to_base58">#int_to_base58</a>
+    
+    <li><a href="#method-i-open_key">#open_key</a>
+    
+    <li><a href="#method-i-pubkey_to_address">#pubkey_to_address</a>
+    
+    <li><a href="#method-i-regenerate_public_key">#regenerate_public_key</a>
+    
+    <li><a href="#method-i-sha256">#sha256</a>
+    
+    <li><a href="#method-i-sign_data">#sign_data</a>
+    
+    <li><a href="#method-i-valid_address-3F">#valid_address?</a>
+    
+    <li><a href="#method-i-verify_signature">#verify_signature</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Bitcoin.html">Bitcoin</a>
+  
+    <li><a href="../Bitcoin/Connection.html">Bitcoin::Connection</a>
+  
+    <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
+  
+    <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
+  
+    <li><a href="../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
+  
+    <li><a href="../Bitcoin/Logger.html">Bitcoin::Logger</a>
+  
+    <li><a href="../Bitcoin/Logger/LogWrapper.html">Bitcoin::Logger::LogWrapper</a>
+  
+    <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
+  
+    <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
+  
+    <li><a href="../Bitcoin/Network/CommandHandler.html">Bitcoin::Network::CommandHandler</a>
+  
+    <li><a href="../Bitcoin/Network/ConnectionHandler.html">Bitcoin::Network::ConnectionHandler</a>
+  
+    <li><a href="../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
+  
+    <li><a href="../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
+  
+    <li><a href="../Bitcoin/Protocol.html">Bitcoin::P</a>
+  
+    <li><a href="../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
+  
+    <li><a href="../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
+  
+    <li><a href="../Bitcoin/Protocol/Handler.html">Bitcoin::Protocol::Handler</a>
+  
+    <li><a href="../Bitcoin/Protocol/Parser.html">Bitcoin::Protocol::Parser</a>
+  
+    <li><a href="../Bitcoin/Protocol/Tx.html">Bitcoin::Protocol::Tx</a>
+  
+    <li><a href="../Bitcoin/Protocol/TxIn.html">Bitcoin::Protocol::TxIn</a>
+  
+    <li><a href="../Bitcoin/Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>
+  
+    <li><a href="../Bitcoin/Protocol/VersionPkt.html">Bitcoin::Protocol::VersionPkt</a>
+  
+    <li><a href="../Bitcoin/Script.html">Bitcoin::Script</a>
+  
+    <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore.html">Bitcoin::Storage::Backends::ActiverecordStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Base.html">Bitcoin::Storage::Backends::ActiverecordStore::Base</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Block.html">Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Input.html">Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Output.html">Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html">Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/ActiverecordStore/TransactionsParent.html">Bitcoin::Storage::Backends::ActiverecordStore::TransactionsParent</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/StorageModel.html">Bitcoin::Storage::Backends::StorageModel</a>
+  
+    <li><a href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
+  
+    <li><a href="../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
+  
+    <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
+  
+    <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../OpenSSL.html">OpenSSL</a>
+  
+    <li><a href="../OpenSSL/BN.html">OpenSSL::BN</a>
+  
+    <li><a href="../OpenSSL/PKey.html">OpenSSL::PKey</a>
+  
+    <li><a href="../OpenSSL/PKey/EC.html">OpenSSL::PKey::EC</a>
+  
+    <li><a href="../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
+  
+    <li><a href="../Log4r.html">Log4r</a>
+  
+    <li><a href="../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../Array.html">Array</a>
+  
+    <li><a href="../Chain.html">Chain</a>
+  
+    <li><a href="../Hash.html">Hash</a>
+  
+    <li><a href="../InventoryRequest.html">InventoryRequest</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Bitcoin::Util</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-address_checksum-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">address_checksum?</span><span
+            class="method-args">(address)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="address_checksum-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">address_checksum?</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">base58_to_hex</span>(<span class="ruby-identifier">address</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">address_version</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;00&quot;</span>
+    <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">checksum</span>( <span class="ruby-identifier">address_version</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">40</span>] ) <span class="ruby-operator">==</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">-8</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">checksum</span>( <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">42</span>] ) <span class="ruby-operator">==</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">-8</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- address_checksum-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- address_checksum-3F-method -->
+
+    
+      <div id="method-i-address_version" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">address_version</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="address_version-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">address_version</span>
+  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-identifier">network</span>[<span class="ruby-value">:address_version</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- address_version-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- address_version-method -->
+
+    
+      <div id="method-i-base58_to_hex" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">base58_to_hex</span><span
+            class="method-args">(base58_val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="base58_to_hex-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">base58_to_hex</span>(<span class="ruby-identifier">base58_val</span>)
+  <span class="ruby-comment">#[base58_to_int(base58_val).to_s(2).reverse].pack(&quot;b*&quot;).reverse.unpack(&quot;H*&quot;)[0]</span>
+  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">base58_to_int</span>(<span class="ruby-identifier">base58_val</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>); <span class="ruby-identifier">s</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">odd?</span> <span class="ruby-operator">?</span> <span class="ruby-string">'0'</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- base58_to_hex-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- base58_to_hex-method -->
+
+    
+      <div id="method-i-base58_to_int" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">base58_to_int</span><span
+            class="method-args">(base58_val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="base58_to_int-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">base58_to_int</span>(<span class="ruby-identifier">base58_val</span>)
+  <span class="ruby-identifier">alpha</span> = <span class="ruby-string">&quot;123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz&quot;</span>
+  <span class="ruby-identifier">int_val</span>, <span class="ruby-identifier">base</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">alpha</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-identifier">base58_val</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">each_char</span>.<span class="ruby-identifier">with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">char</span>,<span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">'Value not a valid Base58 String.'</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">char_index</span> = <span class="ruby-identifier">alpha</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">char</span>)
+    <span class="ruby-identifier">int_val</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">char_index</span>*(<span class="ruby-identifier">base</span><span class="ruby-operator">**</span><span class="ruby-identifier">index</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">int_val</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- base58_to_int-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- base58_to_int-method -->
+
+    
+      <div id="method-i-bitcoin_elliptic_curve" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bitcoin_elliptic_curve</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bitcoin_elliptic_curve-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bitcoin_elliptic_curve</span>
+  <span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">EC</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;secp256k1&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- bitcoin_elliptic_curve-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bitcoin_elliptic_curve-method -->
+
+    
+      <div id="method-i-bitcoin_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bitcoin_hash</span><span
+            class="method-args">(hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bitcoin_hash-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bitcoin_hash</span>(<span class="ruby-identifier">hex</span>)
+  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(
+    <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>( [<span class="ruby-identifier">hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>).<span class="ruby-identifier">reverse</span> )
+  ).<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- bitcoin_hash-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bitcoin_hash-method -->
+
+    
+      <div id="method-i-bitcoin_mrkl" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bitcoin_mrkl</span><span
+            class="method-args">(a, b)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bitcoin_mrkl-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bitcoin_mrkl</span>(<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>); <span class="ruby-identifier">bitcoin_hash</span>(<span class="ruby-identifier">b</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">a</span>); <span class="ruby-keyword">end</span></pre>
+          </div><!-- bitcoin_mrkl-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bitcoin_mrkl-method -->
+
+    
+      <div id="method-i-block_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">block_hash</span><span
+            class="method-args">(prev_block, mrkl_root, time, bits, nonce, ver)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="block_hash-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">block_hash</span>(<span class="ruby-identifier">prev_block</span>, <span class="ruby-identifier">mrkl_root</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">bits</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-identifier">ver</span>)
+  <span class="ruby-identifier">h</span> = <span class="ruby-string">&quot;%08x%08x%08x%064s%064s%08x&quot;</span> <span class="ruby-operator">%</span>
+        [<span class="ruby-identifier">nonce</span>, <span class="ruby-identifier">bits</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">mrkl_root</span>, <span class="ruby-identifier">prev_block</span>, <span class="ruby-identifier">ver</span>]
+  <span class="ruby-identifier">bitcoin_hash</span>(<span class="ruby-identifier">h</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- block_hash-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- block_hash-method -->
+
+    
+      <div id="method-i-checksum" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">checksum</span><span
+            class="method-args">(hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>checksum is a 4 bytes sha256-sha256 hexdigest.</p>
+          
+
+          
+          <div class="method-source-code" id="checksum-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">checksum</span>(<span class="ruby-identifier">hex</span>)
+  <span class="ruby-identifier">b</span> = [<span class="ruby-identifier">hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>) <span class="ruby-comment"># unpack hex</span>
+  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>( <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">b</span>) )[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">8</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- checksum-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- checksum-method -->
+
+    
+      <div id="method-i-decode_compact_bits" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">decode_compact_bits</span><span
+            class="method-args">(bits)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>target compact bits (int) to bignum hex</p>
+          
+
+          
+          <div class="method-source-code" id="decode_compact_bits-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">decode_compact_bits</span>(<span class="ruby-identifier">bits</span>)
+  <span class="ruby-identifier">bytes</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">size</span>=((<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">24</span>) &amp; <span class="ruby-value">255</span>), <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">bytes</span>[<span class="ruby-value">0</span>] = (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">16</span>) &amp; <span class="ruby-value">255</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">bytes</span>[<span class="ruby-value">1</span>] = (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;&gt;</span>  <span class="ruby-value">8</span>) &amp; <span class="ruby-value">255</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>
+  <span class="ruby-identifier">bytes</span>[<span class="ruby-value">2</span>] = (<span class="ruby-identifier">bits</span>      ) &amp; <span class="ruby-value">255</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">3</span>
+  <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;%02x&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">i</span>] }.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">64</span>, <span class="ruby-string">'0'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- decode_compact_bits-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- decode_compact_bits-method -->
+
+    
+      <div id="method-i-decode_target" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">decode_target</span><span
+            class="method-args">(target_bits)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="decode_target-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">decode_target</span>(<span class="ruby-identifier">target_bits</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">target_bits</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Fixnum</span>
+    [ <span class="ruby-identifier">decode_compact_bits</span>(<span class="ruby-identifier">target_bits</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>), <span class="ruby-identifier">target_bits</span> ]
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    [ <span class="ruby-identifier">target_bits</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>), <span class="ruby-identifier">encode_compact_bits</span>(<span class="ruby-identifier">target_bits</span>) ]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- decode_target-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- decode_target-method -->
+
+    
+      <div id="method-i-encode_base58" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">encode_base58</span><span
+            class="method-args">(hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="encode_base58-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">encode_base58</span>(<span class="ruby-identifier">hex</span>)
+  <span class="ruby-identifier">int_to_base58</span>( <span class="ruby-identifier">hex</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- encode_base58-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- encode_base58-method -->
+
+    
+      <div id="method-i-encode_compact_bits" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">encode_compact_bits</span><span
+            class="method-args">(target)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>target bignum hex to compact bits (int)</p>
+          
+
+          
+          <div class="method-source-code" id="encode_compact_bits-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">encode_compact_bits</span>(<span class="ruby-identifier">target</span>)
+  <span class="ruby-identifier">bytes</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">BN</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target</span>, <span class="ruby-value">16</span>).<span class="ruby-identifier">to_mpi</span>
+  <span class="ruby-identifier">size</span> = <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">4</span>
+  <span class="ruby-identifier">nbits</span> = <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">24</span>
+  <span class="ruby-identifier">nbits</span> <span class="ruby-operator">|=</span> (<span class="ruby-identifier">bytes</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">16</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">nbits</span> <span class="ruby-operator">|=</span> (<span class="ruby-identifier">bytes</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-value">8</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>
+  <span class="ruby-identifier">nbits</span> <span class="ruby-operator">|=</span> (<span class="ruby-identifier">bytes</span>[<span class="ruby-value">6</span>]      ) <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">3</span>
+  <span class="ruby-identifier">nbits</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- encode_compact_bits-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- encode_compact_bits-method -->
+
+    
+      <div id="method-i-generate_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_address</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_address</span>
+  <span class="ruby-identifier">prvkey</span>, <span class="ruby-identifier">pubkey</span> = <span class="ruby-identifier">generate_key</span>
+  [ <span class="ruby-identifier">pubkey_to_address</span>(<span class="ruby-identifier">pubkey</span>), <span class="ruby-identifier">prvkey</span>, <span class="ruby-identifier">pubkey</span>, <span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">pubkey</span>) ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_address-method -->
+
+    
+      <div id="method-i-generate_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_key</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_key-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_key</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">bitcoin_elliptic_curve</span>.<span class="ruby-identifier">generate_key</span>
+  <span class="ruby-identifier">inspect_key</span>( <span class="ruby-identifier">key</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_key-method -->
+
+    
+      <div id="method-i-hash160" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hash160</span><span
+            class="method-args">(hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>hash160 is a 20 bytes (160bits) rmd610-sha256 hexdigest.</p>
+          
+
+          
+          <div class="method-source-code" id="hash160-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">hex</span>)
+  <span class="ruby-identifier">bytes</span> = [<span class="ruby-identifier">hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">RMD160</span>.<span class="ruby-identifier">hexdigest</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">bytes</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hash160-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hash160-method -->
+
+    
+      <div id="method-i-hash160_from_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hash160_from_address</span><span
+            class="method-args">(address)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hash160_from_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash160_from_address</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">address_checksum?</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">base58_to_hex</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-identifier">address_version</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;00&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">40</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">2</span><span class="ruby-operator">...</span><span class="ruby-value">42</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hash160_from_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hash160_from_address-method -->
+
+    
+      <div id="method-i-hash160_to_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hash160_to_address</span><span
+            class="method-args">(hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hash160_to_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash160_to_address</span>(<span class="ruby-identifier">hex</span>)
+  <span class="ruby-identifier">hex</span> = <span class="ruby-identifier">address_version</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hex</span>
+  <span class="ruby-identifier">addr</span> = <span class="ruby-identifier">encode_base58</span>(<span class="ruby-identifier">hex</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">checksum</span>(<span class="ruby-identifier">hex</span>))
+  <span class="ruby-identifier">addr</span> = <span class="ruby-string">&quot;1&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">addr</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">address_version</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;00&quot;</span>
+  <span class="ruby-identifier">addr</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hash160_to_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hash160_to_address-method -->
+
+    
+      <div id="method-i-hash_mrkl_tree" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hash_mrkl_tree</span><span
+            class="method-args">(tx)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hash_mrkl_tree-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash_mrkl_tree</span>(<span class="ruby-identifier">tx</span>)
+  <span class="ruby-identifier">chunks</span> = [ <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">dup</span> ]
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">chunks</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">chunks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">chunks</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">each_slice</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">bitcoin_mrkl</span>( <span class="ruby-identifier">i</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">i</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">0</span>] )
+    }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">chunks</span>.<span class="ruby-identifier">flatten</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hash_mrkl_tree-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hash_mrkl_tree-method -->
+
+    
+      <div id="method-i-htb" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">htb</span><span
+            class="method-args">(h)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="htb-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">h</span>); [<span class="ruby-identifier">h</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>); <span class="ruby-keyword">end</span></pre>
+          </div><!-- htb-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- htb-method -->
+
+    
+      <div id="method-i-hth" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hth</span><span
+            class="method-args">(h)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hth-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">h</span>); <span class="ruby-identifier">h</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]; <span class="ruby-keyword">end</span></pre>
+          </div><!-- hth-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hth-method -->
+
+    
+      <div id="method-i-inspect_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inspect_key</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="inspect_key-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect_key</span>(<span class="ruby-identifier">key</span>)
+  [ <span class="ruby-identifier">key</span>.<span class="ruby-identifier">private_key_hex</span>, <span class="ruby-identifier">key</span>.<span class="ruby-identifier">public_key_hex</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- inspect_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- inspect_key-method -->
+
+    
+      <div id="method-i-int_to_base58" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">int_to_base58</span><span
+            class="method-args">(int_val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="int_to_base58-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">int_to_base58</span>(<span class="ruby-identifier">int_val</span>)
+  <span class="ruby-identifier">alpha</span> = <span class="ruby-string">&quot;123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz&quot;</span>
+  <span class="ruby-identifier">base58_val</span>, <span class="ruby-identifier">base</span> = <span class="ruby-string">''</span>, <span class="ruby-identifier">alpha</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">while</span>(<span class="ruby-identifier">int_val</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">base</span>)
+    <span class="ruby-identifier">mod</span> = <span class="ruby-identifier">int_val</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">base</span>
+    <span class="ruby-identifier">base58_val</span> = <span class="ruby-identifier">alpha</span>[<span class="ruby-identifier">mod</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">base58_val</span>
+    <span class="ruby-identifier">int_val</span> = (<span class="ruby-identifier">int_val</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">mod</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">base</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">alpha</span>[<span class="ruby-identifier">int_val</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">base58_val</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- int_to_base58-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- int_to_base58-method -->
+
+    
+      <div id="method-i-open_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open_key</span><span
+            class="method-args">(private_key, public_key=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="open_key-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_key</span>(<span class="ruby-identifier">private_key</span>, <span class="ruby-identifier">public_key</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">key</span>  = <span class="ruby-identifier">bitcoin_elliptic_curve</span>
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">private_key</span> = <span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">BN</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-identifier">private_key</span>)
+  <span class="ruby-identifier">public_key</span> = <span class="ruby-identifier">regenerate_public_key</span>(<span class="ruby-identifier">private_key</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">public_key</span>
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">public_key</span>  = <span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">EC</span><span class="ruby-operator">::</span><span class="ruby-constant">Point</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">group</span>, <span class="ruby-identifier">public_key</span>)
+  <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- open_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- open_key-method -->
+
+    
+      <div id="method-i-pubkey_to_address" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pubkey_to_address</span><span
+            class="method-args">(pubkey)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="pubkey_to_address-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pubkey_to_address</span>(<span class="ruby-identifier">pubkey</span>)
+  <span class="ruby-identifier">hash160_to_address</span>( <span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">pubkey</span>) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- pubkey_to_address-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pubkey_to_address-method -->
+
+    
+      <div id="method-i-regenerate_public_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">regenerate_public_key</span><span
+            class="method-args">(private_key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="regenerate_public_key-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerate_public_key</span>(<span class="ruby-identifier">private_key</span>)
+  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL_EC</span>.<span class="ruby-identifier">regenerate_key</span>(<span class="ruby-identifier">private_key</span>)[<span class="ruby-value">1</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- regenerate_public_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- regenerate_public_key-method -->
+
+    
+      <div id="method-i-sha256" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sha256</span><span
+            class="method-args">(hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sha256-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sha256</span>(<span class="ruby-identifier">hex</span>)
+  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>([<span class="ruby-identifier">hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sha256-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sha256-method -->
+
+    
+      <div id="method-i-sign_data" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sign_data</span><span
+            class="method-args">(key, data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sign_data-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sign_data</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">dsa_sign_asn1</span>(<span class="ruby-identifier">data</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sign_data-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sign_data-method -->
+
+    
+      <div id="method-i-valid_address-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">valid_address?</span><span
+            class="method-args">(address)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="valid_address-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">valid_address?</span>(<span class="ruby-identifier">address</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">address_version</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;00&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">address</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;1&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">base58_to_hex</span>(<span class="ruby-identifier">address</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">address_version</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">address_checksum?</span>(<span class="ruby-identifier">address</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- valid_address-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- valid_address-3F-method -->
+
+    
+      <div id="method-i-verify_signature" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">verify_signature</span><span
+            class="method-args">(hash, signature, public_key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="verify_signature-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">verify_signature</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">signature</span>, <span class="ruby-identifier">public_key</span>)
+  <span class="ruby-identifier">key</span>  = <span class="ruby-identifier">bitcoin_elliptic_curve</span>
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">public_key</span> = <span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">EC</span><span class="ruby-operator">::</span><span class="ruby-constant">Point</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">group</span>, <span class="ruby-identifier">public_key</span>)
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">dsa_verify_asn1</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">signature</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">ECError</span>, <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">EC</span><span class="ruby-operator">::</span><span class="ruby-constant">Point</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- verify_signature-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- verify_signature-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
