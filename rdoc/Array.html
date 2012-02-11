@@ -99,13 +99,13 @@
   
     <li><a href="./Bitcoin.html">Bitcoin</a>
   
+    <li><a href="./Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="./Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="./Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="./Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="./Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="./Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -185,6 +185,18 @@
   
     <li><a href="./Bitcoin/Util.html">Bitcoin::Util</a>
   
+    <li><a href="./Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="./Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="./Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="./Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="./Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="./Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
+  
     <li><a href="./OpenSSL.html">OpenSSL</a>
   
     <li><a href="./OpenSSL/BN.html">OpenSSL::BN</a>
@@ -254,7 +266,7 @@
 
           
           <div class="method-source-code" id="random-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 261</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">random</span>(<span class="ruby-identifier">weights</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">random</span>(<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">n</span>) })  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">random</span>(<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">weights</span>) })  <span class="ruby-keyword">if</span> <span class="ruby-identifier">weights</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Symbol</span>
@@ -294,7 +306,7 @@
 
           
           <div class="method-source-code" id="weighted_sample-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 275</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 287</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">weighted_sample</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">weights</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">src</span> = <span class="ruby-identifier">dup</span>
   <span class="ruby-identifier">buf</span> = []

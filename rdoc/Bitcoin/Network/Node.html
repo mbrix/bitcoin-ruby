@@ -86,6 +86,8 @@
     
     <li><a href="#method-i-queue_inv">#queue_inv</a>
     
+    <li><a href="#method-i-relay_tx">#relay_tx</a>
+    
     <li><a href="#method-i-run">#run</a>
     
     <li><a href="#method-i-set_store">#set_store</a>
@@ -127,13 +129,13 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -212,6 +214,18 @@
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
@@ -692,7 +706,7 @@ fallback to using `nslookup` if it is not installed or fails.</p>
 
           
           <div class="method-source-code" id="init_epoll-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 247</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 252</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_epoll</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;EPOLL: Available file descriptors: &quot;</span> <span class="ruby-operator">+</span>
     <span class="ruby-constant">EM</span>.<span class="ruby-identifier">set_descriptor_table_size</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:epoll_limit</span>]).<span class="ruby-identifier">to_s</span> }
@@ -728,7 +742,7 @@ fallback to using `nslookup` if it is not installed or fails.</p>
 
           
           <div class="method-source-code" id="queue_inv-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 238</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_inv</span> <span class="ruby-identifier">inv</span>
   <span class="ruby-value">128</span>.<span class="ruby-identifier">times</span> { <span class="ruby-ivar">@inv_cache</span>.<span class="ruby-identifier">shift</span> }  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inv_cache</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:max</span>][<span class="ruby-value">:inv_cache</span>]
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inv_cache</span>.<span class="ruby-identifier">include?</span>([<span class="ruby-identifier">inv</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">inv</span>[<span class="ruby-value">1</span>]])
@@ -743,6 +757,39 @@ fallback to using `nslookup` if it is not installed or fails.</p>
 
         
       </div><!-- queue_inv-method -->
+
+    
+      <div id="method-i-relay_tx" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">relay_tx</span><span
+            class="method-args">(tx)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="relay_tx-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 262</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">relay_tx</span>(<span class="ruby-identifier">tx</span>)
+  <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">store_tx</span>(<span class="ruby-identifier">tx</span>)
+  <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">sample</span>((<span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">peer</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">peer</span>.<span class="ruby-identifier">send_inv</span>(<span class="ruby-value">:tx</span>, <span class="ruby-identifier">tx</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- relay_tx-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- relay_tx-method -->
 
     
       <div id="method-i-run" class="method-detail ">
@@ -1001,7 +1048,7 @@ already full</p>
 
           
           <div class="method-source-code" id="work_inv_queue-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 225</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 230</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">work_inv_queue</span>
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;inv queue worker running&quot;</span> }
   <span class="ruby-constant">EM</span>.<span class="ruby-identifier">defer</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">proc</span> { <span class="ruby-identifier">work_inv_queue</span> }) <span class="ruby-keyword">do</span>
@@ -1048,13 +1095,18 @@ already full</p>
       <span class="ruby-identifier">sleep</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:intervals</span>][<span class="ruby-value">:queue</span>]
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">while</span> <span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">shift</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;store_#{obj[0]}&quot;</span>, <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>])
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:block</span>
-          <span class="ruby-identifier">block</span> = <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>)
-          <span class="ruby-ivar">@notify</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">obj</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">block</span>.<span class="ruby-identifier">depth</span>])
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-ivar">@notify</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">obj</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>]])
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;store_#{obj[0]}&quot;</span>, <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>])
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:block</span>
+            <span class="ruby-identifier">block</span> = <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>)
+            <span class="ruby-ivar">@notify</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">obj</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">block</span>.<span class="ruby-identifier">depth</span>])
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-ivar">@notify</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">obj</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>]])
+          <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span>
+        <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-identifier">$!</span>.<span class="ruby-identifier">inspect</span> }
+        <span class="ruby-identifier">puts</span> *<span class="ruby-identifier">$@</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>

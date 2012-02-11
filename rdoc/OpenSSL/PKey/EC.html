@@ -99,13 +99,13 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -185,6 +185,18 @@
   
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
   
+    <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
+  
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -254,7 +266,7 @@
 
           
           <div class="method-source-code" id="private_key_hex-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 223</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 230</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">private_key_hex</span>; <span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">to_hex</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">64</span>, <span class="ruby-string">'0'</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- private_key_hex-source -->
           
@@ -282,7 +294,7 @@
 
           
           <div class="method-source-code" id="public_key_hex-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 224</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">public_key_hex</span>;  <span class="ruby-identifier">public_key</span>.<span class="ruby-identifier">to_hex</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">130</span>, <span class="ruby-string">'0'</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- public_key_hex-source -->
           

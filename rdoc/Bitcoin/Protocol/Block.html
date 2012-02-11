@@ -123,13 +123,13 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -208,6 +208,18 @@
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
@@ -776,7 +788,7 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
         
         <div class="method-heading">
           <span class="method-name">to_json</span><span
-            class="method-args">(options = {:space => ''})</span>
+            class="method-args">(options = {:space => ''}, *a)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -790,7 +802,7 @@ from_json)</p>
           
           <div class="method-source-code" id="to_json-source">
             <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>}, *<span class="ruby-identifier">a</span>)
   <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>( <span class="ruby-identifier">to_hash</span>, <span class="ruby-identifier">options</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_json-source -->

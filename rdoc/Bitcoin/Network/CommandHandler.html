@@ -92,6 +92,8 @@
     
     <li><a href="#method-i-handle_monitor">#handle_monitor</a>
     
+    <li><a href="#method-i-handle_relay_tx">#handle_relay_tx</a>
+    
     <li><a href="#method-i-handle_stop">#handle_stop</a>
     
     <li><a href="#method-i-log">#log</a>
@@ -127,13 +129,13 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -212,6 +214,18 @@
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
@@ -320,7 +334,7 @@
 
           
           <div class="method-source-code" id="format_uptime-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 104</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">format_uptime</span> <span class="ruby-identifier">t</span>
   <span class="ruby-identifier">mm</span>, <span class="ruby-identifier">ss</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">divmod</span>(<span class="ruby-value">60</span>)            <span class="ruby-comment">#=&gt; [4515, 21]</span>
   <span class="ruby-identifier">hh</span>, <span class="ruby-identifier">mm</span> = <span class="ruby-identifier">mm</span>.<span class="ruby-identifier">divmod</span>(<span class="ruby-value">60</span>)           <span class="ruby-comment">#=&gt; [75, 15]</span>
@@ -544,7 +558,7 @@
 
           
           <div class="method-source-code" id="handle_help-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 100</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_help</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">methods</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp">%r^handle_(.*?)/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">%r^(.*?)_/</span>, <span class="ruby-string">''</span>)}
 <span class="ruby-keyword">end</span></pre>
@@ -638,6 +652,38 @@
       </div><!-- handle_monitor-method -->
 
     
+      <div id="method-i-handle_relay_tx" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">handle_relay_tx</span><span
+            class="method-args">(data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="handle_relay_tx-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_relay_tx</span> <span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">tx</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">data</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>))
+  <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">relay_tx</span>(<span class="ruby-identifier">tx</span>)
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">to_hash</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- handle_relay_tx-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- handle_relay_tx-method -->
+
+    
       <div id="method-i-handle_stop" class="method-detail ">
         
         <div class="method-heading">
@@ -654,7 +700,7 @@
 
           
           <div class="method-source-code" id="handle_stop-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_stop</span>
   <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">start</span> { <span class="ruby-identifier">sleep</span> <span class="ruby-value">0.1</span>; <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">stop</span> }
   {<span class="ruby-value">:state</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Stopping...&quot;</span>}
@@ -784,7 +830,7 @@
 
           
           <div class="method-source-code" id="unbind-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 111</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_handler.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unbind</span>
   <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">notify</span>.<span class="ruby-identifier">unsubscribe</span>(<span class="ruby-ivar">@notify_sid</span>)  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@notify_sid</span>
   <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">command_connections</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-keyword">self</span>)

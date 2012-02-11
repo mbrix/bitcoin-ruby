@@ -101,13 +101,13 @@
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -187,6 +187,18 @@
   
     <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
   
+    <li><a href="../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
+  
     <li><a href="../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -256,7 +268,7 @@
 
           
           <div class="method-source-code" id="from_hex-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 218</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 225</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-identifier">hex</span>); <span class="ruby-identifier">new</span>(<span class="ruby-identifier">hex</span>, <span class="ruby-value">16</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- from_hex-source -->
           
@@ -290,7 +302,7 @@
 
           
           <div class="method-source-code" id="to_hex-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 219</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_hex</span>; <span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- to_hex-source -->
           
@@ -318,7 +330,7 @@
 
           
           <div class="method-source-code" id="to_mpi-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 220</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_mpi</span>; <span class="ruby-identifier">to_s</span>(<span class="ruby-value">0</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- to_mpi-source -->
           

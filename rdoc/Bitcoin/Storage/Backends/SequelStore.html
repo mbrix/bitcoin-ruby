@@ -106,6 +106,8 @@
     
     <li><a href="#method-i-get_txin_for_txout">#get_txin_for_txout</a>
     
+    <li><a href="#method-i-get_txout_for_txin">#get_txout_for_txin</a>
+    
     <li><a href="#method-i-get_txouts_for_hash160">#get_txouts_for_hash160</a>
     
     <li><a href="#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script</a>
@@ -163,13 +165,13 @@
   
     <li><a href="../../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../../../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../../../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -248,6 +250,18 @@
     <li><a href="../../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="../../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../../../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../../../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="../../../OpenSSL.html">OpenSSL</a>
   
@@ -407,7 +421,7 @@
 
           
           <div class="method-source-code" id="get_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 131</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">blk_hash</span>)
   <span class="ruby-identifier">wrap_block</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">blk_hash</span>).<span class="ruby-identifier">to_sequel_blob</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -437,7 +451,7 @@
 
           
           <div class="method-source-code" id="get_block_by_depth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 135</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_depth</span>(<span class="ruby-identifier">depth</span>)
   <span class="ruby-identifier">wrap_block</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>][<span class="ruby-value">:depth</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">depth</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -467,7 +481,7 @@
 
           
           <div class="method-source-code" id="get_block_by_id-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 151</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_id</span>(<span class="ruby-identifier">block_id</span>)
   <span class="ruby-identifier">wrap_block</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>][<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">block_id</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -497,7 +511,7 @@
 
           
           <div class="method-source-code" id="get_block_by_prev_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 139</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_prev_hash</span>(<span class="ruby-identifier">prev_hash</span>)
   <span class="ruby-identifier">wrap_block</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>][<span class="ruby-value">:prev_hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">prev_hash</span>).<span class="ruby-identifier">to_sequel_blob</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -527,7 +541,7 @@
 
           
           <div class="method-source-code" id="get_block_by_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 143</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_tx</span>(<span class="ruby-identifier">tx_hash</span>)
   <span class="ruby-identifier">tx</span> = <span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">tx_hash</span>).<span class="ruby-identifier">to_sequel_blob</span>]
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tx</span>
@@ -561,7 +575,7 @@
 
           
           <div class="method-source-code" id="get_depth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 126</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_depth</span>
   <span class="ruby-keyword">return</span> <span class="ruby-value">-1</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>].<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">get_head</span>.<span class="ruby-identifier">hash</span>).<span class="ruby-identifier">to_sequel_blob</span>][<span class="ruby-value">:depth</span>]
@@ -592,7 +606,7 @@
 
           
           <div class="method-source-code" id="get_head-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 122</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_head</span>
   <span class="ruby-identifier">wrap_block</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>].<span class="ruby-identifier">order</span>(<span class="ruby-value">:depth</span>).<span class="ruby-identifier">last</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -622,7 +636,7 @@
 
           
           <div class="method-source-code" id="get_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 155</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tx</span>(<span class="ruby-identifier">tx_hash</span>)
   <span class="ruby-identifier">wrap_tx</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">tx_hash</span>).<span class="ruby-identifier">to_sequel_blob</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -652,7 +666,7 @@
 
           
           <div class="method-source-code" id="get_tx_by_id-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 159</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tx_by_id</span>(<span class="ruby-identifier">tx_id</span>)
   <span class="ruby-identifier">wrap_tx</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>][<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx_id</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -682,7 +696,7 @@
 
           
           <div class="method-source-code" id="get_txin_for_txout-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txin_for_txout</span>(<span class="ruby-identifier">tx_hash</span>, <span class="ruby-identifier">txout_idx</span>)
   <span class="ruby-identifier">tx_hash</span> = <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">tx_hash</span>).<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">to_sequel_blob</span>
   <span class="ruby-identifier">wrap_txin</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:txin</span>][<span class="ruby-value">:prev_out</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx_hash</span>, <span class="ruby-value">:prev_out_index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">txout_idx</span>])
@@ -695,6 +709,38 @@
 
         
       </div><!-- get_txin_for_txout-method -->
+
+    
+      <div id="method-i-get_txout_for_txin" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_txout_for_txin</span><span
+            class="method-args">(txin)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_txout_for_txin-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txout_for_txin</span>(<span class="ruby-identifier">txin</span>)
+  <span class="ruby-identifier">tx</span> = <span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">prev_out</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">to_sequel_blob</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tx</span>
+  <span class="ruby-identifier">wrap_txout</span>(<span class="ruby-ivar">@db</span>[<span class="ruby-value">:txout</span>][<span class="ruby-value">:tx_idx</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">prev_out_index</span>, <span class="ruby-value">:tx_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx</span>[<span class="ruby-value">:id</span>]])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_txout_for_txin-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_txout_for_txin-method -->
 
     
       <div id="method-i-get_txouts_for_hash160" class="method-detail ">
@@ -713,7 +759,7 @@
 
           
           <div class="method-source-code" id="get_txouts_for_hash160-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 173</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txouts_for_hash160</span>(<span class="ruby-identifier">hash160</span>)
   <span class="ruby-ivar">@db</span>[<span class="ruby-value">:txout</span>].<span class="ruby-identifier">where</span>(<span class="ruby-value">:hash160</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">hash160</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">wrap_txout</span>(<span class="ruby-identifier">o</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -743,7 +789,7 @@
 
           
           <div class="method-source-code" id="get_txouts_for_pk_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 168</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txouts_for_pk_script</span>(<span class="ruby-identifier">script</span>)
   <span class="ruby-identifier">txouts</span> = <span class="ruby-ivar">@db</span>[<span class="ruby-value">:txout</span>].<span class="ruby-identifier">filter</span>(<span class="ruby-value">:pk_script</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">script</span>.<span class="ruby-identifier">to_sequel_blob</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:id</span>)
   <span class="ruby-identifier">txouts</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">txout</span><span class="ruby-operator">|</span> <span class="ruby-identifier">wrap_txout</span>(<span class="ruby-identifier">txout</span>)}
@@ -774,7 +820,7 @@
 
           
           <div class="method-source-code" id="get_unconfirmed_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 177</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_unconfirmed_tx</span>
   <span class="ruby-ivar">@db</span>[<span class="ruby-value">:unconfirmed</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">wrap_tx</span>(<span class="ruby-identifier">t</span>)}
 <span class="ruby-keyword">end</span></pre>
@@ -804,7 +850,7 @@
 
           
           <div class="method-source-code" id="has_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 114</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_block</span>(<span class="ruby-identifier">blk_hash</span>)
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>].<span class="ruby-identifier">where</span>(<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">blk_hash</span>).<span class="ruby-identifier">to_sequel_blob</span>).<span class="ruby-identifier">get</span>(<span class="ruby-value">1</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -834,7 +880,7 @@
 
           
           <div class="method-source-code" id="has_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 118</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_tx</span>(<span class="ruby-identifier">tx_hash</span>)
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>].<span class="ruby-identifier">where</span>(<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">tx_hash</span>).<span class="ruby-identifier">to_sequel_blob</span>).<span class="ruby-identifier">get</span>(<span class="ruby-value">1</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -864,7 +910,7 @@
 
           
           <div class="method-source-code" id="htb-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 249</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">hex</span>); [<span class="ruby-identifier">hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- htb-source -->
           
@@ -892,7 +938,7 @@
 
           
           <div class="method-source-code" id="hth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 248</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">bin</span>); <span class="ruby-identifier">bin</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]; <span class="ruby-keyword">end</span></pre>
           </div><!-- hth-source -->
           
@@ -952,9 +998,13 @@
           <div class="method-source-code" id="store_block-source">
             <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_block</span>(<span class="ruby-identifier">blk</span>)
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Storing tx #{blk.hash} (#{blk.to_payload.bytesize} bytes)&quot;</span> }
   <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">block</span> = <span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">blk</span>.<span class="ruby-identifier">hash</span>).<span class="ruby-identifier">to_sequel_blob</span>]
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+      <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;skipping already existing block: #{blk.hash}&quot;</span> }
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">prev_block</span> = <span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">hth</span>(<span class="ruby-identifier">blk</span>.<span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">reverse</span>))
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">prev_block</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">hash</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-identifier">network</span>[<span class="ruby-value">:genesis_hash</span>]
@@ -979,7 +1029,7 @@
       })
     <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">tx</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">tx_id</span> = <span class="ruby-identifier">store_tx</span>(<span class="ruby-identifier">tx</span>)
-      <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tx_id</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error saving tx #{tx.hash} in block #{blk.hash}&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tx_id</span>
       <span class="ruby-ivar">@db</span>[<span class="ruby-value">:blk_tx</span>].<span class="ruby-identifier">insert</span>({
           <span class="ruby-value">:blk_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">block_id</span>,
           <span class="ruby-value">:tx_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx_id</span>,
@@ -1017,12 +1067,12 @@
 
           
           <div class="method-source-code" id="store_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_tx</span>(<span class="ruby-identifier">tx</span>)
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Storing tx #{tx.hash} (#{tx.to_payload.bytesize} bytes)&quot;</span> }
   <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">transaction</span> = <span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>][<span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">tx</span>.<span class="ruby-identifier">hash</span>).<span class="ruby-identifier">to_sequel_blob</span>]
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">transaction</span>
-
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">transaction</span>[<span class="ruby-value">:id</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">transaction</span>
     <span class="ruby-identifier">tx_id</span> = <span class="ruby-ivar">@db</span>[<span class="ruby-value">:tx</span>].<span class="ruby-identifier">insert</span>({
         <span class="ruby-value">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">tx</span>.<span class="ruby-identifier">hash</span>).<span class="ruby-identifier">to_sequel_blob</span>,
         <span class="ruby-value">:version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">ver</span>,
@@ -1061,7 +1111,7 @@
 
           
           <div class="method-source-code" id="store_txin-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 92</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_txin</span>(<span class="ruby-identifier">tx_id</span>, <span class="ruby-identifier">txin</span>, <span class="ruby-identifier">idx</span>)
   <span class="ruby-ivar">@db</span>[<span class="ruby-value">:txin</span>].<span class="ruby-identifier">insert</span>({
       <span class="ruby-value">:tx_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx_id</span>,
@@ -1098,7 +1148,7 @@
 
           
           <div class="method-source-code" id="store_txout-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_txout</span>(<span class="ruby-identifier">tx_id</span>, <span class="ruby-identifier">txout</span>, <span class="ruby-identifier">idx</span>)
   <span class="ruby-ivar">@db</span>[<span class="ruby-value">:txout</span>].<span class="ruby-identifier">insert</span>({
       <span class="ruby-value">:tx_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tx_id</span>,
@@ -1134,7 +1184,7 @@
 
           
           <div class="method-source-code" id="wrap_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wrap_block</span>(<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block</span>
 
@@ -1183,7 +1233,7 @@
 
           
           <div class="method-source-code" id="wrap_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 204</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 214</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wrap_tx</span>(<span class="ruby-identifier">transaction</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">transaction</span>
 
@@ -1229,7 +1279,7 @@
 
           
           <div class="method-source-code" id="wrap_txin-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 224</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 234</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wrap_txin</span>(<span class="ruby-identifier">input</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>
   <span class="ruby-identifier">data</span> = {<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">input</span>[<span class="ruby-value">:id</span>], <span class="ruby-value">:tx_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">input</span>[<span class="ruby-value">:tx_id</span>], <span class="ruby-value">:tx_idx</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">input</span>[<span class="ruby-value">:tx_idx</span>]}
@@ -1267,7 +1317,7 @@
 
           
           <div class="method-source-code" id="wrap_txout-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 236</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/sequel.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wrap_txout</span>(<span class="ruby-identifier">output</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">output</span>
   <span class="ruby-identifier">data</span> = {<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">output</span>[<span class="ruby-value">:id</span>], <span class="ruby-value">:tx_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">output</span>[<span class="ruby-value">:tx_id</span>], <span class="ruby-value">:tx_idx</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">output</span>[<span class="ruby-value">:tx_idx</span>],

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Bitcoin::Storage::Backends - RDoc Documentation</title>
+<title>class Bitcoin::Wallet::SimpleCoinSelector - RDoc Documentation</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
 
 
-<body id="top" class="module">
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,10 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/bitcoin/storage/dummy.rb
-    <li>lib/bitcoin/storage/sequel.rb
-    <li>lib/bitcoin/storage/activerecord.rb
-    <li>lib/bitcoin/storage/storage.rb
+    <li>lib/bitcoin/wallet/coinselector.rb
   </ul>
 </nav>
 
@@ -59,9 +56,27 @@
 
   <div id="class-metadata">
     
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
     
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
     
+    <li><a href="#method-c-new">::new</a>
     
+    <li><a href="#method-i-select">#select</a>
+    
+  </ul>
+</nav>
+
   </div>
 
   <div id="project-metadata">
@@ -211,7 +226,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Bitcoin::Storage::Backends</h1>
+  <h1 class="class">class Bitcoin::Wallet::SimpleCoinSelector</h1>
 
   <div id="description" class="description">
     
@@ -231,6 +246,90 @@
 
     <!-- Methods -->
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(txouts)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/coinselector.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">txouts</span>
+  <span class="ruby-ivar">@txouts</span> = <span class="ruby-identifier">txouts</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">select</span><span
+            class="method-args">(value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="select-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/coinselector.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">txouts</span> = []
+  <span class="ruby-ivar">@txouts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">txout</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">next</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">txout</span>.<span class="ruby-identifier">get_next_in</span>
+      <span class="ruby-keyword">next</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">txout</span>.<span class="ruby-identifier">get_address</span>
+      <span class="ruby-comment"># next  unless txout.get_tx.get_block</span>
+      <span class="ruby-identifier">txouts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">txout</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">txouts</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">txouts</span>.<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:value</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>) <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">value</span>
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-identifier">p</span> <span class="ruby-identifier">$!</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- select-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- select-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->

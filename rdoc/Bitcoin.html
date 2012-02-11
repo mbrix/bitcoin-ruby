@@ -62,6 +62,7 @@
     <li>lib/bitcoin/connection.rb
     <li>lib/bitcoin/protocol.rb
     <li>lib/bitcoin/version.rb
+    <li>lib/bitcoin/config.rb
   </ul>
 </nav>
 
@@ -107,13 +108,13 @@
   
     <li><a href="./Bitcoin.html">Bitcoin</a>
   
+    <li><a href="./Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="./Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="./Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="./Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="./Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="./Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -192,6 +193,18 @@
     <li><a href="./Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="./Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="./Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="./Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="./Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="./Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="./Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="./Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="./OpenSSL.html">OpenSSL</a>
   
@@ -285,7 +298,7 @@
 
           
           <div class="method-source-code" id="network-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 242</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 249</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network</span>
   <span class="ruby-constant">NETWORKS</span>[<span class="ruby-ivar">@network</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -315,7 +328,7 @@
 
           
           <div class="method-source-code" id="network-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 246</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network=</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@network</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
 <span class="ruby-keyword">end</span></pre>

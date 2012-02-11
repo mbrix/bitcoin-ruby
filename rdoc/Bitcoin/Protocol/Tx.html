@@ -133,13 +133,13 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -218,6 +218,18 @@
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
@@ -373,7 +385,7 @@
 
           
           <div class="method-source-code" id="binary_from_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 200</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">binary_from_hash</span>(<span class="ruby-identifier">h</span>); <span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">h</span>).<span class="ruby-identifier">to_payload</span>; <span class="ruby-keyword">end</span></pre>
           </div><!-- binary_from_hash-source -->
           
@@ -401,7 +413,7 @@
 
           
           <div class="method-source-code" id="binary_from_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 206</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">binary_from_json</span>(<span class="ruby-identifier">json_string</span>); <span class="ruby-identifier">from_json</span>(<span class="ruby-identifier">json_string</span>).<span class="ruby-identifier">to_payload</span>; <span class="ruby-keyword">end</span></pre>
           </div><!-- binary_from_json-source -->
           
@@ -429,7 +441,7 @@
 
           
           <div class="method-source-code" id="from_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">h</span>)
   <span class="ruby-identifier">tx</span> = <span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">ver</span>, <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">lock_time</span> = *<span class="ruby-identifier">h</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-string">'ver'</span>, <span class="ruby-string">'lock_time'</span>)
@@ -485,7 +497,7 @@
 
           
           <div class="method-source-code" id="from_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 203</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 205</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_json</span>(<span class="ruby-identifier">json_string</span>); <span class="ruby-identifier">from_hash</span>( <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">json_string</span>) ); <span class="ruby-keyword">end</span></pre>
           </div><!-- from_json-source -->
           
@@ -513,7 +525,7 @@
 
           
           <div class="method-source-code" id="htb-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 208</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 210</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">htb</span>(<span class="ruby-identifier">s</span>)
   [<span class="ruby-identifier">s</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">'H*'</span>).<span class="ruby-identifier">reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -758,7 +770,7 @@
 
           
           <div class="method-source-code" id="hth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 159</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">s</span>)
   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">'H*'</span>)[<span class="ruby-value">0</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -836,7 +848,7 @@
         
         <div class="method-heading">
           <span class="method-name">signature_hash_for_input</span><span
-            class="method-args">(input_idx, outpoint_tx, script_pubkey=nil, hash_type=nil)</span>
+            class="method-args">(input_idx, outpoint_tx, script_pubkey=nil, hash_type=nil, drop_sigs=nil, script=nil)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -850,12 +862,14 @@
           
           <div class="method-source-code" id="signature_hash_for_input-source">
             <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">signature_hash_for_input</span>(<span class="ruby-identifier">input_idx</span>, <span class="ruby-identifier">outpoint_tx</span>, <span class="ruby-identifier">script_pubkey</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash_type</span>=<span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">signature_hash_for_input</span>(<span class="ruby-identifier">input_idx</span>, <span class="ruby-identifier">outpoint_tx</span>, <span class="ruby-identifier">script_pubkey</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash_type</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">drop_sigs</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">script</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-comment"># https://github.com/bitcoin/bitcoin/blob/e071a3f6c06f41068ad17134189a4ac3073ef76b/script.cpp#L834</span>
   <span class="ruby-comment"># http://code.google.com/p/bitcoinj/source/browse/trunk/src/com/google/bitcoin/core/Script.java#318</span>
   <span class="ruby-identifier">pin</span>  = <span class="ruby-ivar">@in</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span>,<span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">input_idx</span>
       <span class="ruby-identifier">script_pubkey</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">outpoint_tx</span>.<span class="ruby-identifier">out</span>[ <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out_index</span> ].<span class="ruby-identifier">pk_script</span>
+      <span class="ruby-identifier">script_pubkey</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">script</span>)                <span class="ruby-keyword">if</span> <span class="ruby-identifier">script</span>    <span class="ruby-comment"># force this string a script</span>
+      <span class="ruby-identifier">script_pubkey</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">drop_signatures</span>(<span class="ruby-identifier">script_pubkey</span>, <span class="ruby-identifier">drop_sigs</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">drop_sigs</span> <span class="ruby-comment"># array of signature to drop</span>
       <span class="ruby-identifier">length</span> = <span class="ruby-identifier">script_pubkey</span>.<span class="ruby-identifier">bytesize</span>
       [ <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out_index</span>, <span class="ruby-identifier">length</span>, <span class="ruby-identifier">script_pubkey</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sequence</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;\xff\xff\xff\xff&quot;</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-node">&quot;a32ICa#{length}a4&quot;</span>)
     <span class="ruby-keyword">else</span>
@@ -898,7 +912,7 @@
 
           
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 137</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_hash</span>
   {
     <span class="ruby-string">'hash'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@hash</span>, <span class="ruby-string">'ver'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@ver</span>,
@@ -934,7 +948,7 @@
         
         <div class="method-heading">
           <span class="method-name">to_json</span><span
-            class="method-args">(options = {:space => ''})</span>
+            class="method-args">(options = {:space => ''}, *a)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -946,8 +960,8 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 164</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>})
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>}, *<span class="ruby-identifier">a</span>)
   <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>( <span class="ruby-identifier">to_hash</span>, <span class="ruby-identifier">options</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_json-source -->
@@ -1022,18 +1036,18 @@ in <code>outpoint_tx</code></p>
 
           
           <div class="method-source-code" id="verify_input_signature-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 121</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/tx.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verify_input_signature</span>(<span class="ruby-identifier">in_idx</span>, <span class="ruby-identifier">outpoint_tx</span>)
   <span class="ruby-identifier">outpoint_idx</span>  = <span class="ruby-ivar">@in</span>[<span class="ruby-identifier">in_idx</span>].<span class="ruby-identifier">prev_out_index</span>
   <span class="ruby-identifier">script_sig</span>    = <span class="ruby-ivar">@in</span>[<span class="ruby-identifier">in_idx</span>].<span class="ruby-identifier">script_sig</span>
   <span class="ruby-identifier">script_pubkey</span> = <span class="ruby-identifier">outpoint_tx</span>.<span class="ruby-identifier">out</span>[<span class="ruby-identifier">outpoint_idx</span>].<span class="ruby-identifier">pk_script</span>
   <span class="ruby-identifier">script</span>        = <span class="ruby-identifier">script_sig</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">script_pubkey</span>
 
-  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">script</span>).<span class="ruby-identifier">run</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pubkey</span>,<span class="ruby-identifier">sig</span>,<span class="ruby-identifier">hash_type</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">script</span>).<span class="ruby-identifier">run</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pubkey</span>,<span class="ruby-identifier">sig</span>,<span class="ruby-identifier">hash_type</span>,<span class="ruby-identifier">drop_sigs</span>,<span class="ruby-identifier">script</span><span class="ruby-operator">|</span>
     <span class="ruby-comment"># this IS the checksig callback, must return true/false</span>
-    <span class="ruby-comment">#p ['checksig', pubkey, sig, hash_type]</span>
-    <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">signature_hash_for_input</span>(<span class="ruby-identifier">in_idx</span>, <span class="ruby-identifier">outpoint_tx</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash_type</span>)
-    <span class="ruby-comment">#hash = signature_hash_for_input(in_idx, nil, script_pubkey, hash_type)</span>
+    <span class="ruby-comment">#p ['checksig', pubkey, sig, hash_type, drop_sigs, script]</span>
+    <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">signature_hash_for_input</span>(<span class="ruby-identifier">in_idx</span>, <span class="ruby-identifier">outpoint_tx</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash_type</span>, <span class="ruby-identifier">drop_sigs</span>, <span class="ruby-identifier">script</span>)
+    <span class="ruby-comment">#hash = signature_hash_for_input(in_idx, nil, script_pubkey, hash_type, drop_sigs, script)</span>
     <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">verify_signature</span>( <span class="ruby-identifier">hash</span>, <span class="ruby-identifier">sig</span>, <span class="ruby-identifier">pubkey</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>] )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>

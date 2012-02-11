@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Bitcoin::OpenSSL_EC - RDoc Documentation</title>
+<title>module Bitcoin::Config - RDoc Documentation</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/bitcoin/ffi/openssl.rb
+    <li>lib/bitcoin/config.rb
   </ul>
 </nav>
 
@@ -64,9 +64,13 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-init_ffi_ssl">::init_ffi_ssl</a>
+    <li><a href="#method-c-load">::load</a>
     
-    <li><a href="#method-c-regenerate_key">::regenerate_key</a>
+    <li><a href="#method-c-load_file">::load_file</a>
+    
+    <li><a href="#method-c-merge">::merge</a>
+    
+    <li><a href="#method-c-symbolize">::symbolize</a>
     
   </ul>
 </nav>
@@ -220,10 +224,21 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Bitcoin::OpenSSL_EC</h1>
+  <h1 class="module">module Bitcoin::Config</h1>
 
   <div id="description" class="description">
     
+<p>Load config files, merge options, etc.</p>
+
+<p>Multiple config files are loaded in order, and their settings merged into
+an existing <code>options</code> hash.</p>
+
+<p>Each config file defines one or more <code>categories</code> which hold the
+actual settings. Which categories are loaded, and in what order, is
+specified when you load the config (ie. the order in the file doesn’t
+matter). The default category “all” is always used, and is always the first
+(gets overridden by all others)</p>
+
   </div><!-- description -->
 
   
@@ -240,7 +255,7 @@
       <h3 class="section-header">Constants</h3>
       <dl>
       
-        <dt id="NID_secp256k1">NID_secp256k1
+        <dt id="CONFIG_PATHS">CONFIG_PATHS
         
         <dd class="description">
         
@@ -257,109 +272,142 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="method-c-init_ffi_ssl" class="method-detail ">
+      <div id="method-c-load" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">init_ffi_ssl</span><span
-            class="method-args">()</span>
+          <span class="method-name">load</span><span
+            class="method-args">(options, categories = [], paths = CONFIG_PATHS)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          
+          <p>Load <code>categories</code> from all files at <code>paths</code> into
+given <code>options</code> hash.</p>
           
 
           
-          <div class="method-source-code" id="init_ffi_ssl-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 87</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">init_ffi_ssl</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@ssl_loaded</span>
-  <span class="ruby-constant">SSL_library_init</span>()
-  <span class="ruby-constant">ERR_load_crypto_strings</span>()
-  <span class="ruby-constant">SSL_load_error_strings</span>()
-  <span class="ruby-constant">RAND_poll</span>()
-  <span class="ruby-ivar">@ssl_loaded</span> = <span class="ruby-keyword">true</span>
+          <div class="method-source-code" id="load-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/config.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">categories</span> = [], <span class="ruby-identifier">paths</span> = <span class="ruby-constant">CONFIG_PATHS</span>)
+  <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>).<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-string">&quot;~&quot;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;HOME&quot;</span>])
+    <span class="ruby-keyword">next</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">categories</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- init_ffi_ssl-source -->
+          </div><!-- load-source -->
           
         </div>
 
         
 
         
-      </div><!-- init_ffi_ssl-method -->
+      </div><!-- load-method -->
 
     
-      <div id="method-c-regenerate_key" class="method-detail ">
+      <div id="method-c-load_file" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">regenerate_key</span><span
-            class="method-args">(private_key)</span>
+          <span class="method-name">load_file</span><span
+            class="method-args">(options, file, c = [])</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>resolve public from private key, using ffi and libssl.so example:</p>
-
-<pre>keypair = Bitcoin.generate_key; Bitcoin::OpenSSL_EC.regenerate_key(keypair.first) == keypair</pre>
+          <p>Load categories <code>c</code> of a single config <code>file</code> into
+given <code>options</code> hash.</p>
           
 
           
-          <div class="method-source-code" id="regenerate_key-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">regenerate_key</span>(<span class="ruby-identifier">private_key</span>)
-  <span class="ruby-identifier">private_key</span> = [<span class="ruby-identifier">private_key</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&gt;=</span> (<span class="ruby-value">32</span>*<span class="ruby-value">2</span>)
-
-  <span class="ruby-comment">#private_key = FFI::MemoryPointer.new(:uint8, private_key.bytesize)</span>
-  <span class="ruby-comment">#                .put_bytes(0, private_key, 0, private_key.bytesize)</span>
-  <span class="ruby-identifier">private_key</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">from_string</span>(<span class="ruby-identifier">private_key</span>)
- 
-  <span class="ruby-identifier">init_ffi_ssl</span>
-  <span class="ruby-identifier">eckey</span> = <span class="ruby-constant">EC_KEY_new_by_curve_name</span>(<span class="ruby-constant">NID_secp256k1</span>)
-  <span class="ruby-identifier">priv_key</span> = <span class="ruby-constant">BN_bin2bn</span>(<span class="ruby-identifier">private_key</span>, <span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>, <span class="ruby-constant">BN_new</span>())
-
-  <span class="ruby-identifier">group</span>, <span class="ruby-identifier">order</span>, <span class="ruby-identifier">ctx</span> = <span class="ruby-constant">EC_KEY_get0_group</span>(<span class="ruby-identifier">eckey</span>), <span class="ruby-constant">BN_new</span>(), <span class="ruby-constant">BN_CTX_new</span>()
-  <span class="ruby-constant">EC_GROUP_get_order</span>(<span class="ruby-identifier">group</span>, <span class="ruby-identifier">order</span>, <span class="ruby-identifier">ctx</span>)
-
-  <span class="ruby-identifier">pub_key</span> = <span class="ruby-constant">EC_POINT_new</span>(<span class="ruby-identifier">group</span>)
-  <span class="ruby-constant">EC_POINT_mul</span>(<span class="ruby-identifier">group</span>, <span class="ruby-identifier">pub_key</span>, <span class="ruby-identifier">priv_key</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ctx</span>)
-  <span class="ruby-constant">EC_KEY_set_private_key</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-identifier">priv_key</span>)
-  <span class="ruby-constant">EC_KEY_set_public_key</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-identifier">pub_key</span>)
-
-  <span class="ruby-constant">BN_free</span>(<span class="ruby-identifier">order</span>)
-  <span class="ruby-constant">BN_CTX_free</span>(<span class="ruby-identifier">ctx</span>)
-  <span class="ruby-constant">EC_POINT_free</span>(<span class="ruby-identifier">pub_key</span>)
-  <span class="ruby-constant">BN_free</span>(<span class="ruby-identifier">priv_key</span>)
-
-
-  <span class="ruby-identifier">length</span> = <span class="ruby-identifier">i2d_ECPrivateKey</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">ptr</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:pointer</span>)
-  <span class="ruby-identifier">priv_hex</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">i2d_ECPrivateKey</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-identifier">ptr</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">length</span>
-    <span class="ruby-identifier">ptr</span>.<span class="ruby-identifier">read_pointer</span>.<span class="ruby-identifier">read_string</span>(<span class="ruby-identifier">length</span>)[<span class="ruby-value">9</span><span class="ruby-operator">...</span><span class="ruby-value">9</span><span class="ruby-operator">+</span><span class="ruby-value">32</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
+          <div class="method-source-code" id="load_file-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/config.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">c</span> = [])
+  <span class="ruby-identifier">categories</span> = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+  [<span class="ruby-value">:all</span>, *(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">:</span> [<span class="ruby-identifier">c</span>])].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">category</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">categories</span>[<span class="ruby-identifier">category</span>.<span class="ruby-identifier">to_s</span>])  <span class="ruby-keyword">if</span> <span class="ruby-identifier">categories</span>[<span class="ruby-identifier">category</span>.<span class="ruby-identifier">to_s</span>]
   <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">length</span> = <span class="ruby-identifier">i2o_ECPublicKey</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">ptr</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:pointer</span>)
-  <span class="ruby-identifier">pub_hex</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">i2o_ECPublicKey</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-identifier">ptr</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">length</span>
-    <span class="ruby-identifier">ptr</span>.<span class="ruby-identifier">read_pointer</span>.<span class="ruby-identifier">read_string</span>(<span class="ruby-identifier">length</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">EC_KEY_free</span>(<span class="ruby-identifier">eckey</span>)
-
-  [ <span class="ruby-identifier">priv_hex</span>, <span class="ruby-identifier">pub_hex</span> ]
+  <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- regenerate_key-source -->
+          </div><!-- load_file-source -->
           
         </div>
 
         
 
         
-      </div><!-- regenerate_key-method -->
+      </div><!-- load_file-method -->
+
+    
+      <div id="method-c-merge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">merge</span><span
+            class="method-args">(a, b)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Deep-merge hash <code>b</code> into <code>a</code>.</p>
+          
+
+          
+          <div class="method-source-code" id="merge-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/config.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">b</span>
+  <span class="ruby-identifier">symbolize</span>(<span class="ruby-identifier">a</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">symbolize</span>(<span class="ruby-identifier">b</span>)) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">o</span>, <span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">merge</span>(<span class="ruby-identifier">symbolize</span>(<span class="ruby-identifier">o</span>), <span class="ruby-identifier">symbolize</span>(<span class="ruby-identifier">n</span>))
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">n</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- merge-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- merge-method -->
+
+    
+      <div id="method-c-symbolize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">symbolize</span><span
+            class="method-args">(hash)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Turn all keys in <code>hash</code> into symbols.</p>
+          
+
+          
+          <div class="method-source-code" id="symbolize-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/config.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">symbolize</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span>,<span class="ruby-identifier">v</span>]}]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- symbolize-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- symbolize-method -->
 
     
     </section><!-- public-class-method-details -->

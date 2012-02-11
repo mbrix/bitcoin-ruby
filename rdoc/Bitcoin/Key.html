@@ -76,6 +76,8 @@
     
     <li><a href="#method-c-new">::new</a>
     
+    <li><a href="#method-i-3D-3D">#==</a>
+    
     <li><a href="#method-i-addr">#addr</a>
     
     <li><a href="#method-i-generate">#generate</a>
@@ -127,13 +129,13 @@
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../Bitcoin/Config.html">Bitcoin::Config</a>
+  
     <li><a href="../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
-  
-    <li><a href="../Bitcoin/KeyGenerator.html">Bitcoin::KeyGenerator</a>
   
     <li><a href="../Bitcoin/Logger.html">Bitcoin::Logger</a>
   
@@ -212,6 +214,18 @@
     <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
     <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
+  
+    <li><a href="../Bitcoin/Wallet/DeterministicKeyStore.html">Bitcoin::Wallet::DeterministicKeyStore</a>
+  
+    <li><a href="../Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
+  
+    <li><a href="../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
+  
+    <li><a href="../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
     <li><a href="../OpenSSL.html">OpenSSL</a>
   
@@ -358,7 +372,7 @@ Bitcoin::Key.new(nil, pubkey)</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 28</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">privkey</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">pubkey</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">bitcoin_elliptic_curve</span>
   <span class="ruby-identifier">set_priv</span>(<span class="ruby-identifier">privkey</span>)  <span class="ruby-keyword">if</span> <span class="ruby-identifier">privkey</span>
@@ -380,6 +394,36 @@ Bitcoin::Key.new(nil, pubkey)</pre>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-3D-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">==</span><span
+            class="method-args">(other)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="3D-3D-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">priv</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">priv</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 3D-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 3D-3D-method -->
+
+    
       <div id="method-i-addr" class="method-detail ">
         
         <div class="method-heading">
@@ -396,7 +440,7 @@ Bitcoin::Key.new(nil, pubkey)</pre>
 
           
           <div class="method-source-code" id="addr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 75</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addr</span>
   <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_to_address</span>(<span class="ruby-identifier">hash160</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -426,7 +470,7 @@ Bitcoin::Key.new(nil, pubkey)</pre>
 
           
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate</span>
   <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">generate_key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -456,7 +500,7 @@ Bitcoin::Key.new(nil, pubkey)</pre>
 
           
           <div class="method-source-code" id="hash160-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 70</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hash160</span>
   <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">pub</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -486,7 +530,7 @@ Bitcoin::Key.new(nil, pubkey)</pre>
 
           
           <div class="method-source-code" id="priv-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">priv</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span>
   <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">to_hex</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">64</span>, <span class="ruby-string">'0'</span>)
@@ -517,7 +561,7 @@ Bitcoin::Key.new(nil, pubkey)</pre>
 
           
           <div class="method-source-code" id="priv-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">priv=</span> <span class="ruby-identifier">priv</span>
   <span class="ruby-identifier">set_priv</span>(<span class="ruby-identifier">priv</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -548,7 +592,7 @@ private key, the public key is regenerated.</p>
 
           
           <div class="method-source-code" id="pub-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pub</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">public_key</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span>
@@ -585,7 +629,7 @@ private key, the public key is regenerated.</p>
 
           
           <div class="method-source-code" id="pub-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pub=</span> <span class="ruby-identifier">pub</span>
   <span class="ruby-identifier">set_pub</span>(<span class="ruby-identifier">pub</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -618,7 +662,7 @@ sig = key.sign(&quot;some data&quot;)</pre>
 
           
           <div class="method-source-code" id="sign-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 82</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sign</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">dsa_sign_asn1</span>(<span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -649,7 +693,7 @@ href="Key.html#method-c-from_base58">::from_base58</a></p>
 
           
           <div class="method-source-code" id="to_base58-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_base58</span>
   <span class="ruby-identifier">data</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:privkey_version</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">priv</span>
   <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">encode_base58</span>(<span class="ruby-identifier">data</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">checksum</span>(<span class="ruby-identifier">data</span>))
@@ -683,7 +727,7 @@ key2.verify(&quot;some data&quot;, sig)</pre>
 
           
           <div class="method-source-code" id="verify-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 89</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verify</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">sig</span>)
   <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">dsa_verify_asn1</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">sig</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -719,7 +763,7 @@ key2.verify(&quot;some data&quot;, sig)</pre>
 
           
           <div class="method-source-code" id="regenerate_pubkey-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerate_pubkey</span>
   <span class="ruby-identifier">set_pub</span>(<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">OpenSSL_EC</span>.<span class="ruby-identifier">regenerate_key</span>(<span class="ruby-identifier">priv</span>)[<span class="ruby-value">1</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -749,7 +793,7 @@ key2.verify(&quot;some data&quot;, sig)</pre>
 
           
           <div class="method-source-code" id="set_priv-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 108</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_priv</span>(<span class="ruby-identifier">priv</span>)
   <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">private_key</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">BN</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-identifier">priv</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -779,7 +823,7 @@ key2.verify(&quot;some data&quot;, sig)</pre>
 
           
           <div class="method-source-code" id="set_pub-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/key.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_pub</span>(<span class="ruby-identifier">pub</span>)
   <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">public_key</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">EC</span><span class="ruby-operator">::</span><span class="ruby-constant">Point</span>.<span class="ruby-identifier">from_hex</span>(<span class="ruby-ivar">@key</span>.<span class="ruby-identifier">group</span>, <span class="ruby-identifier">pub</span>)
 <span class="ruby-keyword">end</span></pre>
