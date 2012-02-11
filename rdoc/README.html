@@ -253,21 +253,23 @@ and all its prev_outs from blockexplorer.com and verifies the signatures.</p>
 <h3 id="label-bitcoin_wallet">bitcoin_wallet</h3>
 
 <p>To use the wallet you should create a configfile. It’s not required but
-more convenient. Default paths are `./bitcoin-ruby.yml`,
-`~/.bitcoin-ruby.yml` and `/etc/bitcoin-ruby.yml`.</p>
+more convenient. See the <code>Config</code> <code>Files</code> section for
+details.</p>
 
-<pre>network: bitcoin
-keystore: &quot;simple::file=keys.json&quot;
-# keystore: &quot;deterministic::seed=foo,nonce=2116,keys=7&quot;
-storage: &quot;sequel::postgres:/bitcoin&quot;
-node: &quot;127.0.01:9999&quot; # command socket of a node to relay the transaction</pre>
+<pre>all:
+  network: bitcoin
+  storage: &quot;sequel::postgres:/bitcoin&quot;
+  command: &quot;127.0.01:9999&quot;
+wallet:
+  keystore: &quot;simple::file=keys.json&quot;
+  # keystore: &quot;deterministic::seed=foo,nonce=2116,keys=7&quot;</pre>
 
-<p>The `simple` keystore will create one key and put it into the given file.
-You can later ask it to generate more keys.</p>
+<p>The <code>simple</code> keystore will create one key and put it into the
+given file. You can later ask it to generate more keys.</p>
 
-<p>The `deterministic` keystore uses the seed (which should be a large,
-unique, random string!) and generates the given number of keys. The nonce
-is optional, it just speeds up finding the first key. See <a
+<p>The <code>deterministic</code> keystore uses the seed (which should be a
+large, unique, random string!) and generates the given number of keys. The
+nonce is optional, it just speeds up finding the first key. See <a
 href="Bitcoin/Wallet/KeyGenerator.html">Bitcoin::Wallet::KeyGenerator</a>
 for details.</p>
 
@@ -279,8 +281,9 @@ for details.</p>
 
 <pre>bitcoin_wallet list &lt;address&gt;</pre>
 
-<p>Create new keys/addresses (only with `simple` keystore; with
-`deterministic` you have to edit your config):</p>
+<p>Create new keys/addresses (only with <code>simple</code> keystore; with
+<code>deterministic</code> you have to edit your config and increase the
+number of keys):</p>
 
 <pre>bitcoin_wallet new</pre>
 
@@ -309,7 +312,7 @@ network.</p>
 
 <p>For examples that require storage backends, you can specify them using a
 string containing the backend name and a configuration string. The default
-backend is always ‘dummy’ which needs no configuration</p>
+backend is always <code>dummy</code> which needs no configuration</p>
 
 <pre>dummy
 sequel::sqlite:///tmp/bitcoin.db
@@ -325,7 +328,7 @@ provide an option to specify a custom location. The default locations are:</p>
 </li><li>
 <p>~/.bitcoin-ruby.yml</p>
 </li><li>
-<p>/bitcoin-ruby.yml</p>
+<p>./bitcoin-ruby.yml</p>
 </li></ul>
 
 <p>Files are loaded in order (if they exist) and may override each others

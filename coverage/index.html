@@ -23,7 +23,7 @@
       <img src="./assets/0.5.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2012-02-11T22:08:56+01:00">2012-02-11T22:08:56+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-02-11T22:32:41+01:00">2012-02-11T22:32:41+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -34,7 +34,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         175.38
+         175.3
        </span>
     </span> hits/line)
   </h2>
@@ -66,7 +66,7 @@
         <td>154</td>
         <td>150</td>
         <td>4</td>
-        <td>184.3</td>
+        <td>184.4</td>
       </tr>
       
       <tr>
@@ -256,7 +256,7 @@
         <td>27</td>
         <td>27</td>
         <td>0</td>
-        <td>1070.3</td>
+        <td>1068.3</td>
       </tr>
       
       <tr>
@@ -292,7 +292,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         211.87
+         211.9
        </span>
     </span> hits/line)
   </h2>
@@ -324,7 +324,7 @@
         <td>154</td>
         <td>150</td>
         <td>4</td>
-        <td>184.3</td>
+        <td>184.4</td>
       </tr>
       
       <tr>
@@ -563,7 +563,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         271.5
+         271.0
        </span>
     </span> hits/line)
   </h2>
@@ -605,7 +605,7 @@
         <td>27</td>
         <td>27</td>
         <td>0</td>
-        <td>1070.3</td>
+        <td>1068.3</td>
       </tr>
       
       <tr>
@@ -1326,26 +1326,26 @@
           <code class="ruby">      base58_val, base = '', alpha.size</code>
         </li>
       
-        <li class="covered" data-hits="3026" data-linenumber="103">
-          <span class="hits">3026</span>
+        <li class="covered" data-hits="3028" data-linenumber="103">
+          <span class="hits">3028</span>
           
           <code class="ruby">      while(int_val &gt;= base)</code>
         </li>
       
-        <li class="covered" data-hits="2864" data-linenumber="104">
-          <span class="hits">2864</span>
+        <li class="covered" data-hits="2866" data-linenumber="104">
+          <span class="hits">2866</span>
           
           <code class="ruby">        mod = int_val % base</code>
         </li>
       
-        <li class="covered" data-hits="2864" data-linenumber="105">
-          <span class="hits">2864</span>
+        <li class="covered" data-hits="2866" data-linenumber="105">
+          <span class="hits">2866</span>
           
           <code class="ruby">        base58_val = alpha[mod,1] + base58_val</code>
         </li>
       
-        <li class="covered" data-hits="2864" data-linenumber="106">
-          <span class="hits">2864</span>
+        <li class="covered" data-hits="2866" data-linenumber="106">
+          <span class="hits">2866</span>
           
           <code class="ruby">        int_val = (int_val - mod)/base</code>
         </li>
@@ -16950,8 +16950,8 @@
           <code class="ruby">    def check_target(hash)</code>
         </li>
       
-        <li class="covered" data-hits="5682" data-linenumber="62">
-          <span class="hits">5682</span>
+        <li class="covered" data-hits="5671" data-linenumber="62">
+          <span class="hits">5671</span>
           
           <code class="ruby">      hash.unpack(&quot;H*&quot;)[0].to_i(16) &lt; @target</code>
         </li>
@@ -16974,8 +16974,8 @@
           <code class="ruby">    # compute a single SHA256 hash for +d+.</code>
         </li>
       
-        <li class="covered" data-hits="17213" data-linenumber="66">
-          <span class="hits">17213</span>
+        <li class="covered" data-hits="17180" data-linenumber="66">
+          <span class="hits">17180</span>
           
           <code class="ruby">    def sha256(d); Digest::SHA256.digest(d); end</code>
         </li>
@@ -16998,8 +16998,8 @@
           <code class="ruby">    def get_hash(seed, n)</code>
         </li>
       
-        <li class="covered" data-hits="5706" data-linenumber="70">
-          <span class="hits">5706</span>
+        <li class="covered" data-hits="5695" data-linenumber="70">
+          <span class="hits">5695</span>
           
           <code class="ruby">      sha256( sha256(seed) + sha256(n.to_s) )</code>
         </li>
