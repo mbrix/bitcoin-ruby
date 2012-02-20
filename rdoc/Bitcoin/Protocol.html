@@ -54,6 +54,7 @@
     <li>lib/bitcoin/protocol/address.rb
     <li>lib/bitcoin/protocol/handler.rb
     <li>lib/bitcoin/protocol/tx.rb
+    <li>lib/bitcoin/protocol/alert.rb
     <li>lib/bitcoin/protocol.rb
   </ul>
 </nav>
@@ -80,6 +81,8 @@
     <li><a href="#method-c-pkt">::pkt</a>
     
     <li><a href="#method-c-unpack_var_int">::unpack_var_int</a>
+    
+    <li><a href="#method-c-unpack_var_string">::unpack_var_string</a>
     
     <li><a href="#method-c-verack_pkt">::verack_pkt</a>
     
@@ -139,6 +142,8 @@
     <li><a href="../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
   
     <li><a href="../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -300,7 +305,7 @@
 
           
           <div class="method-source-code" id="getdata_pkt-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getdata_pkt</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">hashes</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">hashes</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">256</span>
   <span class="ruby-identifier">t</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
@@ -337,7 +342,7 @@
 
           
           <div class="method-source-code" id="inv_pkt-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 69</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">inv_pkt</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">hashes</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">hashes</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">256</span>
   <span class="ruby-identifier">t</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
@@ -374,7 +379,7 @@
 
           
           <div class="method-source-code" id="pack_var_int-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 31</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pack_var_int</span>(<span class="ruby-identifier">i</span>)
   <span class="ruby-keyword">if</span>    <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span>  <span class="ruby-value">0xfd</span>;                [      <span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffff</span>;              [<span class="ruby-value">0xfd</span>, <span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Cv&quot;</span>)
@@ -409,12 +414,11 @@
 
           
           <div class="method-source-code" id="pkt-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pkt</span>(<span class="ruby-identifier">command</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-identifier">cmd</span>      = <span class="ruby-identifier">command</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">12</span>, <span class="ruby-string">&quot;\x00&quot;</span>)[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">12</span>]
   <span class="ruby-identifier">length</span>   = [<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">bytesize</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;I&quot;</span>)
-  <span class="ruby-identifier">checksum</span> = [<span class="ruby-string">'version'</span>, <span class="ruby-string">'verack'</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">command</span>) <span class="ruby-operator">?</span>
-    <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">payload</span>))[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">4</span>]
+  <span class="ruby-identifier">checksum</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">payload</span>))[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">4</span>]
 
   [<span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:magic_head</span>], <span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">length</span>, <span class="ruby-identifier">checksum</span>, <span class="ruby-identifier">payload</span>].<span class="ruby-identifier">join</span>
 <span class="ruby-keyword">end</span></pre>
@@ -444,7 +448,7 @@
 
           
           <div class="method-source-code" id="unpack_var_int-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 22</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">unpack_var_int</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-comment"># TODO add test cases</span>
   <span class="ruby-keyword">when</span> <span class="ruby-value">0xfd</span>; <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;xva*&quot;</span>)
@@ -463,6 +467,37 @@
       </div><!-- unpack_var_int-method -->
 
     
+      <div id="method-c-unpack_var_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unpack_var_string</span><span
+            class="method-args">(payload)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="unpack_var_string-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">unpack_var_string</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-identifier">size</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Ca*&quot;</span>)
+  <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> (<span class="ruby-identifier">string</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-node">&quot;a#{size}a*&quot;</span>)) <span class="ruby-operator">:</span> [<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">payload</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- unpack_var_string-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- unpack_var_string-method -->
+
+    
       <div id="method-c-verack_pkt" class="method-detail ">
         
         <div class="method-heading">
@@ -479,7 +514,7 @@
 
           
           <div class="method-source-code" id="verack_pkt-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 54</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">verack_pkt</span>
   <span class="ruby-identifier">pkt</span>(<span class="ruby-string">&quot;verack&quot;</span>, <span class="ruby-string">&quot;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -509,7 +544,7 @@
 
           
           <div class="method-source-code" id="version_pkt-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 49</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">version_pkt</span>(<span class="ruby-identifier">from_id</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">last_block</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">time</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = <span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">VersionPkt</span>.<span class="ruby-identifier">build_payload</span>(<span class="ruby-identifier">from_id</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">last_block</span>, <span class="ruby-identifier">time</span>)
   <span class="ruby-identifier">pkt</span>(<span class="ruby-string">&quot;version&quot;</span>, <span class="ruby-identifier">payload</span>)

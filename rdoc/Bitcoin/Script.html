@@ -80,15 +80,29 @@
     
     <li><a href="#method-c-to_address_script">::to_address_script</a>
     
+    <li><a href="#method-c-to_hash160_script">::to_hash160_script</a>
+    
+    <li><a href="#method-c-to_multisig_script">::to_multisig_script</a>
+    
+    <li><a href="#method-c-to_pubkey_script">::to_pubkey_script</a>
+    
+    <li><a href="#method-c-to_pubkey_script_sig">::to_pubkey_script_sig</a>
+    
     <li><a href="#method-c-to_signature_pubkey_script">::to_signature_pubkey_script</a>
     
     <li><a href="#method-i-codehash_script">#codehash_script</a>
     
     <li><a href="#method-i-get_address">#get_address</a>
     
+    <li><a href="#method-i-get_addresses">#get_addresses</a>
+    
     <li><a href="#method-i-get_hash160">#get_hash160</a>
     
     <li><a href="#method-i-get_hash160_address">#get_hash160_address</a>
+    
+    <li><a href="#method-i-get_multisig_addresses">#get_multisig_addresses</a>
+    
+    <li><a href="#method-i-get_multisig_pubkeys">#get_multisig_pubkeys</a>
     
     <li><a href="#method-i-get_pubkey">#get_pubkey</a>
     
@@ -99,6 +113,8 @@
     <li><a href="#method-i-invalid-3F">#invalid?</a>
     
     <li><a href="#method-i-is_hash160-3F">#is_hash160?</a>
+    
+    <li><a href="#method-i-is_multisig-3F">#is_multisig?</a>
     
     <li><a href="#method-i-is_pubkey-3F">#is_pubkey?</a>
     
@@ -218,6 +234,8 @@
     <li><a href="../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
   
     <li><a href="../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -600,29 +618,29 @@
 
           
           <div class="method-source-code" id="binary_from_string-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 114</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">script_string</span>)
   <span class="ruby-identifier">script_string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot; &quot;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">case</span> <span class="ruby-identifier">i</span>
-      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">values</span>;          <span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">first</span>
-      <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES_ALIAS</span>.<span class="ruby-identifier">keys</span>;      <span class="ruby-constant">OPCODES_ALIAS</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">last</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r^([2-9]$|1[0-7])$/</span>;      <span class="ruby-constant">OP_2_16</span>[<span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>]
-      <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r\(opcode (\d+)\)/</span>;       <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-      <span class="ruby-keyword">else</span> 
-        <span class="ruby-identifier">data</span> = [<span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
-        <span class="ruby-identifier">size</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">bytesize</span>
+    <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">values</span>;          <span class="ruby-constant">OPCODES</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">when</span> *<span class="ruby-constant">OPCODES_ALIAS</span>.<span class="ruby-identifier">keys</span>;      <span class="ruby-constant">OPCODES_ALIAS</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">last</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r^([2-9]$|1[0-7])$/</span>;      <span class="ruby-constant">OP_2_16</span>[<span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r\(opcode (\d+)\)/</span>;       <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">else</span> 
+      <span class="ruby-identifier">data</span> = [<span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+      <span class="ruby-identifier">size</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">bytesize</span>
 
-        <span class="ruby-identifier">head</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">OP_PUSHDATA1</span>
-          [<span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>)
-        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">OP_PUSHDATA1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xff</span>
-          [<span class="ruby-constant">OP_PUSHDATA1</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;CC&quot;</span>)
-        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0xff</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffff</span>
-          [<span class="ruby-constant">OP_PUSHDATA2</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Cn&quot;</span>)
-        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0xffff</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffffffff</span>
-          [<span class="ruby-constant">OP_PUSHDATA4</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;CN&quot;</span>)
-        <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">head</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">OP_PUSHDATA1</span>
+               [<span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>)
+             <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">OP_PUSHDATA1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xff</span>
+               [<span class="ruby-constant">OP_PUSHDATA1</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;CC&quot;</span>)
+             <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0xff</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffff</span>
+               [<span class="ruby-constant">OP_PUSHDATA2</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Cn&quot;</span>)
+             <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0xffff</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0xffffffff</span>
+               [<span class="ruby-constant">OP_PUSHDATA4</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;CN&quot;</span>)
+             <span class="ruby-keyword">end</span>
 
-        <span class="ruby-identifier">head</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>
+      <span class="ruby-identifier">head</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>
     <span class="ruby-keyword">end</span>
   }.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">i</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Fixnum</span>) <span class="ruby-operator">?</span> [<span class="ruby-identifier">i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">i</span> <span class="ruby-comment"># TODO yikes, implement/pack 2 byte opcodes.</span>
@@ -654,7 +672,7 @@
 
           
           <div class="method-source-code" id="drop_signatures-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 412</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">drop_signatures</span>(<span class="ruby-identifier">script_pubkey</span>, <span class="ruby-identifier">drop_signatures</span>)
   <span class="ruby-identifier">script</span> = <span class="ruby-identifier">new</span>(<span class="ruby-identifier">script_pubkey</span>).<span class="ruby-identifier">to_string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot; &quot;</span>).<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">drop_signatures</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
   <span class="ruby-identifier">script_pubkey</span> = <span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">script</span>)
@@ -685,7 +703,7 @@
 
           
           <div class="method-source-code" id="from_string-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 109</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_string</span>(<span class="ruby-identifier">script_string</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">script_string</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -716,7 +734,7 @@ output_script</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">bytes</span>, <span class="ruby-identifier">offset</span>=<span class="ruby-value">0</span>)
   <span class="ruby-ivar">@raw</span> = <span class="ruby-identifier">bytes</span>
   <span class="ruby-ivar">@stack</span>, <span class="ruby-ivar">@stack_alt</span> = [], []
@@ -743,17 +761,14 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>generate standard transaction script for given <code>address</code></p>
+          
           
 
           
           <div class="method-source-code" id="to_address_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 466</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 282</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_address_script</span>(<span class="ruby-identifier">address</span>)
-  <span class="ruby-identifier">hash160</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_from_address</span>(<span class="ruby-identifier">address</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash160</span>
-  <span class="ruby-comment">#  DUP   HASH160  length  hash160    EQUALVERIFY  CHECKSIG</span>
-  [ [<span class="ruby-string">&quot;76&quot;</span>, <span class="ruby-string">&quot;a9&quot;</span>,    <span class="ruby-string">&quot;14&quot;</span>,   <span class="ruby-identifier">hash160</span>,   <span class="ruby-string">&quot;88&quot;</span>,        <span class="ruby-string">&quot;ac&quot;</span>].<span class="ruby-identifier">join</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+  <span class="ruby-identifier">to_hash160_script</span>(<span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_from_address</span>(<span class="ruby-identifier">address</span>))
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_address_script-source -->
           
@@ -765,10 +780,105 @@ output_script</p>
       </div><!-- to_address_script-method -->
 
     
-      <div id="method-c-to_signature_pubkey_script" class="method-detail ">
+      <div id="method-c-to_hash160_script" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_signature_pubkey_script</span><span
+          <span class="method-name">to_hash160_script</span><span
+            class="method-args">(hash160)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>generate hash160 tx for given <code>address</code></p>
+          
+
+          
+          <div class="method-source-code" id="to_hash160_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_hash160_script</span>(<span class="ruby-identifier">hash160</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash160</span>
+  <span class="ruby-comment">#  DUP   HASH160  length  hash160    EQUALVERIFY  CHECKSIG</span>
+  [ [<span class="ruby-string">&quot;76&quot;</span>, <span class="ruby-string">&quot;a9&quot;</span>,    <span class="ruby-string">&quot;14&quot;</span>,   <span class="ruby-identifier">hash160</span>,   <span class="ruby-string">&quot;88&quot;</span>,        <span class="ruby-string">&quot;ac&quot;</span>].<span class="ruby-identifier">join</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_hash160_script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_hash160_script-method -->
+
+    
+      <div id="method-c-to_multisig_script" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_multisig_script</span><span
+            class="method-args">(m, *pubkeys)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>generate multisig tx for given <code>pubkeys</code>, expecting
+<code>m</code> signatures</p>
+          
+
+          
+          <div class="method-source-code" id="to_multisig_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 287</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_multisig_script</span>(<span class="ruby-identifier">m</span>, *<span class="ruby-identifier">pubkeys</span>)
+  <span class="ruby-identifier">pubs</span> = <span class="ruby-identifier">pubkeys</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">pk</span><span class="ruby-operator">|</span><span class="ruby-identifier">p</span>=[<span class="ruby-identifier">pk</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>); [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">bytesize</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">p</span>}
+  [ [<span class="ruby-value">80</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), *<span class="ruby-identifier">pubs</span>, [<span class="ruby-value">80</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pubs</span>.<span class="ruby-identifier">size</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), <span class="ruby-string">&quot;\xAE&quot;</span>].<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_multisig_script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_multisig_script-method -->
+
+    
+      <div id="method-c-to_pubkey_script" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_pubkey_script</span><span
+            class="method-args">(pubkey)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>generate pubkey tx script for given <code>pubkey</code></p>
+          
+
+          
+          <div class="method-source-code" id="to_pubkey_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 271</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_pubkey_script</span>(<span class="ruby-identifier">pubkey</span>)
+  <span class="ruby-identifier">pk</span> = [<span class="ruby-identifier">pubkey</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+  [[<span class="ruby-identifier">pk</span>.<span class="ruby-identifier">bytesize</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), <span class="ruby-identifier">pk</span>, <span class="ruby-string">&quot;\xAC&quot;</span>].<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_pubkey_script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_pubkey_script-method -->
+
+    
+      <div id="method-c-to_pubkey_script_sig" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_pubkey_script_sig</span><span
             class="method-args">(signature, pubkey)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -776,17 +886,48 @@ output_script</p>
 
         <div class="method-description">
           
-          
+          <p>generate pubkey script sig for given <code>signature</code> and
+<code>pubkey</code></p>
           
 
           
-          <div class="method-source-code" id="to_signature_pubkey_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 473</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_signature_pubkey_script</span>(<span class="ruby-identifier">signature</span>, <span class="ruby-identifier">pubkey</span>)
+          <div class="method-source-code" id="to_pubkey_script_sig-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_pubkey_script_sig</span>(<span class="ruby-identifier">signature</span>, <span class="ruby-identifier">pubkey</span>)
   <span class="ruby-identifier">hash_type</span> = <span class="ruby-string">&quot;\x01&quot;</span>
   <span class="ruby-comment">#pubkey = [pubkey].pack(&quot;H*&quot;) if pubkey.bytesize != 65</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;pubkey is not in binary form&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pubkey</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">==</span> <span class="ruby-value">65</span>  <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pubkey</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\x04&quot;</span>
   [ [<span class="ruby-identifier">signature</span>.<span class="ruby-identifier">bytesize</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), <span class="ruby-identifier">signature</span>, <span class="ruby-identifier">hash_type</span>, [<span class="ruby-identifier">pubkey</span>.<span class="ruby-identifier">bytesize</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C&quot;</span>), <span class="ruby-identifier">pubkey</span> ].<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_pubkey_script_sig-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_pubkey_script_sig-method -->
+
+    
+      <div id="method-c-to_signature_pubkey_script" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_signature_pubkey_script</span><span
+            class="method-args">(*a)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>alias for to_pubkey_script_sig</p>
+          
+
+          
+          <div class="method-source-code" id="to_signature_pubkey_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_signature_pubkey_script</span>(*<span class="ruby-identifier">a</span>)
+  <span class="ruby-identifier">to_pubkey_script_sig</span>(*<span class="ruby-identifier">a</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_signature_pubkey_script-source -->
           
@@ -820,7 +961,7 @@ output_script</p>
 
           
           <div class="method-source-code" id="codehash_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 405</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">codehash_script</span>(<span class="ruby-identifier">opcode</span>)
   <span class="ruby-comment"># CScript scriptCode(pbegincodehash, pend);</span>
   <span class="ruby-identifier">script</span>    = <span class="ruby-identifier">to_string</span>(<span class="ruby-ivar">@chunks</span>[(<span class="ruby-ivar">@codehash_start</span><span class="ruby-operator">||</span><span class="ruby-value">0</span>)<span class="ruby-operator">...</span><span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">opcode</span>)])
@@ -848,15 +989,15 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>get address this script corresponds to (if possible)</p>
+          <p>get single address, or first for multisig script</p>
           
 
           
           <div class="method-source-code" id="get_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 460</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_address</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_pubkey_address</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pubkey?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_hash160_address</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span>
+  <span class="ruby-identifier">addrs</span> = <span class="ruby-identifier">get_addresses</span>
+  <span class="ruby-identifier">addrs</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">addrs</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">addrs</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_address-source -->
           
@@ -866,6 +1007,38 @@ output_script</p>
 
         
       </div><!-- get_address-method -->
+
+    
+      <div id="method-i-get_addresses" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_addresses</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get all addresses this script corresponds to (if possible)</p>
+          
+
+          
+          <div class="method-source-code" id="get_addresses-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_addresses</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">get_pubkey_address</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pubkey?</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">get_hash160_address</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_multisig_addresses</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_multisig?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_addresses-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_addresses-method -->
 
     
       <div id="method-i-get_hash160" class="method-detail ">
@@ -879,12 +1052,12 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>get the hash160 for this script (in standard address scripts)</p>
+          <p>get the hash160 for this hash160 script</p>
           
 
           
           <div class="method-source-code" id="get_hash160-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 449</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 237</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_hash160</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-3</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">get_pubkey</span>)        <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pubkey?</span>
@@ -910,12 +1083,12 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>get the address for the script hash160 (in standard address scripts)</p>
+          <p>get the hash160 address for this hash160 script</p>
           
 
           
           <div class="method-source-code" id="get_hash160_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 455</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_hash160_address</span>
   <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_to_address</span>(<span class="ruby-identifier">get_hash160</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -929,6 +1102,66 @@ output_script</p>
       </div><!-- get_hash160_address-method -->
 
     
+      <div id="method-i-get_multisig_addresses" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_multisig_addresses</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the pubkey addresses for this multisig script</p>
+          
+
+          
+          <div class="method-source-code" id="get_multisig_addresses-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_multisig_addresses</span>
+  <span class="ruby-identifier">get_multisig_pubkeys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]).<span class="ruby-identifier">addr</span>}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_multisig_addresses-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_multisig_addresses-method -->
+
+    
+      <div id="method-i-get_multisig_pubkeys" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_multisig_pubkeys</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the public keys for this multisig script</p>
+          
+
+          
+          <div class="method-source-code" id="get_multisig_pubkeys-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_multisig_pubkeys</span>
+  <span class="ruby-value">0</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-value">80</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>]}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_multisig_pubkeys-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_multisig_pubkeys-method -->
+
+    
       <div id="method-i-get_pubkey" class="method-detail ">
         
         <div class="method-heading">
@@ -940,12 +1173,12 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>get the public key for this script (in generation scripts)</p>
+          <p>get the public key for this pubkey script</p>
           
 
           
           <div class="method-source-code" id="get_pubkey-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 438</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_pubkey</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
   <span class="ruby-identifier">is_pubkey?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
@@ -971,12 +1204,12 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>get the address for the public key (in generation scripts)</p>
+          <p>get the pubkey address for this pubkey script</p>
           
 
           
           <div class="method-source-code" id="get_pubkey_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 444</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_pubkey_address</span>
   <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">pubkey_to_address</span>(<span class="ruby-identifier">get_pubkey</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1006,7 +1239,7 @@ output_script</p>
 
           
           <div class="method-source-code" id="invalid-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 401</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invalid</span>
   <span class="ruby-ivar">@script_invalid</span> = <span class="ruby-keyword">true</span>; <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1036,7 +1269,7 @@ output_script</p>
 
           
           <div class="method-source-code" id="invalid-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 142</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invalid?</span>
   <span class="ruby-ivar">@script_invalid</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1066,7 +1299,7 @@ output_script</p>
 
           
           <div class="method-source-code" id="is_hash160-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 430</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 213</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_hash160?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">5</span>
   (<span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span>
@@ -1083,7 +1316,37 @@ output_script</p>
       </div><!-- is_hash160-3F-method -->
 
     
-      <div id="method-i-is_pubkey-3F" class="method-detail method-alias">
+      <div id="method-i-is_multisig-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_multisig?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>is this a multisig tx</p>
+          
+
+          
+          <div class="method-source-code" id="is_multisig-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_multisig?</span>
+  <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">OP_CHECKMULTISIG</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_multisig-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_multisig-3F-method -->
+
+    
+      <div id="method-i-is_pubkey-3F" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">is_pubkey?</span><span
@@ -1094,23 +1357,31 @@ output_script</p>
 
         <div class="method-description">
           
-          
+          <p>is this a pubkey tx</p>
           
 
+          
+          <div class="method-source-code" id="is_pubkey-3F-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 206</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_pubkey?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
+  (<span class="ruby-ivar">@chunks</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">OP_CHECKSIG</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_pubkey-3F-source -->
           
         </div>
-
-        
 
         
         <div class="aliases">
-          Alias for: <a href="Script.html#method-i-is_send_to_ip-3F">is_send_to_ip?</a>
+          Also aliased as: <a href="Script.html#method-i-is_send_to_ip-3F">is_send_to_ip?</a>
         </div>
+        
+
         
       </div><!-- is_pubkey-3F-method -->
 
     
-      <div id="method-i-is_send_to_ip-3F" class="method-detail ">
+      <div id="method-i-is_send_to_ip-3F" class="method-detail method-alias">
         
         <div class="method-heading">
           <span class="method-name">is_send_to_ip?</span><span
@@ -1121,26 +1392,18 @@ output_script</p>
 
         <div class="method-description">
           
-          <p>is this a send-to-ip (pubkey) tx</p>
+          
           
 
           
-          <div class="method-source-code" id="is_send_to_ip-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 423</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_send_to_ip?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
-  (<span class="ruby-ivar">@chunks</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">OP_CHECKSIG</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- is_send_to_ip-3F-source -->
-          
         </div>
+
+        
 
         
         <div class="aliases">
-          Also aliased as: <a href="Script.html#method-i-is_pubkey-3F">is_pubkey?</a>
+          Alias for: <a href="Script.html#method-i-is_pubkey-3F">is_pubkey?</a>
         </div>
-        
-
         
       </div><!-- is_send_to_ip-3F-method -->
 
@@ -1161,9 +1424,9 @@ output_script</p>
 
           
           <div class="method-source-code" id="is_standard-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 418</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_standard?</span>
-  <span class="ruby-identifier">is_pubkey?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_hash160?</span>
+  <span class="ruby-identifier">is_pubkey?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_hash160?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_multisig?</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- is_standard-3F-source -->
           
@@ -1191,7 +1454,7 @@ output_script</p>
 
           
           <div class="method-source-code" id="op_0-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 257</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 419</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_0</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-comment"># []</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1222,7 +1485,7 @@ href="Script.html#OP_TRUE">OP_TRUE</a></p>
 
           
           <div class="method-source-code" id="op_1-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 262</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 424</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_1</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1252,7 +1515,7 @@ href="Script.html#OP_TRUE">OP_TRUE</a></p>
 
           
           <div class="method-source-code" id="op_add-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 212</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 374</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_add</span>
   <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>
@@ -1283,7 +1546,7 @@ href="Script.html#OP_TRUE">OP_TRUE</a></p>
 
           
           <div class="method-source-code" id="op_booland-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 206</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 368</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_booland</span>
   <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>)
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-operator">!</span>[<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>].<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> } <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
@@ -1317,7 +1580,7 @@ add guards from wikipage too.</p>
 
           
           <div class="method-source-code" id="op_checkhashverify-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 268</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 430</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_checkhashverify</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@checkhash</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@checkhash</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>])
     <span class="ruby-ivar">@script_invalid</span> = <span class="ruby-keyword">true</span>
@@ -1363,7 +1626,7 @@ href="https://github.com/bitcoin/bitcoin/blob/master/src/script.cpp#L931">github
 
           
           <div class="method-source-code" id="op_checkmultisig-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 322</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 484</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_checkmultisig</span>(<span class="ruby-identifier">check_callback</span>)
   <span class="ruby-identifier">n_pubkeys</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">invalid</span>  <span class="ruby-keyword">unless</span> (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">20</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n_pubkeys</span>)
@@ -1388,8 +1651,8 @@ href="https://github.com/bitcoin/bitcoin/blob/master/src/script.cpp#L931">github
 
   <span class="ruby-identifier">valid_sigs</span> = <span class="ruby-value">0</span>
   <span class="ruby-identifier">sigs</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span><span class="ruby-operator">|</span> <span class="ruby-identifier">pubkeys</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">pubkey</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">valid_sigs</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">pubkey</span>, <span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span>, <span class="ruby-identifier">drop_sigs</span>, <span class="ruby-identifier">script_code</span>)
-  }}
+      <span class="ruby-identifier">valid_sigs</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">pubkey</span>, <span class="ruby-identifier">sig</span>, <span class="ruby-identifier">hash_type</span>, <span class="ruby-identifier">drop_sigs</span>, <span class="ruby-identifier">script_code</span>)
+    }}
 
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> ((<span class="ruby-identifier">valid_sigs</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">n_sigs</span>) <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> (<span class="ruby-identifier">invalid</span>; <span class="ruby-value">0</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1422,7 +1685,7 @@ href="Protocol/Tx.html#method-i-verify_input_signature">Bitcoin::Protocol::Tx#ve
 
           
           <div class="method-source-code" id="op_checksig-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 282</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 445</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_checksig</span>(<span class="ruby-identifier">check_callback</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">invalid</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
   <span class="ruby-identifier">pubkey</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
@@ -1469,10 +1732,9 @@ href="Protocol/Tx.html#method-i-verify_input_signature">Bitcoin::Protocol::Tx#ve
 
           
           <div class="method-source-code" id="op_checksigverify-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 303</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 466</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_checksigverify</span>(<span class="ruby-identifier">check_callback</span>)
   <span class="ruby-identifier">op_checksig</span>(<span class="ruby-identifier">check_callback</span>)
-  <span class="ruby-identifier">p</span> <span class="ruby-ivar">@stack</span>
   <span class="ruby-identifier">op_verify</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- op_checksigverify-source -->
@@ -1503,7 +1765,7 @@ href="Script.html#OP_CODESEPARATOR">OP_CODESEPARATOR</a>.</p>
 
           
           <div class="method-source-code" id="op_codeseparator-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 275</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 438</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_codeseparator</span>
   <span class="ruby-ivar">@codehash_start</span> = <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">OP_CODESEPARATOR</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1533,7 +1795,7 @@ href="Script.html#OP_CODESEPARATOR">OP_CODESEPARATOR</a>.</p>
 
           
           <div class="method-source-code" id="op_drop-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 230</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 392</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_drop</span>
   <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1563,7 +1825,7 @@ href="Script.html#OP_CODESEPARATOR">OP_CODESEPARATOR</a>.</p>
 
           
           <div class="method-source-code" id="op_dup-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 151</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 313</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_dup</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">dup</span> <span class="ruby-keyword">rescue</span> <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -1593,7 +1855,7 @@ href="Script.html#OP_CODESEPARATOR">OP_CODESEPARATOR</a>.</p>
 
           
           <div class="method-source-code" id="op_equal-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 235</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 397</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_equal</span>
   <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
@@ -1625,7 +1887,7 @@ href="Script.html#OP_VERIFY">OP_VERIFY</a> afterward.</p>
 
           
           <div class="method-source-code" id="op_equalverify-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 252</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_equalverify</span>
   <span class="ruby-identifier">op_equal</span>; <span class="ruby-identifier">op_verify</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1656,7 +1918,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_fromaltstack-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 191</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 353</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_fromaltstack</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack_alt</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1686,7 +1948,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_greaterthanorequal-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 224</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 386</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_greaterthanorequal</span>
   <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
@@ -1717,7 +1979,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_hash160-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 168</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 330</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_hash160</span>
   <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">RMD160</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>))
@@ -1748,7 +2010,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_hash256-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 180</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 342</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_hash256</span>
   <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>))
@@ -1779,7 +2041,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_nop-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 147</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 309</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_nop</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- op_nop-source -->
@@ -1808,7 +2070,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_ripemd160-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 174</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 336</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_ripemd160</span>
   <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">RMD160</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>)
@@ -1839,7 +2101,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_sha1-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 162</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 324</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_sha1</span>
   <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>)
@@ -1870,7 +2132,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_sha256-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 156</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 318</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_sha256</span>
   <span class="ruby-identifier">buf</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">buf</span>)
@@ -1901,7 +2163,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_sub-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 218</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 380</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_sub</span>
   <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">reverse</span>
   <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">b</span>
@@ -1932,7 +2194,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_swap-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 201</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 363</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_swap</span>
   <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] = <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1963,7 +2225,7 @@ stack.</p>
 
           
           <div class="method-source-code" id="op_toaltstack-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 186</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_toaltstack</span>
   <span class="ruby-ivar">@stack_alt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1994,7 +2256,7 @@ second-to-top item.</p>
 
           
           <div class="method-source-code" id="op_tuck-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 196</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 358</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_tuck</span>
   <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] = [ <span class="ruby-ivar">@stack</span>[<span class="ruby-value">-1</span>], *<span class="ruby-ivar">@stack</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] ]
 <span class="ruby-keyword">end</span></pre>
@@ -2025,7 +2287,7 @@ removed, but false is not.</p>
 
           
           <div class="method-source-code" id="op_verify-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 241</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 403</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">op_verify</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
@@ -2061,7 +2323,7 @@ removed, but false is not.</p>
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 64</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">bytes</span>, <span class="ruby-identifier">offset</span>=<span class="ruby-value">0</span>)
   <span class="ruby-identifier">program</span> = <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
   <span class="ruby-identifier">chunks</span> = []
@@ -2116,7 +2378,7 @@ href="Script.html#OP_CHECKSIG">OP_CHECKSIG</a> operations</p>
 
           
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 363</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(&amp;<span class="ruby-identifier">check_callback</span>)
   <span class="ruby-ivar">@debug</span> = []
   <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">chunk</span><span class="ruby-operator">|</span>
@@ -2133,7 +2395,7 @@ href="Script.html#OP_CHECKSIG">OP_CHECKSIG</a> operations</p>
 
       <span class="ruby-keyword">when</span> *<span class="ruby-constant">OP_2_16</span>
         <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">OP_2_16</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">chunk</span>) <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
-
+        <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;OP_#{chunk-80}&quot;</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">name</span> = <span class="ruby-constant">OPCODES</span>[<span class="ruby-identifier">chunk</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">chunk</span>
         <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;opcode #{name} unkown or not implemented&quot;</span>
@@ -2148,7 +2410,6 @@ href="Script.html#OP_CHECKSIG">OP_CHECKSIG</a> operations</p>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@script_invalid</span>
     <span class="ruby-ivar">@stack</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">0</span>
     <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;INVALID TRANSACTION&quot;</span>
-    <span class="ruby-identifier">require</span> <span class="ruby-string">'pp'</span>; <span class="ruby-identifier">pp</span> <span class="ruby-ivar">@debug</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-ivar">@debug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;RESULT&quot;</span>
@@ -2180,7 +2441,7 @@ href="Script.html#OP_CHECKSIG">OP_CHECKSIG</a> operations</p>
 
           
           <div class="method-source-code" id="to_string-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/script.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_string</span>(<span class="ruby-identifier">chunks</span>=<span class="ruby-keyword">nil</span>)
   (<span class="ruby-identifier">chunks</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@chunks</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">case</span> <span class="ruby-identifier">i</span>

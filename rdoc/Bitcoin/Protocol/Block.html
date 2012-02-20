@@ -84,6 +84,8 @@
     
     <li><a href="#method-i-header_info">#header_info</a>
     
+    <li><a href="#method-i-header_to_json">#header_to_json</a>
+    
     <li><a href="#method-i-htb">#htb</a>
     
     <li><a href="#method-i-hth">#hth</a>
@@ -152,6 +154,8 @@
     <li><a href="../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
   
     <li><a href="../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -618,6 +622,38 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
         
       </div><!-- header_info-method -->
+
+    
+      <div id="method-i-header_to_json" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">header_to_json</span><span
+            class="method-args">(options = {:space => ''})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>convert header to json representation as seen in the block explorer.</p>
+          
+
+          
+          <div class="method-source-code" id="header_to_json-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">header_to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>})
+  <span class="ruby-identifier">h</span> = <span class="ruby-identifier">to_hash</span>
+  <span class="ruby-node">%w[tx mrkl_tree]</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>) }
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>( <span class="ruby-identifier">h</span>, <span class="ruby-identifier">options</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- header_to_json-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- header_to_json-method -->
 
     
       <div id="method-i-htb" class="method-detail ">

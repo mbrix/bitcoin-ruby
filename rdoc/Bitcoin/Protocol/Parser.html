@@ -80,6 +80,8 @@
     
     <li><a href="#method-i-parse_addr">#parse_addr</a>
     
+    <li><a href="#method-i-parse_alert">#parse_alert</a>
+    
     <li><a href="#method-i-parse_buffer">#parse_buffer</a>
     
     <li><a href="#method-i-parse_headers">#parse_headers</a>
@@ -144,6 +146,8 @@
     <li><a href="../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
   
     <li><a href="../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -319,7 +323,7 @@
 
           
           <div class="method-source-code" id="handle_error-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_error</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">msg</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
   <span class="ruby-keyword">when</span> <span class="ruby-value">:close</span>
@@ -382,7 +386,7 @@
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 71</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">buf</span>)
   <span class="ruby-ivar">@buf</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">buf</span>
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">parse_buffer</span>; <span class="ruby-keyword">end</span>
@@ -431,6 +435,37 @@
       </div><!-- parse_addr-method -->
 
     
+      <div id="method-i-parse_alert" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_alert</span><span
+            class="method-args">(payload)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="parse_alert-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_alert</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@h</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:on_alert</span>)
+  <span class="ruby-identifier">m</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">call</span>(<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">Alert</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>)) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- parse_alert-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parse_alert-method -->
+
+    
       <div id="method-i-parse_buffer" class="method-detail ">
         
         <div class="method-heading">
@@ -447,7 +482,7 @@
 
           
           <div class="method-source-code" id="parse_buffer-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 77</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_buffer</span>
   <span class="ruby-identifier">head_magic</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-identifier">network</span>[<span class="ruby-value">:magic_head</span>]
   <span class="ruby-identifier">head_size</span>  = <span class="ruby-value">24</span>
@@ -461,19 +496,14 @@
     <span class="ruby-ivar">@buf</span> = <span class="ruby-string">''</span>
   <span class="ruby-keyword">else</span>
 
-    <span class="ruby-keyword">if</span> [<span class="ruby-string">'version'</span>, <span class="ruby-string">'verack'</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
-      <span class="ruby-identifier">head_size</span> <span class="ruby-operator">-=</span> <span class="ruby-value">4</span>
-      <span class="ruby-identifier">payload</span> = <span class="ruby-ivar">@buf</span>[<span class="ruby-identifier">head_size</span><span class="ruby-operator">...</span><span class="ruby-identifier">head_size</span><span class="ruby-operator">+</span><span class="ruby-identifier">length</span>]
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>( <span class="ruby-identifier">payload</span> ))[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">4</span>] <span class="ruby-operator">!=</span> <span class="ruby-identifier">checksum</span>
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">50000</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">length</span>)
-          <span class="ruby-identifier">size_info</span> = [<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">length</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">'/'</span>)
-          <span class="ruby-identifier">handle_error</span>(<span class="ruby-value">:debug</span>, <span class="ruby-node">&quot;chunked packet stream (#{size_info})&quot;</span>)
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">handle_error</span>(<span class="ruby-value">:close</span>, <span class="ruby-string">&quot;checksum mismatch&quot;</span>)
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">digest</span>( <span class="ruby-identifier">payload</span> ))[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">4</span>] <span class="ruby-operator">!=</span> <span class="ruby-identifier">checksum</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">50000</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">length</span>)
+        <span class="ruby-identifier">size_info</span> = [<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">length</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">'/'</span>)
+        <span class="ruby-identifier">handle_error</span>(<span class="ruby-value">:debug</span>, <span class="ruby-node">&quot;chunked packet stream (#{size_info})&quot;</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">handle_error</span>(<span class="ruby-value">:close</span>, <span class="ruby-string">&quot;checksum mismatch&quot;</span>)
       <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">return</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-ivar">@buf</span> = <span class="ruby-ivar">@buf</span>[<span class="ruby-identifier">head_size</span><span class="ruby-operator">+</span><span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;&quot;</span>
 
@@ -591,7 +621,7 @@
 
           
           <div class="method-source-code" id="parse_version-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/parser.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_version</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-identifier">version</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">VersionPkt</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@h</span>.<span class="ruby-identifier">on_version</span>(<span class="ruby-identifier">version</span>)
@@ -633,6 +663,7 @@
   <span class="ruby-keyword">when</span> <span class="ruby-string">'addr'</span>;     <span class="ruby-identifier">parse_addr</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-keyword">when</span> <span class="ruby-string">'verack'</span>;   <span class="ruby-ivar">@h</span>.<span class="ruby-identifier">on_handshake_complete</span> <span class="ruby-comment"># nop</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">'version'</span>;  <span class="ruby-identifier">parse_version</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">'alert'</span>;    <span class="ruby-identifier">parse_alert</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">p</span> [<span class="ruby-string">'unkown-packet'</span>, <span class="ruby-identifier">command</span>, <span class="ruby-identifier">payload</span>]
   <span class="ruby-keyword">end</span>

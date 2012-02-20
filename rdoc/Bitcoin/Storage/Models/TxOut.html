@@ -74,6 +74,8 @@
     
     <li><a href="#method-i-get_address">#get_address</a>
     
+    <li><a href="#method-i-get_addresses">#get_addresses</a>
+    
     <li><a href="#method-i-get_next_in">#get_next_in</a>
     
     <li><a href="#method-i-get_tx">#get_tx</a>
@@ -132,6 +134,8 @@
     <li><a href="../../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
+  
+    <li><a href="../../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
   
     <li><a href="../../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -379,7 +383,7 @@
 
         <div class="method-description">
           
-          <p>get the address this txout corresponds to (if possible)</p>
+          <p>get all addresses this txout corresponds to (if possible)</p>
           
 
           
@@ -396,6 +400,36 @@
 
         
       </div><!-- get_address-method -->
+
+    
+      <div id="method-i-get_addresses" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_addresses</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get the single address this txout corresponds to (first for multisig tx)</p>
+          
+
+          
+          <div class="method-source-code" id="get_addresses-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_addresses</span>
+  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pk_script</span>).<span class="ruby-identifier">get_addresses</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_addresses-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_addresses-method -->
 
     
       <div id="method-i-get_next_in" class="method-detail ">

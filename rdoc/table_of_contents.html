@@ -110,6 +110,9 @@
     <a href="Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   </li>
     <li class="class">
+    <a href="Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  </li>
+    <li class="class">
     <a href="Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   </li>
     <li class="class">
@@ -250,9 +253,9 @@
 <h2 id="methods">Methods</h2>
 <ul>
   
-    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-c-binary_from_hash">::binary_from_hash &mdash; Bitcoin::Protocol::Block</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-c-binary_from_hash">::binary_from_hash &mdash; Bitcoin::Protocol::Tx</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-c-binary_from_hash">::binary_from_hash &mdash; Bitcoin::Protocol::Block</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Block.html#method-c-binary_from_json">::binary_from_json &mdash; Bitcoin::Protocol::Block</a>
   
@@ -288,21 +291,21 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-c-from_json">::from_json &mdash; Bitcoin::Protocol::Tx</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-c-from_protocol">::from_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Output.html#method-c-from_protocol">::from_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Input.html#method-c-from_protocol">::from_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Block.html#method-c-from_protocol">::from_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-c-from_protocol">::from_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Output.html#method-c-from_protocol">::from_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
   
     <li class="method"><a href="Bitcoin/Script.html#method-c-from_string">::from_string &mdash; Bitcoin::Script</a>
   
     <li class="method"><a href="Bitcoin/Key.html#method-c-generate">::generate &mdash; Bitcoin::Key</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Block.html#method-c-get">::get &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-c-get">::get &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Block.html#method-c-get">::get &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
   
     <li class="method"><a href="Bitcoin/Protocol.html#method-c-getdata_pkt">::getdata_pkt &mdash; Bitcoin::Protocol</a>
   
@@ -330,7 +333,7 @@
   
     <li class="method"><a href="Bitcoin.html#method-c-network-3D">::network= &mdash; Bitcoin</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-c-new">::new &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+    <li class="method"><a href="Bitcoin/Protocol/Alert.html#method-c-new">::new &mdash; Bitcoin::Protocol::Alert</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-c-new">::new &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
@@ -344,35 +347,37 @@
   
     <li class="method"><a href="Bitcoin/Storage/Models/Block.html#method-c-new">::new &mdash; Bitcoin::Storage::Models::Block</a>
   
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-c-new">::new &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Wallet/KeyGenerator.html#method-c-new">::new &mdash; Bitcoin::Wallet::KeyGenerator</a>
+  
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-c-new">::new &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
-    <li class="method"><a href="Bitcoin/Wallet/DeterministicKeyStore.html#method-c-new">::new &mdash; Bitcoin::Wallet::DeterministicKeyStore</a>
-  
-    <li class="method"><a href="Bitcoin/Network/CommandHandler.html#method-c-new">::new &mdash; Bitcoin::Network::CommandHandler</a>
-  
-    <li class="method"><a href="Bitcoin/Script.html#method-c-new">::new &mdash; Bitcoin::Script</a>
-  
-    <li class="method"><a href="Bitcoin/Key.html#method-c-new">::new &mdash; Bitcoin::Key</a>
-  
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-c-new">::new &mdash; Bitcoin::Network::ConnectionHandler</a>
-  
-    <li class="method"><a href="Bitcoin/Wallet/SimpleKeyStore.html#method-c-new">::new &mdash; Bitcoin::Wallet::SimpleKeyStore</a>
-  
-    <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-c-new">::new &mdash; Bitcoin::Protocol::Tx</a>
+    <li class="method"><a href="Bitcoin/Connection.html#method-c-new">::new &mdash; Bitcoin::Connection</a>
   
     <li class="method"><a href="Bitcoin/Network/Node.html#method-c-new">::new &mdash; Bitcoin::Network::Node</a>
   
+    <li class="method"><a href="Bitcoin/Network/CommandHandler.html#method-c-new">::new &mdash; Bitcoin::Network::CommandHandler</a>
+  
+    <li class="method"><a href="Bitcoin/Key.html#method-c-new">::new &mdash; Bitcoin::Key</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-c-new">::new &mdash; Bitcoin::Script</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-c-new">::new &mdash; Bitcoin::Protocol::Tx</a>
+  
+    <li class="method"><a href="Bitcoin/Wallet/SimpleKeyStore.html#method-c-new">::new &mdash; Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-c-new">::new &mdash; Bitcoin::Network::ConnectionHandler</a>
+  
     <li class="method"><a href="Bitcoin/Protocol/Addr.html#method-c-new">::new &mdash; Bitcoin::Protocol::Addr</a>
+  
+    <li class="method"><a href="Bitcoin/Logger/LogWrapper.html#method-c-new">::new &mdash; Bitcoin::Logger::LogWrapper</a>
+  
+    <li class="method"><a href="Bitcoin/Wallet/Wallet.html#method-c-new">::new &mdash; Bitcoin::Wallet::Wallet</a>
   
     <li class="method"><a href="Bitcoin/Logger/Logger.html#method-c-new">::new &mdash; Bitcoin::Logger::Logger</a>
   
     <li class="method"><a href="Bitcoin/Wallet/SimpleCoinSelector.html#method-c-new">::new &mdash; Bitcoin::Wallet::SimpleCoinSelector</a>
-  
-    <li class="method"><a href="Bitcoin/Connection.html#method-c-new">::new &mdash; Bitcoin::Connection</a>
-  
-    <li class="method"><a href="Bitcoin/Wallet/KeyGenerator.html#method-c-new">::new &mdash; Bitcoin::Wallet::KeyGenerator</a>
-  
-    <li class="method"><a href="Bitcoin/Wallet/Wallet.html#method-c-new">::new &mdash; Bitcoin::Wallet::Wallet</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Block.html#method-c-new">::new &mdash; Bitcoin::Protocol::Block</a>
   
@@ -382,21 +387,23 @@
   
     <li class="method"><a href="Bitcoin/Protocol/TxIn.html#method-c-new">::new &mdash; Bitcoin::Protocol::TxIn</a>
   
-    <li class="method"><a href="Bitcoin/Logger/LogWrapper.html#method-c-new">::new &mdash; Bitcoin::Logger::LogWrapper</a>
+    <li class="method"><a href="Bitcoin/Wallet/DeterministicKeyStore.html#method-c-new">::new &mdash; Bitcoin::Wallet::DeterministicKeyStore</a>
   
     <li class="method"><a href="Bitcoin/Protocol.html#method-c-pack_var_int">::pack_var_int &mdash; Bitcoin::Protocol</a>
   
     <li class="method"><a href="Bitcoin/Protocol.html#method-c-pack_var_int">::pack_var_int &mdash; Bitcoin::Protocol</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Alert.html#method-c-parse">::parse &mdash; Bitcoin::Protocol::Alert</a>
   
     <li class="method"><a href="Bitcoin/Protocol/VersionPkt.html#method-c-parse">::parse &mdash; Bitcoin::Protocol::VersionPkt</a>
   
     <li class="method"><a href="Bitcoin/Protocol/VersionPkt.html#method-c-parse_ip">::parse_ip &mdash; Bitcoin::Protocol::VersionPkt</a>
   
+    <li class="method"><a href="Bitcoin/Protocol.html#method-c-pkt">::pkt &mdash; Bitcoin::Protocol</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol.html#method-c-pkt">::pkt &mdash; Bitcoin::Protocol</a>
+  
     <li class="method"><a href="Bitcoin/Protocol/Addr.html#method-c-pkt">::pkt &mdash; Bitcoin::Protocol::Addr</a>
-  
-    <li class="method"><a href="Bitcoin/Protocol.html#method-c-pkt">::pkt &mdash; Bitcoin::Protocol</a>
-  
-    <li class="method"><a href="Bitcoin/Protocol.html#method-c-pkt">::pkt &mdash; Bitcoin::Protocol</a>
   
     <li class="method"><a href="Bitcoin/OpenSSL_EC.html#method-c-regenerate_key">::regenerate_key &mdash; Bitcoin::OpenSSL_EC</a>
   
@@ -404,11 +411,23 @@
   
     <li class="method"><a href="Bitcoin/Script.html#method-c-to_address_script">::to_address_script &mdash; Bitcoin::Script</a>
   
+    <li class="method"><a href="Bitcoin/Script.html#method-c-to_hash160_script">::to_hash160_script &mdash; Bitcoin::Script</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-c-to_multisig_script">::to_multisig_script &mdash; Bitcoin::Script</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-c-to_pubkey_script">::to_pubkey_script &mdash; Bitcoin::Script</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-c-to_pubkey_script_sig">::to_pubkey_script_sig &mdash; Bitcoin::Script</a>
+  
     <li class="method"><a href="Bitcoin/Script.html#method-c-to_signature_pubkey_script">::to_signature_pubkey_script &mdash; Bitcoin::Script</a>
   
     <li class="method"><a href="Bitcoin/Protocol.html#method-c-unpack_var_int">::unpack_var_int &mdash; Bitcoin::Protocol</a>
   
     <li class="method"><a href="Bitcoin/Protocol.html#method-c-unpack_var_int">::unpack_var_int &mdash; Bitcoin::Protocol</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol.html#method-c-unpack_var_string">::unpack_var_string &mdash; Bitcoin::Protocol</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol.html#method-c-unpack_var_string">::unpack_var_string &mdash; Bitcoin::Protocol</a>
   
     <li class="method"><a href="Bitcoin/Protocol/TxOut.html#method-c-value_to_address">::value_to_address &mdash; Bitcoin::Protocol::TxOut</a>
   
@@ -420,15 +439,15 @@
   
     <li class="method"><a href="Bitcoin/Protocol.html#method-c-version_pkt">::version_pkt &mdash; Bitcoin::Protocol</a>
   
-    <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-3D-3D">#== &mdash; Bitcoin::Protocol::Tx</a>
-  
-    <li class="method"><a href="Bitcoin/Protocol/TxOut.html#method-i-3D-3D">#== &mdash; Bitcoin::Protocol::TxOut</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-3D-3D">#== &mdash; Bitcoin::Protocol::Block</a>
   
     <li class="method"><a href="Bitcoin/Protocol/TxIn.html#method-i-3D-3D">#== &mdash; Bitcoin::Protocol::TxIn</a>
   
     <li class="method"><a href="Bitcoin/Key.html#method-i-3D-3D">#== &mdash; Bitcoin::Key</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/TxOut.html#method-i-3D-3D">#== &mdash; Bitcoin::Protocol::TxOut</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-3D-3D">#== &mdash; Bitcoin::Protocol::Tx</a>
   
     <li class="method"><a href="Bitcoin/Protocol/TxIn.html#method-i-5B-5D">#[] &mdash; Bitcoin::Protocol::TxIn</a>
   
@@ -476,9 +495,9 @@
   
     <li class="method"><a href="Bitcoin/Script.html#method-i-codehash_script">#codehash_script &mdash; Bitcoin::Script</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Input.html#method-i-coinbase-3F">#coinbase? &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/TxIn.html#method-i-coinbase-3F">#coinbase? &mdash; Bitcoin::Protocol::TxIn</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Input.html#method-i-coinbase-3F">#coinbase? &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-connect">#connect &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
@@ -524,29 +543,33 @@
   
     <li class="method"><a href="Bitcoin/Storage/Models/TxOut.html#method-i-get_address">#get_address &mdash; Bitcoin::Storage::Models::TxOut</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_balance">#get_balance &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Models/TxOut.html#method-i-get_addresses">#get_addresses &mdash; Bitcoin::Storage::Models::TxOut</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-i-get_addresses">#get_addresses &mdash; Bitcoin::Script</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_balance">#get_balance &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Wallet/Wallet.html#method-i-get_balance">#get_balance &mdash; Bitcoin::Wallet::Wallet</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Models/Tx.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Models::Tx</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Backends::StoreBase</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_balance">#get_balance &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Backends::StoreBase</a>
+  
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Models/Tx.html#method-i-get_block">#get_block &mdash; Bitcoin::Storage::Models::Tx</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block_by_depth">#get_block_by_depth &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_block_by_depth">#get_block_by_depth &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block_by_depth">#get_block_by_depth &mdash; Bitcoin::Storage::Backends::DummyStore</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_block_by_depth">#get_block_by_depth &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block_by_depth">#get_block_by_depth &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block_by_depth">#get_block_by_depth &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_block_by_id">#get_block_by_id &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
@@ -554,17 +577,17 @@
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block_by_id">#get_block_by_id &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block_by_prev_hash">#get_block_by_prev_hash &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block_by_prev_hash">#get_block_by_prev_hash &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_block_by_prev_hash">#get_block_by_prev_hash &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block_by_prev_hash">#get_block_by_prev_hash &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block_by_prev_hash">#get_block_by_prev_hash &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_block_by_tx">#get_block_by_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block_by_tx">#get_block_by_tx &mdash; Bitcoin::Storage::Backends::DummyStore</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_block_by_tx">#get_block_by_tx &mdash; Bitcoin::Storage::Backends::StoreBase</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_block_by_tx">#get_block_by_tx &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_block_depth">#get_block_depth &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
@@ -572,11 +595,11 @@
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_depth">#get_depth &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_depth">#get_depth &mdash; Bitcoin::Storage::Backends::DummyStore</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_depth">#get_depth &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_depth">#get_depth &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_depth">#get_depth &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-get_genesis_block">#get_genesis_block &mdash; Bitcoin::Network::ConnectionHandler</a>
   
@@ -586,17 +609,21 @@
   
     <li class="method"><a href="Bitcoin/Script.html#method-i-get_hash160_address">#get_hash160_address &mdash; Bitcoin::Script</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_head">#get_head &mdash; Bitcoin::Storage::Backends::SequelStore</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_head">#get_head &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_head">#get_head &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_head">#get_head &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_head">#get_head &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_head">#get_head &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
     <li class="method"><a href="Bitcoin/Wallet/KeyGenerator.html#method-i-get_key">#get_key &mdash; Bitcoin::Wallet::KeyGenerator</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_locator">#get_locator &mdash; Bitcoin::Storage::Backends::StoreBase</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-i-get_multisig_addresses">#get_multisig_addresses &mdash; Bitcoin::Script</a>
+  
+    <li class="method"><a href="Bitcoin/Script.html#method-i-get_multisig_pubkeys">#get_multisig_pubkeys &mdash; Bitcoin::Script</a>
   
     <li class="method"><a href="Bitcoin/Wallet/Wallet.html#method-i-get_new_addr">#get_new_addr &mdash; Bitcoin::Wallet::Wallet</a>
   
@@ -616,19 +643,19 @@
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Models/TxIn.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Models::TxIn</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::StoreBase</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Models/TxOut.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Models::TxOut</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Models/TxIn.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Models::TxIn</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_tx_by_id">#get_tx_by_id &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_tx">#get_tx &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_tx_by_id">#get_tx_by_id &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_tx_by_id">#get_tx_by_id &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_tx_by_id">#get_tx_by_id &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
@@ -644,15 +671,15 @@
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_txouts_for_address">#get_txouts_for_address &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_txouts_for_hash160">#get_txouts_for_hash160 &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_txouts_for_hash160">#get_txouts_for_hash160 &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_txouts_for_hash160">#get_txouts_for_hash160 &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script &mdash; Bitcoin::Storage::Backends::SequelStore</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-get_unconfirmed_tx">#get_unconfirmed_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
@@ -682,11 +709,11 @@
   
     <li class="method"><a href="Bitcoin/Network/CommandHandler.html#method-i-handle_stop">#handle_stop &mdash; Bitcoin::Network::CommandHandler</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-has_block">#has_block &mdash; Bitcoin::Storage::Backends::StoreBase</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-has_block">#has_block &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-has_block">#has_block &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-has_block">#has_block &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-has_tx">#has_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
@@ -708,19 +735,29 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-header_info">#header_info &mdash; Bitcoin::Protocol::Block</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-htb">#htb &mdash; Bitcoin::Storage::Backends::SequelStore</a>
-  
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-htb">#htb &mdash; Bitcoin::Network::ConnectionHandler</a>
+    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-header_to_json">#header_to_json &mdash; Bitcoin::Protocol::Block</a>
   
     <li class="method"><a href="Bitcoin/Util.html#method-i-htb">#htb &mdash; Bitcoin::Util</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StorageModel.html#method-i-htb">#htb &mdash; Bitcoin::Storage::Backends::StorageModel</a>
   
-    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-htb">#htb &mdash; Bitcoin::Protocol::Block</a>
-  
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-htb">#htb &mdash; Bitcoin::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Handler</a>
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-htb">#htb &mdash; Bitcoin::Network::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-htb">#htb &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-htb">#htb &mdash; Bitcoin::Protocol::Block</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Tx</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Block</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-hth">#hth &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/StorageModel.html#method-i-hth">#hth &mdash; Bitcoin::Storage::Backends::StorageModel</a>
+  
+    <li class="method"><a href="Bitcoin/Util.html#method-i-hth">#hth &mdash; Bitcoin::Util</a>
   
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-hth">#hth &mdash; Bitcoin::ConnectionHandler</a>
   
@@ -728,15 +765,7 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Parser.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Parser</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-hth">#hth &mdash; Bitcoin::Storage::Backends::SequelStore</a>
-  
-    <li class="method"><a href="Bitcoin/Util.html#method-i-hth">#hth &mdash; Bitcoin::Util</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/StorageModel.html#method-i-hth">#hth &mdash; Bitcoin::Storage::Backends::StorageModel</a>
-  
-    <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Tx</a>
-  
-    <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Block</a>
+    <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-hth">#hth &mdash; Bitcoin::Protocol::Handler</a>
   
     <li class="method"><a href="Bitcoin/Wallet/SimpleKeyStore.html#method-i-import">#import &mdash; Bitcoin::Wallet::SimpleKeyStore</a>
   
@@ -754,6 +783,8 @@
   
     <li class="method"><a href="Bitcoin/Script.html#method-i-is_hash160-3F">#is_hash160? &mdash; Bitcoin::Script</a>
   
+    <li class="method"><a href="Bitcoin/Script.html#method-i-is_multisig-3F">#is_multisig? &mdash; Bitcoin::Script</a>
+  
     <li class="method"><a href="Bitcoin/Script.html#method-i-is_pubkey-3F">#is_pubkey? &mdash; Bitcoin::Script</a>
   
     <li class="method"><a href="Bitcoin/Script.html#method-i-is_send_to_ip-3F">#is_send_to_ip? &mdash; Bitcoin::Script</a>
@@ -764,9 +795,9 @@
   
     <li class="method"><a href="Bitcoin/Wallet/DeterministicKeyStore.html#method-i-key">#key &mdash; Bitcoin::Wallet::DeterministicKeyStore</a>
   
-    <li class="method"><a href="Bitcoin/Wallet/DeterministicKeyStore.html#method-i-keys">#keys &mdash; Bitcoin::Wallet::DeterministicKeyStore</a>
-  
     <li class="method"><a href="Bitcoin/Wallet/SimpleKeyStore.html#method-i-keys">#keys &mdash; Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Wallet/DeterministicKeyStore.html#method-i-keys">#keys &mdash; Bitcoin::Wallet::DeterministicKeyStore</a>
   
     <li class="method"><a href="Bitcoin/Logger/Logger.html#method-i-level-3D">#level= &mdash; Bitcoin::Logger::Logger</a>
   
@@ -776,15 +807,15 @@
   
     <li class="method"><a href="Bitcoin/Wallet/SimpleKeyStore.html#method-i-load_keys">#load_keys &mdash; Bitcoin::Wallet::SimpleKeyStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-log">#log &mdash; Bitcoin::Storage::Backends::StoreBase</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Base.html#method-i-log">#log &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Base</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/StorageModel.html#method-i-log">#log &mdash; Bitcoin::Storage::Backends::StorageModel</a>
   
     <li class="method"><a href="Bitcoin/Network/CommandHandler.html#method-i-log">#log &mdash; Bitcoin::Network::CommandHandler</a>
   
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Base.html#method-i-log">#log &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Base</a>
+  
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-log">#log &mdash; Bitcoin::Network::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/StorageModel.html#method-i-log">#log &mdash; Bitcoin::Storage::Backends::StorageModel</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-log">#log &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Logger/LogWrapper.html#method-i-method_missing">#method_missing &mdash; Bitcoin::Logger::LogWrapper</a>
   
@@ -798,11 +829,11 @@
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Output.html#method-i-next_input">#next_input &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
   
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_addr">#on_addr &mdash; Bitcoin::Network::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_addr">#on_addr &mdash; Bitcoin::Protocol::Handler</a>
   
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_addr">#on_addr &mdash; Bitcoin::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_addr">#on_addr &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_block">#on_block &mdash; Bitcoin::Protocol::Handler</a>
   
@@ -810,51 +841,51 @@
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_block">#on_block &mdash; Bitcoin::Network::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_get_block">#on_get_block &mdash; Bitcoin::Network::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_get_block">#on_get_block &mdash; Bitcoin::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_get_block">#on_get_block &mdash; Bitcoin::Protocol::Handler</a>
+  
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_get_block">#on_get_block &mdash; Bitcoin::Network::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_get_transaction">#on_get_transaction &mdash; Bitcoin::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_get_transaction">#on_get_transaction &mdash; Bitcoin::Protocol::Handler</a>
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_get_transaction">#on_get_transaction &mdash; Bitcoin::Network::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_get_transaction">#on_get_transaction &mdash; Bitcoin::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_handshake_begin">#on_handshake_begin &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_handshake_begin">#on_handshake_begin &mdash; Bitcoin::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_handshake_complete">#on_handshake_complete &mdash; Bitcoin::Network::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_handshake_complete">#on_handshake_complete &mdash; Bitcoin::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_handshake_complete">#on_handshake_complete &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_headers">#on_headers &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_inv_block">#on_inv_block &mdash; Bitcoin::Protocol::Handler</a>
   
-    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_inv_block">#on_inv_block &mdash; Bitcoin::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_inv_block">#on_inv_block &mdash; Bitcoin::Network::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_inv_block">#on_inv_block &mdash; Bitcoin::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_inv_transaction">#on_inv_transaction &mdash; Bitcoin::Protocol::Handler</a>
   
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_inv_transaction">#on_inv_transaction &mdash; Bitcoin::Network::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_inv_transaction">#on_inv_transaction &mdash; Bitcoin::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_inv_transaction">#on_inv_transaction &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_tx">#on_tx &mdash; Bitcoin::Network::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_tx">#on_tx &mdash; Bitcoin::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/Handler.html#method-i-on_tx">#on_tx &mdash; Bitcoin::Protocol::Handler</a>
+  
+    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_tx">#on_tx &mdash; Bitcoin::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_verack">#on_verack &mdash; Bitcoin::Network::ConnectionHandler</a>
   
-    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_version">#on_version &mdash; Bitcoin::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-on_version">#on_version &mdash; Bitcoin::Network::ConnectionHandler</a>
+  
+    <li class="method"><a href="Bitcoin/ConnectionHandler.html#method-i-on_version">#on_version &mdash; Bitcoin::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Script.html#method-i-op_0">#op_0 &mdash; Bitcoin::Script</a>
   
@@ -918,13 +949,15 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Parser.html#method-i-parse_addr">#parse_addr &mdash; Bitcoin::Protocol::Parser</a>
   
+    <li class="method"><a href="Bitcoin/Protocol/Parser.html#method-i-parse_alert">#parse_alert &mdash; Bitcoin::Protocol::Parser</a>
+  
     <li class="method"><a href="Bitcoin/Protocol/Parser.html#method-i-parse_buffer">#parse_buffer &mdash; Bitcoin::Protocol::Parser</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-parse_data">#parse_data &mdash; Bitcoin::Protocol::Tx</a>
   
-    <li class="method"><a href="Bitcoin/Protocol/TxOut.html#method-i-parse_data">#parse_data &mdash; Bitcoin::Protocol::TxOut</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-parse_data">#parse_data &mdash; Bitcoin::Protocol::Block</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/TxOut.html#method-i-parse_data">#parse_data &mdash; Bitcoin::Protocol::TxOut</a>
   
     <li class="method"><a href="Bitcoin/Protocol/TxIn.html#method-i-parse_data">#parse_data &mdash; Bitcoin::Protocol::TxIn</a>
   
@@ -934,9 +967,9 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Parser.html#method-i-parse_version">#parse_version &mdash; Bitcoin::Protocol::Parser</a>
   
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-post_init">#post_init &mdash; Bitcoin::Network::ConnectionHandler</a>
-  
     <li class="method"><a href="Bitcoin/Connection.html#method-i-post_init">#post_init &mdash; Bitcoin::Connection</a>
+  
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-post_init">#post_init &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Block.html#method-i-prev">#prev &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
   
@@ -980,29 +1013,29 @@
   
     <li class="method"><a href="Bitcoin/Network/Node.html#method-i-relay_tx">#relay_tx &mdash; Bitcoin::Network::Node</a>
   
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-reset">#reset &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+  
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-reset">#reset &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-reset">#reset &mdash; Bitcoin::Storage::Backends::StoreBase</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-reset">#reset &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-reset">#reset &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
     <li class="method"><a href="Bitcoin/Network/CommandHandler.html#method-i-respond">#respond &mdash; Bitcoin::Network::CommandHandler</a>
   
-    <li class="method"><a href="Bitcoin/Network/Node.html#method-i-run">#run &mdash; Bitcoin::Network::Node</a>
-  
     <li class="method"><a href="Bitcoin/Script.html#method-i-run">#run &mdash; Bitcoin::Script</a>
+  
+    <li class="method"><a href="Bitcoin/Network/Node.html#method-i-run">#run &mdash; Bitcoin::Network::Node</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Input.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/TransactionsParent.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::TransactionsParent</a>
-  
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Output.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Block.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Output.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/TransactionsParent.html#method-i-save">#save &mdash; Bitcoin::Storage::Backends::ActiverecordStore::TransactionsParent</a>
   
     <li class="method"><a href="Bitcoin/Wallet/SimpleKeyStore.html#method-i-save_keys">#save_keys &mdash; Bitcoin::Wallet::SimpleKeyStore</a>
   
@@ -1028,9 +1061,9 @@
   
     <li class="method"><a href="Bitcoin/Network/Node.html#method-i-set_store">#set_store &mdash; Bitcoin::Network::Node</a>
   
-    <li class="method"><a href="Bitcoin/Wallet/KeyGenerator.html#method-i-sha256">#sha256 &mdash; Bitcoin::Wallet::KeyGenerator</a>
-  
     <li class="method"><a href="Bitcoin/Util.html#method-i-sha256">#sha256 &mdash; Bitcoin::Util</a>
+  
+    <li class="method"><a href="Bitcoin/Wallet/KeyGenerator.html#method-i-sha256">#sha256 &mdash; Bitcoin::Wallet::KeyGenerator</a>
   
     <li class="method"><a href="Bitcoin/Key.html#method-i-sign">#sign &mdash; Bitcoin::Key</a>
   
@@ -1042,19 +1075,19 @@
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-store_block">#store_block &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-store_block">#store_block &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-store_block">#store_block &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-store_block">#store_block &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-store_block">#store_block &mdash; Bitcoin::Storage::Backends::StoreBase</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-store_block">#store_block &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/StoreBase.html#method-i-store_tx">#store_tx &mdash; Bitcoin::Storage::Backends::StoreBase</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-store_tx">#store_tx &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-store_tx">#store_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-store_tx">#store_tx &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-store_tx">#store_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore.html#method-i-store_tx">#store_tx &mdash; Bitcoin::Storage::Backends::ActiverecordStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-store_txin">#store_txin &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
@@ -1070,9 +1103,9 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-to_hash">#to_hash &mdash; Bitcoin::Protocol::Tx</a>
   
-    <li class="method"><a href="OpenSSL/BN.html#method-i-to_hex">#to_hex &mdash; OpenSSL::BN</a>
-  
     <li class="method"><a href="OpenSSL/PKey/EC/Point.html#method-i-to_hex">#to_hex &mdash; OpenSSL::PKey::EC::Point</a>
+  
+    <li class="method"><a href="OpenSSL/BN.html#method-i-to_hex">#to_hex &mdash; OpenSSL::BN</a>
   
     <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-to_json">#to_json &mdash; Bitcoin::Protocol::Tx</a>
   
@@ -1082,13 +1115,13 @@
   
     <li class="method"><a href="Bitcoin/Protocol/Tx.html#method-i-to_payload">#to_payload &mdash; Bitcoin::Protocol::Tx</a>
   
-    <li class="method"><a href="Bitcoin/Protocol/Addr.html#method-i-to_payload">#to_payload &mdash; Bitcoin::Protocol::Addr</a>
-  
     <li class="method"><a href="Bitcoin/Protocol/Block.html#method-i-to_payload">#to_payload &mdash; Bitcoin::Protocol::Block</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-i-to_protocol">#to_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
+    <li class="method"><a href="Bitcoin/Protocol/Addr.html#method-i-to_payload">#to_payload &mdash; Bitcoin::Protocol::Addr</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Block.html#method-i-to_protocol">#to_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html#method-i-to_protocol">#to_protocol &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-to_s">#to_s &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
@@ -1100,17 +1133,19 @@
   
     <li class="method"><a href="Bitcoin/Wallet/Wallet.html#method-i-tx">#tx &mdash; Bitcoin::Wallet::Wallet</a>
   
-    <li class="method"><a href="Bitcoin/Connection.html#method-i-unbind">#unbind &mdash; Bitcoin::Connection</a>
+    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-unbind">#unbind &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Network/CommandHandler.html#method-i-unbind">#unbind &mdash; Bitcoin::Network::CommandHandler</a>
   
-    <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-unbind">#unbind &mdash; Bitcoin::Network::ConnectionHandler</a>
+    <li class="method"><a href="Bitcoin/Connection.html#method-i-unbind">#unbind &mdash; Bitcoin::Connection</a>
   
     <li class="method"><a href="Bitcoin/Network/ConnectionHandler.html#method-i-uptime">#uptime &mdash; Bitcoin::Network::ConnectionHandler</a>
   
     <li class="method"><a href="Bitcoin/Network/Node.html#method-i-uptime">#uptime &mdash; Bitcoin::Network::Node</a>
   
     <li class="method"><a href="Bitcoin/Util.html#method-i-valid_address-3F">#valid_address? &mdash; Bitcoin::Util</a>
+  
+    <li class="method"><a href="Bitcoin/Protocol/Alert.html#method-i-valid_signature-3F">#valid_signature? &mdash; Bitcoin::Protocol::Alert</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/ActiverecordStore/Output.html#method-i-value">#value &mdash; Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
   
@@ -1130,21 +1165,21 @@
   
     <li class="method"><a href="Bitcoin/Network/Node.html#method-i-work_queue">#work_queue &mdash; Bitcoin::Network::Node</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-wrap_block">#wrap_block &mdash; Bitcoin::Storage::Backends::SequelStore</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-wrap_block">#wrap_block &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-wrap_block">#wrap_block &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-wrap_tx">#wrap_tx &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-wrap_tx">#wrap_tx &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-wrap_txin">#wrap_txin &mdash; Bitcoin::Storage::Backends::DummyStore</a>
-  
     <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-wrap_txin">#wrap_txin &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
-    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-wrap_txout">#wrap_txout &mdash; Bitcoin::Storage::Backends::SequelStore</a>
+    <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-wrap_txin">#wrap_txin &mdash; Bitcoin::Storage::Backends::DummyStore</a>
   
     <li class="method"><a href="Bitcoin/Storage/Backends/DummyStore.html#method-i-wrap_txout">#wrap_txout &mdash; Bitcoin::Storage::Backends::DummyStore</a>
+  
+    <li class="method"><a href="Bitcoin/Storage/Backends/SequelStore.html#method-i-wrap_txout">#wrap_txout &mdash; Bitcoin::Storage::Backends::SequelStore</a>
   
 </ul>
 

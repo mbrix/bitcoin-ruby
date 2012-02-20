@@ -133,6 +133,8 @@
   
     <li><a href="../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
+    <li><a href="../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
     <li><a href="../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
     <li><a href="../../Bitcoin/Protocol/Handler.html">Bitcoin::Protocol::Handler</a>
@@ -270,7 +272,7 @@
 
           
           <div class="method-source-code" id="build_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 99</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">build_address</span>(<span class="ruby-identifier">addr_str</span>)
   <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">addr_str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)
   <span class="ruby-identifier">port</span> = <span class="ruby-identifier">port</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">8333</span>
@@ -305,7 +307,7 @@
 
           
           <div class="method-source-code" id="build_payload-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 108</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">build_payload</span>(<span class="ruby-identifier">from_id</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">last_block</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">time</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ver</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">time</span> = [<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">time</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">tv_sec</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;IQQ&quot;</span>)
   <span class="ruby-identifier">payload</span> = [
@@ -343,7 +345,7 @@
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 85</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-identifier">version</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">block</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Ia8Qa26a26x9I&quot;</span>)
   <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span> = <span class="ruby-identifier">parse_ip</span>(<span class="ruby-identifier">to</span>), <span class="ruby-identifier">parse_ip</span>(<span class="ruby-identifier">from</span>)
@@ -375,7 +377,7 @@
 
           
           <div class="method-source-code" id="parse_ip-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 91</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse_ip</span>(<span class="ruby-identifier">payload</span>)
   <span class="ruby-identifier">service</span>, <span class="ruby-identifier">ip</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Qx12a4n&quot;</span>)
   { <span class="ruby-value">:service</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">service</span>, <span class="ruby-value">:ip</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ip</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>), <span class="ruby-value">:port</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">port</span> }
