@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Bitcoin::Storage::Models::TxOut - RDoc Documentation</title>
+<title>Class: Bitcoin::Storage::Models::TxOut</title>
 
 <link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
 
@@ -80,6 +80,8 @@
     
     <li><a href="#method-i-get_tx">#get_tx</a>
     
+    <li><a href="#method-i-hash160">#hash160</a>
+    
   </ul>
 </nav>
 
@@ -93,7 +95,17 @@
   
     <li class="file"><a href="../../../COPYING.html">COPYING</a>
   
-    <li class="file"><a href="../../../README.html">README</a>
+    <li class="file"><a href="../../../README_rdoc.html">README</a>
+  
+    <li class="file"><a href="../../../doc/CONFIG_rdoc.html">CONFIG</a>
+  
+    <li class="file"><a href="../../../doc/EXAMPLES_rdoc.html">EXAMPLES</a>
+  
+    <li class="file"><a href="../../../doc/NODE_rdoc.html">NODE</a>
+  
+    <li class="file"><a href="../../../doc/STORAGE_rdoc.html">STORAGE</a>
+  
+    <li class="file"><a href="../../../doc/WALLET_rdoc.html">WALLET</a>
   
   </ul>
 </nav>
@@ -105,11 +117,31 @@
   
     <li><a href="../../../Bitcoin.html">Bitcoin</a>
   
+    <li><a href="../../../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+  
+    <li><a href="../../../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
     <li><a href="../../../Bitcoin/Config.html">Bitcoin::Config</a>
   
     <li><a href="../../../Bitcoin/Connection.html">Bitcoin::Connection</a>
   
     <li><a href="../../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
+  
+    <li><a href="../../../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Bitcoin/Gui.html">Bitcoin::Gui::Bitcoin::Gui</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
+  
+    <li><a href="../../../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
   
     <li><a href="../../../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -121,11 +153,15 @@
   
     <li><a href="../../../Bitcoin/Network.html">Bitcoin::Network</a>
   
+    <li><a href="../../../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
+  
     <li><a href="../../../Bitcoin/Network/CommandHandler.html">Bitcoin::Network::CommandHandler</a>
   
     <li><a href="../../../Bitcoin/Network/ConnectionHandler.html">Bitcoin::Network::ConnectionHandler</a>
   
     <li><a href="../../../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
+  
+    <li><a href="../../../Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
   
     <li><a href="../../../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
@@ -149,35 +185,23 @@
   
     <li><a href="../../../Bitcoin/Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>
   
-    <li><a href="../../../Bitcoin/Protocol/VersionPkt.html">Bitcoin::Protocol::VersionPkt</a>
+    <li><a href="../../../Bitcoin/Protocol/Version.html">Bitcoin::Protocol::Version</a>
   
     <li><a href="../../../Bitcoin/Script.html">Bitcoin::Script</a>
+  
+    <li><a href="../../../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
+  
+    <li><a href="../../../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
   
     <li><a href="../../../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../../../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore.html">Bitcoin::Storage::Backends::ActiverecordStore</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore/Base.html">Bitcoin::Storage::Backends::ActiverecordStore::Base</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore/Block.html">Bitcoin::Storage::Backends::ActiverecordStore::Block</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore/Input.html">Bitcoin::Storage::Backends::ActiverecordStore::Input</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore/Output.html">Bitcoin::Storage::Backends::ActiverecordStore::Output</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore/Transaction.html">Bitcoin::Storage::Backends::ActiverecordStore::Transaction</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/ActiverecordStore/TransactionsParent.html">Bitcoin::Storage::Backends::ActiverecordStore::TransactionsParent</a>
   
     <li><a href="../../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
     <li><a href="../../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
   
     <li><a href="../../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Backends/StorageModel.html">Bitcoin::Storage::Backends::StorageModel</a>
   
     <li><a href="../../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
@@ -191,6 +215,12 @@
   
     <li><a href="../../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
+    <li><a href="../../../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
+  
+    <li><a href="../../../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
+  
+    <li><a href="../../../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
+  
     <li><a href="../../../Bitcoin/Util.html">Bitcoin::Util</a>
   
     <li><a href="../../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
@@ -202,6 +232,8 @@
     <li><a href="../../../Bitcoin/Wallet/SimpleCoinSelector.html">Bitcoin::Wallet::SimpleCoinSelector</a>
   
     <li><a href="../../../Bitcoin/Wallet/SimpleKeyStore.html">Bitcoin::Wallet::SimpleKeyStore</a>
+  
+    <li><a href="../../../Bitcoin/Wallet/TxDP.html">Bitcoin::Wallet::TxDP</a>
   
     <li><a href="../../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
@@ -221,11 +253,15 @@
   
     <li><a href="../../../Array.html">Array</a>
   
-    <li><a href="../../../Chain.html">Chain</a>
+    <li><a href="../../../EM.html">EM</a>
+  
+    <li><a href="../../../Gtk.html">Gtk</a>
   
     <li><a href="../../../Hash.html">Hash</a>
   
-    <li><a href="../../../InventoryRequest.html">InventoryRequest</a>
+    <li><a href="../../../Object.html">Object</a>
+  
+    <li><a href="../../../RawJSON_Connection.html">RawJSON_Connection</a>
   
   </ul>
 </nav>
@@ -238,7 +274,8 @@
 
   <div id="description" class="description">
     
-<p>Transaction output retrieved from storage.</p>
+<p>Transaction output retrieved from storage. (see <a
+href="../../Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>)</p>
 
   </div><!-- description -->
 
@@ -257,19 +294,6 @@
     <section id="attribute-method-details" class="method-section section">
       <h3 class="section-header">Attributes</h3>
 
-      
-      <div id="attribute-i-hash160" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">hash160</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
       
       <div id="attribute-i-id" class="method-detail">
         <div class="method-heading attribute-method-heading">
@@ -323,6 +347,19 @@
         </div>
       </div>
       
+      <div id="attribute-i-type" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">type</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
     </section><!-- attribute-method-details -->
     
 
@@ -348,13 +385,13 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 83</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">store</span>, <span class="ruby-identifier">data</span>
   <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">store</span>
   <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">:id</span>]
   <span class="ruby-ivar">@tx_id</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">:tx_id</span>]
   <span class="ruby-ivar">@tx_idx</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">:tx_idx</span>]
-  <span class="ruby-ivar">@hash160</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">:hash160</span>]
+  <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">:type</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -388,7 +425,7 @@
 
           
           <div class="method-source-code" id="get_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_address</span>
   <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pk_script</span>).<span class="ruby-identifier">get_address</span>
 <span class="ruby-keyword">end</span></pre>
@@ -418,7 +455,7 @@
 
           
           <div class="method-source-code" id="get_addresses-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_addresses</span>
   <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pk_script</span>).<span class="ruby-identifier">get_addresses</span>
 <span class="ruby-keyword">end</span></pre>
@@ -448,7 +485,7 @@
 
           
           <div class="method-source-code" id="get_next_in-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_next_in</span>
   <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_txin_for_txout</span>(<span class="ruby-identifier">get_tx</span>.<span class="ruby-identifier">hash</span>, <span class="ruby-ivar">@tx_idx</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -478,7 +515,7 @@
 
           
           <div class="method-source-code" id="get_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 92</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tx</span>
   <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_tx_by_id</span>(<span class="ruby-ivar">@tx_id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -492,6 +529,36 @@
       </div><!-- get_tx-method -->
 
     
+      <div id="method-i-hash160" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hash160</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hash160-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash160</span>
+  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pk_script</span>).<span class="ruby-identifier">get_hash160</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hash160-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hash160-method -->
+
+    
     </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
@@ -501,7 +568,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
