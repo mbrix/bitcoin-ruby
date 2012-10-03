@@ -64,10 +64,6 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-htb">#htb</a>
-    
-    <li><a href="#method-i-hth">#hth</a>
-    
     <li><a href="#method-i-on_addr">#on_addr</a>
     
     <li><a href="#method-i-on_block">#on_block</a>
@@ -125,9 +121,19 @@
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -136,6 +142,8 @@
     <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -147,9 +155,19 @@
   
     <li><a href="../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -199,8 +217,6 @@
   
     <li><a href="../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -223,13 +239,15 @@
   
     <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -267,9 +285,13 @@
   
     <li><a href="../Hash.html">Hash</a>
   
+    <li><a href="../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../Object.html">Object</a>
   
     <li><a href="../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../String.html">String</a>
   
   </ul>
 </nav>
@@ -302,62 +324,6 @@
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-htb" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">htb</span><span
-            class="method-args">(h)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="htb-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">h</span>); [<span class="ruby-identifier">h</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>); <span class="ruby-keyword">end</span></pre>
-          </div><!-- htb-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- htb-method -->
-
-    
-      <div id="method-i-hth" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">hth</span><span
-            class="method-args">(h)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="hth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">h</span>); <span class="ruby-identifier">h</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]; <span class="ruby-keyword">end</span></pre>
-          </div><!-- hth-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- hth-method -->
-
-    
       <div id="method-i-on_addr" class="method-detail ">
         
         <div class="method-heading">
@@ -374,7 +340,7 @@
 
           
           <div class="method-source-code" id="on_addr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 31</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_addr</span>(<span class="ruby-identifier">addr</span>)
   <span class="ruby-identifier">p</span> [<span class="ruby-string">'addr'</span>, <span class="ruby-identifier">addr</span>, <span class="ruby-identifier">addr</span>.<span class="ruby-identifier">alive?</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -404,7 +370,7 @@
 
           
           <div class="method-source-code" id="on_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_block</span>(<span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">p</span> [<span class="ruby-string">'block'</span>, <span class="ruby-identifier">block</span>.<span class="ruby-identifier">hash</span>]
   <span class="ruby-comment">#p block.payload.each_byte.map{|i| &quot;%02x&quot; % [i] }.join(&quot; &quot;)</span>
@@ -436,9 +402,9 @@
 
           
           <div class="method-source-code" id="on_get_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_get_block</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">p</span> [<span class="ruby-string">'get block'</span>, <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">hash</span>)]
+  <span class="ruby-identifier">p</span> [<span class="ruby-string">'get block'</span>, <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- on_get_block-source -->
           
@@ -466,9 +432,9 @@
 
           
           <div class="method-source-code" id="on_get_transaction-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 23</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_get_transaction</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">p</span> [<span class="ruby-string">'get transaction'</span>, <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">hash</span>)]
+  <span class="ruby-identifier">p</span> [<span class="ruby-string">'get transaction'</span>, <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- on_get_transaction-source -->
           
@@ -496,7 +462,7 @@
 
           
           <div class="method-source-code" id="on_handshake_begin-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 64</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_handshake_begin</span>
   <span class="ruby-identifier">block</span>   = <span class="ruby-value">127953</span>
   <span class="ruby-identifier">from</span>    = <span class="ruby-string">&quot;127.0.0.1:8333&quot;</span>
@@ -533,7 +499,7 @@
 
           
           <div class="method-source-code" id="on_handshake_complete-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_handshake_complete</span>
   <span class="ruby-identifier">p</span> [<span class="ruby-ivar">@sockaddr</span>, <span class="ruby-string">'handshake complete'</span>]
   <span class="ruby-ivar">@connected</span> = <span class="ruby-keyword">true</span>
@@ -566,9 +532,9 @@
 
           
           <div class="method-source-code" id="on_inv_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_inv_block</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">p</span> [<span class="ruby-string">'inv block'</span>, <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">hash</span>)]
+  <span class="ruby-identifier">p</span> [<span class="ruby-string">'inv block'</span>, <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>]
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">getdata_pkt</span>(<span class="ruby-value">:block</span>, [<span class="ruby-identifier">hash</span>])
   <span class="ruby-identifier">send_data</span>(<span class="ruby-identifier">pkt</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -598,9 +564,9 @@
 
           
           <div class="method-source-code" id="on_inv_transaction-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 11</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_inv_transaction</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">p</span> [<span class="ruby-string">'inv transaction'</span>, <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">hash</span>)]
+  <span class="ruby-identifier">p</span> [<span class="ruby-string">'inv transaction'</span>, <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>]
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">getdata_pkt</span>(<span class="ruby-value">:tx</span>, [<span class="ruby-identifier">hash</span>])
   <span class="ruby-identifier">send_data</span>(<span class="ruby-identifier">pkt</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -630,7 +596,7 @@
 
           
           <div class="method-source-code" id="on_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_tx</span>(<span class="ruby-identifier">tx</span>)
   <span class="ruby-identifier">p</span> [<span class="ruby-string">'tx'</span>, <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">hash</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -660,7 +626,7 @@
 
           
           <div class="method-source-code" id="on_version-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_version</span>(<span class="ruby-identifier">version</span>)
   <span class="ruby-identifier">p</span> [<span class="ruby-ivar">@sockaddr</span>, <span class="ruby-string">'version'</span>, <span class="ruby-identifier">version</span>, <span class="ruby-identifier">version</span>.<span class="ruby-identifier">timestamp</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>]
   <span class="ruby-identifier">send_data</span>( <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">verack_pkt</span> )
@@ -691,7 +657,7 @@
 
           
           <div class="method-source-code" id="query_blocks-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/connection.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query_blocks</span>
   <span class="ruby-identifier">start</span> = (<span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">32</span>)
   <span class="ruby-identifier">stop</span>  = (<span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">32</span>)
@@ -717,7 +683,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

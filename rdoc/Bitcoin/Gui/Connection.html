@@ -107,9 +107,19 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -118,6 +128,8 @@
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -129,9 +141,19 @@
   
     <li><a href="../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -181,8 +203,6 @@
   
     <li><a href="../../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -205,13 +225,15 @@
   
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -249,9 +271,13 @@
   
     <li><a href="../../Hash.html">Hash</a>
   
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../../Object.html">Object</a>
   
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../String.html">String</a>
   
   </ul>
 </nav>
@@ -303,7 +329,7 @@
             <pre><span class="ruby-comment"># File lib/bitcoin/gui/connection.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">gui</span>
   <span class="ruby-ivar">@gui</span> = <span class="ruby-identifier">gui</span>
-  <span class="ruby-identifier">client</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Network</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandClient</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">gui</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-ivar">@gui</span>.<span class="ruby-identifier">node</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Network</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandClient</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">gui</span>) <span class="ruby-keyword">do</span>
 
     <span class="ruby-identifier">on_connected</span> <span class="ruby-keyword">do</span>
       <span class="ruby-identifier">request</span> <span class="ruby-value">:info</span>
@@ -323,33 +349,34 @@
 
     <span class="ruby-identifier">on_connection</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">state</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;connected&quot;</span>
-        <span class="ruby-identifier">row</span> = <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">conn_store</span>.<span class="ruby-identifier">append</span>(<span class="ruby-keyword">nil</span>)
-        <span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'host'</span>]
-          <span class="ruby-identifier">row</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'port'</span>]
-          <span class="ruby-identifier">row</span>[<span class="ruby-value">2</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'state'</span>]
-          <span class="ruby-identifier">row</span>[<span class="ruby-value">3</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'version'</span>]
-          <span class="ruby-identifier">row</span>[<span class="ruby-value">4</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'block'</span>]
-          <span class="ruby-identifier">row</span>[<span class="ruby-value">5</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'started'</span>]
-          <span class="ruby-identifier">row</span>[<span class="ruby-value">6</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">'user_agent'</span>]
-          <span class="ruby-identifier">gui</span> { <span class="ruby-identifier">conn_view</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">conn_store</span> }
+        <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">conn_view</span>.<span class="ruby-identifier">connected</span>(<span class="ruby-identifier">data</span>)
       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;disconnected&quot;</span>
-        <span class="ruby-identifier">iter</span> = <span class="ruby-keyword">nil</span>
-        <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">conn_store</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">model</span>,<span class="ruby-identifier">path</span>,<span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">iter</span> = <span class="ruby-identifier">i</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">iter</span>
-          <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">conn_store</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">iter</span>)
-          <span class="ruby-identifier">gui</span> { <span class="ruby-identifier">conn_view</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">conn_store</span>}
-        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">conn_view</span>.<span class="ruby-identifier">disconnected</span>(<span class="ruby-identifier">data</span>)
       <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">i</span>=<span class="ruby-value">0</span>; <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">conn_store</span>.<span class="ruby-identifier">each</span> {<span class="ruby-identifier">i</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>};
-      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">notebook</span>.<span class="ruby-identifier">get_nth_page</span>(<span class="ruby-value">2</span>)
-      <span class="ruby-identifier">l</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Connections (#{i})&quot;</span>)
-      <span class="ruby-identifier">gui</span> { <span class="ruby-identifier">notebook</span>.<span class="ruby-identifier">set_tab_label</span>(<span class="ruby-identifier">p</span>, <span class="ruby-identifier">l</span>) }
+
+      <span class="ruby-identifier">gui</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">size</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">v</span>, <span class="ruby-identifier">i</span> = <span class="ruby-identifier">conn_view</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">get_iter_first</span>
+        <span class="ruby-keyword">while</span> <span class="ruby-identifier">v</span>
+          <span class="ruby-identifier">size</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">v</span> = <span class="ruby-identifier">conn_view</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">iter_next</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_ptr</span>)
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">p</span> = <span class="ruby-identifier">notebook</span>.<span class="ruby-identifier">get_nth_page</span>(<span class="ruby-value">2</span>)
+        <span class="ruby-identifier">l</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Connections (#{size})&quot;</span>)
+        <span class="ruby-identifier">notebook</span>.<span class="ruby-identifier">set_tab_label</span>(<span class="ruby-identifier">p</span>, <span class="ruby-identifier">l</span>)
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">on_disconnected</span> <span class="ruby-keyword">do</span>
-      <span class="ruby-identifier">gui</span> { <span class="ruby-identifier">status_network</span>.<span class="ruby-identifier">push</span> <span class="ruby-value">0</span>, <span class="ruby-string">&quot;Offline&quot;</span> }
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connection_attempts</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+        <span class="ruby-identifier">gui</span> <span class="ruby-keyword">do</span>
+          <span class="ruby-identifier">message</span>(<span class="ruby-value">:warning</span>, <span class="ruby-string">&quot;Node not available&quot;</span>, <span class="ruby-string">&quot;The bitcoin node is not running &quot;</span> <span class="ruby-operator">+</span>
+            <span class="ruby-string">&quot;or not reachable.\nYou can use the wallet to handle keys but you won't &quot;</span> <span class="ruby-operator">+</span>
+            <span class="ruby-string">&quot;be able to send/receive transactions.&quot;</span>, [<span class="ruby-value">:ok</span>])
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">gui</span>.<span class="ruby-identifier">status_network</span>.<span class="ruby-identifier">push</span> <span class="ruby-value">0</span>, <span class="ruby-string">&quot;Offline&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -372,7 +399,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

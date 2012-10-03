@@ -125,9 +125,19 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -136,6 +146,8 @@
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -147,9 +159,19 @@
   
     <li><a href="../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -199,8 +221,6 @@
   
     <li><a href="../../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -223,13 +243,15 @@
   
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -267,9 +289,13 @@
   
     <li><a href="../../Hash.html">Hash</a>
   
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../../Object.html">Object</a>
   
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../String.html">String</a>
   
   </ul>
 </nav>
@@ -321,7 +347,7 @@ issue requests or register for events</p>
 
           
           <div class="method-source-code" id="connect-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">connect</span> <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>
   <span class="ruby-identifier">client</span> = <span class="ruby-constant">EM</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">block</span>, *<span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -401,7 +427,7 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="callback-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 72</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">callback</span> <span class="ruby-identifier">name</span>, *<span class="ruby-identifier">args</span>
   <span class="ruby-identifier">cb</span> = <span class="ruby-ivar">@callbacks</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>]
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cb</span>
@@ -435,11 +461,8 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
           
           <div class="method-source-code" id="log-source">
             <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">log</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@log</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@log</span>
-  <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">create</span>(<span class="ruby-string">&quot;command_client&quot;</span>)
-  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">level</span> = <span class="ruby-value">:info</span>
-  <span class="ruby-ivar">@log</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">log</span>;
+  <span class="ruby-ivar">@log</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- log-source -->
           
@@ -467,7 +490,7 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="method_missing-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">name</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^on_/</span>
     <span class="ruby-ivar">@callbacks</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;on_&quot;</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">block</span>
@@ -502,9 +525,9 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="post_init-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 32</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">post_init</span>
-  <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;Connected&quot;</span> }
+  <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;Connected&quot;</span> }
   <span class="ruby-identifier">callback</span> <span class="ruby-value">:connected</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- post_init-source -->
@@ -533,7 +556,7 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="receive_data-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">receive_data</span> <span class="ruby-identifier">data</span>
   <span class="ruby-ivar">@connection_attempts</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">extract</span>(<span class="ruby-identifier">data</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">packet</span><span class="ruby-operator">|</span>
@@ -570,7 +593,7 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="register_monitor_callbacks-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 90</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">register_monitor_callbacks</span>
   <span class="ruby-identifier">on_monitor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">callback</span>(<span class="ruby-identifier">type</span>, *<span class="ruby-identifier">data</span>)
@@ -602,7 +625,7 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="request-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">request</span> <span class="ruby-identifier">cmd</span>, *<span class="ruby-identifier">args</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;request: #{cmd} #{args.inspect}&quot;</span> }
   <span class="ruby-identifier">register_monitor_callbacks</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:monitor</span>
@@ -634,11 +657,11 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
           
           <div class="method-source-code" id="unbind-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/command_client.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unbind</span>
-  <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;Disconnected.&quot;</span> }
+  <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;Disconnected.&quot;</span> }
   <span class="ruby-identifier">callback</span> <span class="ruby-value">:disconnected</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connection_attempts</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connection_attempts</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
     <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;Trying to start server...&quot;</span> }
     <span class="ruby-constant">EM</span>.<span class="ruby-identifier">defer</span> { <span class="ruby-identifier">system</span>(<span class="ruby-string">&quot;bin/bitcoin_node&quot;</span>, <span class="ruby-string">&quot;--quiet&quot;</span>) }
   <span class="ruby-keyword">end</span>
@@ -667,7 +690,7 @@ executing callbacks from <code>block</code>, passing <code>args</code> in.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

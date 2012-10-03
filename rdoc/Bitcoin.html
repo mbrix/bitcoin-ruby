@@ -47,24 +47,24 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/bitcoin.rb
-    <li>lib/bitcoin/ffi/openssl.rb
     <li>lib/bitcoin/logger.rb
+    <li>lib/bitcoin/protocol.rb
+    <li>lib/bitcoin/config.rb
     <li>lib/bitcoin/builder.rb
+    <li>lib/bitcoin/connection.rb
     <li>lib/bitcoin/key.rb
+    <li>lib/bitcoin/ffi/openssl.rb
+    <li>lib/bitcoin/version.rb
+    <li>lib/bitcoin/protocol/tx.rb
+    <li>lib/bitcoin/protocol/alert.rb
+    <li>lib/bitcoin/protocol/txout.rb
     <li>lib/bitcoin/protocol/txin.rb
     <li>lib/bitcoin/protocol/parser.rb
-    <li>lib/bitcoin/protocol/txout.rb
-    <li>lib/bitcoin/protocol/block.rb
     <li>lib/bitcoin/protocol/address.rb
-    <li>lib/bitcoin/protocol/handler.rb
-    <li>lib/bitcoin/protocol/tx.rb
     <li>lib/bitcoin/protocol/version.rb
-    <li>lib/bitcoin/protocol/alert.rb
-    <li>lib/bitcoin/connection.rb
-    <li>lib/bitcoin/protocol.rb
-    <li>lib/bitcoin/version.rb
-    <li>lib/bitcoin/config.rb
+    <li>lib/bitcoin/protocol/handler.rb
+    <li>lib/bitcoin/protocol/block.rb
+    <li>lib/bitcoin.rb
   </ul>
 </nav>
 
@@ -84,6 +84,8 @@
     <li><a href="#method-c-network">::network</a>
     
     <li><a href="#method-c-network-3D">::network=</a>
+    
+    <li><a href="#method-c-require_dependency">::require_dependency</a>
     
   </ul>
 </nav>
@@ -120,9 +122,19 @@
   
     <li><a href="./Bitcoin.html">Bitcoin</a>
   
-    <li><a href="./Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="./Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="./Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="./Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="./Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -131,6 +143,8 @@
     <li><a href="./Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="./Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="./Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="./Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -142,9 +156,19 @@
   
     <li><a href="./Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="./Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="./Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="./Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="./Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="./Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="./Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="./Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="./Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -194,8 +218,6 @@
   
     <li><a href="./Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="./Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="./Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="./Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -218,13 +240,15 @@
   
     <li><a href="./Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="./Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="./Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="./Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="./Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="./Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="./Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="./Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="./Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="./Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -262,9 +286,13 @@
   
     <li><a href="./Hash.html">Hash</a>
   
+    <li><a href="./Mnemonic.html">Mnemonic</a>
+  
     <li><a href="./Object.html">Object</a>
   
     <li><a href="./RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="./String.html">String</a>
   
   </ul>
 </nav>
@@ -292,6 +320,56 @@
     <section id="constants-list" class="section">
       <h3 class="section-header">Constants</h3>
       <dl>
+      
+        <dt id="CENT">CENT
+        
+        <dd class="description">
+        
+      
+        <dt id="COIN">COIN
+        
+        <dd class="description">
+        
+      
+        <dt id="MAX_BLOCK_SIGOPS">MAX_BLOCK_SIGOPS
+        
+        <dd class="description">
+        
+      
+        <dt id="MAX_BLOCK_SIZE">MAX_BLOCK_SIZE
+        
+        <dd class="description">
+        
+      
+        <dt id="MAX_BLOCK_SIZE_GEN">MAX_BLOCK_SIZE_GEN
+        
+        <dd class="description">
+        
+      
+        <dt id="MAX_MONEY">MAX_MONEY
+        
+        <dd class="description">
+        
+      
+        <dt id="MAX_ORPHAN_TRANSACTIONS">MAX_ORPHAN_TRANSACTIONS
+        
+        <dd class="description">
+        
+      
+        <dt id="MIN_FEE_MODE">MIN_FEE_MODE
+        
+        <dd class="description">
+        
+      
+        <dt id="MIN_RELAY_TX_FEE">MIN_RELAY_TX_FEE
+        
+        <dd class="description">
+        
+      
+        <dt id="MIN_TX_FEE">MIN_TX_FEE
+        
+        <dd class="description">
+        
       
         <dt id="NETWORKS">NETWORKS
         
@@ -336,7 +414,7 @@
 
           
           <div class="method-source-code" id="network-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 257</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 341</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network</span>
   <span class="ruby-constant">NETWORKS</span>[<span class="ruby-ivar">@network</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -366,7 +444,7 @@
 
           
           <div class="method-source-code" id="network-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 261</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 345</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network=</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@network</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
 <span class="ruby-keyword">end</span></pre>
@@ -380,6 +458,46 @@
       </div><!-- network-3D-method -->
 
     
+      <div id="method-c-require_dependency" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">require_dependency</span><span
+            class="method-args">(name, opts = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="require_dependency-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_dependency</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">opts</span> = {}
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+    <span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Cannot load #{opts[:exit] == false ? 'optional' : 'required'} dependency '#{name}'&quot;</span>
+    (<span class="ruby-identifier">opts</span>[<span class="ruby-value">:gem</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;&quot;</span>) <span class="ruby-operator">:</span>
+      <span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot; - install with `gem install #{opts[:gem] || name}`&quot;</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:message</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:message</span>]
+    <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:exit</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- require_dependency-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- require_dependency-method -->
+
+    
     </section><!-- public-class-method-details -->
   
   </section><!-- 5Buntitled-5D -->
@@ -389,7 +507,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

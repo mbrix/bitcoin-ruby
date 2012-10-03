@@ -59,7 +59,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link">Struct.new(:version, :services, :timestamp, :to, :from,         :nonce, :user_agent, :block)
+  <p class="link"><a href="../../Object.html">Object</a>
   
 </nav>
 
@@ -70,13 +70,23 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-build_address">::build_address</a>
-    
-    <li><a href="#method-c-build_payload">::build_payload</a>
+    <li><a href="#method-c-new">::new</a>
     
     <li><a href="#method-c-parse">::parse</a>
     
-    <li><a href="#method-c-parse_ip">::parse_ip</a>
+    <li><a href="#method-i-method_missing">#method_missing</a>
+    
+    <li><a href="#method-i-pack_address_field">#pack_address_field</a>
+    
+    <li><a href="#method-i-parse">#parse</a>
+    
+    <li><a href="#method-i-to_payload">#to_payload</a>
+    
+    <li><a href="#method-i-to_pkt">#to_pkt</a>
+    
+    <li><a href="#method-i-unpack_address_field">#unpack_address_field</a>
+    
+    <li><a href="#method-i-uptime">#uptime</a>
     
   </ul>
 </nav>
@@ -113,9 +123,19 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -124,6 +144,8 @@
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -135,9 +157,19 @@
   
     <li><a href="../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -187,8 +219,6 @@
   
     <li><a href="../../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -211,13 +241,15 @@
   
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -255,9 +287,13 @@
   
     <li><a href="../../Hash.html">Hash</a>
   
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../../Object.html">Object</a>
   
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../String.html">String</a>
   
   </ul>
 </nav>
@@ -283,6 +319,26 @@
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-fields" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">fields</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
@@ -290,46 +346,11 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="method-c-build_address" class="method-detail ">
+      <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">build_address</span><span
-            class="method-args">(addr_str)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>build packet</p>
-          
-
-          
-          <div class="method-source-code" id="build_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 26</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">build_address</span>(<span class="ruby-identifier">addr_str</span>)
-  <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">addr_str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)
-  <span class="ruby-identifier">port</span> = <span class="ruby-identifier">port</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">8333</span>
-  <span class="ruby-identifier">sockaddr</span> = <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">pack_sockaddr_in</span>(<span class="ruby-identifier">port</span>, <span class="ruby-identifier">host</span>)
-  <span class="ruby-comment">#raise &quot;invalid IPv4 Address: #{addr}&quot; unless sockaddr[0...2] == &quot;\x02\x00&quot;</span>
-  <span class="ruby-identifier">port</span>, <span class="ruby-identifier">host</span> = <span class="ruby-identifier">sockaddr</span>[<span class="ruby-value">2</span><span class="ruby-operator">...</span><span class="ruby-value">4</span>], <span class="ruby-identifier">sockaddr</span>[<span class="ruby-value">4</span><span class="ruby-operator">...</span><span class="ruby-value">8</span>]
-  [[<span class="ruby-value">1</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Q&quot;</span>), <span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">10</span>, <span class="ruby-string">&quot;\xFF\xFF&quot;</span>,  <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>].<span class="ruby-identifier">join</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- build_address-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- build_address-method -->
-
-    
-      <div id="method-c-build_payload" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">build_payload</span><span
-            class="method-args">(from_id, from, to, last_block=nil, time=nil, user_agent = nil)</span>
+          <span class="method-name">new</span><span
+            class="method-args">(opts={})</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -340,27 +361,28 @@
           
 
           
-          <div class="method-source-code" id="build_payload-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">build_payload</span>(<span class="ruby-identifier">from_id</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">last_block</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">time</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_agent</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">ver</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">time</span> = [<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">time</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">tv_sec</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;IQQ&quot;</span>)
-  <span class="ruby-identifier">payload</span> = [
-    <span class="ruby-identifier">ver</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">time</span>,
-    <span class="ruby-identifier">build_address</span>(<span class="ruby-identifier">from</span>),  <span class="ruby-comment"># me</span>
-    <span class="ruby-identifier">build_address</span>(<span class="ruby-identifier">to</span>),    <span class="ruby-comment"># you</span>
-    [ <span class="ruby-identifier">from_id</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Q&quot;</span>),
-    <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pack_var_string</span>(<span class="ruby-identifier">user_agent</span> <span class="ruby-operator">||</span> <span class="ruby-node">&quot;/bitcoin-ruby:#{Bitcoin::VERSION}/&quot;</span>),
-    [<span class="ruby-identifier">last_block</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;I&quot;</span>)
-  ].<span class="ruby-identifier">join</span>
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">opts</span>={})
+  <span class="ruby-ivar">@fields</span> = {
+    <span class="ruby-value">:version</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>,
+    <span class="ruby-value">:services</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>,
+    <span class="ruby-value">:time</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">tv_sec</span>,
+    <span class="ruby-value">:from</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;127.0.0.1:8333&quot;</span>,
+    <span class="ruby-value">:to</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;127.0.0.1:8333&quot;</span>,
+    <span class="ruby-value">:nonce</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">Uniq</span>,
+    <span class="ruby-value">:user_agent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;/bitcoin-ruby:#{Bitcoin::VERSION}/&quot;</span>,
+    <span class="ruby-value">:last_block</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-comment"># 188617</span>
+  }.<span class="ruby-identifier">merge</span>( <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> } )
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- build_payload-source -->
+          </div><!-- new-source -->
           
         </div>
 
         
 
         
-      </div><!-- build_payload-method -->
+      </div><!-- new-method -->
 
     
       <div id="method-c-parse" class="method-detail ">
@@ -374,19 +396,13 @@
 
         <div class="method-description">
           
-          <p>parse packet</p>
+          
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>)
-  <span class="ruby-identifier">version</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Ia8Qa26a26Qa*&quot;</span>)
-  <span class="ruby-identifier">user_agent</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">unpack_var_string</span>(<span class="ruby-identifier">payload</span>)
-  <span class="ruby-identifier">block</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;I&quot;</span>)[<span class="ruby-value">0</span>]
-  <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span> = <span class="ruby-identifier">parse_ip</span>(<span class="ruby-identifier">to</span>), <span class="ruby-identifier">parse_ip</span>(<span class="ruby-identifier">from</span>)
-  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">version</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-identifier">user_agent</span>, <span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>); <span class="ruby-identifier">new</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>); <span class="ruby-keyword">end</span></pre>
           </div><!-- parse-source -->
           
         </div>
@@ -397,10 +413,79 @@
       </div><!-- parse-method -->
 
     
-      <div id="method-c-parse_ip" class="method-detail ">
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-method_missing" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">parse_ip</span><span
+          <span class="method-name">method_missing</span><span
+            class="method-args">(*a)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="method_missing-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(*<span class="ruby-identifier">a</span>); <span class="ruby-ivar">@fields</span>[<span class="ruby-identifier">a</span>.<span class="ruby-identifier">first</span>]  <span class="ruby-keyword">or</span> <span class="ruby-keyword">super</span>(*<span class="ruby-identifier">a</span>); <span class="ruby-keyword">end</span></pre>
+          </div><!-- method_missing-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- method_missing-method -->
+
+    
+      <div id="method-i-pack_address_field" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pack_address_field</span><span
+            class="method-args">(addr_str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="pack_address_field-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pack_address_field</span>(<span class="ruby-identifier">addr_str</span>)
+  <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">addr_str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)
+  <span class="ruby-identifier">port</span> = <span class="ruby-identifier">port</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">8333</span>
+  <span class="ruby-identifier">sockaddr</span> = <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">pack_sockaddr_in</span>(<span class="ruby-identifier">port</span>, <span class="ruby-identifier">host</span>)
+  <span class="ruby-comment">#raise &quot;invalid IPv4 Address: #{addr}&quot; unless sockaddr[0...2] == &quot;\x02\x00&quot;</span>
+  <span class="ruby-identifier">port</span>, <span class="ruby-identifier">host</span> = <span class="ruby-identifier">sockaddr</span>[<span class="ruby-value">2</span><span class="ruby-operator">...</span><span class="ruby-value">4</span>], <span class="ruby-identifier">sockaddr</span>[<span class="ruby-value">4</span><span class="ruby-operator">...</span><span class="ruby-value">8</span>]
+  [[<span class="ruby-value">1</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Q&quot;</span>), <span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">10</span>, <span class="ruby-string">&quot;\xFF\xFF&quot;</span>,  <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>].<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- pack_address_field-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pack_address_field-method -->
+
+    
+      <div id="method-i-parse" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse</span><span
             class="method-args">(payload)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -412,23 +497,160 @@
           
 
           
-          <div class="method-source-code" id="parse_ip-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse_ip</span>(<span class="ruby-identifier">payload</span>)
-  <span class="ruby-identifier">service</span>, <span class="ruby-identifier">ip</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Qx12a4n&quot;</span>)
-  { <span class="ruby-value">:service</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">service</span>, <span class="ruby-value">:ip</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ip</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>), <span class="ruby-value">:port</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">port</span> }
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-identifier">version</span>, <span class="ruby-identifier">services</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Ia8Qa26a26Qa*&quot;</span>)
+  <span class="ruby-identifier">to</span>, <span class="ruby-identifier">from</span> = <span class="ruby-identifier">unpack_address_field</span>(<span class="ruby-identifier">to</span>), <span class="ruby-identifier">unpack_address_field</span>(<span class="ruby-identifier">from</span>)
+  <span class="ruby-identifier">user_agent</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">unpack_var_string</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-identifier">last_block</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;I&quot;</span>)[<span class="ruby-value">0</span>]
+
+  <span class="ruby-ivar">@fields</span> = {
+   <span class="ruby-value">:version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">version</span>, <span class="ruby-value">:services</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">services</span>, <span class="ruby-value">:time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">timestamp</span>,
+   <span class="ruby-value">:from</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from</span>, <span class="ruby-value">:to</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to</span>, <span class="ruby-value">:nonce</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">nonce</span>,
+   <span class="ruby-value">:user_agent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user_agent</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value">:last_block</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">last_block</span>
+  }
+  <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- parse_ip-source -->
+          </div><!-- parse-source -->
           
         </div>
 
         
 
         
-      </div><!-- parse_ip-method -->
+      </div><!-- parse-method -->
 
     
-    </section><!-- public-class-method-details -->
+      <div id="method-i-to_payload" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_payload</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_payload-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_payload</span>
+  <span class="ruby-identifier">payload</span> = [
+    <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:version</span>, <span class="ruby-value">:services</span>, <span class="ruby-value">:time</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;IQQ&quot;</span>),
+    <span class="ruby-identifier">pack_address_field</span>(<span class="ruby-ivar">@fields</span>[<span class="ruby-value">:from</span>]),
+    <span class="ruby-identifier">pack_address_field</span>(<span class="ruby-ivar">@fields</span>[<span class="ruby-value">:to</span>]),
+    <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:nonce</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Q&quot;</span>),
+    <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pack_var_string</span>(<span class="ruby-ivar">@fields</span>[<span class="ruby-value">:user_agent</span>]),
+    <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:last_block</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;I&quot;</span>)
+  ].<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_payload-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_payload-method -->
+
+    
+      <div id="method-i-to_pkt" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_pkt</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_pkt-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_pkt</span>
+  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pkt</span>(<span class="ruby-string">&quot;version&quot;</span>, <span class="ruby-identifier">to_payload</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_pkt-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_pkt-method -->
+
+    
+      <div id="method-i-unpack_address_field" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unpack_address_field</span><span
+            class="method-args">(payload)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="unpack_address_field-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unpack_address_field</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-identifier">ip</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;x8x12a4n&quot;</span>)
+  <span class="ruby-node">&quot;#{ip.unpack(&quot;C*&quot;).join(&quot;.&quot;)}:#{port}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- unpack_address_field-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- unpack_address_field-method -->
+
+    
+      <div id="method-i-uptime" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">uptime</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="uptime-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/version.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">uptime</span>
+  <span class="ruby-ivar">@fields</span>[<span class="ruby-value">:time</span>] <span class="ruby-operator">-</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">tv_sec</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- uptime-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- uptime-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 
@@ -437,7 +659,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

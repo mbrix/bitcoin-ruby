@@ -74,21 +74,31 @@
     
     <li><a href="#method-c-binary_from_json">::binary_from_json</a>
     
+    <li><a href="#method-c-from_file">::from_file</a>
+    
     <li><a href="#method-c-from_hash">::from_hash</a>
     
     <li><a href="#method-c-from_json">::from_json</a>
+    
+    <li><a href="#method-c-from_json_file">::from_json_file</a>
     
     <li><a href="#method-c-new">::new</a>
     
     <li><a href="#method-i-3D-3D">#==</a>
     
+    <li><a href="#method-i-binary_hash">#binary_hash</a>
+    
+    <li><a href="#method-i-bip34_block_height">#bip34_block_height</a>
+    
+    <li><a href="#method-i-decimaltarget">#decimaltarget</a>
+    
+    <li><a href="#method-i-difficulty">#difficulty</a>
+    
     <li><a href="#method-i-header_info">#header_info</a>
     
     <li><a href="#method-i-header_to_json">#header_to_json</a>
     
-    <li><a href="#method-i-htb">#htb</a>
-    
-    <li><a href="#method-i-hth">#hth</a>
+    <li><a href="#method-i-hextarget">#hextarget</a>
     
     <li><a href="#method-i-parse_data">#parse_data</a>
     
@@ -98,7 +108,13 @@
     
     <li><a href="#method-i-to_json">#to_json</a>
     
+    <li><a href="#method-i-to_json_file">#to_json_file</a>
+    
     <li><a href="#method-i-to_payload">#to_payload</a>
+    
+    <li><a href="#method-i-validator">#validator</a>
+    
+    <li><a href="#method-i-verify_mrkl_root">#verify_mrkl_root</a>
     
   </ul>
 </nav>
@@ -135,9 +151,19 @@
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -146,6 +172,8 @@
     <li><a href="../../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -157,9 +185,19 @@
   
     <li><a href="../../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -209,8 +247,6 @@
   
     <li><a href="../../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -233,13 +269,15 @@
   
     <li><a href="../../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -277,9 +315,13 @@
   
     <li><a href="../../Hash.html">Hash</a>
   
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../../Object.html">Object</a>
   
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../String.html">String</a>
   
   </ul>
 </nav>
@@ -401,6 +443,20 @@
         </div>
       </div>
       
+      <div id="attribute-i-transactions" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">transactions</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>transactions (<a href="../../Array.html">Array</a> of <a
+href="Tx.html">Tx</a>)</p>
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-tx" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">tx</span><span
@@ -453,7 +509,7 @@ href="Tx.html">Tx</a>)</p>
 
           
           <div class="method-source-code" id="binary_from_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 111</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">binary_from_hash</span>(<span class="ruby-identifier">h</span>); <span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">h</span>).<span class="ruby-identifier">to_payload</span>; <span class="ruby-keyword">end</span></pre>
           </div><!-- binary_from_hash-source -->
           
@@ -481,7 +537,7 @@ href="Tx.html">Tx</a>)</p>
 
           
           <div class="method-source-code" id="binary_from_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">binary_from_json</span>(<span class="ruby-identifier">json_string</span>); <span class="ruby-identifier">from_json</span>(<span class="ruby-identifier">json_string</span>).<span class="ruby-identifier">to_payload</span>; <span class="ruby-keyword">end</span></pre>
           </div><!-- binary_from_json-source -->
           
@@ -491,6 +547,34 @@ href="Tx.html">Tx</a>)</p>
 
         
       </div><!-- binary_from_json-method -->
+
+    
+      <div id="method-c-from_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">from_file</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>read binary block from a file</p>
+          
+
+          
+          <div class="method-source-code" id="from_file-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_file</span>(<span class="ruby-identifier">path</span>); <span class="ruby-identifier">new</span>( <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">read_binary_file</span>(<span class="ruby-identifier">path</span>) ); <span class="ruby-keyword">end</span></pre>
+          </div><!-- from_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- from_file-method -->
 
     
       <div id="method-c-from_hash" class="method-detail ">
@@ -505,17 +589,17 @@ href="Tx.html">Tx</a>)</p>
         <div class="method-description">
           
           <p>parse ruby hash (see also <a
-href="Block.html#method-i-to_hash">to_hash</a>)</p>
+href="Block.html#method-i-to_hash">#to_hash</a>)</p>
           
 
           
           <div class="method-source-code" id="from_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 99</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">h</span>)
   <span class="ruby-identifier">blk</span> = <span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">instance_eval</span>{
     <span class="ruby-ivar">@ver</span>, <span class="ruby-ivar">@time</span>, <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-string">'ver'</span>, <span class="ruby-string">'time'</span>, <span class="ruby-string">'bits'</span>, <span class="ruby-string">'nonce'</span>)
-    <span class="ruby-ivar">@prev_block</span>, <span class="ruby-ivar">@mrkl_root</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-string">'prev_block'</span>, <span class="ruby-string">'mrkl_root'</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">i</span>) }
+    <span class="ruby-ivar">@prev_block</span>, <span class="ruby-ivar">@mrkl_root</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-string">'prev_block'</span>, <span class="ruby-string">'mrkl_root'</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">htb_reverse</span> }
     <span class="ruby-identifier">recalc_block_hash</span>
     <span class="ruby-identifier">h</span>[<span class="ruby-string">'tx'</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@tx</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Tx</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">tx</span>) }
   }
@@ -543,12 +627,12 @@ href="Block.html#method-i-to_hash">to_hash</a>)</p>
         <div class="method-description">
           
           <p>parse json representation (see also <a
-href="Block.html#method-i-to_json">to_json</a>)</p>
+href="Block.html#method-i-to_json">#to_json</a>)</p>
           
 
           
           <div class="method-source-code" id="from_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 114</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_json</span>(<span class="ruby-identifier">json_string</span>); <span class="ruby-identifier">from_hash</span>( <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">json_string</span>) ); <span class="ruby-keyword">end</span></pre>
           </div><!-- from_json-source -->
           
@@ -558,6 +642,34 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
         
       </div><!-- from_json-method -->
+
+    
+      <div id="method-c-from_json_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">from_json_file</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>read json block from a file</p>
+          
+
+          
+          <div class="method-source-code" id="from_json_file-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_json_file</span>(<span class="ruby-identifier">path</span>); <span class="ruby-identifier">from_json</span>( <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">read_binary_file</span>(<span class="ruby-identifier">path</span>) ); <span class="ruby-keyword">end</span></pre>
+          </div><!-- from_json_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- from_json_file-method -->
 
     
       <div id="method-c-new" class="method-detail ">
@@ -576,7 +688,7 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@tx</span> = []
   <span class="ruby-identifier">parse_data</span>(<span class="ruby-identifier">data</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>
@@ -613,7 +725,7 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 34</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-ivar">@hash</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
@@ -625,6 +737,131 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
         
       </div><!-- 3D-3D-method -->
+
+    
+      <div id="method-i-binary_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">binary_hash</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="binary_hash-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">binary_hash</span>
+  [<span class="ruby-ivar">@hash</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- binary_hash-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- binary_hash-method -->
+
+    
+      <div id="method-i-bip34_block_height" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bip34_block_height</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>introduced in block version 2 by BIP_0034 blockchain height as seen by the
+block itself. do not trust this value, instead verify with chain storage.</p>
+          
+
+          
+          <div class="method-source-code" id="bip34_block_height-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bip34_block_height</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@ver</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>
+  <span class="ruby-identifier">coinbase</span> = <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">inputs</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">script_sig</span>
+  <span class="ruby-identifier">coinbase</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-node">&quot;xH#{ coinbase.unpack(&quot;C&quot;)[0]*2 }&quot;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
+<span class="ruby-keyword">rescue</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- bip34_block_height-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bip34_block_height-method -->
+
+    
+      <div id="method-i-decimaltarget" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">decimaltarget</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="decimaltarget-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">decimaltarget</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">decode_compact_bits</span>(<span class="ruby-ivar">@bits</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- decimaltarget-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- decimaltarget-method -->
+
+    
+      <div id="method-i-difficulty" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">difficulty</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="difficulty-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">difficulty</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">block_difficulty</span>(<span class="ruby-ivar">@bits</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- difficulty-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- difficulty-method -->
 
     
       <div id="method-i-header_info" class="method-detail ">
@@ -639,15 +876,15 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
         <div class="method-description">
           
           <p>get the block header info</p>
-<dl class="rdoc-list label-list"><dt>&lt;version&gt;, &lt;<a href="Block.html#attribute-i-prev_block">prev_block</a>&gt;, &lt;merkle_root&gt;, &lt;time&gt;, &lt;bits&gt;, &lt;nonce&gt;, &lt;txcount&gt;, &lt;size&gt;
+<dl class="rdoc-list label-list"><dt>&lt;version&gt;, &lt;<a href="Block.html#attribute-i-prev_block">#prev_block</a>&gt;, &lt;merkle_root&gt;, &lt;time&gt;, &lt;bits&gt;, &lt;nonce&gt;, &lt;txcount&gt;, &lt;size&gt;
 <dd></dd></dl>
           
 
           
           <div class="method-source-code" id="header_info-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 67</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">header_info</span>
-  [<span class="ruby-ivar">@ver</span>, <span class="ruby-identifier">hth</span>(<span class="ruby-ivar">@prev_block</span>), <span class="ruby-identifier">hth</span>(<span class="ruby-ivar">@mrkl_root</span>), <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@time</span>), <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span>, <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">size</span>, <span class="ruby-ivar">@payload</span>.<span class="ruby-identifier">size</span>]
+  [<span class="ruby-ivar">@ver</span>, <span class="ruby-ivar">@prev_block</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-ivar">@mrkl_root</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@time</span>), <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span>, <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">size</span>, <span class="ruby-ivar">@payload</span>.<span class="ruby-identifier">size</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- header_info-source -->
           
@@ -670,12 +907,12 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
         <div class="method-description">
           
-          <p>convert header to json representation as seen in the block explorer.</p>
+          <p>convert header to json representation.</p>
           
 
           
           <div class="method-source-code" id="header_to_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">header_to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>})
   <span class="ruby-identifier">h</span> = <span class="ruby-identifier">to_hash</span>
   <span class="ruby-node">]tx mrkl_tree]</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>) }
@@ -691,11 +928,11 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
       </div><!-- header_to_json-method -->
 
     
-      <div id="method-i-htb" class="method-detail ">
+      <div id="method-i-hextarget" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">htb</span><span
-            class="method-args">(s)</span>
+          <span class="method-name">hextarget</span><span
+            class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -706,45 +943,19 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
           
 
           
-          <div class="method-source-code" id="htb-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">htb</span>(<span class="ruby-identifier">s</span>); [<span class="ruby-identifier">s</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">'H*'</span>).<span class="ruby-identifier">reverse</span>; <span class="ruby-keyword">end</span></pre>
-          </div><!-- htb-source -->
+          <div class="method-source-code" id="hextarget-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hextarget</span>
+  <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">decode_compact_bits</span>(<span class="ruby-ivar">@bits</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hextarget-source -->
           
         </div>
 
         
 
         
-      </div><!-- htb-method -->
-
-    
-      <div id="method-i-hth" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">hth</span><span
-            class="method-args">(h)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="hth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">hth</span>(<span class="ruby-identifier">h</span>); <span class="ruby-identifier">h</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]; <span class="ruby-keyword">end</span></pre>
-          </div><!-- hth-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- hth-method -->
+      </div><!-- hextarget-method -->
 
     
       <div id="method-i-parse_data" class="method-detail ">
@@ -763,7 +974,7 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
           
           <div class="method-source-code" id="parse_data-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_data</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@ver</span>, <span class="ruby-ivar">@prev_block</span>, <span class="ruby-ivar">@mrkl_root</span>, <span class="ruby-ivar">@time</span>, <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span>, <span class="ruby-identifier">payload</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;Ia32a32IIIa*&quot;</span>)
   <span class="ruby-identifier">recalc_block_hash</span>
@@ -804,9 +1015,9 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
           
           <div class="method-source-code" id="recalc_block_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 61</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">recalc_block_hash</span>
-  <span class="ruby-ivar">@hash</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">block_hash</span>(<span class="ruby-identifier">hth</span>(<span class="ruby-ivar">@prev_block</span>), <span class="ruby-identifier">hth</span>(<span class="ruby-ivar">@mrkl_root</span>), <span class="ruby-ivar">@time</span>, <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span>, <span class="ruby-ivar">@ver</span>)
+  <span class="ruby-ivar">@hash</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">block_hash</span>(<span class="ruby-ivar">@prev_block</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-ivar">@mrkl_root</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-ivar">@time</span>, <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span>, <span class="ruby-ivar">@ver</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- recalc_block_hash-source -->
           
@@ -834,11 +1045,11 @@ href="Block.html#method-i-to_json">to_json</a>)</p>
 
           
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 81</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_hash</span>
   {
     <span class="ruby-string">'hash'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@hash</span>, <span class="ruby-string">'ver'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@ver</span>,
-    <span class="ruby-string">'prev_block'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">hth</span>(<span class="ruby-ivar">@prev_block</span>), <span class="ruby-string">'mrkl_root'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">hth</span>(<span class="ruby-ivar">@mrkl_root</span>),
+    <span class="ruby-string">'prev_block'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prev_block</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-string">'mrkl_root'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@mrkl_root</span>.<span class="ruby-identifier">reverse_hth</span>,
     <span class="ruby-string">'time'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@time</span>, <span class="ruby-string">'bits'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bits</span>, <span class="ruby-string">'nonce'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@nonce</span>,
     <span class="ruby-string">'n_tx'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">size</span>, <span class="ruby-string">'size'</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-ivar">@payload</span><span class="ruby-operator">||</span><span class="ruby-identifier">to_payload</span>).<span class="ruby-identifier">bytesize</span>,
     <span class="ruby-string">'tx'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_hash</span> },
@@ -872,7 +1083,7 @@ from_json)</p>
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 94</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-value">:space</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">''</span>}, *<span class="ruby-identifier">a</span>)
   <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>( <span class="ruby-identifier">to_hash</span>, <span class="ruby-identifier">options</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -884,6 +1095,37 @@ from_json)</p>
 
         
       </div><!-- to_json-method -->
+
+    
+      <div id="method-i-to_json_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_json_file</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>write json representation to a file (see also <a
+href="Block.html#method-i-to_json">#to_json</a>)</p>
+          
+
+          
+          <div class="method-source-code" id="to_json_file-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json_file</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">'wb'</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">to_json</span>; }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_json_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_json_file-method -->
 
     
       <div id="method-i-to_payload" class="method-detail ">
@@ -902,7 +1144,7 @@ from_json)</p>
 
           
           <div class="method-source-code" id="to_payload-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 75</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_payload</span>
   <span class="ruby-identifier">head</span> = [<span class="ruby-ivar">@ver</span>, <span class="ruby-ivar">@prev_block</span>, <span class="ruby-ivar">@mrkl_root</span>, <span class="ruby-ivar">@time</span>, <span class="ruby-ivar">@bits</span>, <span class="ruby-ivar">@nonce</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;Ia32a32III&quot;</span>)
   [<span class="ruby-identifier">head</span>, <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pack_var_int</span>(<span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">size</span>), <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:to_payload</span>).<span class="ruby-identifier">join</span>].<span class="ruby-identifier">join</span>
@@ -917,6 +1159,66 @@ from_json)</p>
       </div><!-- to_payload-method -->
 
     
+      <div id="method-i-validator" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validator</span><span
+            class="method-args">(store, prev_block = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="validator-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validator</span>(<span class="ruby-identifier">store</span>, <span class="ruby-identifier">prev_block</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@validator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Validation</span><span class="ruby-operator">::</span><span class="ruby-constant">Block</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">store</span>, <span class="ruby-identifier">prev_block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- validator-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- validator-method -->
+
+    
+      <div id="method-i-verify_mrkl_root" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">verify_mrkl_root</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>verify mrkl tree</p>
+          
+
+          
+          <div class="method-source-code" id="verify_mrkl_root-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/block.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">verify_mrkl_root</span>
+  <span class="ruby-ivar">@mrkl_root</span>.<span class="ruby-identifier">reverse_hth</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash_mrkl_tree</span>( <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:hash</span>) ).<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- verify_mrkl_root-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- verify_mrkl_root-method -->
+
+    
     </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
@@ -926,7 +1228,7 @@ from_json)</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

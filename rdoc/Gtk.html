@@ -103,9 +103,19 @@
   
     <li><a href="./Bitcoin.html">Bitcoin</a>
   
-    <li><a href="./Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="./Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="./Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="./Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="./Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="./Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -114,6 +124,8 @@
     <li><a href="./Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="./Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="./Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="./Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -125,9 +137,19 @@
   
     <li><a href="./Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="./Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="./Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="./Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="./Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="./Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="./Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="./Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="./Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -177,8 +199,6 @@
   
     <li><a href="./Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="./Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="./Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="./Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -201,13 +221,15 @@
   
     <li><a href="./Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="./Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="./Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="./Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="./Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="./Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="./Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="./Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="./Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="./Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -245,9 +267,13 @@
   
     <li><a href="./Hash.html">Hash</a>
   
+    <li><a href="./Mnemonic.html">Mnemonic</a>
+  
     <li><a href="./Object.html">Object</a>
   
     <li><a href="./RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="./String.html">String</a>
   
   </ul>
 </nav>
@@ -314,7 +340,7 @@
 
           
           <div class="method-source-code" id="main_iteration_with_queue-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/gui/em_gtk.rb, line 11</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/gui/em_gtk.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main_iteration_with_queue</span>
     <span class="ruby-constant">GTK_PENDING_BLOCKS_LOCK</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
       <span class="ruby-keyword">for</span> <span class="ruby-identifier">block</span> <span class="ruby-keyword">in</span> <span class="ruby-constant">GTK_PENDING_BLOCKS</span>
@@ -322,7 +348,7 @@
       <span class="ruby-keyword">end</span>
       <span class="ruby-constant">GTK_PENDING_BLOCKS</span>.<span class="ruby-identifier">clear</span>
     <span class="ruby-keyword">end</span>
-  <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main_iteration</span>  <span class="ruby-keyword">if</span> <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">events_pending?</span>
+  <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main_iteration</span> <span class="ruby-keyword">while</span> <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">events_pending</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- main_iteration_with_queue-source -->
           
@@ -350,7 +376,7 @@
 
           
           <div class="method-source-code" id="queue-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/gui/em_gtk.rb, line 5</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/gui/em_gtk.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">queue</span> &amp;<span class="ruby-identifier">block</span>
   <span class="ruby-constant">GTK_PENDING_BLOCKS_LOCK</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
     <span class="ruby-constant">GTK_PENDING_BLOCKS</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>
@@ -375,7 +401,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

@@ -64,6 +64,8 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-c-der_to_private_key">::der_to_private_key</a>
+    
     <li><a href="#method-c-init_ffi_ssl">::init_ffi_ssl</a>
     
     <li><a href="#method-c-regenerate_key">::regenerate_key</a>
@@ -103,9 +105,19 @@
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -114,6 +126,8 @@
     <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -125,9 +139,19 @@
   
     <li><a href="../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -177,8 +201,6 @@
   
     <li><a href="../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -201,13 +223,15 @@
   
     <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -245,9 +269,13 @@
   
     <li><a href="../Hash.html">Hash</a>
   
+    <li><a href="../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../Object.html">Object</a>
   
     <li><a href="../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../String.html">String</a>
   
   </ul>
 </nav>
@@ -293,6 +321,48 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
+      <div id="method-c-der_to_private_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">der_to_private_key</span><span
+            class="method-args">(der_hex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>extract private key from uncompressed DER format</p>
+          
+
+          
+          <div class="method-source-code" id="der_to_private_key-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">der_to_private_key</span>(<span class="ruby-identifier">der_hex</span>)
+  <span class="ruby-identifier">init_ffi_ssl</span>
+  <span class="ruby-comment">#k  = EC_KEY_new_by_curve_name(NID_secp256k1)</span>
+  <span class="ruby-comment">#kp = FFI::MemoryPointer.new(:pointer).put_pointer(0, eckey)</span>
+
+  <span class="ruby-identifier">buf</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">from_string</span>([<span class="ruby-identifier">der_hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>))
+  <span class="ruby-identifier">ptr</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:pointer</span>).<span class="ruby-identifier">put_pointer</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">buf</span>)
+
+  <span class="ruby-comment">#ec_key = d2i_ECPrivateKey(kp, ptr, buf.size-1)</span>
+  <span class="ruby-identifier">ec_key</span> = <span class="ruby-identifier">d2i_ECPrivateKey</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ptr</span>, <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ec_key</span>.<span class="ruby-identifier">null?</span>
+  <span class="ruby-identifier">bn</span> = <span class="ruby-constant">EC_KEY_get0_private_key</span>(<span class="ruby-identifier">ec_key</span>)
+  <span class="ruby-constant">BN_bn2bin</span>(<span class="ruby-identifier">bn</span>, <span class="ruby-identifier">buf</span>)
+  <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">read_string</span>(<span class="ruby-value">32</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- der_to_private_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- der_to_private_key-method -->
+
+    
       <div id="method-c-init_ffi_ssl" class="method-detail ">
         
         <div class="method-heading">
@@ -309,7 +379,7 @@
 
           
           <div class="method-source-code" id="init_ffi_ssl-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">init_ffi_ssl</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@ssl_loaded</span>
   <span class="ruby-constant">SSL_library_init</span>()
@@ -346,7 +416,7 @@
 
           
           <div class="method-source-code" id="regenerate_key-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/ffi/openssl.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">regenerate_key</span>(<span class="ruby-identifier">private_key</span>)
   <span class="ruby-identifier">private_key</span> = [<span class="ruby-identifier">private_key</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&gt;=</span> (<span class="ruby-value">32</span>*<span class="ruby-value">2</span>)
   <span class="ruby-identifier">private_key_hex</span> = <span class="ruby-identifier">private_key</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
@@ -379,6 +449,7 @@
   <span class="ruby-identifier">priv_hex</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">i2d_ECPrivateKey</span>(<span class="ruby-identifier">eckey</span>, <span class="ruby-identifier">ptr</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">length</span>
     <span class="ruby-identifier">size</span> = <span class="ruby-identifier">ptr</span>.<span class="ruby-identifier">read_pointer</span>.<span class="ruby-identifier">get_array_of_uint8</span>(<span class="ruby-value">8</span>, <span class="ruby-value">1</span>)[<span class="ruby-value">0</span>]
     <span class="ruby-identifier">ptr</span>.<span class="ruby-identifier">read_pointer</span>.<span class="ruby-identifier">get_array_of_uint8</span>(<span class="ruby-value">9</span>, <span class="ruby-identifier">size</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">32</span>, <span class="ruby-string">&quot;\x00&quot;</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
+    <span class="ruby-comment">#der_to_private_key( ptr.read_pointer.read_string(length).unpack(&quot;H*&quot;)[0] )</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">priv_hex</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">private_key_hex</span>
@@ -415,7 +486,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

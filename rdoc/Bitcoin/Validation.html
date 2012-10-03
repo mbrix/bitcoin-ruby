@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Bitcoin::ScriptBuilder</title>
+<title>Module: Bitcoin::Validation</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/bitcoin/builder.rb
+    <li>lib/bitcoin/validation.rb
   </ul>
 </nav>
 
@@ -56,29 +56,9 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link"><a href="../Object.html">Object</a>
-  
-</nav>
-
     
-    <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
-
-  <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-recipient">#recipient</a>
-    
-    <li><a href="#method-i-type">#type</a>
-    
-  </ul>
-</nav>
-
   </div>
 
   <div id="project-metadata">
@@ -111,9 +91,19 @@
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -122,6 +112,8 @@
     <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -133,9 +125,19 @@
   
     <li><a href="../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -185,8 +187,6 @@
   
     <li><a href="../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -209,13 +209,15 @@
   
     <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -253,9 +255,13 @@
   
     <li><a href="../Hash.html">Hash</a>
   
+    <li><a href="../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../Object.html">Object</a>
   
     <li><a href="../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../String.html">String</a>
   
   </ul>
 </nav>
@@ -264,7 +270,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Bitcoin::ScriptBuilder</h1>
+  <h1 class="module">module Bitcoin::Validation</h1>
 
   <div id="description" class="description">
     
@@ -279,134 +285,59 @@
     
 
     
-
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="COIN">COIN
+        
+        <dd class="description"><p>the number of base units (“satoshis”) that make up one bitcoin</p>
+        
+      
+        <dt id="COINBASE_MATURITY">COINBASE_MATURITY
+        
+        <dd class="description"><p>number of confirmations required before coinbase tx can be spent</p>
+        
+      
+        <dt id="INT_MAX">INT_MAX
+        
+        <dd class="description"><p>maximum integer value</p>
+        
+      
+        <dt id="MAX_BLOCK_SIGOPS">MAX_BLOCK_SIGOPS
+        
+        <dd class="description"><p>maximum number of signature operations in a block</p>
+        
+      
+        <dt id="MAX_BLOCK_SIZE">MAX_BLOCK_SIZE
+        
+        <dd class="description"><p>maximum size of a block (in bytes)</p>
+        
+      
+        <dt id="MAX_MONEY">MAX_MONEY
+        
+        <dd class="description"><p>total number of base units in existence</p>
+        
+      
+        <dt id="RETARGET">RETARGET
+        
+        <dd class="description"><p>interval (in blocks) for difficulty retarget</p>
+        
+      
+        <dt id="REWARD_DROP">REWARD_DROP
+        
+        <dd class="description"><p>interval (in blocks) for mining reward reduction</p>
+        
+      
+      </dl>
+    </section>
     
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
 
-      
-      <div id="attribute-i-script" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">script</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 164</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-ivar">@type</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@script</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
-
-    
-      <div id="method-i-recipient" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">recipient</span><span
-            class="method-args">(data)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="recipient-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 173</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">recipient</span> <span class="ruby-identifier">data</span>
-  <span class="ruby-ivar">@script</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;to_#{@type}_script&quot;</span>, <span class="ruby-identifier">data</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- recipient-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- recipient-method -->
-
-    
-      <div id="method-i-type" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">type</span><span
-            class="method-args">(type)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 169</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">type</span> <span class="ruby-identifier">type</span>
-  <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- type-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- type-method -->
-
-    
-    </section><!-- public-instance-method-details -->
-  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->
@@ -414,7 +345,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

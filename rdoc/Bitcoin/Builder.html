@@ -66,6 +66,8 @@
     
     <li><a href="#method-i-blk">#blk</a>
     
+    <li><a href="#method-i-script">#script</a>
+    
     <li><a href="#method-i-tx">#tx</a>
     
   </ul>
@@ -103,9 +105,19 @@
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
-    <li><a href="../Bitcoin/BlockBuilder.html">Bitcoin::BlockBuilder</a>
+    <li><a href="../Bitcoin/BinaryExtensions.html">Bitcoin::BinaryExtensions</a>
   
     <li><a href="../Bitcoin/Builder.html">Bitcoin::Builder</a>
+  
+    <li><a href="../Bitcoin/Builder/BlockBuilder.html">Bitcoin::Builder::BlockBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/ScriptBuilder.html">Bitcoin::Builder::ScriptBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxBuilder.html">Bitcoin::Builder::TxBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxInBuilder.html">Bitcoin::Builder::TxInBuilder</a>
+  
+    <li><a href="../Bitcoin/Builder/TxOutBuilder.html">Bitcoin::Builder::TxOutBuilder</a>
   
     <li><a href="../Bitcoin/Config.html">Bitcoin::Config</a>
   
@@ -114,6 +126,8 @@
     <li><a href="../Bitcoin/ConnectionHandler.html">Bitcoin::ConnectionHandler</a>
   
     <li><a href="../Bitcoin/Gui.html">Bitcoin::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/AddrView.html">Bitcoin::Gui::AddrView</a>
   
     <li><a href="../Bitcoin/Gui/Bitcoin.html">Bitcoin::Gui::Bitcoin</a>
   
@@ -125,9 +139,19 @@
   
     <li><a href="../Bitcoin/Gui/Bitcoin/Gui/Bitcoin/Network/CommandClient.html">Bitcoin::Gui::Bitcoin::Gui::Bitcoin::Network::CommandClient</a>
   
+    <li><a href="../Bitcoin/Gui/ConnView.html">Bitcoin::Gui::ConnView</a>
+  
     <li><a href="../Bitcoin/Gui/Connection.html">Bitcoin::Gui::Connection</a>
   
     <li><a href="../Bitcoin/Gui/Gui.html">Bitcoin::Gui::Gui</a>
+  
+    <li><a href="../Bitcoin/Gui/Helpers.html">Bitcoin::Gui::Helpers</a>
+  
+    <li><a href="../Bitcoin/Gui/TreeView.html">Bitcoin::Gui::TreeView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxInView.html">Bitcoin::Gui::TxInView</a>
+  
+    <li><a href="../Bitcoin/Gui/TxView.html">Bitcoin::Gui::TxView</a>
   
     <li><a href="../Bitcoin/Key.html">Bitcoin::Key</a>
   
@@ -177,8 +201,6 @@
   
     <li><a href="../Bitcoin/Script/ScriptOpcodeError.html">Bitcoin::Script::ScriptOpcodeError</a>
   
-    <li><a href="../Bitcoin/ScriptBuilder.html">Bitcoin::ScriptBuilder</a>
-  
     <li><a href="../Bitcoin/Storage.html">Bitcoin::Storage</a>
   
     <li><a href="../Bitcoin/Storage/Backends.html">Bitcoin::Storage::Backends</a>
@@ -201,13 +223,15 @@
   
     <li><a href="../Bitcoin/Storage/Models/TxOut.html">Bitcoin::Storage::Models::TxOut</a>
   
-    <li><a href="../Bitcoin/TxBuilder.html">Bitcoin::TxBuilder</a>
-  
-    <li><a href="../Bitcoin/TxInBuilder.html">Bitcoin::TxInBuilder</a>
-  
-    <li><a href="../Bitcoin/TxOutBuilder.html">Bitcoin::TxOutBuilder</a>
-  
     <li><a href="../Bitcoin/Util.html">Bitcoin::Util</a>
+  
+    <li><a href="../Bitcoin/Validation.html">Bitcoin::Validation</a>
+  
+    <li><a href="../Bitcoin/Validation/Block.html">Bitcoin::Validation::Block</a>
+  
+    <li><a href="../Bitcoin/Validation/Tx.html">Bitcoin::Validation::Tx</a>
+  
+    <li><a href="../Bitcoin/Validation/ValidationError.html">Bitcoin::Validation::ValidationError</a>
   
     <li><a href="../Bitcoin/Wallet.html">Bitcoin::Wallet</a>
   
@@ -245,9 +269,13 @@
   
     <li><a href="../Hash.html">Hash</a>
   
+    <li><a href="../Mnemonic.html">Mnemonic</a>
+  
     <li><a href="../Object.html">Object</a>
   
     <li><a href="../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../String.html">String</a>
   
   </ul>
 </nav>
@@ -260,6 +288,14 @@
 
   <div id="description" class="description">
     
+<p>Optional DSL to help create blocks and transactions.</p>
+
+<p>see also <a href="Builder/BlockBuilder.html">BlockBuilder</a>, <a
+href="Builder/TxBuilder.html">TxBuilder</a>, <a
+href="Builder/TxInBuilder.html">TxInBuilder</a>, <a
+href="Builder/TxOutBuilder.html">TxOutBuilder</a>, <a
+href="Builder/ScriptBuilder.html">ScriptBuilder</a></p>
+
   </div><!-- description -->
 
   
@@ -284,22 +320,24 @@
         
         <div class="method-heading">
           <span class="method-name">blk</span><span
-            class="method-args">(target = "00".ljust(32, 'f'), &block)</span>
+            class="method-args">(target = "00".ljust(64, 'f')) { |c| ... }</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          
+          <p>build a <a href="Protocol/Block.html">Bitcoin::Protocol::Block</a> matching
+the given <code>target</code>. see <a
+href="Builder/BlockBuilder.html">BlockBuilder</a> for details.</p>
           
 
           
           <div class="method-source-code" id="blk-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 5</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">blk</span>(<span class="ruby-identifier">target</span> = <span class="ruby-string">&quot;00&quot;</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">32</span>, <span class="ruby-string">'f'</span>), &amp;<span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">blk</span>(<span class="ruby-identifier">target</span> = <span class="ruby-string">&quot;00&quot;</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">64</span>, <span class="ruby-string">'f'</span>))
   <span class="ruby-identifier">c</span> = <span class="ruby-constant">BlockBuilder</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">instance_eval</span> &amp;<span class="ruby-identifier">block</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">c</span>
   <span class="ruby-identifier">c</span>.<span class="ruby-identifier">block</span>(<span class="ruby-identifier">target</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- blk-source -->
@@ -312,26 +350,60 @@
       </div><!-- blk-method -->
 
     
-      <div id="method-i-tx" class="method-detail ">
+      <div id="method-i-script" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">tx</span><span
-            class="method-args">(&block)</span>
+          <span class="method-name">script</span><span
+            class="method-args">() { |c| ... }</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
+          <p>build a <a href="Script.html">Bitcoin::Script</a>. see <a
+href="Builder/ScriptBuilder.html">ScriptBuilder</a> for details.</p>
           
+
+          
+          <div class="method-source-code" id="script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">script</span>
+  <span class="ruby-identifier">c</span> = <span class="ruby-constant">ScriptBuilder</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">c</span>
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">script</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- script-method -->
+
+    
+      <div id="method-i-tx" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tx</span><span
+            class="method-args">() { |c| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>build a <a href="Protocol/Tx.html">Bitcoin::Protocol::Tx</a>. see <a
+href="Builder/TxBuilder.html">TxBuilder</a> for details.</p>
           
 
           
           <div class="method-source-code" id="tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tx</span> &amp;<span class="ruby-identifier">block</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tx</span>
   <span class="ruby-identifier">c</span> = <span class="ruby-constant">TxBuilder</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">instance_eval</span> &amp;<span class="ruby-identifier">block</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">c</span>
   <span class="ruby-identifier">c</span>.<span class="ruby-identifier">tx</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- tx-source -->
@@ -353,7 +425,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.10.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
