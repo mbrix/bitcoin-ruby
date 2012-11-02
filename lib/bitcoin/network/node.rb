@@ -37,10 +37,12 @@ module Bitcoin::Network
     attr_reader :notifiers
 
     DEFAULT_CONFIG = {
+      :network => "bitcoin",
       :listen => ["0.0.0.0", Bitcoin.network[:default_port]],
       :connect => [],
-      :command => "",
-      :storage => Bitcoin::Storage.dummy({}),
+      :command => "127.0.0.1:9999",
+      :storage => "sequel::sqlite://bitcoin.db",
+      :electrm => nil,
       :mode => :full,
       :dns => true,
       :epoll => false,
@@ -50,13 +52,14 @@ module Bitcoin::Network
       :log => {
         :network => :info,
         :storage => :info,
+        :electrum => :info,
       },
       :max => {
         :connections => 8,
         :addr => 256,
-        :queue => 64,
-        :inv => 128,
-        :inv_cache => 1024,
+        :queue => 500,
+        :inv => 500,
+        :inv_cache => 0,
       },
       :intervals => {
         :queue => 5,
@@ -153,6 +156,11 @@ module Bitcoin::Network
           host, port = @config[:command]
           EM.start_server(host, port, CommandHandler, self)
           log.info { "Command socket listening on #{host}:#{port}" }
+        end
+
+        if @config[:electrum]
+          Bitcoin::Electrum::Server.new(self, @config)
+          host, port = @config[:electrum]
         end
 
         if @config[:listen]
