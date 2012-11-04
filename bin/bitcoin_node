@@ -43,7 +43,7 @@ optparse = OptionParser.new do |opts|
 
   opts.on("--connect [HOST:PORT[,HOST:PORT[...]]]",
     "Hosts to connect to (default: #{options[:connect]})") do |connect|
-    options[:connect] = connect.split(":")
+    options[:connect] = connect
   end
 
   opts.on("-s", "--storage [BACKEND::CONFIG]",
@@ -114,9 +114,9 @@ end
 
 optparse.parse!
 
+[:command, :listen, :connect].each {|n| options[n] = options[n].split(":")  if options[n].is_a?(String) }
+
 Bitcoin.network = options[:network]
-options[:command] = options[:command] == "" ? nil : options[:command].split(':')
-options[:listen] = options[:listen] == "" ? nil : options[:listen].split(':')
 
 if ARGV.any?
   EM.run do
