@@ -44,7 +44,9 @@ module Bitcoin::Network
     # time when the last main chain block was added
     attr_reader :last_block_time
 
+    attr_accessor :relay_tx
     attr_accessor :relay_propagation
+
 
     DEFAULT_CONFIG = {
       :network => :bitcoin,
@@ -93,7 +95,7 @@ module Bitcoin::Network
       @inv_cache = []
       @notifiers = {}
       @relay_propagation, @last_block_time, @external_ips = {}, Time.now, []
-      @unconfirmed = {}
+      @unconfirmed, @relay_tx = {}, {}
     end
 
     def set_store
@@ -408,18 +410,6 @@ module Bitcoin::Network
         log.info { "EPOLL: Effective user set to: #{@config[:epoll_user]}" }
       end
       EM.epoll
-    end
-
-    def relay_tx(tx)
-      return false  unless @store.in_sync?
-      log.info { "relaying tx #{tx.hash}" }
-      @store.store_tx(tx)
-      @connections.select(&:connected?).sample((@connections.size / 2) + 1).each do |peer|
-        peer.send_inv(:tx, tx)
-      end
-    rescue Bitcoin::Validation::ValidationError
-      @log.warn { "ValiationError storing tx #{tx.hash}: #{$!.message}" }
-      false
     end
 
     def work_relay
