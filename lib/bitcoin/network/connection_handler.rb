@@ -286,7 +286,7 @@ module Bitcoin::Network
     # begin handshake; send +version+ message
     def on_handshake_begin
       @state = :handshake
-      from = "#{@node.external_ip}:#{@node.config[:listen].split(':')[1]}"
+      from = "#{@node.external_ip}:#{@node.config[:listen][1]}"
       version = Bitcoin::Protocol::Version.new({
         :version    => 70001,
         :last_block => @node.store.get_depth,
