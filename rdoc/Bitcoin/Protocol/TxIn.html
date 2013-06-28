@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Bitcoin::Protocol::TxIn</title>
+<title>class Bitcoin::Protocol::TxIn - bitcoin-ruby RDoc</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -64,33 +66,42 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-from_hash">::from_hash</a>
+    <li ><a href="#method-c-from_hash">::from_hash</a>
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-from_hex_hash">::from_hex_hash</a>
     
-    <li><a href="#method-i-3D-3D">#==</a>
+    <li ><a href="#method-c-from_io">::from_io</a>
     
-    <li><a href="#method-i-coinbase-3F">#coinbase?</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-parse_data">#parse_data</a>
+    <li ><a href="#method-i-3D-3D">#==</a>
     
-    <li><a href="#method-i-parse_payload">#parse_payload</a>
+    <li ><a href="#method-i-add_signature_pubkey_script">#add_signature_pubkey_script</a>
     
-    <li><a href="#method-i-previous_output">#previous_output</a>
+    <li ><a href="#method-i-coinbase-3F">#coinbase?</a>
     
-    <li><a href="#method-i-script-3D">#script=</a>
+    <li ><a href="#method-i-parse_data">#parse_data</a>
     
-    <li><a href="#method-i-script_sig-3D">#script_sig=</a>
+    <li ><a href="#method-i-parse_data_from_io">#parse_data_from_io</a>
     
-    <li><a href="#method-i-to_hash">#to_hash</a>
+    <li ><a href="#method-i-parse_payload">#parse_payload</a>
     
-    <li><a href="#method-i-to_payload">#to_payload</a>
+    <li ><a href="#method-i-previous_output">#previous_output</a>
+    
+    <li ><a href="#method-i-script-3D">#script=</a>
+    
+    <li ><a href="#method-i-script_sig-3D">#script_sig=</a>
+    
+    <li ><a href="#method-i-to_hash">#to_hash</a>
+    
+    <li ><a href="#method-i-to_payload">#to_payload</a>
     
   </ul>
 </nav>
@@ -111,11 +122,17 @@
   
     <li class="file"><a href="../../doc/EXAMPLES_rdoc.html">EXAMPLES</a>
   
+    <li class="file"><a href="../../doc/NAMECOIN_rdoc.html">NAMECOIN</a>
+  
     <li class="file"><a href="../../doc/NODE_rdoc.html">NODE</a>
   
     <li class="file"><a href="../../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
   
   </ul>
 </nav>
@@ -124,6 +141,8 @@
   <h3 class="section-header">Class and Module Index</h3>
 
   <ul class="link-list">
+  
+    <li><a href="../../Array.html">Array</a>
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
@@ -183,6 +202,10 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
     <li><a href="../../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
@@ -193,17 +216,17 @@
   
     <li><a href="../../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
   
-    <li><a href="../../Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
-  
     <li><a href="../../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
-    <li><a href="../../Bitcoin/Protocol.html">Bitcoin::P</a>
+    <li><a href="../../Bitcoin/P.html">Bitcoin::P</a>
   
     <li><a href="../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
     <li><a href="../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
+    <li><a href="../../Bitcoin/Protocol/AuxPow.html">Bitcoin::Protocol::AuxPow</a>
   
     <li><a href="../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -239,6 +262,8 @@
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
   
+    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
+  
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
     <li><a href="../../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
@@ -269,6 +294,28 @@
   
     <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
+    <li><a href="../../Connection.html">Connection</a>
+  
+    <li><a href="../../Digest.html">Digest</a>
+  
+    <li><a href="../../EM.html">EM</a>
+  
+    <li><a href="../../ElectrumClient.html">ElectrumClient</a>
+  
+    <li><a href="../../Gtk.html">Gtk</a>
+  
+    <li><a href="../../Hash.html">Hash</a>
+  
+    <li><a href="../../JSON.html">JSON</a>
+  
+    <li><a href="../../Log4r.html">Log4r</a>
+  
+    <li><a href="../../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
+    <li><a href="../../Object.html">Object</a>
+  
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -279,23 +326,13 @@
   
     <li><a href="../../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
   
-    <li><a href="../../Log4r.html">Log4r</a>
-  
-    <li><a href="../../Log4r/Logger.html">Log4r::Logger</a>
-  
-    <li><a href="../../Array.html">Array</a>
-  
-    <li><a href="../../EM.html">EM</a>
-  
-    <li><a href="../../Gtk.html">Gtk</a>
-  
-    <li><a href="../../Hash.html">Hash</a>
-  
-    <li><a href="../../Mnemonic.html">Mnemonic</a>
-  
-    <li><a href="../../Object.html">Object</a>
-  
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../Server.html">Server</a>
+  
+    <li><a href="../../SimpleNode.html">SimpleNode</a>
+  
+    <li><a href="../../SimpleNode/Connection.html">SimpleNode::Connection</a>
   
     <li><a href="../../String.html">String</a>
   
@@ -367,6 +404,34 @@
         </div>
       </div>
       
+      <div id="attribute-i-script" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">script</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p><a href="TxIn.html#attribute-i-script_sig">#script_sig</a> input <a
+href="../Script.html">Script</a> (signature)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-script_length" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">script_length</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p><a href="TxIn.html#attribute-i-script_sig">#script_sig</a> input <a
+href="../Script.html">Script</a> (signature)</p>
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-script_sig" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">script_sig</span><span
@@ -403,7 +468,7 @@ href="../Script.html">Script</a> (signature)</p>
 
         <div class="method-description">
         
-        <p>sequence</p>
+        <p><a href="TxIn.html#attribute-i-sequence">#sequence</a></p>
         
         </div>
       </div>
@@ -422,7 +487,9 @@ href="../Script.html">Script</a> (signature)</p>
         <div class="method-heading">
           <span class="method-name">from_hash</span><span
             class="method-args">(input)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -430,18 +497,19 @@ href="../Script.html">Script</a> (signature)</p>
           
           
           
+          
 
           
           <div class="method-source-code" id="from_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">input</span>)
-  <span class="ruby-identifier">txin</span> = <span class="ruby-constant">TxIn</span>.<span class="ruby-identifier">new</span>([ <span class="ruby-identifier">input</span>[<span class="ruby-string">'prev_out'</span>][<span class="ruby-string">'hash'</span>] ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">'H*'</span>).<span class="ruby-identifier">reverse</span>, <span class="ruby-identifier">input</span>[<span class="ruby-string">'prev_out'</span>][<span class="ruby-string">'n'</span>])
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span>[<span class="ruby-string">'coinbase'</span>]
-    <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">script_sig</span> = [ <span class="ruby-identifier">input</span>[<span class="ruby-string">'coinbase'</span>] ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
+  <span class="ruby-identifier">txin</span> = <span class="ruby-constant">TxIn</span>.<span class="ruby-identifier">new</span>([ <span class="ruby-identifier">input</span>[<span class="ruby-string">&#39;prev_out&#39;</span>][<span class="ruby-string">&#39;hash&#39;</span>] ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;H*&#39;</span>).<span class="ruby-identifier">reverse</span>, <span class="ruby-identifier">input</span>[<span class="ruby-string">&#39;prev_out&#39;</span>][<span class="ruby-string">&#39;n&#39;</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span>[<span class="ruby-string">&#39;coinbase&#39;</span>]
+    <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">script_sig</span> = [ <span class="ruby-identifier">input</span>[<span class="ruby-string">&#39;coinbase&#39;</span>] ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">script_sig</span> = <span class="ruby-constant">Script</span>.<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">input</span>[<span class="ruby-string">'scriptSig'</span>])
+    <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">script_sig</span> = <span class="ruby-constant">Script</span>.<span class="ruby-identifier">binary_from_string</span>(<span class="ruby-identifier">input</span>[<span class="ruby-string">&#39;scriptSig&#39;</span>])
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">sequence</span> = [ <span class="ruby-identifier">input</span>[<span class="ruby-string">'sequence'</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0xffffffff</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;I&quot;</span>)
+  <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">sequence</span> = [ <span class="ruby-identifier">input</span>[<span class="ruby-string">&#39;sequence&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0xffffffff</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;V&quot;</span>)
   <span class="ruby-identifier">txin</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- from_hash-source -->
@@ -454,12 +522,14 @@ href="../Script.html">Script</a> (signature)</p>
       </div><!-- from_hash-method -->
 
     
-      <div id="method-c-new" class="method-detail ">
+      <div id="method-c-from_hex_hash" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(*args)</span>
+          <span class="method-name">from_hex_hash</span><span
+            class="method-args">(hash, index)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -467,13 +537,80 @@ href="../Script.html">Script</a> (signature)</p>
           
           
           
+          
+
+          
+          <div class="method-source-code" id="from_hex_hash-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_hex_hash</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">index</span>)
+  <span class="ruby-constant">TxIn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">hash</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>).<span class="ruby-identifier">reverse</span>, <span class="ruby-identifier">index</span>, <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- from_hex_hash-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- from_hex_hash-method -->
+
+    
+      <div id="method-c-from_io" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">from_io</span><span
+            class="method-args">(buf)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="from_io-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_io</span>(<span class="ruby-identifier">buf</span>)
+  <span class="ruby-identifier">txin</span> = <span class="ruby-identifier">new</span>; <span class="ruby-identifier">txin</span>.<span class="ruby-identifier">parse_data_from_io</span>(<span class="ruby-identifier">buf</span>); <span class="ruby-identifier">txin</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- from_io-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- from_io-method -->
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> *<span class="ruby-identifier">args</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
   <span class="ruby-ivar">@prev_out</span>, <span class="ruby-ivar">@prev_out_index</span>, <span class="ruby-ivar">@script_sig_length</span>,
-  <span class="ruby-ivar">@script_sig</span>, <span class="ruby-ivar">@sequence</span> = *<span class="ruby-identifier">args</span>
+  <span class="ruby-ivar">@script_sig</span>, <span class="ruby-ivar">@sequence</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
   <span class="ruby-ivar">@sequence</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_SEQUENCE</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
@@ -497,7 +634,9 @@ href="../Script.html">Script</a> (signature)</p>
         <div class="method-heading">
           <span class="method-name">==</span><span
             class="method-args">(other)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -505,10 +644,11 @@ href="../Script.html">Script</a> (signature)</p>
           
           <p>compare to another txout</p>
           
+          
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-ivar">@prev_out</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">prev_out</span> <span class="ruby-operator">&amp;&amp;</span>
     <span class="ruby-ivar">@prev_out_index</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">prev_out_index</span> <span class="ruby-operator">&amp;&amp;</span>
@@ -525,12 +665,47 @@ href="../Script.html">Script</a> (signature)</p>
       </div><!-- 3D-3D-method -->
 
     
+      <div id="method-i-add_signature_pubkey_script" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_signature_pubkey_script</span><span
+            class="method-args">(sig, pubkey_hex)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_signature_pubkey_script-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_signature_pubkey_script</span>(<span class="ruby-identifier">sig</span>, <span class="ruby-identifier">pubkey_hex</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">script</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">to_signature_pubkey_script</span>(<span class="ruby-identifier">sig</span>, [<span class="ruby-identifier">pubkey_hex</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_signature_pubkey_script-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- add_signature_pubkey_script-method -->
+
+    
       <div id="method-i-coinbase-3F" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">coinbase?</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -538,12 +713,13 @@ href="../Script.html">Script</a> (signature)</p>
           
           <p>check if input is coinbase</p>
           
+          
 
           
           <div class="method-source-code" id="coinbase-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 82</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">coinbase?</span>
-  (<span class="ruby-ivar">@prev_out_index</span> <span class="ruby-operator">==</span> <span class="ruby-value">4294967295</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@prev_out</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">32</span>)
+  (<span class="ruby-ivar">@prev_out_index</span> <span class="ruby-operator">==</span> <span class="ruby-value">4294967295</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@prev_out</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\x00&quot;</span><span class="ruby-operator">*</span><span class="ruby-value">32</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- coinbase-3F-source -->
           
@@ -560,7 +736,9 @@ href="../Script.html">Script</a> (signature)</p>
         <div class="method-heading">
           <span class="method-name">parse_data</span><span
             class="method-args">(data)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -568,13 +746,14 @@ href="../Script.html">Script</a> (signature)</p>
           
           <p>parse raw binary data for transaction input</p>
           
+          
 
           
           <div class="method-source-code" id="parse_data-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_data</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@prev_out</span>, <span class="ruby-ivar">@prev_out_index</span> = <span class="ruby-identifier">data</span>[<span class="ruby-identifier">idx</span><span class="ruby-operator">...</span><span class="ruby-identifier">idx</span><span class="ruby-operator">+=</span><span class="ruby-value">36</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;a32I&quot;</span>)
+  <span class="ruby-ivar">@prev_out</span>, <span class="ruby-ivar">@prev_out_index</span> = <span class="ruby-identifier">data</span>[<span class="ruby-identifier">idx</span><span class="ruby-operator">...</span><span class="ruby-identifier">idx</span><span class="ruby-operator">+=</span><span class="ruby-value">36</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;a32V&quot;</span>)
   <span class="ruby-ivar">@script_sig_length</span>, <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">unpack_var_int</span>(<span class="ruby-identifier">data</span>[<span class="ruby-identifier">idx</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
   <span class="ruby-identifier">idx</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>[<span class="ruby-identifier">idx</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">bytesize</span>
   <span class="ruby-ivar">@script_sig</span> = <span class="ruby-identifier">data</span>[<span class="ruby-identifier">idx</span><span class="ruby-operator">...</span><span class="ruby-identifier">idx</span><span class="ruby-operator">+=</span><span class="ruby-ivar">@script_sig_length</span>]
@@ -595,16 +774,53 @@ href="../Script.html">Script</a> (signature)</p>
       </div><!-- parse_data-method -->
 
     
+      <div id="method-i-parse_data_from_io" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_data_from_io</span><span
+            class="method-args">(buf)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="parse_data_from_io-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_data_from_io</span>(<span class="ruby-identifier">buf</span>)
+  <span class="ruby-ivar">@prev_out</span>, <span class="ruby-ivar">@prev_out_index</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">36</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;a32V&quot;</span>)
+  <span class="ruby-ivar">@script_sig_length</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">unpack_var_int_from_io</span>(<span class="ruby-identifier">buf</span>)
+  <span class="ruby-ivar">@script_sig</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">read</span>(<span class="ruby-ivar">@script_sig_length</span>)
+  <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">4</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- parse_data_from_io-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parse_data_from_io-method -->
+
+    
       <div id="method-i-parse_payload" class="method-detail method-alias">
         
         <div class="method-heading">
           <span class="method-name">parse_payload</span><span
             class="method-args">(data)</span>
-          <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -627,7 +843,9 @@ href="../Script.html">Script</a> (signature)</p>
         <div class="method-heading">
           <span class="method-name">previous_output</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -635,10 +853,11 @@ href="../Script.html">Script</a> (signature)</p>
           
           <p>previous output in hex</p>
           
+          
 
           
           <div class="method-source-code" id="previous_output-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 77</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">previous_output</span>
   <span class="ruby-ivar">@prev_out</span>.<span class="ruby-identifier">reverse_hth</span>
 <span class="ruby-keyword">end</span></pre>
@@ -657,11 +876,12 @@ href="../Script.html">Script</a> (signature)</p>
         <div class="method-heading">
           <span class="method-name">script=</span><span
             class="method-args">(script_sig)</span>
-          <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -684,7 +904,9 @@ href="../Script.html">Script</a> (signature)</p>
         <div class="method-heading">
           <span class="method-name">script_sig=</span><span
             class="method-args">(script_sig)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -693,10 +915,11 @@ href="../Script.html">Script</a> (signature)</p>
           <p>set <a href="TxIn.html#attribute-i-script_sig">#script_sig</a> and <a
 href="TxIn.html#attribute-i-script_sig_length">#script_sig_length</a></p>
           
+          
 
           
           <div class="method-source-code" id="script_sig-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">script_sig=</span>(<span class="ruby-identifier">script_sig</span>)
   <span class="ruby-ivar">@script_sig_length</span> = <span class="ruby-identifier">script_sig</span>.<span class="ruby-identifier">bytesize</span>
   <span class="ruby-ivar">@script_sig</span> = <span class="ruby-identifier">script_sig</span>
@@ -719,8 +942,10 @@ href="TxIn.html#attribute-i-script_sig_length">#script_sig_length</a></p>
         
         <div class="method-heading">
           <span class="method-name">to_hash</span><span
-            class="method-args">()</span>
+            class="method-args">(options = {})</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -728,18 +953,19 @@ href="TxIn.html#attribute-i-script_sig_length">#script_sig_length</a></p>
           
           
           
+          
 
           
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_hash</span>
-  <span class="ruby-identifier">t</span> = { <span class="ruby-string">'prev_out'</span>  =<span class="ruby-operator">&gt;</span> { <span class="ruby-string">'hash'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prev_out</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-string">'n'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prev_out_index</span> } }
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">t</span> = { <span class="ruby-string">&#39;prev_out&#39;</span>  =<span class="ruby-operator">&gt;</span> { <span class="ruby-string">&#39;hash&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prev_out</span>.<span class="ruby-identifier">reverse_hth</span>, <span class="ruby-string">&#39;n&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prev_out_index</span> } }
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">coinbase?</span>
-    <span class="ruby-identifier">t</span>[<span class="ruby-string">'coinbase'</span>]  = <span class="ruby-ivar">@script_sig</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
+    <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;coinbase&#39;</span>]  = <span class="ruby-ivar">@script_sig</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
   <span class="ruby-keyword">else</span> <span class="ruby-comment"># coinbase tx</span>
-    <span class="ruby-identifier">t</span>[<span class="ruby-string">'scriptSig'</span>] = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@script_sig</span>).<span class="ruby-identifier">to_string</span>
+    <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;scriptSig&#39;</span>] = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@script_sig</span>).<span class="ruby-identifier">to_string</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">t</span>[<span class="ruby-string">'sequence'</span>]  = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;I&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@sequence</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\xff\xff\xff\xff&quot;</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;sequence&#39;</span>]  = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;V&quot;</span>)[<span class="ruby-value">0</span>] <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@sequence</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\xff\xff\xff\xff&quot;</span>
   <span class="ruby-identifier">t</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_hash-source -->
@@ -757,7 +983,9 @@ href="TxIn.html#attribute-i-script_sig_length">#script_sig_length</a></p>
         <div class="method-heading">
           <span class="method-name">to_payload</span><span
             class="method-args">(script=@script_sig, sequence=@sequence)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -765,12 +993,13 @@ href="TxIn.html#attribute-i-script_sig_length">#script_sig_length</a></p>
           
           
           
+          
 
           
           <div class="method-source-code" id="to_payload-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/protocol/txin.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_payload</span>(<span class="ruby-identifier">script</span>=<span class="ruby-ivar">@script_sig</span>, <span class="ruby-identifier">sequence</span>=<span class="ruby-ivar">@sequence</span>)
-  <span class="ruby-identifier">buf</span> =  [ <span class="ruby-ivar">@prev_out</span>, <span class="ruby-ivar">@prev_out_index</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;a32I&quot;</span>)
+  <span class="ruby-identifier">buf</span> =  [ <span class="ruby-ivar">@prev_out</span>, <span class="ruby-ivar">@prev_out_index</span> ].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;a32V&quot;</span>)
   <span class="ruby-identifier">buf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pack_var_int</span>(<span class="ruby-identifier">script</span>.<span class="ruby-identifier">bytesize</span>)
   <span class="ruby-identifier">buf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">script</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">script</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
   <span class="ruby-identifier">buf</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">sequence</span> <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_SEQUENCE</span>)
@@ -794,7 +1023,7 @@ href="TxIn.html#attribute-i-script_sig_length">#script_sig_length</a></p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

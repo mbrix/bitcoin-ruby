@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Bitcoin::Builder::TxInBuilder</title>
+<title>class Bitcoin::Builder::TxInBuilder - bitcoin-ruby RDoc</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -64,25 +66,26 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-coinbase">#coinbase</a>
+    <li ><a href="#method-i-coinbase">#coinbase</a>
     
-    <li><a href="#method-i-prev_out">#prev_out</a>
+    <li ><a href="#method-i-prev_out">#prev_out</a>
     
-    <li><a href="#method-i-prev_out_index">#prev_out_index</a>
+    <li ><a href="#method-i-prev_out_index">#prev_out_index</a>
     
-    <li><a href="#method-i-sequence">#sequence</a>
+    <li ><a href="#method-i-sequence">#sequence</a>
     
-    <li><a href="#method-i-signature_key">#signature_key</a>
+    <li ><a href="#method-i-signature_key">#signature_key</a>
     
-    <li><a href="#method-i-txin">#txin</a>
+    <li ><a href="#method-i-txin">#txin</a>
     
   </ul>
 </nav>
@@ -103,11 +106,17 @@
   
     <li class="file"><a href="../../doc/EXAMPLES_rdoc.html">EXAMPLES</a>
   
+    <li class="file"><a href="../../doc/NAMECOIN_rdoc.html">NAMECOIN</a>
+  
     <li class="file"><a href="../../doc/NODE_rdoc.html">NODE</a>
   
     <li class="file"><a href="../../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
   
   </ul>
 </nav>
@@ -116,6 +125,8 @@
   <h3 class="section-header">Class and Module Index</h3>
 
   <ul class="link-list">
+  
+    <li><a href="../../Array.html">Array</a>
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
@@ -175,6 +186,10 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
     <li><a href="../../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
@@ -185,17 +200,17 @@
   
     <li><a href="../../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
   
-    <li><a href="../../Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
-  
     <li><a href="../../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
-    <li><a href="../../Bitcoin/Protocol.html">Bitcoin::P</a>
+    <li><a href="../../Bitcoin/P.html">Bitcoin::P</a>
   
     <li><a href="../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
     <li><a href="../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
+    <li><a href="../../Bitcoin/Protocol/AuxPow.html">Bitcoin::Protocol::AuxPow</a>
   
     <li><a href="../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -231,6 +246,8 @@
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
   
+    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
+  
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
     <li><a href="../../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
@@ -261,6 +278,28 @@
   
     <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
+    <li><a href="../../Connection.html">Connection</a>
+  
+    <li><a href="../../Digest.html">Digest</a>
+  
+    <li><a href="../../EM.html">EM</a>
+  
+    <li><a href="../../ElectrumClient.html">ElectrumClient</a>
+  
+    <li><a href="../../Gtk.html">Gtk</a>
+  
+    <li><a href="../../Hash.html">Hash</a>
+  
+    <li><a href="../../JSON.html">JSON</a>
+  
+    <li><a href="../../Log4r.html">Log4r</a>
+  
+    <li><a href="../../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
+    <li><a href="../../Object.html">Object</a>
+  
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -271,23 +310,13 @@
   
     <li><a href="../../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
   
-    <li><a href="../../Log4r.html">Log4r</a>
-  
-    <li><a href="../../Log4r/Logger.html">Log4r::Logger</a>
-  
-    <li><a href="../../Array.html">Array</a>
-  
-    <li><a href="../../EM.html">EM</a>
-  
-    <li><a href="../../Gtk.html">Gtk</a>
-  
-    <li><a href="../../Hash.html">Hash</a>
-  
-    <li><a href="../../Mnemonic.html">Mnemonic</a>
-  
-    <li><a href="../../Object.html">Object</a>
-  
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../Server.html">Server</a>
+  
+    <li><a href="../../SimpleNode.html">SimpleNode</a>
+  
+    <li><a href="../../SimpleNode/Connection.html">SimpleNode::Connection</a>
   
     <li><a href="../../String.html">String</a>
   
@@ -306,11 +335,9 @@
 by <a
 href="TxBuilder.html#method-i-input">Bitcoin::Builder::TxBuilder#input</a>.</p>
 
-<p>inputs can be either ‘coinbase’, in which case they only need to specify <a
-href="TxInBuilder.html#method-i-coinbase">#coinbase</a>, or they have to
-define a <a href="TxInBuilder.html#method-i-prev_out">#prev_out</a>, <a
-href="TxInBuilder.html#method-i-prev_out_index">#prev_out_index</a> and
-signature key.</p>
+<p>inputs can be either &#39;coinbase&#39;, in which case they only need to
+specify #coinbase, or they have to define a #prev_out, #prev_out_index and
+#signature <a href="TxInBuilder.html#attribute-i-key">#key</a>.</p>
 
   </div><!-- description -->
 
@@ -370,7 +397,9 @@ signature key.</p>
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -378,10 +407,11 @@ signature key.</p>
           
           
           
+          
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@txin</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">TxIn</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -406,18 +436,23 @@ signature key.</p>
         <div class="method-heading">
           <span class="method-name">coinbase</span><span
             class="method-args">(data = nil)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>specify that this is a coinbase input. optionally set <code>data</code>.</p>
+          <p>specify that this is a <a
+href="TxInBuilder.html#method-i-coinbase">#coinbase</a> input. optionally
+set <code>data</code>.</p>
+          
           
 
           
           <div class="method-source-code" id="coinbase-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 207</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">coinbase</span> <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@coinbase_data</span> = <span class="ruby-identifier">data</span> <span class="ruby-operator">||</span> <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Random</span>.<span class="ruby-identifier">random_bytes</span>(<span class="ruby-value">32</span>)
   <span class="ruby-ivar">@prev_out</span> = <span class="ruby-keyword">nil</span>
@@ -438,7 +473,9 @@ signature key.</p>
         <div class="method-heading">
           <span class="method-name">prev_out</span><span
             class="method-args">(tx)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -446,10 +483,11 @@ signature key.</p>
           
           <p>previous transaction that contains the output we want to use.</p>
           
+          
 
           
           <div class="method-source-code" id="prev_out-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 186</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">prev_out</span> <span class="ruby-identifier">tx</span>
   <span class="ruby-ivar">@prev_out</span> = <span class="ruby-identifier">tx</span>
 <span class="ruby-keyword">end</span></pre>
@@ -468,19 +506,21 @@ signature key.</p>
         <div class="method-heading">
           <span class="method-name">prev_out_index</span><span
             class="method-args">(i)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>index of the output in the <a
-href="TxInBuilder.html#method-i-prev_out">#prev_out</a> transaction.</p>
+          <p>index of the output in the #prev_out transaction.</p>
+          
           
 
           
           <div class="method-source-code" id="prev_out_index-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 191</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">prev_out_index</span> <span class="ruby-identifier">i</span>
   <span class="ruby-ivar">@prev_out_index</span> = <span class="ruby-identifier">i</span>
 <span class="ruby-keyword">end</span></pre>
@@ -499,18 +539,22 @@ href="TxInBuilder.html#method-i-prev_out">#prev_out</a> transaction.</p>
         <div class="method-heading">
           <span class="method-name">sequence</span><span
             class="method-args">(s)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>specify sequence. this is usually not needed.</p>
+          <p>specify <a href="TxInBuilder.html#method-i-sequence">#sequence</a>. this is
+usually not needed.</p>
+          
           
 
           
           <div class="method-source-code" id="sequence-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 196</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sequence</span> <span class="ruby-identifier">s</span>
   <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">s</span>
 <span class="ruby-keyword">end</span></pre>
@@ -529,7 +573,9 @@ href="TxInBuilder.html#method-i-prev_out">#prev_out</a> transaction.</p>
         <div class="method-heading">
           <span class="method-name">signature_key</span><span
             class="method-args">(key)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -539,10 +585,11 @@ href="TxInBuilder.html#method-i-prev_out">#prev_out</a> transaction.</p>
 the input. see Bitcoin::Script.signature_hash_for_input and <a
 href="../Key.html#method-i-sign">Bitcoin::Key#sign</a>.</p>
           
+          
 
           
           <div class="method-source-code" id="signature_key-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 202</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 210</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">signature_key</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -561,20 +608,24 @@ href="../Key.html#method-i-sign">Bitcoin::Key#sign</a>.</p>
         <div class="method-heading">
           <span class="method-name">txin</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>create the txin according to values specified via DSL</p>
+          <p>create the <a href="TxInBuilder.html#method-i-txin">#txin</a> according to
+values specified via DSL</p>
+          
           
 
           
           <div class="method-source-code" id="txin-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 214</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">txin</span>
-  <span class="ruby-ivar">@txin</span>.<span class="ruby-identifier">prev_out</span> = (<span class="ruby-ivar">@prev_out</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@prev_out</span>.<span class="ruby-identifier">binary_hash</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">32</span>)
+  <span class="ruby-ivar">@txin</span>.<span class="ruby-identifier">prev_out</span> = (<span class="ruby-ivar">@prev_out</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@prev_out</span>.<span class="ruby-identifier">binary_hash</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;\x00&quot;</span><span class="ruby-operator">*</span><span class="ruby-value">32</span>)
   <span class="ruby-ivar">@txin</span>.<span class="ruby-identifier">prev_out_index</span> = <span class="ruby-ivar">@prev_out_index</span>
   <span class="ruby-ivar">@txin</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-ivar">@sequence</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;\xff\xff\xff\xff&quot;</span>
   <span class="ruby-ivar">@txin</span>
@@ -598,7 +649,7 @@ href="../Key.html#method-i-sign">Bitcoin::Key#sign</a>.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

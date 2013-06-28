@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Bitcoin::Builder::BlockBuilder</title>
+<title>class Bitcoin::Builder::BlockBuilder - bitcoin-ruby RDoc</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -64,21 +66,26 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-block">#block</a>
+    <li ><a href="#method-i-block">#block</a>
     
-    <li><a href="#method-i-prev_block">#prev_block</a>
+    <li ><a href="#method-i-find_hash">#find_hash</a>
     
-    <li><a href="#method-i-tx">#tx</a>
+    <li ><a href="#method-i-prev_block">#prev_block</a>
     
-    <li><a href="#method-i-version">#version</a>
+    <li ><a href="#method-i-time">#time</a>
+    
+    <li ><a href="#method-i-tx">#tx</a>
+    
+    <li ><a href="#method-i-version">#version</a>
     
   </ul>
 </nav>
@@ -99,11 +106,17 @@
   
     <li class="file"><a href="../../doc/EXAMPLES_rdoc.html">EXAMPLES</a>
   
+    <li class="file"><a href="../../doc/NAMECOIN_rdoc.html">NAMECOIN</a>
+  
     <li class="file"><a href="../../doc/NODE_rdoc.html">NODE</a>
   
     <li class="file"><a href="../../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
   
   </ul>
 </nav>
@@ -112,6 +125,8 @@
   <h3 class="section-header">Class and Module Index</h3>
 
   <ul class="link-list">
+  
+    <li><a href="../../Array.html">Array</a>
   
     <li><a href="../../Bitcoin.html">Bitcoin</a>
   
@@ -171,6 +186,10 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
     <li><a href="../../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
@@ -181,17 +200,17 @@
   
     <li><a href="../../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
   
-    <li><a href="../../Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
-  
     <li><a href="../../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
-    <li><a href="../../Bitcoin/Protocol.html">Bitcoin::P</a>
+    <li><a href="../../Bitcoin/P.html">Bitcoin::P</a>
   
     <li><a href="../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
     <li><a href="../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
+    <li><a href="../../Bitcoin/Protocol/AuxPow.html">Bitcoin::Protocol::AuxPow</a>
   
     <li><a href="../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -227,6 +246,8 @@
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
   
+    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
+  
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
     <li><a href="../../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
@@ -257,6 +278,28 @@
   
     <li><a href="../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
+    <li><a href="../../Connection.html">Connection</a>
+  
+    <li><a href="../../Digest.html">Digest</a>
+  
+    <li><a href="../../EM.html">EM</a>
+  
+    <li><a href="../../ElectrumClient.html">ElectrumClient</a>
+  
+    <li><a href="../../Gtk.html">Gtk</a>
+  
+    <li><a href="../../Hash.html">Hash</a>
+  
+    <li><a href="../../JSON.html">JSON</a>
+  
+    <li><a href="../../Log4r.html">Log4r</a>
+  
+    <li><a href="../../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../../Mnemonic.html">Mnemonic</a>
+  
+    <li><a href="../../Object.html">Object</a>
+  
     <li><a href="../../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -267,23 +310,13 @@
   
     <li><a href="../../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
   
-    <li><a href="../../Log4r.html">Log4r</a>
-  
-    <li><a href="../../Log4r/Logger.html">Log4r::Logger</a>
-  
-    <li><a href="../../Array.html">Array</a>
-  
-    <li><a href="../../EM.html">EM</a>
-  
-    <li><a href="../../Gtk.html">Gtk</a>
-  
-    <li><a href="../../Hash.html">Hash</a>
-  
-    <li><a href="../../Mnemonic.html">Mnemonic</a>
-  
-    <li><a href="../../Object.html">Object</a>
-  
     <li><a href="../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../Server.html">Server</a>
+  
+    <li><a href="../../SimpleNode.html">SimpleNode</a>
+  
+    <li><a href="../../SimpleNode/Connection.html">SimpleNode::Connection</a>
   
     <li><a href="../../String.html">String</a>
   
@@ -302,8 +335,8 @@
 href="../Protocol/Block.html">Bitcoin::Protocol::Block</a> used by <a
 href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">block</span> = <span class="ruby-identifier">blk</span>(<span class="ruby-string">&quot;00&quot;</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">32</span>, <span class="ruby-string">'f'</span>)) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">prev_block</span> <span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">32</span>
+<pre class="ruby"><span class="ruby-identifier">block</span> = <span class="ruby-identifier">blk</span>(<span class="ruby-string">&quot;00&quot;</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">32</span>, <span class="ruby-string">&#39;f&#39;</span>)) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">prev_block</span> <span class="ruby-string">&quot;\x00&quot;</span><span class="ruby-operator">*</span><span class="ruby-value">32</span>
   <span class="ruby-identifier">b</span>.<span class="ruby-identifier">tx</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">t</span>.<span class="ruby-identifier">input</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">coinbase</span> }
     <span class="ruby-identifier">t</span>.<span class="ruby-identifier">output</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
@@ -342,7 +375,9 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -350,10 +385,11 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
           
           
           
+          
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 48</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@block</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Block</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -378,23 +414,27 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
         <div class="method-heading">
           <span class="method-name">block</span><span
             class="method-args">(target)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>create the block according to values specified via DSL.</p>
+          <p>create the <a href="BlockBuilder.html#method-i-block">#block</a> according
+to values specified via DSL.</p>
+          
           
 
           
           <div class="method-source-code" id="block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 70</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">block</span> <span class="ruby-identifier">target</span>
   <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">ver</span> = <span class="ruby-ivar">@version</span> <span class="ruby-operator">||</span> <span class="ruby-value">1</span>
   <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">prev_block</span> = [<span class="ruby-ivar">@prev_block</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>).<span class="ruby-identifier">reverse</span>
   <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">mrkl_root</span> = <span class="ruby-ivar">@mrkl_root</span>
-  <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">time</span> = <span class="ruby-ivar">@time</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">nonce</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">mrkl_root</span> = [<span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash_mrkl_tree</span>(<span class="ruby-ivar">@block</span>.<span class="ruby-identifier">tx</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">hash</span> }).<span class="ruby-identifier">last</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>).<span class="ruby-identifier">reverse</span>
@@ -416,18 +456,22 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
         <div class="method-heading">
           <span class="method-name">prev_block</span><span
             class="method-args">(hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>set the hash of the previous block.</p>
+          <p>set the hash of the previous <a
+href="BlockBuilder.html#method-i-block">#block</a>.</p>
+          
           
 
           
           <div class="method-source-code" id="prev_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">prev_block</span> <span class="ruby-identifier">hash</span>
   <span class="ruby-ivar">@prev_block</span> = <span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
@@ -441,23 +485,62 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
       </div><!-- prev_block-method -->
 
     
-      <div id="method-i-tx" class="method-detail ">
+      <div id="method-i-time" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">tx</span><span
-            class="method-args">() { |c| ... }</span>
+          <span class="method-name">time</span><span
+            class="method-args">(time)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>add transactions to the block (see <a href="TxBuilder.html">TxBuilder</a>).</p>
+          <p>set the <a href="BlockBuilder.html#method-i-block">#block</a> timestamp
+(defaults to current <a href="BlockBuilder.html#method-i-time">#time</a>).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="time-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">time</span> <span class="ruby-identifier">time</span>
+  <span class="ruby-ivar">@time</span> = <span class="ruby-identifier">time</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- time-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- time-method -->
+
+    
+      <div id="method-i-tx" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tx</span><span
+            class="method-args">() { |c| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>add transactions to the <a
+href="BlockBuilder.html#method-i-block">#block</a> (see <a
+href="TxBuilder.html">TxBuilder</a>).</p>
+          
           
 
           
           <div class="method-source-code" id="tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 63</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tx</span>
   <span class="ruby-identifier">c</span> = <span class="ruby-constant">TxBuilder</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">c</span>
@@ -478,18 +561,23 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
         <div class="method-heading">
           <span class="method-name">version</span><span
             class="method-args">(v)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>specify block version. this is usually not necessary. defaults to 1.</p>
+          <p>specify <a href="BlockBuilder.html#method-i-block">#block</a> <a
+href="BlockBuilder.html#method-i-version">#version</a>. this is usually not
+necessary. defaults to 1.</p>
+          
           
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span> <span class="ruby-identifier">v</span>
   <span class="ruby-ivar">@version</span> = <span class="ruby-identifier">v</span>
 <span class="ruby-keyword">end</span></pre>
@@ -505,6 +593,63 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
     
     </section><!-- public-instance-method-details -->
   
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-find_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_hash</span><span
+            class="method-args">(target)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>increment nonce/time to find a <a
+href="BlockBuilder.html#method-i-block">#block</a> hash matching the
+<code>target</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="find_hash-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_hash</span> <span class="ruby-identifier">target</span>
+  <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">bits</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">encode_compact_bits</span>(<span class="ruby-identifier">target</span>)
+  <span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">recalc_block_hash</span>
+  <span class="ruby-keyword">until</span> <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">hash</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">target</span>
+    <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">nonce</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">recalc_block_hash</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">nonce</span> <span class="ruby-operator">==</span> <span class="ruby-value">100000</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>
+        <span class="ruby-identifier">tt</span> = <span class="ruby-value">1</span> <span class="ruby-operator">/</span> ((<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">t</span>) <span class="ruby-operator">/</span> <span class="ruby-value">100000</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1000</span>
+        <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;\r%.2f khash/s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">tt</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+      <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">nonce</span> = <span class="ruby-value">0</span>
+      <span class="ruby-identifier">$stdout</span>.<span class="ruby-identifier">flush</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_hash-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_hash-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->
@@ -512,7 +657,7 @@ href="../Builder.html#method-i-blk">Bitcoin::Builder#blk</a>.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

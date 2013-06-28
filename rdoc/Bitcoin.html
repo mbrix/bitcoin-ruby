@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Module: Bitcoin</title>
+<title>module Bitcoin - bitcoin-ruby RDoc</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -43,28 +43,66 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/bitcoin/logger.rb
-    <li>lib/bitcoin/protocol.rb
-    <li>lib/bitcoin/config.rb
-    <li>lib/bitcoin/builder.rb
-    <li>lib/bitcoin/connection.rb
-    <li>lib/bitcoin/key.rb
-    <li>lib/bitcoin/ffi/openssl.rb
-    <li>lib/bitcoin/version.rb
-    <li>lib/bitcoin/protocol/tx.rb
-    <li>lib/bitcoin/protocol/alert.rb
-    <li>lib/bitcoin/protocol/txout.rb
-    <li>lib/bitcoin/protocol/txin.rb
-    <li>lib/bitcoin/protocol/parser.rb
-    <li>lib/bitcoin/protocol/address.rb
-    <li>lib/bitcoin/protocol/version.rb
-    <li>lib/bitcoin/protocol/handler.rb
-    <li>lib/bitcoin/protocol/block.rb
+    <li>examples/balance.rb
+    <li>examples/bbe_verify_tx.rb
+    <li>examples/bitcoin_pay.rb
+    <li>examples/connect.rb
+    <li>examples/generate_tx.rb
+    <li>examples/import.rb
+    <li>examples/munin_blocks.rb
+    <li>examples/munin_connections.rb
+    <li>examples/simple_network_monitor_and_util.rb
+    <li>examples/verify_tx.rb
     <li>lib/bitcoin.rb
+    <li>lib/bitcoin/builder.rb
+    <li>lib/bitcoin/config.rb
+    <li>lib/bitcoin/connection.rb
+    <li>lib/bitcoin/ffi/openssl.rb
+    <li>lib/bitcoin/gui/addr_view.rb
+    <li>lib/bitcoin/gui/conn_view.rb
+    <li>lib/bitcoin/gui/connection.rb
+    <li>lib/bitcoin/gui/gui.rb
+    <li>lib/bitcoin/gui/helpers.rb
+    <li>lib/bitcoin/gui/tree_view.rb
+    <li>lib/bitcoin/gui/tx_view.rb
+    <li>lib/bitcoin/key.rb
+    <li>lib/bitcoin/logger.rb
+    <li>lib/bitcoin/namecoin.rb
+    <li>lib/bitcoin/network/command_client.rb
+    <li>lib/bitcoin/network/command_handler.rb
+    <li>lib/bitcoin/network/connection_handler.rb
+    <li>lib/bitcoin/network/node.rb
+    <li>lib/bitcoin/network/storage_worker.rb
+    <li>lib/bitcoin/protocol.rb
+    <li>lib/bitcoin/protocol/address.rb
+    <li>lib/bitcoin/protocol/alert.rb
+    <li>lib/bitcoin/protocol/aux_pow.rb
+    <li>lib/bitcoin/protocol/block.rb
+    <li>lib/bitcoin/protocol/handler.rb
+    <li>lib/bitcoin/protocol/parser.rb
+    <li>lib/bitcoin/protocol/tx.rb
+    <li>lib/bitcoin/protocol/txin.rb
+    <li>lib/bitcoin/protocol/txout.rb
+    <li>lib/bitcoin/protocol/version.rb
+    <li>lib/bitcoin/script.rb
+    <li>lib/bitcoin/storage/dummy/dummy_store.rb
+    <li>lib/bitcoin/storage/models.rb
+    <li>lib/bitcoin/storage/sequel/migrations.rb
+    <li>lib/bitcoin/storage/sequel/sequel_store.rb
+    <li>lib/bitcoin/storage/storage.rb
+    <li>lib/bitcoin/validation.rb
+    <li>lib/bitcoin/version.rb
+    <li>lib/bitcoin/wallet/coinselector.rb
+    <li>lib/bitcoin/wallet/keygenerator.rb
+    <li>lib/bitcoin/wallet/keystore.rb
+    <li>lib/bitcoin/wallet/txdp.rb
+    <li>lib/bitcoin/wallet/wallet.rb
   </ul>
 </nav>
 
@@ -74,18 +112,47 @@
   <div id="class-metadata">
     
     
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Extension Modules -->
+<nav id="extends-section" class="section">
+  <h3 class="section-header">Extended With Modules</h3>
+
+  <ul class="link-list">
     
+  
+    <li><a class="extend" href="Bitcoin/Util.html">Bitcoin::Util</a>
+  
+  
+  </ul>
+</nav>
+
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-network">::network</a>
+    <li ><a href="#method-c-network">::network</a>
     
-    <li><a href="#method-c-network-3D">::network=</a>
+    <li ><a href="#method-c-network-3D">::network=</a>
     
-    <li><a href="#method-c-require_dependency">::require_dependency</a>
+    <li ><a href="#method-c-network_name">::network_name</a>
+    
+    <li ><a href="#method-c-network_project">::network_project</a>
+    
+    <li ><a href="#method-c-require_dependency">::require_dependency</a>
     
   </ul>
 </nav>
@@ -106,11 +173,17 @@
   
     <li class="file"><a href="./doc/EXAMPLES_rdoc.html">EXAMPLES</a>
   
+    <li class="file"><a href="./doc/NAMECOIN_rdoc.html">NAMECOIN</a>
+  
     <li class="file"><a href="./doc/NODE_rdoc.html">NODE</a>
   
     <li class="file"><a href="./doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="./doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="./lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
+  
+    <li class="file"><a href="./lib/bitcoin/gui/gui_builder.html">gui.builder</a>
   
   </ul>
 </nav>
@@ -119,6 +192,8 @@
   <h3 class="section-header">Class and Module Index</h3>
 
   <ul class="link-list">
+  
+    <li><a href="./Array.html">Array</a>
   
     <li><a href="./Bitcoin.html">Bitcoin</a>
   
@@ -178,6 +253,10 @@
   
     <li><a href="./Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="./Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
+  
+    <li><a href="./Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
     <li><a href="./Bitcoin/Network.html">Bitcoin::Network</a>
   
     <li><a href="./Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
@@ -188,17 +267,17 @@
   
     <li><a href="./Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
   
-    <li><a href="./Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
-  
     <li><a href="./Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
-    <li><a href="./Bitcoin/Protocol.html">Bitcoin::P</a>
+    <li><a href="./Bitcoin/P.html">Bitcoin::P</a>
   
     <li><a href="./Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="./Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
     <li><a href="./Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
+    <li><a href="./Bitcoin/Protocol/AuxPow.html">Bitcoin::Protocol::AuxPow</a>
   
     <li><a href="./Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -234,6 +313,8 @@
   
     <li><a href="./Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
   
+    <li><a href="./Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
+  
     <li><a href="./Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
     <li><a href="./Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
@@ -264,6 +345,28 @@
   
     <li><a href="./Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
+    <li><a href="./Connection.html">Connection</a>
+  
+    <li><a href="./Digest.html">Digest</a>
+  
+    <li><a href="./EM.html">EM</a>
+  
+    <li><a href="./ElectrumClient.html">ElectrumClient</a>
+  
+    <li><a href="./Gtk.html">Gtk</a>
+  
+    <li><a href="./Hash.html">Hash</a>
+  
+    <li><a href="./JSON.html">JSON</a>
+  
+    <li><a href="./Log4r.html">Log4r</a>
+  
+    <li><a href="./Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="./Mnemonic.html">Mnemonic</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
     <li><a href="./OpenSSL.html">OpenSSL</a>
   
     <li><a href="./OpenSSL/BN.html">OpenSSL::BN</a>
@@ -274,23 +377,13 @@
   
     <li><a href="./OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
   
-    <li><a href="./Log4r.html">Log4r</a>
-  
-    <li><a href="./Log4r/Logger.html">Log4r::Logger</a>
-  
-    <li><a href="./Array.html">Array</a>
-  
-    <li><a href="./EM.html">EM</a>
-  
-    <li><a href="./Gtk.html">Gtk</a>
-  
-    <li><a href="./Hash.html">Hash</a>
-  
-    <li><a href="./Mnemonic.html">Mnemonic</a>
-  
-    <li><a href="./Object.html">Object</a>
-  
     <li><a href="./RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="./Server.html">Server</a>
+  
+    <li><a href="./SimpleNode.html">SimpleNode</a>
+  
+    <li><a href="./SimpleNode/Connection.html">SimpleNode::Connection</a>
   
     <li><a href="./String.html">String</a>
   
@@ -386,6 +479,11 @@
         <dd class="description">
         
       
+        <dt id="network">network
+        
+        <dd class="description">
+        
+      
       </dl>
     </section>
     
@@ -403,7 +501,9 @@
         <div class="method-heading">
           <span class="method-name">network</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -411,10 +511,11 @@
           
           
           
+          
 
           
           <div class="method-source-code" id="network-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 341</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 377</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network</span>
   <span class="ruby-constant">NETWORKS</span>[<span class="ruby-ivar">@network</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -433,7 +534,9 @@
         <div class="method-heading">
           <span class="method-name">network=</span><span
             class="method-args">(name)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -441,12 +544,17 @@
           
           
           
+          
 
           
           <div class="method-source-code" id="network-3D-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 345</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network=</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Network descriptor &#39;#{name}&#39; not found.&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">NETWORKS</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>]
   <span class="ruby-ivar">@network</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-ivar">@network_project</span> = <span class="ruby-identifier">network</span>[<span class="ruby-value">:project</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-constant">Script</span>.<span class="ruby-identifier">class_eval</span> { <span class="ruby-identifier">include</span> <span class="ruby-constant">Namecoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span> }  <span class="ruby-keyword">if</span> <span class="ruby-identifier">namecoin?</span>
+  <span class="ruby-ivar">@network</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- network-3D-source -->
           
@@ -458,12 +566,14 @@
       </div><!-- network-3D-method -->
 
     
-      <div id="method-c-require_dependency" class="method-detail ">
+      <div id="method-c-network_name" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">require_dependency</span><span
-            class="method-args">(name, opts = {})</span>
+          <span class="method-name">network_name</span><span
+            class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -471,15 +581,83 @@
           
           
           
+          
+
+          
+          <div class="method-source-code" id="network_name-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 381</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network_name</span>
+  <span class="ruby-ivar">@network</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- network_name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- network_name-method -->
+
+    
+      <div id="method-c-network_project" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">network_project</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="network_project-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 385</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">network_project</span>
+  <span class="ruby-ivar">@network_project</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- network_project-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- network_project-method -->
+
+    
+      <div id="method-c-require_dependency" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">require_dependency</span><span
+            class="method-args">(name, opts = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
 
           
           <div class="method-source-code" id="require_dependency-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_dependency</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">opts</span> = {}
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">require</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
-    <span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Cannot load #{opts[:exit] == false ? 'optional' : 'required'} dependency '#{name}'&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;log4r&quot;</span>
+    <span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Cannot load #{opts[:exit] == false ? &#39;optional&#39; : &#39;required&#39;} dependency &#39;#{name}&#39;&quot;</span>
     (<span class="ruby-identifier">opts</span>[<span class="ruby-value">:gem</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;&quot;</span>) <span class="ruby-operator">:</span>
       <span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot; - install with `gem install #{opts[:gem] || name}`&quot;</span>)
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:message</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:message</span>]
@@ -507,7 +685,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

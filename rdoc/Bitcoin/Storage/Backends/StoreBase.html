@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Bitcoin::Storage::Backends::StoreBase</title>
+<title>class Bitcoin::Storage::Backends::StoreBase - bitcoin-ruby RDoc</title>
 
 <link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
 
@@ -43,11 +43,14 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
     <li>lib/bitcoin/storage/storage.rb
+    <li>lib/bitcoin/validation.rb
   </ul>
 </nav>
 
@@ -64,59 +67,64 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-get_balance">#get_balance</a>
+    <li ><a href="#method-i-get_balance">#get_balance</a>
     
-    <li><a href="#method-i-get_block">#get_block</a>
+    <li ><a href="#method-i-get_block">#get_block</a>
     
-    <li><a href="#method-i-get_block_by_depth">#get_block_by_depth</a>
+    <li ><a href="#method-i-get_block_by_depth">#get_block_by_depth</a>
     
-    <li><a href="#method-i-get_block_by_id">#get_block_by_id</a>
+    <li ><a href="#method-i-get_block_by_id">#get_block_by_id</a>
     
-    <li><a href="#method-i-get_block_by_prev_hash">#get_block_by_prev_hash</a>
+    <li ><a href="#method-i-get_block_by_prev_hash">#get_block_by_prev_hash</a>
     
-    <li><a href="#method-i-get_block_by_tx">#get_block_by_tx</a>
+    <li ><a href="#method-i-get_block_by_tx">#get_block_by_tx</a>
     
-    <li><a href="#method-i-get_depth">#get_depth</a>
+    <li ><a href="#method-i-get_depth">#get_depth</a>
     
-    <li><a href="#method-i-get_head">#get_head</a>
+    <li ><a href="#method-i-get_head">#get_head</a>
     
-    <li><a href="#method-i-get_locator">#get_locator</a>
+    <li ><a href="#method-i-get_locator">#get_locator</a>
     
-    <li><a href="#method-i-get_tx">#get_tx</a>
+    <li ><a href="#method-i-get_tx">#get_tx</a>
     
-    <li><a href="#method-i-get_tx_by_id">#get_tx_by_id</a>
+    <li ><a href="#method-i-get_tx_by_id">#get_tx_by_id</a>
     
-    <li><a href="#method-i-get_txin_for_txout">#get_txin_for_txout</a>
+    <li ><a href="#method-i-get_txin_for_txout">#get_txin_for_txout</a>
     
-    <li><a href="#method-i-get_txouts_for_address">#get_txouts_for_address</a>
+    <li ><a href="#method-i-get_txouts_for_address">#get_txouts_for_address</a>
     
-    <li><a href="#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script</a>
+    <li ><a href="#method-i-get_txouts_for_pk_script">#get_txouts_for_pk_script</a>
     
-    <li><a href="#method-i-has_block">#has_block</a>
+    <li ><a href="#method-i-has_block">#has_block</a>
     
-    <li><a href="#method-i-has_tx">#has_tx</a>
+    <li ><a href="#method-i-has_tx">#has_tx</a>
     
-    <li><a href="#method-i-import">#import</a>
+    <li ><a href="#method-i-import">#import</a>
     
-    <li><a href="#method-i-in_sync-3F">#in_sync?</a>
+    <li ><a href="#method-i-in_sync-3F">#in_sync?</a>
     
-    <li><a href="#method-i-persist_block">#persist_block</a>
+    <li ><a href="#method-i-new_block">#new_block</a>
     
-    <li><a href="#method-i-reset">#reset</a>
+    <li ><a href="#method-i-new_tx">#new_tx</a>
     
-    <li><a href="#method-i-store_block">#store_block</a>
+    <li ><a href="#method-i-persist_block">#persist_block</a>
     
-    <li><a href="#method-i-store_tx">#store_tx</a>
+    <li ><a href="#method-i-reset">#reset</a>
     
-    <li><a href="#method-i-update_block">#update_block</a>
+    <li ><a href="#method-i-store_block">#store_block</a>
+    
+    <li ><a href="#method-i-store_tx">#store_tx</a>
+    
+    <li ><a href="#method-i-update_block">#update_block</a>
     
   </ul>
 </nav>
@@ -137,11 +145,17 @@
   
     <li class="file"><a href="../../../doc/EXAMPLES_rdoc.html">EXAMPLES</a>
   
+    <li class="file"><a href="../../../doc/NAMECOIN_rdoc.html">NAMECOIN</a>
+  
     <li class="file"><a href="../../../doc/NODE_rdoc.html">NODE</a>
   
     <li class="file"><a href="../../../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../../../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
+  
+    <li class="file"><a href="../../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
   
   </ul>
 </nav>
@@ -150,6 +164,8 @@
   <h3 class="section-header">Class and Module Index</h3>
 
   <ul class="link-list">
+  
+    <li><a href="../../../Array.html">Array</a>
   
     <li><a href="../../../Bitcoin.html">Bitcoin</a>
   
@@ -209,6 +225,10 @@
   
     <li><a href="../../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
+  
+    <li><a href="../../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
     <li><a href="../../../Bitcoin/Network.html">Bitcoin::Network</a>
   
     <li><a href="../../../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
@@ -219,17 +239,17 @@
   
     <li><a href="../../../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
   
-    <li><a href="../../../Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
-  
     <li><a href="../../../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
-    <li><a href="../../../Bitcoin/Protocol.html">Bitcoin::P</a>
+    <li><a href="../../../Bitcoin/P.html">Bitcoin::P</a>
   
     <li><a href="../../../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../../../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
     <li><a href="../../../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
+    <li><a href="../../../Bitcoin/Protocol/AuxPow.html">Bitcoin::Protocol::AuxPow</a>
   
     <li><a href="../../../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -265,6 +285,8 @@
   
     <li><a href="../../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
   
+    <li><a href="../../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
+  
     <li><a href="../../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
     <li><a href="../../../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
@@ -295,6 +317,28 @@
   
     <li><a href="../../../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
+    <li><a href="../../../Connection.html">Connection</a>
+  
+    <li><a href="../../../Digest.html">Digest</a>
+  
+    <li><a href="../../../EM.html">EM</a>
+  
+    <li><a href="../../../ElectrumClient.html">ElectrumClient</a>
+  
+    <li><a href="../../../Gtk.html">Gtk</a>
+  
+    <li><a href="../../../Hash.html">Hash</a>
+  
+    <li><a href="../../../JSON.html">JSON</a>
+  
+    <li><a href="../../../Log4r.html">Log4r</a>
+  
+    <li><a href="../../../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../../../Mnemonic.html">Mnemonic</a>
+  
+    <li><a href="../../../Object.html">Object</a>
+  
     <li><a href="../../../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../../../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -305,23 +349,13 @@
   
     <li><a href="../../../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
   
-    <li><a href="../../../Log4r.html">Log4r</a>
-  
-    <li><a href="../../../Log4r/Logger.html">Log4r::Logger</a>
-  
-    <li><a href="../../../Array.html">Array</a>
-  
-    <li><a href="../../../EM.html">EM</a>
-  
-    <li><a href="../../../Gtk.html">Gtk</a>
-  
-    <li><a href="../../../Hash.html">Hash</a>
-  
-    <li><a href="../../../Mnemonic.html">Mnemonic</a>
-  
-    <li><a href="../../../Object.html">Object</a>
-  
     <li><a href="../../../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../../../Server.html">Server</a>
+  
+    <li><a href="../../../SimpleNode.html">SimpleNode</a>
+  
+    <li><a href="../../../SimpleNode/Connection.html">SimpleNode::Connection</a>
   
     <li><a href="../../../String.html">String</a>
   
@@ -409,7 +443,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(config = {}, getblocks_callback = nil)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -417,14 +453,20 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           
           
+          
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span> = {}, <span class="ruby-identifier">getblocks_callback</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:db</span>]
+    <span class="ruby-ivar">@config</span>[<span class="ruby-value">:db</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-string">&quot;~&quot;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;HOME&quot;</span>])
+    <span class="ruby-ivar">@config</span>[<span class="ruby-value">:db</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-string">&quot;&lt;network&gt;&quot;</span>, <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network_name</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@getblocks_callback</span> = <span class="ruby-identifier">getblocks_callback</span>
   <span class="ruby-ivar">@log</span>    = <span class="ruby-identifier">config</span>[<span class="ruby-value">:log</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">log</span>
+  <span class="ruby-ivar">@checkpoints</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:checkpoints</span>] <span class="ruby-operator">||</span> {}
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -447,7 +489,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_balance</span><span
             class="method-args">(hash160, unconfirmed = false)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -455,14 +499,15 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get balance for given <code>hash160</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_balance-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 237</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_balance</span>(<span class="ruby-identifier">hash160</span>, <span class="ruby-identifier">unconfirmed</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">txouts</span> = <span class="ruby-identifier">get_txouts_for_hash160</span>(<span class="ruby-identifier">hash160</span>, <span class="ruby-identifier">unconfirmed</span>)
   <span class="ruby-identifier">unspent</span> = <span class="ruby-identifier">txouts</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">get_next_in</span>.<span class="ruby-identifier">nil?</span>}
-  <span class="ruby-identifier">unspent</span>.<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:value</span>).<span class="ruby-identifier">inject</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span><span class="ruby-operator">+=</span><span class="ruby-identifier">b</span>; <span class="ruby-identifier">a</span>} <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">unspent</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>).<span class="ruby-identifier">inject</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span><span class="ruby-operator">+=</span><span class="ruby-identifier">b</span>; <span class="ruby-identifier">a</span>} <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">rescue</span>
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -481,7 +526,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_block</span><span
             class="method-args">(blk_hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -489,10 +536,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get block with given <code>blk_hash</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 183</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">blk_hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -511,7 +559,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_block_by_depth</span><span
             class="method-args">(depth)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -519,10 +569,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get block with given <code>depth</code> from main chain</p>
           
+          
 
           
           <div class="method-source-code" id="get_block_by_depth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 188</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_depth</span>(<span class="ruby-identifier">depth</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -541,7 +592,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_block_by_id</span><span
             class="method-args">(block_id)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -549,10 +602,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get block by given <code>block_id</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_block_by_id-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 203</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_id</span>(<span class="ruby-identifier">block_id</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -571,7 +625,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_block_by_prev_hash</span><span
             class="method-args">(prev_hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -579,10 +635,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get block with given <code>prev_hash</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_block_by_prev_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 193</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_prev_hash</span>(<span class="ruby-identifier">prev_hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -601,7 +658,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_block_by_tx</span><span
             class="method-args">(tx_hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -609,10 +668,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get block that includes tx with given <code>tx_hash</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_block_by_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 198</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_block_by_tx</span>(<span class="ruby-identifier">tx_hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -631,7 +691,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_depth</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -639,10 +701,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>return depth of the head block</p>
           
+          
 
           
           <div class="method-source-code" id="get_depth-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 152</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_depth</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -661,7 +724,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_head</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -669,10 +734,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get the hash of the leading block</p>
           
+          
 
           
           <div class="method-source-code" id="get_head-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 147</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_head</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -691,7 +757,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_locator</span><span
             class="method-args">(pointer = get_head)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -699,10 +767,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>compute blockchain locator</p>
           
+          
 
           
           <div class="method-source-code" id="get_locator-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 157</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_locator</span> <span class="ruby-identifier">pointer</span> = <span class="ruby-identifier">get_head</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@locator</span>
     <span class="ruby-identifier">locator</span>, <span class="ruby-identifier">head</span> = <span class="ruby-ivar">@locator</span>
@@ -710,8 +779,8 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
       <span class="ruby-keyword">return</span> <span class="ruby-identifier">locator</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-keyword">return</span> [(<span class="ruby-string">&quot;\x00&quot;</span>*<span class="ruby-value">32</span>).<span class="ruby-identifier">hth</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_depth</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+
+  <span class="ruby-keyword">return</span> [(<span class="ruby-string">&quot;\x00&quot;</span><span class="ruby-operator">*</span><span class="ruby-value">32</span>).<span class="ruby-identifier">hth</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_depth</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
   <span class="ruby-identifier">locator</span> = []
   <span class="ruby-identifier">step</span> = <span class="ruby-value">1</span>
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">pointer</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pointer</span>.<span class="ruby-identifier">hash</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-identifier">network</span>[<span class="ruby-value">:genesis_hash</span>]
@@ -742,7 +811,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_tx</span><span
             class="method-args">(tx_hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -750,10 +821,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get tx with given <code>tx_hash</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 214</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tx</span>(<span class="ruby-identifier">tx_hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -772,7 +844,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_tx_by_id</span><span
             class="method-args">(tx_id)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -780,10 +854,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           
           <p>get tx with given <code>tx_id</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_tx_by_id-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 219</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 248</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tx_by_id</span>(<span class="ruby-identifier">tx_id</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -802,7 +877,9 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
         <div class="method-heading">
           <span class="method-name">get_txin_for_txout</span><span
             class="method-args">(tx_hash, txout_idx)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -811,10 +888,11 @@ appropriate <a href="../Models.html">Bitcoin::Storage::Models</a> class.</p>
           <p>get corresponding txin for the txout in transaction <code>tx_hash</code>
 with index <code>txout_idx</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_txin_for_txout-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 209</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txin_for_txout</span>(<span class="ruby-identifier">tx_hash</span>, <span class="ruby-identifier">txout_idx</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -833,7 +911,9 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">get_txouts_for_address</span><span
             class="method-args">(address, unconfirmed = false)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -841,10 +921,11 @@ with index <code>txout_idx</code></p>
           
           <p>collect all txouts containing a standard tx to given <code>address</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_txouts_for_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 231</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 260</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txouts_for_address</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">unconfirmed</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">hash160</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_from_address</span>(<span class="ruby-identifier">address</span>)
   <span class="ruby-identifier">get_txouts_for_hash160</span>(<span class="ruby-identifier">hash160</span>, <span class="ruby-identifier">unconfirmed</span>)
@@ -864,7 +945,9 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">get_txouts_for_pk_script</span><span
             class="method-args">(script)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -872,10 +955,11 @@ with index <code>txout_idx</code></p>
           
           <p>collect all txouts containing the given <code>script</code></p>
           
+          
 
           
           <div class="method-source-code" id="get_txouts_for_pk_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 225</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 254</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txouts_for_pk_script</span>(<span class="ruby-identifier">script</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -894,7 +978,9 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">has_block</span><span
             class="method-args">(blk_hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -902,10 +988,11 @@ with index <code>txout_idx</code></p>
           
           <p>check if block with given <code>blk_hash</code> is already stored</p>
           
+          
 
           
           <div class="method-source-code" id="has_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 137</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_block</span>(<span class="ruby-identifier">blk_hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -924,7 +1011,9 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">has_tx</span><span
             class="method-args">(tx_hash)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -932,10 +1021,11 @@ with index <code>txout_idx</code></p>
           
           <p>check if tx with given <code>tx_hash</code> is already stored</p>
           
+          
 
           
           <div class="method-source-code" id="has_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 142</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_tx</span>(<span class="ruby-identifier">tx_hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -954,28 +1044,42 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">import</span><span
             class="method-args">(filename, max_depth = nil)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>import satoshi bitcoind blk0001.dat blockchain file</p>
+          <p><a href="StoreBase.html#method-i-import">#import</a> satoshi bitcoind
+blk0001.dat blockchain file</p>
+          
           
 
           
           <div class="method-source-code" id="import-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 246</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 275</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">import</span> <span class="ruby-identifier">filename</span>, <span class="ruby-identifier">max_depth</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">until</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">eof?</span>
-      <span class="ruby-identifier">magic</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">4</span>)
-      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;invalid network magic&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:magic_head</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">magic</span>
-      <span class="ruby-identifier">size</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">4</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;L&quot;</span>)[<span class="ruby-value">0</span>]
-      <span class="ruby-identifier">blk</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Block</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">size</span>))
-      <span class="ruby-identifier">depth</span>, <span class="ruby-identifier">chain</span> = <span class="ruby-identifier">store_block</span>(<span class="ruby-identifier">blk</span>)
-      <span class="ruby-keyword">break</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">max_depth</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">depth</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">max_depth</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Importing #{filename}&quot;</span> }
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">until</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">eof?</span>
+        <span class="ruby-identifier">magic</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">4</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;invalid network magic&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:magic_head</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">magic</span>
+        <span class="ruby-identifier">size</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">4</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;L&quot;</span>)[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">blk</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Block</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">size</span>))
+        <span class="ruby-identifier">depth</span>, <span class="ruby-identifier">chain</span> = <span class="ruby-identifier">new_block</span>(<span class="ruby-identifier">blk</span>)
+        <span class="ruby-keyword">break</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">max_depth</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">depth</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">max_depth</span>
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">next</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^blk.*?\.dat$/</span>
+      <span class="ruby-identifier">import</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">file</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Import dir/file #{filename} not found&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- import-source -->
@@ -993,7 +1097,9 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">in_sync?</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -1001,10 +1107,11 @@ with index <code>txout_idx</code></p>
           
           
           
+          
 
           
           <div class="method-source-code" id="in_sync-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 259</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">in_sync?</span>
   (<span class="ruby-identifier">get_head</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">get_head</span>.<span class="ruby-identifier">time</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3600</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1018,12 +1125,85 @@ with index <code>txout_idx</code></p>
       </div><!-- in_sync-3F-method -->
 
     
+      <div id="method-i-new_block" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_block</span><span
+            class="method-args">(blk)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new_block-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_block</span> <span class="ruby-identifier">blk</span>
+  <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">store_block</span>(<span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;block #{blk.hash} &quot;</span> <span class="ruby-operator">+</span>
+    <span class="ruby-node">&quot;[#{res[0]}, #{[&#39;main&#39;, &#39;side&#39;, &#39;orphan&#39;][res[1]]}] &quot;</span> <span class="ruby-operator">+</span>
+    <span class="ruby-node">&quot;(#{&quot;%.4fs, %.3fkb&quot; % [(Time.now - time), blk.payload.bytesize.to_f/1000]})&quot;</span> }  <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">res</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new_block-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new_block-method -->
+
+    
+      <div id="method-i-new_tx" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_tx</span><span
+            class="method-args">(tx)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new_tx-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_tx</span>(<span class="ruby-identifier">tx</span>)
+  <span class="ruby-identifier">store_tx</span>(<span class="ruby-identifier">tx</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new_tx-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new_tx-method -->
+
+    
       <div id="method-i-persist_block" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">persist_block</span><span
             class="method-args">(blk)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -1031,10 +1211,11 @@ with index <code>txout_idx</code></p>
           
           <p>persist given block <code>blk</code> to storage.</p>
           
+          
 
           
           <div class="method-source-code" id="persist_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 121</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1053,18 +1234,22 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">reset</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>reset the store; delete all data</p>
+          <p><a href="StoreBase.html#method-i-reset">#reset</a> the store; delete all
+data</p>
+          
           
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1083,7 +1268,9 @@ with index <code>txout_idx</code></p>
         <div class="method-heading">
           <span class="method-name">store_block</span><span
             class="method-args">(blk)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -1093,17 +1280,18 @@ with index <code>txout_idx</code></p>
 block. trigger reorg if side branch becomes longer than current main chain
 and connect orpans.</p>
           
+          
 
           
           <div class="method-source-code" id="store_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 59</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_block</span> <span class="ruby-identifier">blk</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;new block #{blk.hash}&quot;</span> }
 
   <span class="ruby-identifier">existing</span> = <span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">blk</span>.<span class="ruby-identifier">hash</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">existing</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">existing</span>.<span class="ruby-identifier">chain</span> <span class="ruby-operator">==</span> <span class="ruby-constant">MAIN</span>
     <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;=&gt; exists (#{existing.depth}, #{existing.chain})&quot;</span> }
-    <span class="ruby-keyword">return</span> [<span class="ruby-identifier">existing</span>.<span class="ruby-identifier">depth</span>, <span class="ruby-identifier">existing</span>.<span class="ruby-identifier">chain</span>]
+    <span class="ruby-keyword">return</span> [<span class="ruby-identifier">existing</span>.<span class="ruby-identifier">depth</span>]
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">prev_block</span> = <span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">blk</span>.<span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">reverse_hth</span>)
@@ -1117,25 +1305,34 @@ and connect orpans.</p>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">depth</span> = <span class="ruby-identifier">prev_block</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">depth</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;=&gt; orphan (#{depth})&quot;</span> }
-      <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">in_sync?</span>
+      <span class="ruby-keyword">return</span> [<span class="ruby-value">0</span>, <span class="ruby-value">2</span>]  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">in_sync?</span>
       <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">ORPHAN</span>, <span class="ruby-identifier">depth</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">depth</span> = <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">depth</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+
+  <span class="ruby-identifier">checkpoint</span> = <span class="ruby-ivar">@checkpoints</span>[<span class="ruby-identifier">depth</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">checkpoint</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">hash</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">checkpoint</span>
+    <span class="ruby-identifier">log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Block #{depth} doesn&#39;t match checkpoint #{checkpoint}&quot;</span>
+    <span class="ruby-identifier">exit</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">depth</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">get_depth</span> <span class="ruby-comment"># TODO: handle checkpoint mismatch properly</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">chain</span> <span class="ruby-operator">==</span> <span class="ruby-constant">MAIN</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">prev_block</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">get_head</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;=&gt; main (#{depth})&quot;</span> }
-      <span class="ruby-identifier">validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-identifier">rules</span><span class="ruby-operator">:</span> [<span class="ruby-value">:context</span>], <span class="ruby-identifier">raise_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">MAIN</span>, <span class="ruby-identifier">depth</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@checkpoints</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">depth</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@checkpoints</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">last</span>
+        <span class="ruby-identifier">validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-identifier">rules</span><span class="ruby-operator">:</span> [<span class="ruby-value">:context</span>], <span class="ruby-identifier">raise_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">MAIN</span>, <span class="ruby-identifier">depth</span>, <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">work</span>)
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;=&gt; side (#{depth})&quot;</span> }
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">SIDE</span>, <span class="ruby-identifier">depth</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">SIDE</span>, <span class="ruby-identifier">depth</span>, <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">work</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">head</span> = <span class="ruby-identifier">get_head</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">depth</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">head</span>.<span class="ruby-identifier">depth</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">work</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">block_work</span>  <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">head</span>.<span class="ruby-identifier">work</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;=&gt; side (#{depth})&quot;</span> }
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">SIDE</span>, <span class="ruby-identifier">depth</span>)
+      <span class="ruby-identifier">validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-identifier">rules</span><span class="ruby-operator">:</span> [<span class="ruby-value">:context</span>], <span class="ruby-identifier">raise_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">SIDE</span>, <span class="ruby-identifier">depth</span>, <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">work</span>)
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;=&gt; reorg&quot;</span> }
       <span class="ruby-identifier">new_main</span>, <span class="ruby-identifier">new_side</span> = [], []
@@ -1153,7 +1350,7 @@ and connect orpans.</p>
       <span class="ruby-identifier">update_blocks</span>([[<span class="ruby-identifier">new_side</span>, {<span class="ruby-value">:chain</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SIDE</span>}]])
       <span class="ruby-identifier">new_main</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">b</span>).<span class="ruby-identifier">validator</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">validate</span>(<span class="ruby-identifier">raise_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>) }
       <span class="ruby-identifier">update_blocks</span>([[<span class="ruby-identifier">new_main</span>, {<span class="ruby-value">:chain</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">MAIN</span>}]])
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">MAIN</span>, <span class="ruby-identifier">depth</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">persist_block</span>(<span class="ruby-identifier">blk</span>, <span class="ruby-constant">MAIN</span>, <span class="ruby-identifier">depth</span>, <span class="ruby-identifier">prev_block</span>.<span class="ruby-identifier">work</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1172,7 +1369,9 @@ and connect orpans.</p>
         <div class="method-heading">
           <span class="method-name">store_tx</span><span
             class="method-args">(tx)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -1180,10 +1379,11 @@ and connect orpans.</p>
           
           <p>store given <code>tx</code></p>
           
+          
 
           
           <div class="method-source-code" id="store_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 132</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_tx</span>(<span class="ruby-identifier">tx</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1202,19 +1402,22 @@ and connect orpans.</p>
         <div class="method-heading">
           <span class="method-name">update_block</span><span
             class="method-args">(hash, attrs)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
           <p>update <code>attrs</code> for block with given <code>hash</code>. typically
-used to update chain.</p>
+used to update the chain value during reorg.</p>
+          
           
 
           
           <div class="method-source-code" id="update_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 127</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/storage.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_block</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">attrs</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not implemented&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1237,7 +1440,7 @@ used to update chain.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

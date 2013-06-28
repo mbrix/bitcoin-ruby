@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>COPYING</title>
+<title>STORAGE - bitcoin-ruby RDoc</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,19 @@
 </nav>
 
 
+  
+<div id="table-of-contents">
+  <nav class="section">
+    <h3 class="section-header">Table of Contents</h3>
+    <ul>
+      <li><a href="#label-Storage">Storage</a>
+      <li><a href="#label-Backends">Backends</a>
+      <li><a href="#label-Custom+Backends">Custom Backends</a>
+    </ul>
+  </nav>
+</div>
+
+
   <div id="project-metadata">
     <nav id="fileindex-section" class="section project-section">
   <h3 class="section-header">Pages</h3>
@@ -57,11 +70,17 @@
   
     <li class="file"><a href="../doc/EXAMPLES_rdoc.html">EXAMPLES</a>
   
+    <li class="file"><a href="../doc/NAMECOIN_rdoc.html">NAMECOIN</a>
+  
     <li class="file"><a href="../doc/NODE_rdoc.html">NODE</a>
   
     <li class="file"><a href="../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
+  
+    <li class="file"><a href="../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
   
   </ul>
 </nav>
@@ -70,6 +89,8 @@
   <h3 class="section-header">Class and Module Index</h3>
 
   <ul class="link-list">
+  
+    <li><a href="../Array.html">Array</a>
   
     <li><a href="../Bitcoin.html">Bitcoin</a>
   
@@ -129,6 +150,10 @@
   
     <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
     <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
   
     <li><a href="../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
@@ -139,17 +164,17 @@
   
     <li><a href="../Bitcoin/Network/Node.html">Bitcoin::Network::Node</a>
   
-    <li><a href="../Bitcoin/Network/WorkerHandler.html">Bitcoin::Network::WorkerHandler</a>
-  
     <li><a href="../Bitcoin/OpenSSL_EC.html">Bitcoin::OpenSSL_EC</a>
   
-    <li><a href="../Bitcoin/Protocol.html">Bitcoin::P</a>
+    <li><a href="../Bitcoin/P.html">Bitcoin::P</a>
   
     <li><a href="../Bitcoin/Protocol.html">Bitcoin::Protocol</a>
   
     <li><a href="../Bitcoin/Protocol/Addr.html">Bitcoin::Protocol::Addr</a>
   
     <li><a href="../Bitcoin/Protocol/Alert.html">Bitcoin::Protocol::Alert</a>
+  
+    <li><a href="../Bitcoin/Protocol/AuxPow.html">Bitcoin::Protocol::AuxPow</a>
   
     <li><a href="../Bitcoin/Protocol/Block.html">Bitcoin::Protocol::Block</a>
   
@@ -185,6 +210,8 @@
   
     <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
   
+    <li><a href="../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
+  
     <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
     <li><a href="../Bitcoin/Storage/Models/TxIn.html">Bitcoin::Storage::Models::TxIn</a>
@@ -215,6 +242,28 @@
   
     <li><a href="../Bitcoin/Wallet/Wallet.html">Bitcoin::Wallet::Wallet</a>
   
+    <li><a href="../Connection.html">Connection</a>
+  
+    <li><a href="../Digest.html">Digest</a>
+  
+    <li><a href="../EM.html">EM</a>
+  
+    <li><a href="../ElectrumClient.html">ElectrumClient</a>
+  
+    <li><a href="../Gtk.html">Gtk</a>
+  
+    <li><a href="../Hash.html">Hash</a>
+  
+    <li><a href="../JSON.html">JSON</a>
+  
+    <li><a href="../Log4r.html">Log4r</a>
+  
+    <li><a href="../Log4r/Logger.html">Log4r::Logger</a>
+  
+    <li><a href="../Mnemonic.html">Mnemonic</a>
+  
+    <li><a href="../Object.html">Object</a>
+  
     <li><a href="../OpenSSL.html">OpenSSL</a>
   
     <li><a href="../OpenSSL/BN.html">OpenSSL::BN</a>
@@ -225,23 +274,13 @@
   
     <li><a href="../OpenSSL/PKey/EC/Point.html">OpenSSL::PKey::EC::Point</a>
   
-    <li><a href="../Log4r.html">Log4r</a>
-  
-    <li><a href="../Log4r/Logger.html">Log4r::Logger</a>
-  
-    <li><a href="../Array.html">Array</a>
-  
-    <li><a href="../EM.html">EM</a>
-  
-    <li><a href="../Gtk.html">Gtk</a>
-  
-    <li><a href="../Hash.html">Hash</a>
-  
-    <li><a href="../Mnemonic.html">Mnemonic</a>
-  
-    <li><a href="../Object.html">Object</a>
-  
     <li><a href="../RawJSON_Connection.html">RawJSON_Connection</a>
+  
+    <li><a href="../Server.html">Server</a>
+  
+    <li><a href="../SimpleNode.html">SimpleNode</a>
+  
+    <li><a href="../SimpleNode/Connection.html">SimpleNode::Connection</a>
   
     <li><a href="../String.html">String</a>
   
@@ -253,13 +292,13 @@
 
 <div id="documentation" class="description">
   
-<h1 id="label-Storage">Storage</h1>
+<h1 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
 <p>There is support for different storage backends, currently the `sequel`
 backend is the most stable and should work with `sqlite` and `postgres`
 databases. see <a href="../Bitcoin/Storage.html">Bitcoin::Storage</a></p>
 
-<h2 id="label-Backends">Backends</h2>
+<h2 id="label-Backends">Backends<span><a href="#label-Backends">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <p>For examples that require storage backends, you can specify them using a
 string containing the backend name and a configuration string. The default
@@ -272,7 +311,7 @@ sequel::sqlite:///tmp/bitcoin.db
 sequel::postgres:/bitcoin
 sequel::postgres://&lt;user&gt;:&lt;pass&gt;@&lt;host&gt;:&lt;port&gt;/&lt;database&gt;</pre>
 
-<h2 id="label-Custom+Backends">Custom Backends</h2>
+<h2 id="label-Custom+Backends">Custom Backends<span><a href="#label-Custom+Backends">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <p>To implement a custom backend you need to inherit from <a
 href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
@@ -284,7 +323,7 @@ and implement the methods defined there.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
