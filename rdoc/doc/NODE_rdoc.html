@@ -50,7 +50,27 @@
     <ul>
       <li><a href="#label-NODE">NODE</a>
       <li><a href="#label-Usage">Usage</a>
-      <li><a href="#label-Command+client">Command client</a>
+      <li><a href="#label-Command+socket">Command socket</a>
+      <li><a href="#label-CLI+interface">CLI interface</a>
+      <li><a href="#label-CommandClient">CommandClient</a>
+      <li><a href="#label-Raw+socket">Raw socket</a>
+      <li><a href="#label-Commands">Commands</a>
+      <li><a href="#label-info">info</a>
+      <li><a href="#label-config">config</a>
+      <li><a href="#label-connections">connections</a>
+      <li><a href="#label-connect">connect</a>
+      <li><a href="#label-disconnect">disconnect</a>
+      <li><a href="#label-getblocks">getblocks</a>
+      <li><a href="#label-getaddr">getaddr</a>
+      <li><a href="#label-addrs">addrs</a>
+      <li><a href="#label-tslb">tslb</a>
+      <li><a href="#label-create_tx">create_tx</a>
+      <li><a href="#label-assemble_tx">assemble_tx</a>
+      <li><a href="#label-relay_tx">relay_tx</a>
+      <li><a href="#label-store_block">store_block</a>
+      <li><a href="#label-store_tx">store_tx</a>
+      <li><a href="#label-stop">stop</a>
+      <li><a href="#label-help">help</a>
     </ul>
   </nav>
 </div>
@@ -77,6 +97,8 @@
     <li class="file"><a href="../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
   
     <li class="file"><a href="../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
@@ -150,9 +172,19 @@
   
     <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -200,17 +232,15 @@
   
     <li><a href="../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -308,31 +338,160 @@ href="STORAGE_rdoc.html">STORAGE</a> backend):</p>
 <p>You can specify options (see <code>--help</code>) or pass a config file
 with <code>--config</code> (see <a href="CONFIG_rdoc.html">CONFIG</a>).</p>
 
-<p>Some common options you might want to change:</p>
+<p>Some common options you might want to use:</p>
 <dl class="rdoc-list note-list"><dt><code>-n --network</code> <em>&lt;name&gt;</em>
 <dd>
-<p><code>bitcoin</code> or <code>testnet</code> network</p>
+<p>Network to use. Usually <code>bitcoin</code>. Support for
+<code>namecoin</code> is also quite good. Use <code>testnet</code> for
+development.</p>
+</dd><dt><code>-c --config</code> <em>&lt;file&gt;</em>
+<dd>
+<p>Read options from config file. See also <a
+href="CONFIG_rdoc.html">CONFIG</a>.</p>
 </dd><dt><code>--connect</code> <em>&lt;ip:port&gt;</em>
 <dd>
-<p>list of peers to connect to</p>
+<p>List of peers to connect to.</p>
 </dd><dt><code>-s --storage</code> <em>&lt;backend-string&gt;</em>
 <dd>
-<p>storage backend to use (see <a href="STORAGE_rdoc.html">STORAGE</a>)</p>
+<p>Storage backend to use. See also <a href="STORAGE_rdoc.html">STORAGE</a>.</p>
+</dd><dt><code>--import</code> <em>&lt;blockchain dir&gt;</em>
+<dd>
+<p>Import blockchain in bitcoind/qt format from given directory.</p>
+</dd><dt><code>-v --verbose</code>
+<dd>
+<p>Display debug output.</p>
+</dd><dt><code>-h --help</code>
+<dd>
+<p>Display all available options.</p>
 </dd></dl>
 
-<p>It will take some time to download/store the entire blockchain at first, so
-be patient ;)</p>
+<p>It will take a long time to download/store the entire blockchain at first,
+so be patient ;)</p>
 
-<h2 id="label-Command+client">Command client<span><a href="#label-Command+client">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-Command+socket">Command socket<span><a href="#label-Command+socket">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <p>The node opens a separate command socket which you can connect to and query
-statistics or get notified about new blocks/tx, etc.</p>
+statistics or get notified about new blocks/tx, etc. See below for a list
+of available commands.</p>
 
-<pre>bitcoin_node info  # general statistics
+<h3 id="label-CLI+interface">CLI interface<span><a href="#label-CLI+interface">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-bitcoin_node help  # list all commands
+<p>The easiest way is to just call `bitcoin_node` again in the same way you
+started it, but with an extra command argument:</p>
 
-bitcoin_node monitor block # wait for new blocks and output their hashes</pre>
+<pre>bitcoin_node info
+bitcoin_node -c config.yml info
+bitcoin_node monitor &quot;block tx&quot;</pre>
+
+<h3 id="label-CommandClient">CommandClient<span><a href="#label-CommandClient">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>If you are programming in an EventMachine context, you might find the <a
+href="../Bitcoin/Network/CommandClient.html">Bitcoin::Network::CommandClient</a>
+convenient.</p>
+
+<h3 id="label-Raw+socket">Raw socket<span><a href="#label-Raw+socket">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Of course you can also connect to the socket by any other means you like,
+just send [&lt;command&gt;, &lt;params&gt;] pairs and receive
+[&lt;command&gt;, &lt;response&gt;] pairs back (both encoded in <a
+href="../JSON.html">JSON</a>):</p>
+
+<pre>$ echo -e &#39;[&quot;tslb&quot;, []]\0&#39; | nc 127.0.0.1 9999
+[&quot;tslb&quot;,{&quot;tslb&quot;:2700}]</pre>
+
+<h3 id="label-Commands">Commands<span><a href="#label-Commands">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<h4 id="label-info">info<span><a href="#label-info">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Get various statistics.</p>
+
+<pre>bitcoin_node info</pre>
+
+<h4 id="label-config">config<span><a href="#label-config">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Get the currently active configuration.</p>
+
+<pre>bitcoin_node config</pre>
+
+<h4 id="label-connections">connections<span><a href="#label-connections">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Get currently connected peers.</p>
+
+<pre>bitcoin_node connections</pre>
+
+<h4 id="label-connect">connect<span><a href="#label-connect">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Connect to given peer(s).</p>
+
+<pre>bitcoin_node connect &lt;ip&gt;:&lt;port&gt;[,&lt;ip&gt;:&lt;port&gt;]</pre>
+
+<h4 id="label-disconnect">disconnect<span><a href="#label-disconnect">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Disconnect given peer(s).</p>
+
+<pre>bitcoin_node disconnect &lt;ip&gt;:&lt;port&gt;[,&lt;ip&gt;,&lt;port&gt;]</pre>
+
+<h4 id="label-getblocks">getblocks<span><a href="#label-getblocks">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Trigger the node to ask its peers for new blocks.</p>
+
+<pre>bitcoin_node getblocks</pre>
+
+<h4 id="label-getaddr">getaddr<span><a href="#label-getaddr">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Trigger the node to ask its for new peer addresses.</p>
+
+<pre>bitcoin_node getaddr</pre>
+
+<h4 id="label-addrs">addrs<span><a href="#label-addrs">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Get known peer addresses (used by bin/bitcoin_dns_seed)</p>
+
+<pre>bitcoin_node addrs [count]</pre>
+
+<h4 id="label-tslb">tslb<span><a href="#label-tslb">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Get Time Since Last Block.</p>
+
+<pre>bitcoin_node tslb</pre>
+
+<h4 id="label-create_tx">create_tx<span><a href="#label-create_tx">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>TODO</p>
+
+<h4 id="label-assemble_tx">assemble_tx<span><a href="#label-assemble_tx">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>TODO</p>
+
+<h4 id="label-relay_tx">relay_tx<span><a href="#label-relay_tx">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Relay given transaction (in hex).</p>
+
+<pre>bitcoin_node relay_tx &lt;tx in hex&gt;</pre>
+
+<h4 id="label-store_block">store_block<span><a href="#label-store_block">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Validate and store given block (in hex) as if it was received by a peer.</p>
+
+<pre>bitcoin_node store_block &lt;block in hex&gt;</pre>
+
+<h4 id="label-store_tx">store_tx<span><a href="#label-store_tx">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Store given transaction (in hex) as if it was received by a peer.</p>
+
+<pre>bitcoin_node store_tx &lt;tx in hex&gt;</pre>
+
+<h4 id="label-stop">stop<span><a href="#label-stop">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Stop the bitcoin node.</p>
+
+<pre>bitcoin_node stop</pre>
+
+<h4 id="label-help">help<span><a href="#label-help">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>List all available commands.</p>
+
+<pre>bitcoin_node help</pre>
 
 </div>
 

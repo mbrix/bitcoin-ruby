@@ -49,6 +49,7 @@
     <h3 class="section-header">Table of Contents</h3>
     <ul>
       <li><a href="#label-Bitcoin-ruby">Bitcoin-ruby</a>
+      <li><a href="#label-Compatible+with...">Compatible with…</a>
       <li><a href="#label-Installation">Installation</a>
       <li><a href="#label-Client">Client</a>
       <li><a href="#label-Library+Usage">Library Usage</a>
@@ -88,6 +89,8 @@
     <li class="file"><a href="./doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="./doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="./lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
   
     <li class="file"><a href="./lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
@@ -161,9 +164,19 @@
   
     <li><a href="./Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="./Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="./Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="./Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="./Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="./Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="./Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="./Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="./Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -211,17 +224,15 @@
   
     <li><a href="./Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="./Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="./Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="./Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="./Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="./Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="./Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="./Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="./Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -340,6 +351,13 @@ of a simple wallet</p>
 <p><a href="Bitcoin/Namecoin.html">Bitcoin::Namecoin</a> implements all the
 namecoin-specific differences (see <a
 href="doc/NAMECOIN_rdoc.html">NAMECOIN</a>)</p>
+</li></ul>
+
+<h2 id="label-Compatible+with...">Compatible with…<span><a href="#label-Compatible+with...">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p>ruby 1.9.3</p>
+</li><li>
+<p>ruby 2.0.0</p>
 </li></ul>
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -553,7 +571,7 @@ lib/bitcoin/network/node.rb for examples.</p>
 <h3 id="label-Storage+%2F+Database+backends">Storage / Database backends<span><a href="#label-Storage+%2F+Database+backends">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>There is support for multiple database backends, but currently the only
-stable one is  the <a
+stable one is the <a
 href="Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
 backend. All backends implement the interface defined in <a
 href="Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>

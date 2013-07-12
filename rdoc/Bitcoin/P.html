@@ -50,7 +50,10 @@
   <h3 class="section-header">Defined In</h3>
   <ul>
     <li>examples/bitcoin_pay.rb
+    <li>examples/forwarder.rb
+    <li>examples/forwarder.rb~
     <li>examples/import.rb
+    <li>examples/monitor_outputs.rb
     <li>examples/simple_network_monitor_and_util.rb
     <li>lib/bitcoin/builder.rb
     <li>lib/bitcoin/network/command_handler.rb
@@ -61,6 +64,7 @@
     <li>lib/bitcoin/storage/sequel/sequel_store.rb
     <li>lib/bitcoin/storage/storage.rb
     <li>lib/bitcoin/wallet/txdp.rb
+    <li>lib/bitcoin/wallet/wallet.rb
   </ul>
 </nav>
 
@@ -96,6 +100,8 @@
     <li class="file"><a href="../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
   
     <li class="file"><a href="../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
@@ -169,9 +175,19 @@
   
     <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -219,17 +235,15 @@
   
     <li><a href="../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   

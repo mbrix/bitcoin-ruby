@@ -1,29 +1,14 @@
 require_relative '../spec_helper.rb'
 
-Bitcoin::NETWORKS[:spec] = {
-  :project => :bitcoin,
-  :magic_head => "spec",
-  :address_version => "6f",
-  :p2sh_version => "c4",
-  :privkey_version => "ef",
-  :default_port => 48333,
-  :protocol_version => 70001,
-  :dns_seeds => [],
-  :genesis_hash => "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943",
-  :proof_of_work_limit => 0x1d07fff8,
-  :alert_pubkeys => [],
-  :known_nodes => [],
-  :checkpoints => {}
-}
-
-include Bitcoin::Builder
+include Bitcoin
+include Builder
 
 describe 'Node Command API' do
 
   def test_command command, params = [], response = nil, &block
     $responses = {}
     EM.run do
-      @client = Bitcoin::Network::CommandClient.connect(*@config[:command].split(":")) do
+      @client = Bitcoin::Network::CommandClient.connect(*@config[:command]) do
         on_connected do
           request(command, *params)
         end
@@ -47,15 +32,15 @@ describe 'Node Command API' do
 
 
   before do
-    Bitcoin::Validation::Block::RULES = {
+    Bitcoin::Validation::Block::RULES.merge({
       syntax: [:hash, :tx_list, :bits, :max_timestamp, :coinbase, :coinbase_scriptsig, :transactions_syntax],
       context: [:prev_hash, :coinbase_value, :min_timestamp, :transactions_context]
-    }
+    })
 
     Bitcoin.network = :spec
     @config = {
-      listen: "127.0.0.1:38333",
-      command: "127.0.0.1:38332",
+      listen: ["127.0.0.1", 38333],
+      command: ["127.0.0.1", 38332],
       storage: "sequel::sqlite:/",
       dns: false,
       intervals: { queue: 0.01 },
@@ -65,11 +50,11 @@ describe 'Node Command API' do
     @node = Bitcoin::Network::Node.new(@config)
     @pid = fork do
       $stdout = StringIO.new
-      SimpleCov.running = false
+      SimpleCov.running = false if defined?(SimpleCov)
       @node.run
     end
 
-    @genesis = Bitcoin::P::Block.new("0100000000000000000000000000000000000000000000000000000000000000000000003ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4adae5494dffff001d1aa4ae180101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4d04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73ffffffff0100f2052a01000000434104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac00000000".htb)
+    @genesis = P::Block.new("0100000000000000000000000000000000000000000000000000000000000000000000003ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4adae5494dffff001d1aa4ae180101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4d04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73ffffffff0100f2052a01000000434104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac00000000".htb)
 
     Bitcoin.network[:proof_of_work_limit] = Bitcoin.encode_compact_bits("ff"*32)
     @key = Bitcoin::Key.generate
@@ -142,6 +127,80 @@ describe 'Node Command API' do
     test_command("info")["blocks"].should == "1 (?) sync"
   end
 
+  describe :create_tx do
+
+    before do
+      @key2 = Key.generate
+      test_command("store_block", [@block.to_payload.hth])
+      sleep 0.1
+    end
+
+    it "should create transaction from given private keys" do
+      res = test_command("create_tx", [[@key.to_base58], [[@key2.addr, 10e8], [@key.addr, 40e8]]])
+      tx = P::Tx.new(res[0].htb)
+      tx.is_a?(P::Tx).should == true
+      tx.verify_input_signature(0, @block.tx[0]).should == true
+    end
+
+    it "should create transaction from given addresses" do
+      res = test_command("create_tx", [[@key.addr], [[@key2.addr, 10e8], [@key.addr, 40e8]]])
+      tx = P::Tx.new(res[0].htb)
+      tx.is_a?(P::Tx).should == true
+      tx.in[0].script_sig.should == ""
+      -> { tx.verify_input_signature(0, @block.tx[0]) }.should.raise(TypeError)
+
+      res[1].each.with_index do |sig_data, idx|
+        sig_hash, sig_addr = *sig_data
+        sig_addr.should == @key.addr
+        sig = @key.sign(sig_hash.htb)
+        script_sig = Script.to_signature_pubkey_script(sig, @key.pub.htb)
+        tx.in[idx].script_sig_length = script_sig.bytesize
+        tx.in[idx].script_sig = script_sig
+      end
+
+      tx.verify_input_signature(0, @block.tx[0]).should == true
+    end
+
+    it "should create transaction from given pubkeys" do
+      res = test_command("create_tx", [[@key.pub], [[@key2.addr, 10e8], [@key.addr, 40e8]]])
+      tx = P::Tx.new(res[0].htb)
+      tx.is_a?(P::Tx).should == true
+      -> { tx.verify_input_signature(0, @block.tx[0]) }.should.raise(TypeError)
+
+      res[1].each.with_index do |sig_data, idx|
+        sig_hash, sig_addr = *sig_data
+        sig_addr.should == @key.addr
+        sig = @key.sign(sig_hash.htb)
+        script_sig = Script.to_signature_pubkey_script(sig, @key.pub.htb)
+        tx.in[idx].script_sig_length = script_sig.bytesize
+        tx.in[idx].script_sig = script_sig
+      end
+
+      tx.verify_input_signature(0, @block.tx[0]).should == true
+    end
+
+  end
+
+  describe :assemble_tx do
+
+    it "should assemble tx from unsigned tx structure, signatures and pubkeys" do
+      tx = build_tx do |t|
+        t.input do |i|
+          i.prev_out @block.tx[0]
+          i.prev_out_index 0
+        end
+        t.output {|o| o.value 50e8; o.script {|s| s.recipient @key.addr } }
+      end
+      sig = @key.sign(tx.in[0].sig_hash)
+      test_command("store_block", [@block.to_payload.hth])
+      sleep 0.1
+      res = test_command("assemble_tx", [tx.to_payload.hth, [[sig.hth, @key.pub]]])
+      tx = Bitcoin::P::Tx.new(res.htb)
+      tx.verify_input_signature(0, @block.tx[0]).should == true
+    end
+
+  end
+
   describe :relay_tx do
 
     it "should handle decoding error" do
@@ -189,7 +248,7 @@ describe 'Node Command API' do
   describe :monitor do
 
     before do
-      @client = TCPSocket.new(*@config[:command].split(":"))
+      @client = TCPSocket.new(*@config[:command])
 
       def send data
         @client.write(data.to_json + "\x00")
@@ -312,6 +371,6 @@ describe 'Node Command API' do
 
     end
 
-   end
+  end
 
 end

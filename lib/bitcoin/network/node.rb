@@ -44,13 +44,15 @@ module Bitcoin::Network
     # time when the last main chain block was added
     attr_reader :last_block_time
 
+    attr_accessor :relay_tx
     attr_accessor :relay_propagation
+
 
     DEFAULT_CONFIG = {
       :network => :bitcoin,
-      :listen => "0.0.0.0:#{Bitcoin.network[:default_port]}",
+      :listen => ["0.0.0.0", Bitcoin.network[:default_port]],
       :connect => [],
-      :command => "127.0.0.1:9999",
+      :command => ["127.0.0.1", 9999],
       :storage => "sequel::sqlite://~/.bitcoin-ruby/<network>/blocks.db",
       :mode => :full,
       :dns => true,
@@ -70,7 +72,7 @@ module Bitcoin::Network
         :queue => 501,
         :inv => 501,
         :inv_cache => 0,
-        :unconfirmed => 3
+        :unconfirmed => 100,
       },
       :intervals => {
         :queue => 1,
@@ -93,13 +95,13 @@ module Bitcoin::Network
       @inv_cache = []
       @notifiers = {}
       @relay_propagation, @last_block_time, @external_ips = {}, Time.now, []
-      @unconfirmed = {}
+      @unconfirmed, @relay_tx = {}, {}
     end
 
     def set_store
       backend, config = @config[:storage].split('::')
-      @store = Bitcoin::Storage.send(backend, {
-          db: config, mode: @config[:mode], cache_head: true}, ->(locator) {
+      @store = Bitcoin::Storage.send(backend, { db: config, mode: @config[:mode],
+          cache_head: true, log_level: @config[:log][:storage]}, ->(locator) {
           peer = @connections.select(&:connected?).sample
           peer.send_getblocks(locator)
         })
@@ -111,6 +113,7 @@ module Bitcoin::Network
             @store.import(@config[:import]); @importing = false
           rescue
             log.fatal { $!.message }
+            puts *$@
             stop
           end
         end
@@ -154,6 +157,7 @@ module Bitcoin::Network
 
     def stop
       log.info { "Shutting down..." }
+      stop_timers
       EM.next_tick { EM.stop }
     end
 
@@ -170,6 +174,10 @@ module Bitcoin::Network
       end
     end
 
+    def stop_timers
+      @timers.each {|n, t| EM.cancel_timer t }
+    end
+
     def run
       @started = Time.now
 
@@ -184,21 +192,27 @@ module Bitcoin::Network
 
         start_timers
 
-        if @config[:command]
-          host, port = *@config[:command].split(":")
+        host, port = *@config[:command]
+        port ||= Bitcoin.network[:default_port]
+        if host
           log.debug { "Trying to bind command socket to #{host}:#{port}" }
           EM.start_server(host, port, CommandHandler, self)
           log.info { "Command socket listening on #{host}:#{port}" }
         end
 
-        if @config[:listen]
-          host, port = *@config[:listen].split(":")
+        host, port = *@config[:listen]
+        port ||= Bitcoin.network[:default_port]
+        if host
           log.debug { "Trying to bind server socket to #{host}:#{port}" }
           EM.start_server(host, port.to_i, ConnectionHandler, self, host, port.to_i, :in)
           log.info { "Server socket listening on #{host}:#{port}" }
         end
 
-        @config[:connect].each{|h, p| connect_peer(h, p) }  if @config[:connect].size > 0
+        @config[:connect].each do |host, port|
+          port ||= Bitcoin.network[:default_port]
+          connect_peer(host, port)
+          log.info { "Connecting to #{host}:#{port}" }
+        end
 
         work_connect if @addrs.any?
         connect_dns  if @config[:dns]
@@ -312,6 +326,20 @@ module Bitcoin::Network
       @log.debug { "queue worker running" }
       return  if @queue.size == 0
 
+      # switch off utxo cache once there aren't tons of new blocks coming in
+      if @store.in_sync?
+        if @store.is_a?(Bitcoin::Storage::Backends::UtxoStore) && @store.config[:utxo_cache] > 0
+          log.debug { "switching off utxo cache" }
+          @store.config[:utxo_cache] = 0
+        end
+        @config[:intervals].each do |name, value|
+          if value <= 1
+            log.debug { "setting #{name} interval to 5 seconds" }
+            @config[:intervals][name] = 5
+          end
+        end
+      end
+
       while obj = @queue.shift
         begin
           if obj[0].to_sym == :block
@@ -326,13 +354,15 @@ module Bitcoin::Network
           else
             drop = @unconfirmed.size - @config[:max][:unconfirmed] + 1
             drop.times { @unconfirmed.shift }  if drop > 0
-            @unconfirmed[obj[1].hash] = obj[1]
-            push_notification(:tx, [obj[1], 0])
+            unless @unconfirmed[obj[1].hash]
+              @unconfirmed[obj[1].hash] = obj[1]
+              push_notification(:tx, [obj[1], 0])
 
-            if @notifiers[:output]
-              obj[1].out.each do |out|
-                address = Bitcoin::Script.new(out.pk_script).get_address
-                push_notification(:output, [obj[1].hash, address, out.value, 0])
+              if @notifiers[:output]
+                obj[1].out.each do |out|
+                  address = Bitcoin::Script.new(out.pk_script).get_address
+                  push_notification(:output, [obj[1].hash, address, out.value, 0])
+                end
               end
             end
           end
@@ -351,11 +381,11 @@ module Bitcoin::Network
     # check for new items in the inv queue and process them,
     # unless the queue is already full
     def work_inv_queue
-      return  if @inv_queue.size == 0
       @log.debug { "inv queue worker running" }
+      return  if @inv_queue.size == 0
       return  if @queue.size >= @config[:max][:queue]
       while inv = @inv_queue.shift
-        next  if !@store.in_sync? && inv[0] == :tx
+        next  if !@store.in_sync? && inv[0] == :tx && @notifiers.empty?
         next  if @queue.map{|i|i[1]}.map(&:hash).include?(inv[1])
         inv[2].send("send_getdata_#{inv[0]}", inv[1])
       end
@@ -388,18 +418,6 @@ module Bitcoin::Network
       EM.epoll
     end
 
-    def relay_tx(tx)
-      return false  unless @store.in_sync?
-      log.info { "relaying tx #{tx.hash}" }
-      @store.store_tx(tx)
-      @connections.select(&:connected?).sample((@connections.size / 2) + 1).each do |peer|
-        peer.send_inv(:tx, tx)
-      end
-    rescue Bitcoin::Validation::ValidationError
-      @log.warn { "ValiationError storing tx #{tx.hash}: #{$!.message}" }
-      false
-    end
-
     def work_relay
       log.debug { "relay worker running" }
       @store.get_unconfirmed_tx.each do |tx|
@@ -407,11 +425,12 @@ module Bitcoin::Network
       end
     end
 
-
+    # get the external ip that was suggested in version messages
+    # from other peers most often.
     def external_ip
-      @external_ips.inject({}) {|a, b| a[b] ||= 0; a[b] += 1; a }.sort_by {|k, v| v}[-1][0]
+      @external_ips.group_by(&:dup).values.max_by(&:size).first
     rescue
-      @config[:listen].split(":")[0]
+      @config[:listen][0]
     end
 
     def push_notification channel, message

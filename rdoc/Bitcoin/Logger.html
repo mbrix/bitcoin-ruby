@@ -62,7 +62,19 @@
     
     
     
+    <!-- Extension Modules -->
+<nav id="extends-section" class="section">
+  <h3 class="section-header">Extended With Modules</h3>
+
+  <ul class="link-list">
     
+  
+    <li><a class="extend" href="Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
+  
+  </ul>
+</nav>
+
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
@@ -97,6 +109,8 @@
     <li class="file"><a href="../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
   
     <li class="file"><a href="../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
@@ -170,9 +184,19 @@
   
     <li><a href="../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -220,17 +244,15 @@
   
     <li><a href="../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -359,14 +381,16 @@ dummy logger is used which only logs to stdout.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/logger.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/logger.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">level</span> = <span class="ruby-value">:info</span>
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Log4r</span>)
-    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-string">&quot;log&quot;</span>)
+    <span class="ruby-identifier">dir</span> = <span class="ruby-string">&quot;log&quot;</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">dir</span> = <span class="ruby-keyword">nil</span>
     <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Log4r</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>)
+    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">TimeLogger</span>)
     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">level</span>
     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">outputters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Log4r</span><span class="ruby-operator">::</span><span class="ruby-constant">Outputter</span>.<span class="ruby-identifier">stdout</span>
-    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">outputters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Log4r</span><span class="ruby-operator">::</span><span class="ruby-constant">FileOutputter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;fout&quot;</span>, <span class="ruby-value">:filename</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;log/#{name}.log&quot;</span>)
+    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">outputters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Log4r</span><span class="ruby-operator">::</span><span class="ruby-constant">FileOutputter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;fout&quot;</span>, <span class="ruby-value">:filename</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{dir}/#{name}.log&quot;</span>)  <span class="ruby-keyword">if</span> <span class="ruby-identifier">dir</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-keyword">end</span>

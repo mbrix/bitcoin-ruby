@@ -114,6 +114,8 @@
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
   
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
+  
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
@@ -186,9 +188,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -236,17 +248,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -335,9 +345,7 @@
 by <a
 href="TxBuilder.html#method-i-input">Bitcoin::Builder::TxBuilder#input</a>.</p>
 
-<p>inputs can be either &#39;coinbase&#39;, in which case they only need to
-specify #coinbase, or they have to define a #prev_out, #prev_out_index and
-#signature <a href="TxInBuilder.html#attribute-i-key">#key</a>.</p>
+<p>inputs need a #prev_out tx and #prev_out_index of the output they spend.</p>
 
   </div><!-- description -->
 
@@ -411,9 +419,9 @@ specify #coinbase, or they have to define a #prev_out, #prev_out_index and
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 189</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-ivar">@txin</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">TxIn</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@txin</span> = <span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">TxIn</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -452,7 +460,7 @@ set <code>data</code>.</p>
 
           
           <div class="method-source-code" id="coinbase-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 215</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">coinbase</span> <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@coinbase_data</span> = <span class="ruby-identifier">data</span> <span class="ruby-operator">||</span> <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Random</span>.<span class="ruby-identifier">random_bytes</span>(<span class="ruby-value">32</span>)
   <span class="ruby-ivar">@prev_out</span> = <span class="ruby-keyword">nil</span>
@@ -487,7 +495,7 @@ set <code>data</code>.</p>
 
           
           <div class="method-source-code" id="prev_out-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 194</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">prev_out</span> <span class="ruby-identifier">tx</span>
   <span class="ruby-ivar">@prev_out</span> = <span class="ruby-identifier">tx</span>
 <span class="ruby-keyword">end</span></pre>
@@ -520,7 +528,7 @@ set <code>data</code>.</p>
 
           
           <div class="method-source-code" id="prev_out_index-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 199</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 216</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">prev_out_index</span> <span class="ruby-identifier">i</span>
   <span class="ruby-ivar">@prev_out_index</span> = <span class="ruby-identifier">i</span>
 <span class="ruby-keyword">end</span></pre>
@@ -554,7 +562,7 @@ usually not needed.</p>
 
           
           <div class="method-source-code" id="sequence-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 204</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 221</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sequence</span> <span class="ruby-identifier">s</span>
   <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">s</span>
 <span class="ruby-keyword">end</span></pre>
@@ -589,7 +597,7 @@ href="../Key.html#method-i-sign">Bitcoin::Key#sign</a>.</p>
 
           
           <div class="method-source-code" id="signature_key-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 210</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">signature_key</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -623,7 +631,7 @@ values specified via DSL</p>
 
           
           <div class="method-source-code" id="txin-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 222</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 239</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">txin</span>
   <span class="ruby-ivar">@txin</span>.<span class="ruby-identifier">prev_out</span> = (<span class="ruby-ivar">@prev_out</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@prev_out</span>.<span class="ruby-identifier">binary_hash</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;\x00&quot;</span><span class="ruby-operator">*</span><span class="ruby-value">32</span>)
   <span class="ruby-ivar">@txin</span>.<span class="ruby-identifier">prev_out_index</span> = <span class="ruby-ivar">@prev_out_index</span>

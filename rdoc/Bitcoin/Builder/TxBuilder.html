@@ -112,6 +112,8 @@
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
   
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
+  
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
@@ -184,9 +186,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -234,17 +246,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -330,22 +340,26 @@
   <div id="description" class="description">
     
 <p>DSL to create <a href="../Protocol/Tx.html">Bitcoin::Protocol::Tx</a> used
-by <a href="../Builder.html#method-i-tx">Bitcoin::Builder#tx</a>. <a
-href="TxBuilder.html#method-i-tx">#tx</a> = <a
-href="TxBuilder.html#method-i-tx">#tx</a> do |t|</p>
+by <a
+href="../Builder.html#method-i-build_tx">Bitcoin::Builder#build_tx</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">t</span>.<span class="ruby-identifier">input</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out</span> <span class="ruby-identifier">prev_tx</span>  <span class="ruby-comment"># previous transaction</span>
-  <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out_index</span> <span class="ruby-value">0</span>  <span class="ruby-comment"># index of previous output</span>
-  <span class="ruby-identifier">i</span>.<span class="ruby-identifier">signature_key</span> <span class="ruby-identifier">key</span> <span class="ruby-comment"># Bitcoin::Key used to sign the input</span>
-<span class="ruby-keyword">end</span>
-<span class="ruby-identifier">t</span>.<span class="ruby-identifier">output</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">o</span>.<span class="ruby-identifier">value</span> <span class="ruby-value">12345</span> <span class="ruby-comment"># 0.00012345 BTC</span>
-  <span class="ruby-identifier">o</span>.<span class="ruby-identifier">script</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">type</span> :<span class="ruby-identifier">address</span>; <span class="ruby-identifier">s</span>.<span class="ruby-identifier">recipient</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">addr</span> }
+<pre class="ruby"><span class="ruby-identifier">tx</span> = <span class="ruby-identifier">tx</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">input</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out</span> <span class="ruby-identifier">prev_tx</span>  <span class="ruby-comment"># previous transaction</span>
+    <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out_index</span> <span class="ruby-value">0</span>  <span class="ruby-comment"># index of previous output</span>
+    <span class="ruby-identifier">i</span>.<span class="ruby-identifier">signature_key</span> <span class="ruby-identifier">key</span> <span class="ruby-comment"># Bitcoin::Key used to sign the input</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">output</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">value</span> <span class="ruby-value">12345</span> <span class="ruby-comment"># 0.00012345 BTC</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">script</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">type</span> :<span class="ruby-identifier">address</span>; <span class="ruby-identifier">s</span>.<span class="ruby-identifier">recipient</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">addr</span> }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span>
 </pre>
 
-<p>end</p>
+<p>signs every <a href="TxBuilder.html#method-i-input">#input</a> that has a
+signature key. if the signature key is not specified, the <a
+href="TxBuilder.html#method-i-input">#input</a> will include the #sig_hash
+that needs to be signed.</p>
 
   </div><!-- description -->
 
@@ -386,9 +400,9 @@ href="TxBuilder.html#method-i-tx">#tx</a> do |t|</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-ivar">@tx</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@tx</span> = <span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">ver</span>, <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">lock_time</span> = <span class="ruby-value">1</span>, <span class="ruby-value">0</span>
   <span class="ruby-ivar">@ins</span>, <span class="ruby-ivar">@outs</span> = [], []
 <span class="ruby-keyword">end</span></pre>
@@ -428,7 +442,7 @@ transaction (see <a href="TxInBuilder.html">TxInBuilder</a>).</p>
 
           
           <div class="method-source-code" id="input-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 146</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">input</span>
   <span class="ruby-identifier">c</span> = <span class="ruby-constant">TxInBuilder</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">c</span>
@@ -465,7 +479,7 @@ not necessary. defaults to 0.</p>
 
           
           <div class="method-source-code" id="lock_time-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 141</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lock_time</span> <span class="ruby-identifier">n</span>
   <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">lock_time</span> = <span class="ruby-identifier">n</span>
 <span class="ruby-keyword">end</span></pre>
@@ -499,7 +513,7 @@ transaction (see <a href="TxOutBuilder.html">TxOutBuilder</a>).</p>
 
           
           <div class="method-source-code" id="output-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 153</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">output</span>
   <span class="ruby-identifier">c</span> = <span class="ruby-constant">TxOutBuilder</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">c</span>
@@ -528,14 +542,17 @@ transaction (see <a href="TxOutBuilder.html">TxOutBuilder</a>).</p>
 
         <div class="method-description">
           
-          <p>create the transaction according to values specified via DSL and sign
-inputs.</p>
+          <p>create the transaction according to values specified via DSL. sign each <a
+href="TxBuilder.html#method-i-input">#input</a> that has a signature key
+specified. if there is no key, store the sig_hash in the <a
+href="TxBuilder.html#method-i-input">#input</a>, so it can easily be signed
+later.</p>
           
           
 
           
           <div class="method-source-code" id="tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 160</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tx</span>
   <span class="ruby-ivar">@ins</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">add_in</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">txin</span>) }
   <span class="ruby-ivar">@outs</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">add_out</span>(<span class="ruby-identifier">o</span>.<span class="ruby-identifier">txout</span>) }
@@ -547,14 +564,25 @@ inputs.</p>
       <span class="ruby-keyword">next</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">prev_tx</span> = <span class="ruby-identifier">inc</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@prev_out</span>)
-    <span class="ruby-identifier">sig_hash</span> = <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">signature_hash_for_input</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">prev_tx</span>)
-    <span class="ruby-identifier">sig</span> = <span class="ruby-identifier">inc</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">sign</span>(<span class="ruby-identifier">sig_hash</span>)
-    <span class="ruby-identifier">script_sig</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">to_signature_pubkey_script</span>(<span class="ruby-identifier">sig</span>, [<span class="ruby-identifier">inc</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">pub</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>))
-    <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">script_sig_length</span> = <span class="ruby-identifier">script_sig</span>.<span class="ruby-identifier">bytesize</span>
-    <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">script_sig</span> = <span class="ruby-identifier">script_sig</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Signature error&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">verify_input_signature</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">prev_tx</span>)
+    <span class="ruby-ivar">@sig_hash</span> = <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">signature_hash_for_input</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">prev_tx</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">inc</span>.<span class="ruby-identifier">key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">inc</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">priv</span>
+      <span class="ruby-identifier">sig</span> = <span class="ruby-identifier">inc</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">sign</span>(<span class="ruby-ivar">@sig_hash</span>)
+      <span class="ruby-identifier">script_sig</span> = <span class="ruby-constant">Script</span>.<span class="ruby-identifier">to_signature_pubkey_script</span>(<span class="ruby-identifier">sig</span>, [<span class="ruby-identifier">inc</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">pub</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;H*&quot;</span>))
+      <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">script_sig_length</span> = <span class="ruby-identifier">script_sig</span>.<span class="ruby-identifier">bytesize</span>
+      <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">script_sig</span> = <span class="ruby-identifier">script_sig</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Signature error&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">verify_input_signature</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">prev_tx</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">script_sig_length</span> = <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">script_sig</span> = <span class="ruby-string">&quot;&quot;</span>
+      <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">sig_hash</span> = <span class="ruby-ivar">@sig_hash</span>
+      <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">sig_address</span> = <span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_tx</span>.<span class="ruby-identifier">out</span>[<span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">prev_out_index</span>].<span class="ruby-identifier">pk_script</span>).<span class="ruby-identifier">get_address</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">to_payload</span>)
+  <span class="ruby-identifier">data</span> = <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">in</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">i</span>.<span class="ruby-identifier">sig_hash</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sig_address</span>] }
+  <span class="ruby-identifier">tx</span> = <span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">to_payload</span>)
+  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span>.<span class="ruby-identifier">with_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">d</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">in</span>[<span class="ruby-identifier">i</span>]; <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sig_hash</span> = <span class="ruby-identifier">d</span>[<span class="ruby-value">0</span>]; <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sig_address</span> = <span class="ruby-identifier">d</span>[<span class="ruby-value">1</span>] }
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Payload Error&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">to_payload</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">to_payload</span>
+  <span class="ruby-identifier">tx</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- tx-source -->
           
@@ -587,7 +615,7 @@ necessary. defaults to 1.</p>
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 136</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span> <span class="ruby-identifier">n</span>
   <span class="ruby-ivar">@tx</span>.<span class="ruby-identifier">ver</span> = <span class="ruby-identifier">n</span>
 <span class="ruby-keyword">end</span></pre>

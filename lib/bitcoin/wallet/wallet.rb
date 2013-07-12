@@ -17,7 +17,8 @@ module Bitcoin::Wallet
   # TODO: new tx notification, keygenerators, keystore cleanup
   class Wallet
 
-    include Bitcoin::Builder
+    include Bitcoin
+    include Builder
 
     # the keystore (SimpleKeyStore) managing keys/addresses/labels
     attr_reader :keystore
@@ -27,18 +28,21 @@ module Bitcoin::Wallet
 
     # open wallet with given +storage+ Storage backend, +keystore+ SimpleKeyStore
     # and +selector+ SimpleCoinSelector
-    def initialize storage, keystore, selector
+    def initialize storage, keystore, selector = SimpleCoinSelector
       @storage = storage
       @keystore = keystore
       @selector = selector
       @callbacks = {}
-      connect_node  if defined?(EM)
+
+      @keystore.keys.each {|key| @storage.add_watched_address(key[:addr]) }
+      # connect_node  if defined?(EM)
+
     end
 
     def connect_node
       return  unless EM.reactor_running?
       host, port = "127.0.0.1", 9999
-      @node = Bitcoin::Network::CommandClient.connect(host, port, self, @storage) do
+      @node = Network::CommandClient.connect(host, port, self, @storage) do
         on_connected { request :monitor, "block", "tx" }
         on_block do |block, depth|
           EM.defer do
@@ -80,7 +84,7 @@ module Bitcoin::Wallet
 
     def log
       return @log  if @log
-      @log = Bitcoin::Logger.create("wallet")
+      @log = Logger.create("wallet")
       @log.level = :debug
       @log
     end
@@ -107,7 +111,7 @@ module Bitcoin::Wallet
     def get_txouts(unconfirmed = false)
       txouts = @keystore.keys.map {|k|
         @storage.get_txouts_for_address(k[:addr])}.flatten.uniq
-      unconfirmed ? txouts : txouts.select {|o| !!o.get_tx.get_block}
+      (unconfirmed || @storage.class.name =~ /Utxo/) ? txouts : txouts.select {|o| !!o.get_tx.get_block}
     end
 
     # get total balance for all addresses in this wallet
@@ -124,6 +128,7 @@ module Bitcoin::Wallet
     # add +key+ to wallet
     def add_key key
       @keystore.add_key(key)
+      @storage.add_watched_address(key[:addr])
     end
 
     # set label for key +old+ to +new+
@@ -145,7 +150,19 @@ module Bitcoin::Wallet
 
     # create new key and return its address
     def get_new_addr
-      @keystore.new_key.addr
+      key = @keystore.new_key
+      @storage.add_watched_address(key.addr)
+      key.addr
+    end
+
+    def import_key base58, label = nil
+      key = @keystore.import(base58, label)
+      @storage.add_watched_address(key.addr)
+      key.addr
+    end
+
+    def rescan
+      @storage.rescan
     end
 
     # get SimpleCoinSelector with txouts for this wallet
@@ -169,7 +186,7 @@ module Bitcoin::Wallet
       output_value = outputs.map{|o| o[-1] }.inject(:+)
 
       prev_outs = get_selector.select(output_value)
-      return nil  if !prev_outs
+      raise "Insufficient funds."  if !prev_outs
       if Bitcoin.namecoin?
         prev_out = nil
         outputs.each do |out|
@@ -188,7 +205,7 @@ module Bitcoin::Wallet
       end
 
       input_value = prev_outs.map(&:value).inject(:+)
-      return nil  unless input_value >= (output_value + fee)
+      raise "Insufficient funds."  unless input_value >= (output_value + fee)
 
       tx = build_tx do |t|
         t.version 0x7100  if Bitcoin.namecoin? && outputs.find {|o| o[0].to_s =~ /^name_/ }
@@ -219,7 +236,7 @@ module Bitcoin::Wallet
             prev_tx = prev_out.get_tx
             i.prev_out prev_tx
             i.prev_out_index prev_tx.out.index(prev_out)
-            pk_script = Bitcoin::Script.new(prev_out.pk_script)
+            pk_script = Script.new(prev_out.pk_script)
             if pk_script.is_pubkey? || pk_script.is_hash160? || pk_script.is_namecoin?
               i.signature_key @keystore.key(prev_out.get_address)[:key]
             elsif pk_script.is_multisig?
@@ -228,9 +245,12 @@ module Bitcoin::Wallet
           end
         end
       end
+
       # TODO: spend multisig outputs again
       # TODO: verify signatures
-      Bitcoin::Protocol::Tx.new(tx.to_payload)
+      raise "Payload Error"  unless P::Tx.new(tx.to_payload).to_payload == tx.to_payload
+
+      tx
     end
 
     protected

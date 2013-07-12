@@ -186,6 +186,8 @@
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
   
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
+  
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
@@ -258,9 +260,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -308,17 +320,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -567,7 +577,7 @@ communication with a specific peer. TODO: incoming/outgoing?</p>
 
           
           <div class="method-source-code" id="addr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 301</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 302</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addr</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@addr</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@addr</span>
   <span class="ruby-ivar">@addr</span> = <span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Addr</span>.<span class="ruby-identifier">new</span>
@@ -604,7 +614,7 @@ communication with a specific peer. TODO: incoming/outgoing?</p>
 
           
           <div class="method-source-code" id="get_genesis_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 251</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 252</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_genesis_block</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;Asking for genesis block&quot;</span> }
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">getdata_pkt</span>(<span class="ruby-value">:block</span>, [<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-identifier">network</span>[<span class="ruby-value">:genesis_hash</span>].<span class="ruby-identifier">htb</span>])
@@ -639,7 +649,7 @@ communication with a specific peer. TODO: incoming/outgoing?</p>
 
           
           <div class="method-source-code" id="incoming-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 322</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 323</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">incoming?</span>; <span class="ruby-ivar">@direction</span> <span class="ruby-operator">==</span> <span class="ruby-value">:in</span>; <span class="ruby-keyword">end</span></pre>
           </div><!-- incoming-3F-source -->
           
@@ -670,7 +680,7 @@ communication with a specific peer. TODO: incoming/outgoing?</p>
 
           
           <div class="method-source-code" id="info-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 314</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 315</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">info</span>
   {
     <span class="ruby-value">:host</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@host</span>, <span class="ruby-value">:port</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@port</span>, <span class="ruby-value">:state</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@state</span>,
@@ -742,7 +752,7 @@ listeners</p>
 
           
           <div class="method-source-code" id="on_addr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 122</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_addr</span>(<span class="ruby-identifier">addr</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; addr: #{addr.ip}:#{addr.port} alive: #{addr.alive?}, service: #{addr.service}&quot;</span> }
   <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">addrs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">addr</span>
@@ -778,7 +788,7 @@ implement alert logic, store, display, relay</p>
 
           
           <div class="method-source-code" id="on_alert-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_alert</span>(<span class="ruby-identifier">alert</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;&gt;&gt; alert: #{alert.inspect}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -812,7 +822,7 @@ to storage queue</p>
 
           
           <div class="method-source-code" id="on_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 137</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_block</span>(<span class="ruby-identifier">blk</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; block: #{blk.hash} (#{blk.payload.size} bytes)&quot;</span> }
   <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">queue</span>.<span class="ruby-identifier">push</span>([<span class="ruby-value">:block</span>, <span class="ruby-identifier">blk</span>])
@@ -847,7 +857,7 @@ specified block if we have it</p>
 
           
           <div class="method-source-code" id="on_get_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_get_block</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; get block: #{hash.hth}&quot;</span> }
   <span class="ruby-identifier">blk</span> = <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_block</span>(<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>)
@@ -890,6 +900,7 @@ specified tx if we have it</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_get_transaction</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; get transaction: #{hash.hth}&quot;</span> }
   <span class="ruby-identifier">tx</span> = <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_tx</span>(<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>)
+  <span class="ruby-identifier">tx</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">relay_tx</span>[<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">hth</span>]
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tx</span>
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pkt</span>(<span class="ruby-string">&quot;tx&quot;</span>, <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">to_payload</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&lt;&lt; tx: #{tx.hash}&quot;</span> }
@@ -925,7 +936,7 @@ peer addresses back.</p>
 
           
           <div class="method-source-code" id="on_getaddr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 196</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_getaddr</span>
   <span class="ruby-identifier">addrs</span> = <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">addrs</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">time</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-value">10800</span> }.<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">250</span>]
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&lt;&lt; addr (#{addrs.size})&quot;</span> }
@@ -960,7 +971,7 @@ peer addresses back.</p>
 
           
           <div class="method-source-code" id="on_getblocks-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 175</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_getblocks</span>(<span class="ruby-identifier">version</span>, <span class="ruby-identifier">hashes</span>, <span class="ruby-identifier">stop_hash</span>)
   <span class="ruby-comment"># remember the last few received getblocks messages and ignore duplicate ones</span>
   <span class="ruby-comment"># fixes unexplained issue where remote node is bombarding us with the same getblocks</span>
@@ -1008,10 +1019,10 @@ peer addresses back.</p>
 
           
           <div class="method-source-code" id="on_handshake_begin-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 285</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 286</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_handshake_begin</span>
   <span class="ruby-ivar">@state</span> = <span class="ruby-value">:handshake</span>
-  <span class="ruby-identifier">from</span> = <span class="ruby-node">&quot;#{@node.external_ip}:#{@node.config[:listen].split(&#39;:&#39;)[1]}&quot;</span>
+  <span class="ruby-identifier">from</span> = <span class="ruby-node">&quot;#{@node.external_ip}:#{@node.config[:listen][1]}&quot;</span>
   <span class="ruby-identifier">version</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">Version</span>.<span class="ruby-identifier">new</span>({
     <span class="ruby-value">:version</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-value">70001</span>,
     <span class="ruby-value">:last_block</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_depth</span>,
@@ -1054,7 +1065,7 @@ notify listeners and add address to <a href="Node.html">Node</a></p>
 
           
           <div class="method-source-code" id="on_handshake_complete-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 258</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_handshake_complete</span>
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">handshake?</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;handshake complete&quot;</span> }
@@ -1096,7 +1107,7 @@ each header to storage queue</p>
 
           
           <div class="method-source-code" id="on_headers-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 144</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_headers</span>(<span class="ruby-identifier">headers</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;&gt;&gt; headers (#{headers.size})&quot;</span> }
   <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">queue</span>.<span class="ruby-identifier">push</span>([<span class="ruby-value">:block</span>, <span class="ruby-identifier">h</span>])}
@@ -1207,7 +1218,7 @@ versions &lt;=60000 don&#39;t set the nonce and don&#39;t expect a pong.</p>
 
           
           <div class="method-source-code" id="on_ping-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 273</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 274</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_ping</span> <span class="ruby-identifier">nonce</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; ping (#{nonce})&quot;</span> }
   <span class="ruby-identifier">send_data</span>(<span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pong_pkt</span>(<span class="ruby-identifier">nonce</span>))  <span class="ruby-keyword">if</span> <span class="ruby-identifier">nonce</span>
@@ -1242,7 +1253,7 @@ versions &lt;=60000 don&#39;t set the nonce and don&#39;t expect a pong.</p>
 
           
           <div class="method-source-code" id="on_pong-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 280</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_pong</span> <span class="ruby-identifier">nonce</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; pong (#{nonce})&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -1276,7 +1287,7 @@ storage queue</p>
 
           
           <div class="method-source-code" id="on_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 130</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_tx</span>(<span class="ruby-identifier">tx</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; tx: #{tx.hash} (#{tx.payload.size} bytes)&quot;</span> }
   <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">queue</span>.<span class="ruby-identifier">push</span>([<span class="ruby-value">:tx</span>, <span class="ruby-identifier">tx</span>])
@@ -1311,7 +1322,7 @@ completed already</p>
 
           
           <div class="method-source-code" id="on_verack-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 162</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_verack</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;&gt;&gt; verack&quot;</span> }
   <span class="ruby-identifier">on_handshake_complete</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">handshake?</span>
@@ -1346,7 +1357,7 @@ completed already</p>
 
           
           <div class="method-source-code" id="on_version-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 151</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_version</span>(<span class="ruby-identifier">version</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&gt;&gt; version: #{version.version}&quot;</span> }
   <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">external_ips</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">version</span>.<span class="ruby-identifier">to</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)[<span class="ruby-value">0</span>]
@@ -1384,7 +1395,7 @@ completed already</p>
 
           
           <div class="method-source-code" id="outgoing-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 323</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 324</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">outgoing?</span>; <span class="ruby-ivar">@direction</span> <span class="ruby-operator">==</span> <span class="ruby-value">:out</span>; <span class="ruby-keyword">end</span></pre>
           </div><!-- outgoing-3F-source -->
           
@@ -1495,7 +1506,7 @@ href="../Protocol/Parser.html">Protocol::Parser</a></p>
 
           
           <div class="method-source-code" id="send_getaddr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 237</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_getaddr</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;&lt;&lt; getaddr&quot;</span> }
   <span class="ruby-identifier">send_data</span>(<span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pkt</span>(<span class="ruby-string">&quot;getaddr&quot;</span>, <span class="ruby-string">&quot;&quot;</span>))
@@ -1529,7 +1540,7 @@ href="../Protocol/Parser.html">Protocol::Parser</a></p>
 
           
           <div class="method-source-code" id="send_getblocks-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 217</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 218</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_getblocks</span> <span class="ruby-identifier">locator</span> = <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_locator</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_depth</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
     <span class="ruby-constant">EM</span>.<span class="ruby-identifier">add_timer</span>(<span class="ruby-value">3</span>) { <span class="ruby-identifier">send_getblocks</span> }
@@ -1568,7 +1579,7 @@ href="../Protocol/Parser.html">Protocol::Parser</a></p>
 
           
           <div class="method-source-code" id="send_getdata_block-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 210</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_getdata_block</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">getdata_pkt</span>(<span class="ruby-value">:block</span>, [<span class="ruby-identifier">hash</span>])
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&lt;&lt; getdata block: #{hash.hth}&quot;</span> }
@@ -1603,7 +1614,7 @@ href="../Protocol/Parser.html">Protocol::Parser</a></p>
 
           
           <div class="method-source-code" id="send_getdata_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 203</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_getdata_tx</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">getdata_pkt</span>(<span class="ruby-value">:tx</span>, [<span class="ruby-identifier">hash</span>])
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&lt;&lt; getdata tx: #{hash.hth}&quot;</span> }
@@ -1638,7 +1649,7 @@ href="../Protocol/Parser.html">Protocol::Parser</a></p>
 
           
           <div class="method-source-code" id="send_getheaders-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 228</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 229</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_getheaders</span> <span class="ruby-identifier">locator</span> = <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_locator</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_genesis_block</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@node</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_depth</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
   <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">pkt</span>(<span class="ruby-string">&quot;getheaders&quot;</span>, [<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-identifier">network</span>[<span class="ruby-value">:magic_head</span>],
@@ -1676,7 +1687,7 @@ href="../Protocol/Parser.html">Protocol::Parser</a></p>
 
           
           <div class="method-source-code" id="send_inv-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 112</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_inv</span> <span class="ruby-identifier">type</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">hashes</span>
   <span class="ruby-identifier">hashes</span>.<span class="ruby-identifier">each_slice</span>(<span class="ruby-value">251</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">slice</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">pkt</span> = <span class="ruby-constant">Protocol</span>.<span class="ruby-identifier">inv_pkt</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">slice</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:htb</span>))
@@ -1716,7 +1727,7 @@ href="ConnectionHandler.html#method-c-new">::new</a> enough)</p>
 
           
           <div class="method-source-code" id="send_ping-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 244</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/connection_handler.rb, line 245</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_ping</span>
   <span class="ruby-identifier">nonce</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-value">0xffffffff</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;&lt;&lt; ping (#{nonce})&quot;</span> }

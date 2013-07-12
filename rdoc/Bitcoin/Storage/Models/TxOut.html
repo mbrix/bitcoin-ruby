@@ -116,6 +116,8 @@
   
     <li class="file"><a href="../../../doc/WALLET_rdoc.html">WALLET</a>
   
+    <li class="file"><a href="../../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
+  
     <li class="file"><a href="../../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
     <li class="file"><a href="../../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
@@ -188,9 +190,19 @@
   
     <li><a href="../../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -238,17 +250,15 @@
   
     <li><a href="../../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -490,7 +500,7 @@ href="../../Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>)</p>
 
           
           <div class="method-source-code" id="get_address-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_address</span>
   <span class="ruby-identifier">script</span>.<span class="ruby-identifier">get_address</span>
 <span class="ruby-keyword">end</span></pre>
@@ -523,7 +533,7 @@ href="../../Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>)</p>
 
           
           <div class="method-source-code" id="get_addresses-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 125</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_addresses</span>
   <span class="ruby-identifier">script</span>.<span class="ruby-identifier">get_addresses</span>
 <span class="ruby-keyword">end</span></pre>
@@ -556,7 +566,7 @@ href="../../Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>)</p>
 
           
           <div class="method-source-code" id="get_namecoin_name-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_namecoin_name</span>
   <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_name_by_txout_id</span>(<span class="ruby-ivar">@id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -592,6 +602,8 @@ href="../../Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>)</p>
             <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_next_in</span>
   <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_txin_for_txout</span>(<span class="ruby-identifier">get_tx</span>.<span class="ruby-identifier">hash</span>, <span class="ruby-ivar">@tx_idx</span>)
+<span class="ruby-keyword">rescue</span>
+  <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_next_in-source -->
           
@@ -688,7 +700,7 @@ href="../../Protocol/TxOut.html">Bitcoin::Protocol::TxOut</a>)</p>
 
           
           <div class="method-source-code" id="script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 137</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/storage/models.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">script</span>
   <span class="ruby-ivar">@_script</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pk_script</span>)
 <span class="ruby-keyword">end</span></pre>

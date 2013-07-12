@@ -95,12 +95,15 @@ class Bitcoin::Network::CommandHandler < EM::Connection
   # When +conf+ is given, don't subscribe to the :tx channel for unconfirmed
   # transactions. Instead, subscribe to the :block channel, and whenever a new
   # block comes in, send all transactions that now have +conf+ confirmations.
-  def handle_monitor_tx conf = 0
-    return  unless (conf = conf.to_i) > 0
+  def handle_monitor_tx conf = nil
+    return  unless conf
+    if conf.to_i == 0 # 'tx_0' is just an alias for 'tx'
+      return @node.subscribe(:tx) {|*a| @node.notifiers[:tx_0].push(*a) }
+    end
     @node.subscribe(:block) do |block, depth|
-      block = @node.store.get_block_by_depth(depth - conf + 1)
+      block = @node.store.get_block_by_depth(depth - conf.to_i + 1)
       next  unless block
-      block.tx.each {|tx| @node.notifiers["tx_#{conf}".to_sym].push([tx, conf]) }
+      block.tx.each {|tx| @node.notifiers["tx_#{conf}".to_sym].push([tx, conf.to_i]) }
     end
   end
 
@@ -132,7 +135,7 @@ class Bitcoin::Network::CommandHandler < EM::Connection
     end
   end
 
-  # display various statistics
+  # Get various statistics.
   #  bitcoin_node info
   def handle_info
     blocks = @node.connections.map(&:version).compact.map(&:last_block) rescue nil
@@ -153,13 +156,13 @@ class Bitcoin::Network::CommandHandler < EM::Connection
     Bitcoin.namecoin? ? {:names => @node.store.db[:names].count}.merge(info) : info
   end
 
-  # display configuration hash currently used
+  # Get the currently active configuration.
   #  bitcoin_node config
   def handle_config
     @node.config
   end
 
-  # display connected peers
+  # Get currently connected peers.
   #  bitcoin_node connections
   def handle_connections
     @node.connections.sort{|x,y| y.uptime <=> x.uptime}.map{|c|
@@ -170,14 +173,14 @@ class Bitcoin::Network::CommandHandler < EM::Connection
       "client: #{c.version.user_agent rescue '?'}]" }
   end
 
-  # connect to given peer(s)
+  # Connect to given peer(s).
   #  bitcoin_node connect <ip>:<port>[,<ip>:<port>]
   def handle_connect *args
     args.each {|a| @node.connect_peer(*a.split(':')) }
     {:state => "Connecting..."}
   end
 
-  # disconnect peer(s)
+  # Disconnect given peer(s).
   #  bitcoin_node disconnect <ip>:<port>[,<ip>,<port>]
   def handle_disconnect *args
     args.each do |c|
@@ -188,21 +191,21 @@ class Bitcoin::Network::CommandHandler < EM::Connection
     {:state => "Disconnected"}
   end
 
-  # trigger node to ask peers for new blocks
+  # Trigger the node to ask its peers for new blocks.
   #  bitcoin_node getblocks
   def handle_getblocks
     @node.connections.sample.send_getblocks
     {:state => "Sending getblocks..."}
   end
 
-  # trigger node to ask for new peer addrs
+  # Trigger the node to ask its for new peer addresses.
   #  bitcoin_node getaddr
   def handle_getaddr
     @node.connections.sample.send_getaddr
     {:state => "Sending getaddr..."}
   end
 
-  # display known peer addrs (used by bin/bitcoin_dns_seed)
+  # Get known peer addresses (used by bin/bitcoin_dns_seed).
   #  bitcoin_node addrs [count]
   def handle_addrs count = 32
     @node.addrs.weighted_sample(count.to_i) do |addr|
@@ -212,17 +215,80 @@ class Bitcoin::Network::CommandHandler < EM::Connection
     end.compact
   end
 
-  # display Time Since Last Block.
+  # Trigger a rescan operation when used with a UtxoStore.
+  #  bitcoin_node rescan
+  def handle_rescan
+    EM.defer { @node.store.rescan }
+    {:state => "Rescanning ..."}
+  end
+
+  # Get Time Since Last Block.
   #  bitcoin_node tslb
   def handle_tslb
     { tslb: (Time.now - @node.last_block_time).to_i }
   end
 
-  # relay given transaction (in hex)
+  # Create a transaction, collecting outputs from given +keys+, spending to +recipients+
+  # with an optional +fee+.
+  # Keys is an array that can contain either privkeys, pubkeys or addresses.
+  # When a privkey is given, the corresponding inputs are signed. If not, the
+  # signature_hash is computed and passed along with the response.
+  # After creating an unsigned transaction, one just needs to sign the sig_hashes
+  # and send everything to #assemble_tx, to receive the complete transaction that
+  # can be relayed to the network.
+  def handle_create_tx keys, recipients, fee = 0
+    keystore = Bitcoin::Wallet::SimpleKeyStore.new(file: StringIO.new("[]"))
+    keys.each do |k|
+      begin
+        key = Bitcoin::Key.from_base58(k)
+        key = { addr: key.addr, key: key }
+      rescue
+        if Bitcoin.valid_address?(k)
+          key = { addr: k }
+        else
+          begin
+            key = Bitcoin::Key.new(nil, k)
+            key = { addr: key.addr, key: key }
+          rescue
+            return { error: "Input not valid address, pub- or privkey: #{k}" }
+          end
+        end
+      end
+      keystore.add_key(key)
+    end
+    wallet = Bitcoin::Wallet::Wallet.new(@node.store, keystore)
+    tx = wallet.new_tx(recipients.map {|r| [:address, r[0], r[1]]}, fee)
+    return { error: "Error creating tx." }  unless tx
+    [ tx.to_payload.hth, tx.in.map {|i| [i.sig_hash.hth, i.sig_address] rescue nil } ]
+  rescue
+    { error: "Error creating tx: #{$!.message}" }
+  end
+
+  # Assemble an unsigned transaction from the +tx_hex+ and +sig_pubkeys+.
+  # The +tx_hex+ is the regular transaction structure, with empty input scripts
+  # (as returned by #create_tx when called without privkeys).
+  # +sig_pubkeys+ is an array of [signature, pubkey] pairs used to build the
+  # input scripts.
+  def handle_assemble_tx tx_hex, sig_pubs
+    tx = Bitcoin::P::Tx.new(tx_hex.htb)
+    sig_pubs.each.with_index do |sig_pub, idx|
+      sig, pub = *sig_pub.map(&:htb)
+      script_sig = Bitcoin::Script.to_signature_pubkey_script(sig, pub)
+      tx.in[idx].script_sig_length = script_sig.bytesize
+      tx.in[idx].script_sig = script_sig
+    end
+    tx = Bitcoin::P::Tx.new(tx.to_payload)
+    tx.validator(@node.store).validate(raise_errors: true)
+    tx.to_payload.hth
+  rescue
+    { error: "Error assembling tx: #{$!.message}" }
+  end
+
+  # Relay given transaction (in hex).
   #  bitcoin_node relay_tx <tx in hex>
   def handle_relay_tx hex, send = 3, wait = 3
     begin
-      tx = Bitcoin::Protocol::Tx.new(hex.htb)
+      tx = Bitcoin::P::Tx.new(hex.htb)
     rescue
       return respond("relay_tx", { error: "Error decoding transaction." })
     end
@@ -237,7 +303,8 @@ class Bitcoin::Network::CommandHandler < EM::Connection
                      details: validator.error })
     end
 
-    @node.store.store_tx(tx)
+    #@node.store.store_tx(tx)
+    @node.relay_tx[tx.hash] = tx
     @node.relay_propagation[tx.hash] = 0
     @node.connections.select(&:connected?).sample(send).each {|c| c.send_inv(:tx, tx.hash) }
 
@@ -252,25 +319,29 @@ class Bitcoin::Network::CommandHandler < EM::Connection
     respond("relay_tx", { error: $!.message, backtrace: $@ })
   end
 
-  # stop bitcoin node
+  # Stop the bitcoin node.
   #  bitcoin_node stop
   def handle_stop
     Thread.start { sleep 0.1; @node.stop }
     {:state => "Stopping..."}
   end
 
-  # list all commands
+  # List all available commands.
   #  bitcoin_node help
   def handle_help
     self.methods.grep(/^handle_(.*?)/).map {|m| m.to_s.sub(/^(.*?)_/, '')}
   end
 
+  # Validate and store given block (in hex) as if it was received by a peer.
+  #  bitcoin_node store_block <block in hex>
   def handle_store_block hex
     block = Bitcoin::P::Block.new(hex.htb)
     @node.queue << [:block, block]
     { queued: [ :block, block.hash ] }
   end
 
+  # Store given transaction (in hex) as if it was received by a peer.
+  #  bitcoin_node store_tx <tx in hex>
   def handle_store_tx hex
     tx = Bitcoin::P::Tx.new(hex.htb)
     @node.queue << [:tx, tx]

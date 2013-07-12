@@ -106,6 +106,8 @@
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
   
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
+  
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
@@ -178,9 +180,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -228,17 +240,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -385,7 +395,7 @@ href="TxOutBuilder.html#method-i-script">Bitcoin::Builder::TxOutBuilder#script</
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 234</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 251</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@type</span> = <span class="ruby-value">:address</span>
   <span class="ruby-ivar">@script</span> = <span class="ruby-keyword">nil</span>
@@ -427,9 +437,9 @@ href="ScriptBuilder.html#attribute-i-script">#script</a>. depending on the
 
           
           <div class="method-source-code" id="recipient-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 246</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">recipient</span> <span class="ruby-operator">*</span><span class="ruby-identifier">data</span>
-  <span class="ruby-ivar">@script</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;to_#{@type}_script&quot;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@script</span> = <span class="ruby-constant">Script</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;to_#{@type}_script&quot;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- recipient-source -->
           
@@ -462,7 +472,7 @@ href="ScriptBuilder.html#method-i-type">#type</a> (:pubkey,
 
           
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 240</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/builder.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">type</span> <span class="ruby-identifier">type</span>
   <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
 <span class="ruby-keyword">end</span></pre>

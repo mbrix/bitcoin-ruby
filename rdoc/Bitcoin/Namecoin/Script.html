@@ -122,6 +122,8 @@
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
   
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
+  
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/gui_builder.html">gui.builder</a>
@@ -194,9 +196,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -244,17 +256,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -339,6 +349,10 @@
 
   <div id="description" class="description">
     
+<p>Namecoin-specific <a href="Script.html">Script</a> methods for parsing and
+creating of namecoin scripts, as well as methods to extract address,
+name_hash, name and value.</p>
+
   </div><!-- description -->
 
   
@@ -378,7 +392,7 @@
 
           
           <div class="method-source-code" id="included-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 6</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
   <span class="ruby-identifier">base</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">const_set</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">base</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">c</span>)) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">constants</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>) }
   <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword">do</span>
@@ -523,7 +537,7 @@ rand value OP_2DROP OP_2DROP &lt;hash160_script&gt;</p>
 
           
           <div class="method-source-code" id="to_name_firstupdate_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_name_firstupdate_script</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rand</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">address</span>)
   [ [ <span class="ruby-string">&quot;52&quot;</span>, <span class="ruby-identifier">name</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">2</span>, <span class="ruby-string">&#39;0&#39;</span>), <span class="ruby-identifier">name</span>.<span class="ruby-identifier">hth</span>,
       <span class="ruby-identifier">rand</span>.<span class="ruby-identifier">htb</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">2</span>, <span class="ruby-string">&#39;0&#39;</span>), <span class="ruby-identifier">rand</span>,
@@ -562,7 +576,7 @@ gets the used random value passed to #set_rand. OP_1 name_hash OP_2DROP
 
           
           <div class="method-source-code" id="to_name_new_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_name_new_script</span>(<span class="ruby-identifier">caller</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">address</span>)
   <span class="ruby-identifier">rand</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-value">64</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">16</span>, <span class="ruby-string">&#39;0&#39;</span>)
   <span class="ruby-identifier">name_hash</span> = <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160</span>(<span class="ruby-identifier">rand</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>])
@@ -600,7 +614,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="to_name_update_script-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 111</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_name_update_script</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">address</span>)
   [ [ <span class="ruby-string">&quot;53&quot;</span>, <span class="ruby-identifier">name</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">2</span>, <span class="ruby-string">&#39;0&#39;</span>), <span class="ruby-identifier">name</span>.<span class="ruby-identifier">hth</span>,
       <span class="ruby-identifier">value</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">2</span>, <span class="ruby-string">&#39;0&#39;</span>), <span class="ruby-identifier">value</span>.<span class="ruby-identifier">hth</span>,
@@ -641,7 +655,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="get_addresses-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 18</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_addresses</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-identifier">get_pubkey_address</span>]    <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pubkey?</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-identifier">get_hash160_address</span>]   <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_namecoin?</span>
@@ -676,7 +690,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="get_hash160-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 11</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_hash160</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-3</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_hash160?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-3</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]        <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_namecoin?</span>
@@ -711,7 +725,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="get_namecoin_hash-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 67</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_namecoin_hash</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-7</span>].<span class="ruby-identifier">hth</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_name_new?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_name_firstupdate?</span>
@@ -751,7 +765,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="get_namecoin_name-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 79</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_namecoin_name</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-10</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_name_firstupdate?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-9</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_name_update?</span>
@@ -785,7 +799,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="get_namecoin_value-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 85</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_namecoin_value</span>
   <span class="ruby-ivar">@chunks</span>[<span class="ruby-value">-8</span>]  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_name_firstupdate?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_name_update?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -819,7 +833,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="is_name_firstupdate-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_name_firstupdate?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">11</span>
   [<span class="ruby-value">-11</span>, <span class="ruby-value">-7</span>, <span class="ruby-value">-6</span>, <span class="ruby-value">-5</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">-1</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-identifier">i</span>] } <span class="ruby-operator">==</span>
@@ -854,7 +868,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="is_name_new-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_name_new?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">8</span>
   [<span class="ruby-value">-8</span>, <span class="ruby-value">-6</span>, <span class="ruby-value">-5</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">-1</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-identifier">i</span>] } <span class="ruby-operator">==</span>
@@ -890,7 +904,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="is_name_update-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_name_update?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chunks</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span>
   [<span class="ruby-value">-10</span>, <span class="ruby-value">-7</span>, <span class="ruby-value">-6</span>, <span class="ruby-value">-5</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">-1</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@chunks</span>[<span class="ruby-identifier">i</span>] } <span class="ruby-operator">==</span>
@@ -925,7 +939,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="is_namecoin-3F-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 62</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_namecoin?</span>
   <span class="ruby-identifier">is_name_new?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_name_firstupdate?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_name_update?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -958,7 +972,7 @@ and <code>address</code>. OP_3 name value OP_2DROP OP_DROP
 
           
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 25</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/namecoin.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">type</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_name_new?</span>;            <span class="ruby-value">:name_new</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">is_name_firstupdate?</span>; <span class="ruby-value">:name_firstupdate</span>

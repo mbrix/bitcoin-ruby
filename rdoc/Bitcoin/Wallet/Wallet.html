@@ -72,6 +72,10 @@
   <ul class="link-list">
   
   
+    <li><a class="include" href="../../Bitcoin.html">Bitcoin</a>
+  
+  
+  
     <li><a class="include" href="../Builder.html">Bitcoin::Builder</a>
   
   
@@ -109,6 +113,8 @@
     
     <li ><a href="#method-i-get_txouts">#get_txouts</a>
     
+    <li ><a href="#method-i-import_key">#import_key</a>
+    
     <li ><a href="#method-i-label">#label</a>
     
     <li ><a href="#method-i-list">#list</a>
@@ -118,6 +124,8 @@
     <li class="calls-super" ><a href="#method-i-method_missing">#method_missing</a>
     
     <li ><a href="#method-i-new_tx">#new_tx</a>
+    
+    <li ><a href="#method-i-rescan">#rescan</a>
     
   </ul>
 </nav>
@@ -145,6 +153,8 @@
     <li class="file"><a href="../../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
@@ -218,9 +228,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -268,17 +288,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -431,7 +449,7 @@ cleanup</p>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(storage, keystore, selector)</span>
+            class="method-args">(storage, keystore, selector = SimpleCoinSelector)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -449,13 +467,16 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">storage</span>, <span class="ruby-identifier">keystore</span>, <span class="ruby-identifier">selector</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">storage</span>, <span class="ruby-identifier">keystore</span>, <span class="ruby-identifier">selector</span> = <span class="ruby-constant">SimpleCoinSelector</span>
   <span class="ruby-ivar">@storage</span> = <span class="ruby-identifier">storage</span>
   <span class="ruby-ivar">@keystore</span> = <span class="ruby-identifier">keystore</span>
   <span class="ruby-ivar">@selector</span> = <span class="ruby-identifier">selector</span>
   <span class="ruby-ivar">@callbacks</span> = {}
-  <span class="ruby-identifier">connect_node</span>  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">EM</span>)
+
+  <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">add_watched_address</span>(<span class="ruby-identifier">key</span>[<span class="ruby-value">:addr</span>]) }
+  <span class="ruby-comment"># connect_node  if defined?(EM)</span>
+
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -492,9 +513,10 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="add_key-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 124</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_key</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">add_key</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">add_watched_address</span>(<span class="ruby-identifier">key</span>[<span class="ruby-value">:addr</span>])
 <span class="ruby-keyword">end</span></pre>
           </div><!-- add_key-source -->
           
@@ -525,7 +547,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="addrs-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 119</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addrs</span>
   <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>[<span class="ruby-value">:addr</span>]}
 <span class="ruby-keyword">end</span></pre>
@@ -559,7 +581,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="callback-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 88</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">callback</span> <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
   <span class="ruby-identifier">cb</span> = <span class="ruby-ivar">@callbacks</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>]
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cb</span>
@@ -595,7 +617,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="check_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">check_tx</span> <span class="ruby-identifier">tx_hash</span>
   <span class="ruby-identifier">relevant</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">addrs</span> = <span class="ruby-identifier">addrs</span>
@@ -644,11 +666,11 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="connect_node-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 37</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">connect_node</span>
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">EM</span>.<span class="ruby-identifier">reactor_running?</span>
   <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-string">&quot;127.0.0.1&quot;</span>, <span class="ruby-value">9999</span>
-  <span class="ruby-ivar">@node</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Network</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandClient</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-keyword">self</span>, <span class="ruby-ivar">@storage</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-ivar">@node</span> = <span class="ruby-constant">Network</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandClient</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-keyword">self</span>, <span class="ruby-ivar">@storage</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">on_connected</span> { <span class="ruby-identifier">request</span> <span class="ruby-value">:monitor</span>, <span class="ruby-string">&quot;block&quot;</span>, <span class="ruby-string">&quot;tx&quot;</span> }
     <span class="ruby-identifier">on_block</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">block</span>, <span class="ruby-identifier">depth</span><span class="ruby-operator">|</span>
       <span class="ruby-constant">EM</span>.<span class="ruby-identifier">defer</span> <span class="ruby-keyword">do</span>
@@ -696,7 +718,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="flag-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 134</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flag</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">flag</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">flag_key</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">flag</span>, <span class="ruby-identifier">value</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -729,7 +751,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a></p>
 
           
           <div class="method-source-code" id="get_balance-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_balance</span>(<span class="ruby-identifier">unconfirmed</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">values</span> = <span class="ruby-identifier">get_txouts</span>(<span class="ruby-identifier">unconfirmed</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">o</span>.<span class="ruby-identifier">get_next_in</span>}.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>)
   ([<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">values</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)
@@ -764,9 +786,11 @@ address</p>
 
           
           <div class="method-source-code" id="get_new_addr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 146</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_new_addr</span>
-  <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">new_key</span>.<span class="ruby-identifier">addr</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">new_key</span>
+  <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">add_watched_address</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">addr</span>)
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">addr</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_new_addr-source -->
           
@@ -798,7 +822,7 @@ for this wallet</p>
 
           
           <div class="method-source-code" id="get_selector-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 151</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_selector</span>
   <span class="ruby-ivar">@selector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">get_txouts</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -832,11 +856,11 @@ concerning any address from this wallet</p>
 
           
           <div class="method-source-code" id="get_txouts-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 106</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_txouts</span>(<span class="ruby-identifier">unconfirmed</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">txouts</span> = <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">get_txouts_for_address</span>(<span class="ruby-identifier">k</span>[<span class="ruby-value">:addr</span>])}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
-  <span class="ruby-identifier">unconfirmed</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">txouts</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">txouts</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">o</span>.<span class="ruby-identifier">get_tx</span>.<span class="ruby-identifier">get_block</span>}
+  (<span class="ruby-identifier">unconfirmed</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Utxo/</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">txouts</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">txouts</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">o</span>.<span class="ruby-identifier">get_tx</span>.<span class="ruby-identifier">get_block</span>}
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_txouts-source -->
           
@@ -846,6 +870,41 @@ concerning any address from this wallet</p>
 
         
       </div><!-- get_txouts-method -->
+
+    
+      <div id="method-i-import_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">import_key</span><span
+            class="method-args">(base58, label = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="import_key-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">import_key</span> <span class="ruby-identifier">base58</span>, <span class="ruby-identifier">label</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">import</span>(<span class="ruby-identifier">base58</span>, <span class="ruby-identifier">label</span>)
+  <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">add_watched_address</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">addr</span>)
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">addr</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- import_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- import_key-method -->
 
     
       <div id="method-i-label" class="method-detail ">
@@ -868,7 +927,7 @@ concerning any address from this wallet</p>
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span> <span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">label_key</span>(<span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -902,7 +961,7 @@ balances</p>
 
           
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 139</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">list</span>
   <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
     [<span class="ruby-identifier">key</span>, <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">get_balance</span>(<span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">hash160_from_address</span>(<span class="ruby-identifier">key</span>[<span class="ruby-value">:addr</span>]))]
@@ -937,10 +996,10 @@ balances</p>
 
           
           <div class="method-source-code" id="log-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">log</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@log</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@log</span>
-  <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">create</span>(<span class="ruby-string">&quot;wallet&quot;</span>)
+  <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">create</span>(<span class="ruby-string">&quot;wallet&quot;</span>)
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">level</span> = <span class="ruby-value">:debug</span>
   <span class="ruby-ivar">@log</span>
 <span class="ruby-keyword">end</span></pre>
@@ -978,7 +1037,7 @@ balances</p>
 
           
           <div class="method-source-code" id="method_missing-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 96</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^on_/</span>
     <span class="ruby-ivar">@callbacks</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;on_&quot;</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">block</span>
@@ -1032,12 +1091,12 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a>.</p>
 
           
           <div class="method-source-code" id="new_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 167</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new_tx</span> <span class="ruby-identifier">outputs</span>, <span class="ruby-identifier">fee</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">change_policy</span> = <span class="ruby-value">:back</span>
   <span class="ruby-identifier">output_value</span> = <span class="ruby-identifier">outputs</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>[<span class="ruby-value">-1</span>] }.<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)
 
   <span class="ruby-identifier">prev_outs</span> = <span class="ruby-identifier">get_selector</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">output_value</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">prev_outs</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Insufficient funds.&quot;</span>  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">prev_outs</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">namecoin?</span>
     <span class="ruby-identifier">prev_out</span> = <span class="ruby-keyword">nil</span>
     <span class="ruby-identifier">outputs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">out</span><span class="ruby-operator">|</span>
@@ -1056,7 +1115,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a>.</p>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">input_value</span> = <span class="ruby-identifier">prev_outs</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input_value</span> <span class="ruby-operator">&gt;=</span> (<span class="ruby-identifier">output_value</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fee</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Insufficient funds.&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input_value</span> <span class="ruby-operator">&gt;=</span> (<span class="ruby-identifier">output_value</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fee</span>)
 
   <span class="ruby-identifier">tx</span> = <span class="ruby-identifier">build_tx</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">t</span>.<span class="ruby-identifier">version</span> <span class="ruby-value">0x7100</span>  <span class="ruby-keyword">if</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">namecoin?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">outputs</span>.<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^name_/</span> }
@@ -1087,7 +1146,7 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a>.</p>
         <span class="ruby-identifier">prev_tx</span> = <span class="ruby-identifier">prev_out</span>.<span class="ruby-identifier">get_tx</span>
         <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out</span> <span class="ruby-identifier">prev_tx</span>
         <span class="ruby-identifier">i</span>.<span class="ruby-identifier">prev_out_index</span> <span class="ruby-identifier">prev_tx</span>.<span class="ruby-identifier">out</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">prev_out</span>)
-        <span class="ruby-identifier">pk_script</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_out</span>.<span class="ruby-identifier">pk_script</span>)
+        <span class="ruby-identifier">pk_script</span> = <span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_out</span>.<span class="ruby-identifier">pk_script</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">pk_script</span>.<span class="ruby-identifier">is_pubkey?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">pk_script</span>.<span class="ruby-identifier">is_hash160?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">pk_script</span>.<span class="ruby-identifier">is_namecoin?</span>
           <span class="ruby-identifier">i</span>.<span class="ruby-identifier">signature_key</span> <span class="ruby-ivar">@keystore</span>.<span class="ruby-identifier">key</span>(<span class="ruby-identifier">prev_out</span>.<span class="ruby-identifier">get_address</span>)[<span class="ruby-value">:key</span>]
         <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pk_script</span>.<span class="ruby-identifier">is_multisig?</span>
@@ -1096,9 +1155,12 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a>.</p>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+
   <span class="ruby-comment"># TODO: spend multisig outputs again</span>
   <span class="ruby-comment"># TODO: verify signatures</span>
-  <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Protocol</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tx</span>.<span class="ruby-identifier">to_payload</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Payload Error&quot;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-constant">P</span><span class="ruby-operator">::</span><span class="ruby-constant">Tx</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tx</span>.<span class="ruby-identifier">to_payload</span>).<span class="ruby-identifier">to_payload</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">to_payload</span>
+
+  <span class="ruby-identifier">tx</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new_tx-source -->
           
@@ -1108,6 +1170,39 @@ href="SimpleCoinSelector.html">SimpleCoinSelector</a>.</p>
 
         
       </div><!-- new_tx-method -->
+
+    
+      <div id="method-i-rescan" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rescan</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="rescan-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rescan</span>
+  <span class="ruby-ivar">@storage</span>.<span class="ruby-identifier">rescan</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- rescan-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- rescan-method -->
 
     
     </section><!-- public-instance-method-details -->
@@ -1152,7 +1247,7 @@ wallets <a href="Wallet.html#attribute-i-keystore">#keystore</a></p>
 
           
           <div class="method-source-code" id="get_change_addr-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 243</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/wallet/wallet.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_change_addr</span>(<span class="ruby-identifier">policy</span>, <span class="ruby-identifier">in_addr</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">policy</span>
   <span class="ruby-keyword">when</span> <span class="ruby-value">:first</span>

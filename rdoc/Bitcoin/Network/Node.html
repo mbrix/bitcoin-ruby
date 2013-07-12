@@ -99,8 +99,6 @@
     
     <li ><a href="#method-i-queue_inv">#queue_inv</a>
     
-    <li ><a href="#method-i-relay_tx">#relay_tx</a>
-    
     <li ><a href="#method-i-run">#run</a>
     
     <li ><a href="#method-i-set_store">#set_store</a>
@@ -108,6 +106,8 @@
     <li ><a href="#method-i-start_timers">#start_timers</a>
     
     <li ><a href="#method-i-stop">#stop</a>
+    
+    <li ><a href="#method-i-stop_timers">#stop_timers</a>
     
     <li ><a href="#method-i-store_addrs">#store_addrs</a>
     
@@ -151,6 +151,8 @@
     <li class="file"><a href="../../doc/STORAGE_rdoc.html">STORAGE</a>
   
     <li class="file"><a href="../../doc/WALLET_rdoc.html">WALLET</a>
+  
+    <li class="file"><a href="../../lib/bitcoin/electrum/client_rb~.html">client.rb~</a>
   
     <li class="file"><a href="../../lib/bitcoin/gui/bitcoin-ruby_svg.html">bitcoin-ruby.svg</a>
   
@@ -224,9 +226,19 @@
   
     <li><a href="../../Bitcoin/Logger/Logger.html">Bitcoin::Logger::Logger</a>
   
+    <li><a href="../../Bitcoin/Logger/TimeLogger.html">Bitcoin::Logger::TimeLogger</a>
+  
     <li><a href="../../Bitcoin/Namecoin.html">Bitcoin::Namecoin</a>
   
     <li><a href="../../Bitcoin/Namecoin/Script.html">Bitcoin::Namecoin::Script</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage.html">Bitcoin::Namecoin::Storage</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Backend.html">Bitcoin::Namecoin::Storage::Backend</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models.html">Bitcoin::Namecoin::Storage::Models</a>
+  
+    <li><a href="../../Bitcoin/Namecoin/Storage/Models/Name.html">Bitcoin::Namecoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Network.html">Bitcoin::Network</a>
   
@@ -274,17 +286,15 @@
   
     <li><a href="../../Bitcoin/Storage/Backends/DummyStore.html">Bitcoin::Storage::Backends::DummyStore</a>
   
-    <li><a href="../../Bitcoin/Storage/Backends/SequelMigrations.html">Bitcoin::Storage::Backends::SequelMigrations</a>
-  
     <li><a href="../../Bitcoin/Storage/Backends/SequelStore.html">Bitcoin::Storage::Backends::SequelStore</a>
   
     <li><a href="../../Bitcoin/Storage/Backends/StoreBase.html">Bitcoin::Storage::Backends::StoreBase</a>
   
+    <li><a href="../../Bitcoin/Storage/Backends/UtxoStore.html">Bitcoin::Storage::Backends::UtxoStore</a>
+  
     <li><a href="../../Bitcoin/Storage/Models.html">Bitcoin::Storage::Models</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Block.html">Bitcoin::Storage::Models::Block</a>
-  
-    <li><a href="../../Bitcoin/Storage/Models/Name.html">Bitcoin::Storage::Models::Name</a>
   
     <li><a href="../../Bitcoin/Storage/Models/Tx.html">Bitcoin::Storage::Models::Tx</a>
   
@@ -408,7 +418,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">config</span> = {}
   <span class="ruby-ivar">@config</span> = <span class="ruby-constant">DEFAULT_CONFIG</span>.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">config</span>)
   <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:network</span>, <span class="ruby-ivar">@config</span>[<span class="ruby-value">:log</span>][<span class="ruby-value">:network</span>])
@@ -420,7 +430,7 @@
   <span class="ruby-ivar">@inv_cache</span> = []
   <span class="ruby-ivar">@notifiers</span> = {}
   <span class="ruby-ivar">@relay_propagation</span>, <span class="ruby-ivar">@last_block_time</span>, <span class="ruby-ivar">@external_ips</span> = {}, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>, []
-  <span class="ruby-ivar">@unconfirmed</span> = {}
+  <span class="ruby-ivar">@unconfirmed</span>, <span class="ruby-ivar">@relay_tx</span> = {}, {}
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -458,7 +468,7 @@ connect</p>
 
           
           <div class="method-source-code" id="connect_dns-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 218</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">connect_dns</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:dns_seeds</span>].<span class="ruby-identifier">any?</span>
     <span class="ruby-identifier">log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-string">&quot;No DNS seed nodes available&quot;</span> }
@@ -500,7 +510,7 @@ connect</p>
 
           
           <div class="method-source-code" id="connect_dns_nslookup-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 257</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 271</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">connect_dns_nslookup</span>(<span class="ruby-identifier">seed</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Querying addresses from DNS seed: #{seed}&quot;</span> }
   <span class="ruby-identifier">addrs</span> = <span class="ruby-node">%xnslookup #{seed}`</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/Address\: (.+)$/</span>).<span class="ruby-identifier">flatten</span>
@@ -538,7 +548,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="connect_dns_resolver-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 240</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 254</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">connect_dns_resolver</span>(<span class="ruby-identifier">seed</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">require_dependency</span> <span class="ruby-string">&quot;em/dns_resolver&quot;</span>, <span class="ruby-identifier">gem</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;em-dns&quot;</span>, <span class="ruby-identifier">exit</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
     <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Querying addresses from DNS seed: #{seed}&quot;</span> }
@@ -583,7 +593,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="connect_known_peers-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 231</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 245</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">connect_known_peers</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;Attempting to connecting to known nodes&quot;</span> }
   <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:known_nodes</span>].<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
@@ -619,7 +629,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="connect_peer-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 208</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">connect_peer</span> <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">host</span> }.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">host</span>)
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Attempting to connect to #{host}:#{port}&quot;</span> }
@@ -651,17 +661,18 @@ is not installed or fails.</p>
 
         <div class="method-description">
           
-          
+          <p>get the external ip that was suggested in version messages from other peers
+most often.</p>
           
           
 
           
           <div class="method-source-code" id="external_ip-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 410</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 429</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">external_ip</span>
-  <span class="ruby-ivar">@external_ips</span>.<span class="ruby-identifier">inject</span>({}) {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>; <span class="ruby-identifier">a</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>; <span class="ruby-identifier">a</span> }.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}[<span class="ruby-value">-1</span>][<span class="ruby-value">0</span>]
+  <span class="ruby-ivar">@external_ips</span>.<span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>).<span class="ruby-identifier">values</span>.<span class="ruby-identifier">max_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:size</span>).<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">rescue</span>
-  <span class="ruby-ivar">@config</span>[<span class="ruby-value">:listen</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)[<span class="ruby-value">0</span>]
+  <span class="ruby-ivar">@config</span>[<span class="ruby-value">:listen</span>][<span class="ruby-value">0</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- external_ip-source -->
           
@@ -692,7 +703,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="getblocks-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 285</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getblocks</span> <span class="ruby-identifier">locator</span> = <span class="ruby-identifier">store</span>.<span class="ruby-identifier">get_locator</span>
   <span class="ruby-identifier">peer</span> = <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:connected?</span>).<span class="ruby-identifier">sample</span>
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">peer</span>
@@ -733,7 +744,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="init_epoll-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 380</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 410</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_epoll</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;EPOLL: Available file descriptors: &quot;</span> <span class="ruby-operator">+</span>
     <span class="ruby-constant">EM</span>.<span class="ruby-identifier">set_descriptor_table_size</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:epoll_limit</span>]).<span class="ruby-identifier">to_s</span> }
@@ -772,7 +783,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="load_addrs-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 119</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load_addrs</span>
   <span class="ruby-identifier">file</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-value">:addr_file</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-string">&quot;~&quot;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;HOME&quot;</span>])
     .<span class="ruby-identifier">sub</span>(<span class="ruby-string">&quot;&lt;network&gt;&quot;</span>, <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network_name</span>.<span class="ruby-identifier">to_s</span>)
@@ -821,7 +832,7 @@ is not installed or fails.</p>
 
           
           <div class="method-source-code" id="push_notification-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 416</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 435</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">push_notification</span> <span class="ruby-identifier">channel</span>, <span class="ruby-identifier">message</span>
   <span class="ruby-ivar">@notifiers</span>[<span class="ruby-identifier">channel</span>.<span class="ruby-identifier">to_sym</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">message</span>)  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@notifiers</span>[<span class="ruby-identifier">channel</span>.<span class="ruby-identifier">to_sym</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -855,7 +866,7 @@ current ones</p>
 
           
           <div class="method-source-code" id="queue_inv-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 364</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 394</span>
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_inv</span> <span class="ruby-identifier">inv</span>
       <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">inv</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;H*&quot;</span>)[<span class="ruby-value">0</span>]
       <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inv_queue</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">inv</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">hash</span> }.<span class="ruby-identifier">any?</span>
@@ -879,47 +890,6 @@ current ones</p>
       </div><!-- queue_inv-method -->
 
     
-      <div id="method-i-relay_tx" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">relay_tx</span><span
-            class="method-args">(tx)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="relay_tx-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 390</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">relay_tx</span>(<span class="ruby-identifier">tx</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">in_sync?</span>
-  <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;relaying tx #{tx.hash}&quot;</span> }
-  <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">store_tx</span>(<span class="ruby-identifier">tx</span>)
-  <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:connected?</span>).<span class="ruby-identifier">sample</span>((<span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">peer</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">peer</span>.<span class="ruby-identifier">send_inv</span>(<span class="ruby-value">:tx</span>, <span class="ruby-identifier">tx</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Validation</span><span class="ruby-operator">::</span><span class="ruby-constant">ValidationError</span>
-  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;ValiationError storing tx #{tx.hash}: #{$!.message}&quot;</span> }
-  <span class="ruby-keyword">false</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- relay_tx-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- relay_tx-method -->
-
-    
       <div id="method-i-run" class="method-detail ">
         
         <div class="method-heading">
@@ -939,7 +909,7 @@ current ones</p>
 
           
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 172</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 180</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
   <span class="ruby-ivar">@started</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
 
@@ -954,21 +924,27 @@ current ones</p>
 
     <span class="ruby-identifier">start_timers</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:command</span>]
-      <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-operator">*</span><span class="ruby-ivar">@config</span>[<span class="ruby-value">:command</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)
+    <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-operator">*</span><span class="ruby-ivar">@config</span>[<span class="ruby-value">:command</span>]
+    <span class="ruby-identifier">port</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:default_port</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">host</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Trying to bind command socket to #{host}:#{port}&quot;</span> }
       <span class="ruby-constant">EM</span>.<span class="ruby-identifier">start_server</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-constant">CommandHandler</span>, <span class="ruby-keyword">self</span>)
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Command socket listening on #{host}:#{port}&quot;</span> }
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:listen</span>]
-      <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-operator">*</span><span class="ruby-ivar">@config</span>[<span class="ruby-value">:listen</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>)
+    <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-operator">*</span><span class="ruby-ivar">@config</span>[<span class="ruby-value">:listen</span>]
+    <span class="ruby-identifier">port</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:default_port</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">host</span>
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Trying to bind server socket to #{host}:#{port}&quot;</span> }
       <span class="ruby-constant">EM</span>.<span class="ruby-identifier">start_server</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-constant">ConnectionHandler</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-value">:in</span>)
       <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Server socket listening on #{host}:#{port}&quot;</span> }
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@config</span>[<span class="ruby-value">:connect</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">connect_peer</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">p</span>) }  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:connect</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@config</span>[<span class="ruby-value">:connect</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">port</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bitcoin</span>.<span class="ruby-identifier">network</span>[<span class="ruby-value">:default_port</span>]
+      <span class="ruby-identifier">connect_peer</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>)
+      <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Connecting to #{host}:#{port}&quot;</span> }
+    <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">work_connect</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@addrs</span>.<span class="ruby-identifier">any?</span>
     <span class="ruby-identifier">connect_dns</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:dns</span>]
@@ -1003,11 +979,11 @@ current ones</p>
 
           
           <div class="method-source-code" id="set_store-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 98</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_store</span>
   <span class="ruby-identifier">backend</span>, <span class="ruby-identifier">config</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-value">:storage</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;::&#39;</span>)
-  <span class="ruby-ivar">@store</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">backend</span>, {
-      <span class="ruby-identifier">db</span><span class="ruby-operator">:</span> <span class="ruby-identifier">config</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:mode</span>], <span class="ruby-identifier">cache_head</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>}, <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span>(<span class="ruby-identifier">locator</span>) {
+  <span class="ruby-ivar">@store</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">backend</span>, { <span class="ruby-identifier">db</span><span class="ruby-operator">:</span> <span class="ruby-identifier">config</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:mode</span>],
+      <span class="ruby-identifier">cache_head</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">log_level</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:log</span>][<span class="ruby-value">:storage</span>]}, <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span>(<span class="ruby-identifier">locator</span>) {
       <span class="ruby-identifier">peer</span> = <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:connected?</span>).<span class="ruby-identifier">sample</span>
       <span class="ruby-identifier">peer</span>.<span class="ruby-identifier">send_getblocks</span>(<span class="ruby-identifier">locator</span>)
     })
@@ -1019,6 +995,7 @@ current ones</p>
         <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">import</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:import</span>]); <span class="ruby-ivar">@importing</span> = <span class="ruby-keyword">false</span>
       <span class="ruby-keyword">rescue</span>
         <span class="ruby-identifier">log</span>.<span class="ruby-identifier">fatal</span> { <span class="ruby-identifier">$!</span>.<span class="ruby-identifier">message</span> }
+        <span class="ruby-identifier">puts</span> <span class="ruby-operator">*</span><span class="ruby-identifier">$@</span>
         <span class="ruby-identifier">stop</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
@@ -1053,7 +1030,7 @@ current ones</p>
 
           
           <div class="method-source-code" id="start_timers-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start_timers</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">EM</span>.<span class="ruby-identifier">add_timer</span>(<span class="ruby-value">1</span>) { <span class="ruby-identifier">start_timers</span> }  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@importing</span>
   [<span class="ruby-value">:queue</span>, <span class="ruby-value">:inv_queue</span>, <span class="ruby-value">:addrs</span>, <span class="ruby-value">:connect</span>, <span class="ruby-value">:relay</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
@@ -1091,9 +1068,10 @@ current ones</p>
 
           
           <div class="method-source-code" id="stop-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 154</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stop</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&quot;Shutting down...&quot;</span> }
+  <span class="ruby-identifier">stop_timers</span>
   <span class="ruby-constant">EM</span>.<span class="ruby-identifier">next_tick</span> { <span class="ruby-constant">EM</span>.<span class="ruby-identifier">stop</span> }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- stop-source -->
@@ -1104,6 +1082,39 @@ current ones</p>
 
         
       </div><!-- stop-method -->
+
+    
+      <div id="method-i-stop_timers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stop_timers</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stop_timers-source">
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stop_timers</span>
+  <span class="ruby-ivar">@timers</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span>, <span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-constant">EM</span>.<span class="ruby-identifier">cancel_timer</span> <span class="ruby-identifier">t</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- stop_timers-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- stop_timers-method -->
 
     
       <div id="method-i-store_addrs" class="method-detail ">
@@ -1125,7 +1136,7 @@ current ones</p>
 
           
           <div class="method-source-code" id="store_addrs-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 139</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_addrs</span>
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@addrs</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@addrs</span>.<span class="ruby-identifier">any?</span>
   <span class="ruby-identifier">file</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-value">:addr_file</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-string">&quot;~&quot;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;HOME&quot;</span>])
@@ -1169,7 +1180,7 @@ current ones</p>
 
           
           <div class="method-source-code" id="subscribe-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 420</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 439</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscribe</span> <span class="ruby-identifier">channel</span>
   <span class="ruby-ivar">@notifiers</span>[<span class="ruby-identifier">channel</span>.<span class="ruby-identifier">to_sym</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">EM</span><span class="ruby-operator">::</span><span class="ruby-constant">Channel</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@notifiers</span>[<span class="ruby-identifier">channel</span>.<span class="ruby-identifier">to_sym</span>].<span class="ruby-identifier">subscribe</span> {<span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">data</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">data</span>) }
@@ -1203,7 +1214,7 @@ current ones</p>
 
           
           <div class="method-source-code" id="uptime-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 159</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uptime</span>
   (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@started</span>).<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1239,7 +1250,7 @@ isn&#39;t</p>
 
           
           <div class="method-source-code" id="work_addrs-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 299</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 313</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">work_addrs</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;addr worker running&quot;</span> }
   <span class="ruby-ivar">@addrs</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">addr</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">addr</span>.<span class="ruby-identifier">alive?</span> }  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@addrs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:max</span>][<span class="ruby-value">:addr</span>]
@@ -1280,7 +1291,7 @@ establish <a href="Node.html#method-c-new">::new</a> ones if needed</p>
 
           
           <div class="method-source-code" id="work_connect-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 266</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 280</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">work_connect</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;Connect worker running&quot;</span> }
   <span class="ruby-identifier">desired</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-value">:max</span>][<span class="ruby-value">:connections_out</span>] <span class="ruby-operator">-</span> <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:outgoing?</span>).<span class="ruby-identifier">size</span>
@@ -1329,13 +1340,13 @@ href="Node.html#attribute-i-queue">#queue</a> and process them, unless the
 
           
           <div class="method-source-code" id="work_inv_queue-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 352</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 382</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">work_inv_queue</span>
-  <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inv_queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;inv queue worker running&quot;</span> }
+  <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inv_queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:max</span>][<span class="ruby-value">:queue</span>]
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">inv</span> = <span class="ruby-ivar">@inv_queue</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-keyword">next</span>  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@store</span>.<span class="ruby-identifier">in_sync?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">inv</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:tx</span>
+    <span class="ruby-keyword">next</span>  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@store</span>.<span class="ruby-identifier">in_sync?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">inv</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:tx</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@notifiers</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-keyword">next</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span><span class="ruby-identifier">i</span>[<span class="ruby-value">1</span>]}.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:hash</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">inv</span>[<span class="ruby-value">1</span>])
     <span class="ruby-identifier">inv</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;send_getdata_#{inv[0]}&quot;</span>, <span class="ruby-identifier">inv</span>[<span class="ruby-value">1</span>])
   <span class="ruby-keyword">end</span>
@@ -1370,10 +1381,24 @@ href="Node.html#attribute-i-queue">#queue</a> and process them</p>
 
           
           <div class="method-source-code" id="work_queue-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 310</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 324</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">work_queue</span>
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;queue worker running&quot;</span> }
   <span class="ruby-keyword">return</span>  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+
+  <span class="ruby-comment"># switch off utxo cache once there aren&#39;t tons of new blocks coming in</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">in_sync?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Backends</span><span class="ruby-operator">::</span><span class="ruby-constant">UtxoStore</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">config</span>[<span class="ruby-value">:utxo_cache</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;switching off utxo cache&quot;</span> }
+      <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">config</span>[<span class="ruby-value">:utxo_cache</span>] = <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@config</span>[<span class="ruby-value">:intervals</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;setting #{name} interval to 5 seconds&quot;</span> }
+        <span class="ruby-ivar">@config</span>[<span class="ruby-value">:intervals</span>][<span class="ruby-identifier">name</span>] = <span class="ruby-value">5</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">shift</span>
     <span class="ruby-keyword">begin</span>
@@ -1389,13 +1414,15 @@ href="Node.html#attribute-i-queue">#queue</a> and process them</p>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">drop</span> = <span class="ruby-ivar">@unconfirmed</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:max</span>][<span class="ruby-value">:unconfirmed</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
         <span class="ruby-identifier">drop</span>.<span class="ruby-identifier">times</span> { <span class="ruby-ivar">@unconfirmed</span>.<span class="ruby-identifier">shift</span> }  <span class="ruby-keyword">if</span> <span class="ruby-identifier">drop</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-        <span class="ruby-ivar">@unconfirmed</span>[<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>] = <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>]
-        <span class="ruby-identifier">push_notification</span>(<span class="ruby-value">:tx</span>, [<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>], <span class="ruby-value">0</span>])
+        <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@unconfirmed</span>[<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>]
+          <span class="ruby-ivar">@unconfirmed</span>[<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>] = <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>]
+          <span class="ruby-identifier">push_notification</span>(<span class="ruby-value">:tx</span>, [<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>], <span class="ruby-value">0</span>])
 
-        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@notifiers</span>[<span class="ruby-value">:output</span>]
-          <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">out</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">out</span><span class="ruby-operator">|</span>
-            <span class="ruby-identifier">address</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">out</span>.<span class="ruby-identifier">pk_script</span>).<span class="ruby-identifier">get_address</span>
-            <span class="ruby-identifier">push_notification</span>(<span class="ruby-value">:output</span>, [<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">address</span>, <span class="ruby-identifier">out</span>.<span class="ruby-identifier">value</span>, <span class="ruby-value">0</span>])
+          <span class="ruby-keyword">if</span> <span class="ruby-ivar">@notifiers</span>[<span class="ruby-value">:output</span>]
+            <span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">out</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">out</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">address</span> = <span class="ruby-constant">Bitcoin</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">out</span>.<span class="ruby-identifier">pk_script</span>).<span class="ruby-identifier">get_address</span>
+              <span class="ruby-identifier">push_notification</span>(<span class="ruby-value">:output</span>, [<span class="ruby-identifier">obj</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">address</span>, <span class="ruby-identifier">out</span>.<span class="ruby-identifier">value</span>, <span class="ruby-value">0</span>])
+            <span class="ruby-keyword">end</span>
           <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
@@ -1439,7 +1466,7 @@ href="Node.html#attribute-i-queue">#queue</a> and process them</p>
 
           
           <div class="method-source-code" id="work_relay-source">
-            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 402</span>
+            <pre><span class="ruby-comment"># File lib/bitcoin/network/node.rb, line 420</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">work_relay</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-string">&quot;relay worker running&quot;</span> }
   <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">get_unconfirmed_tx</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
